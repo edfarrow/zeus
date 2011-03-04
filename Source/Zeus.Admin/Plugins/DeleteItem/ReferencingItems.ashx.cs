@@ -51,7 +51,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 
 		protected void AddReferencesRecursive(ContentItem current, List<ContentItem> referrers)
 		{
-			referrers.AddRange(Context.Finder.QueryItems().Where(ci => ci.Details.OfType<LinkProperty>().Any(ld => ld.LinkedItem == current)));
+			referrers.AddRange(Context.Finder.QueryDetails<LinkProperty>().Where(ld => ld.LinkedItem == current).Select(ld => ld.EnclosingItem));
 			foreach (ContentItem child in current.GetChildren())
 				AddReferencesRecursive(child, referrers);
 		}

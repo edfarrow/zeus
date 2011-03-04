@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using NHibernate.Linq.Visitors;
+using Remotion.Data.Linq.Parsing;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 
 namespace Zeus.Persistence.NH.Linq
 {
-	internal class ContentPropertyVisitor : ExpressionVisitor
+	internal class ContentPropertyVisitor : ExpressionTreeVisitor
 	{
 		private readonly IContentPropertyManager _contentPropertyManager;
 
@@ -18,7 +18,7 @@ namespace Zeus.Persistence.NH.Linq
 			_contentPropertyManager = contentPropertyManager;
 		}
 
-		protected override Expression VisitBinary(BinaryExpression b)
+		protected override Expression VisitBinaryExpression(BinaryExpression b)
 		{
 			// Currently, this will only deal with binary expressions, i.e. c => c.MyProperty == "MyValue".
 			// It will NOT deal with method calls on properties, i.e. c => c.MyProperty.StartsWith("My").
@@ -93,7 +93,7 @@ namespace Zeus.Persistence.NH.Linq
 						)
 					);
 			}
-			return base.VisitBinary(b);
+			return base.VisitBinaryExpression(b);
 		}
 
 		/// <summary>

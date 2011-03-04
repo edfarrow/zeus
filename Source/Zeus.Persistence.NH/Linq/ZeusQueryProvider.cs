@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Linq;
@@ -5,18 +6,29 @@ using Zeus.ContentProperties;
 
 namespace Zeus.Persistence.NH.Linq
 {
-	public class ZeusQueryProvider : NHibernateQueryProvider
+	public class ZeusQueryProvider : NhQueryProvider, IQueryProvider
 	{
-		public ZeusQueryProvider(ISession session, QueryOptions queryOptions)
-			: base(session, queryOptions)
+		public ZeusQueryProvider(ISession session)
+			: base(session)
 		{
 
 		}
 
-		public override object Execute(Expression expression)
+		object IQueryProvider.Execute(Expression expression)
 		{
-			expression = new ContentPropertyVisitor(Context.Current.Resolve<IContentPropertyManager>()).Visit(expression);
-			return base.Execute(expression);
+			expression = TransformExpression(expression);
+			return Execute(expression);
+		}
+
+		TResult IQueryProvider.Execute<TResult>(Expression expression)
+		{
+			expression = TransformExpression(expression);
+			return Execute<TResult>(expression);
+		}
+
+		private static Expression TransformExpression(Expression expression)
+		{
+			return new ContentPropertyVisitor(Context.Current.Resolve<IContentPropertyManager>()).VisitExpression(expression);
 		}
 	}
 }
