@@ -252,7 +252,6 @@
     <Compile Include="Configuration\SiteElement.cs" />
     <Compile Include="Configuration\SiteElementCollection.cs" />
     <Compile Include="Configuration\UserElement.cs" />
-    <Compile Include="Configuration\VersioningElement.cs" />
     <Compile Include="ContentManager.cs" />
     <Compile Include="ContentProperties\BasePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
@@ -472,10 +471,6 @@
     <Compile Include="Net\Mail\IMailSender.cs" />
     <Compile Include="Net\Mail\SmtpMailSender.cs" />
     <Compile Include="Net\Mail\StaticMailSender.cs" />
-    <Compile Include="Persistence\CopyAttribute.cs" />
-    <Compile Include="Persistence\IVersionManager.cs" />
-    <Compile Include="Persistence\NotVersionableAttribute.cs" />
-    <Compile Include="Persistence\VersionManager.cs" />
     <Compile Include="Plugin\AutoInitializeAttribute.cs" />
     <Compile Include="Plugin\InitializerCreatingAttribute.cs" />
     <Compile Include="Plugin\IPluginBootstrapper.cs" />
@@ -543,7 +538,6 @@
     <Compile Include="Web\UI\WebControls\FancyFileUpload.cs" />
     <Compile Include="Web\UI\WebControls\MultiImageUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\ItemEditorVersioningMode.cs" />
     <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
     <Compile Include="Web\UI\WebControls\TabControl.cs" />
     <Compile Include="Web\UI\WebControls\IEditableObjectEditor.cs" />

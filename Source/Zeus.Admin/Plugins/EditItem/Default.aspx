@@ -21,15 +21,13 @@
 						<TopBar>
 							<ext:Toolbar runat="server">
 								<Items>
-									<ext:Button runat="server" ID="btnSave" Text="Save and publish" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
+									<ext:Button runat="server" ID="btnSave" Text="Save" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
 										<DirectEvents>
 											<Click OnEvent="btnSave_Click">
 												<EventMask ShowMask="true" Msg="Saving... Please wait." Target="Page" />
 											</Click>
 										</DirectEvents>
 									</ext:Button>
-									<ext:Button runat="server" ID="btnSaveUnpublished" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
-									<ext:Button runat="server" ID="btnPreview" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
 									<ext:ToolbarFill runat="server" />
 									<ext:ToolbarTextItem runat="server" ID="txiLanguages" Text="Page view: " />
@@ -42,9 +40,6 @@
 							</ext:Toolbar>
 						</TopBar>
 						<Content>
-							<asp:HyperLink ID="hlNewerVersion" runat="server" Text="There is a newer version of this item that hasn't been published. Edit the newer version &amp;raquo;" CssClass="info" Visible="false" />
-							<asp:HyperLink ID="hlOlderVersion" runat="server" Text="This is a version of another item that is the master version. Edit the master version &amp;raquo;" CssClass="info" Visible="false" />
-							
 							<asp:ValidationSummary runat="server" CssClass="info validator" />
 							<asp:CustomValidator ID="csvException" runat="server" Display="None" />
 							
@@ -54,15 +49,13 @@
 						<BottomBar>
 							<ext:Toolbar runat="server">
 								<Items>
-									<ext:Button runat="server" ID="btnSave2" Text="Save and publish" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
+									<ext:Button runat="server" ID="btnSave2" Text="Save" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
 										<DirectEvents>
 											<Click OnEvent="btnSave_Click">
 												<EventMask ShowMask="true" Msg="Saving... Please wait." Target="Page" />
 											</Click>
 										</DirectEvents>
 									</ext:Button>
-									<ext:Button runat="server" ID="btnSaveUnpublished2" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
-									<ext:Button runat="server" ID="btnPreview2" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnCancel2" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
 								</Items>
 							</ext:Toolbar>

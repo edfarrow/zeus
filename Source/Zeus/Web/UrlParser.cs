@@ -115,9 +115,6 @@ namespace Zeus.Web
                 {
                     startPage = current;
 
-                    if (item.VersionOf != null)
-                        url = url.AppendQuery(PathData.PageQueryKey, item.ID);
-
                     // Prepend language identifier, if this is not the default language.
                     if (_languageManager.Enabled && !LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name))
                     {

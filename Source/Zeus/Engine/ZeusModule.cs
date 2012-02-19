@@ -74,7 +74,6 @@ namespace Zeus.Engine
 			// Persistence
 			Bind<IItemNotifier>().To<ItemNotifier>().InSingletonScope();
 			Bind<IPersister>().To<ContentPersister>().InSingletonScope();
-			Bind<IVersionManager>().To<VersionManager>().InSingletonScope();
 
 			// Plugin
 			Bind<IPluginBootstrapper>().To<PluginBootstrapper>().InSingletonScope();

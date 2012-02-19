@@ -98,9 +98,6 @@
 		<property name="Visible"	  access="property" not-null="true" />
 		<property name="SavedBy"	  access="property" length="50" />
 
-		<many-to-one name="VersionOf"	column="VersionOfID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select"/>
-		<property name="Version" access="property" not-null="true" />
-
 		<many-to-one name="TranslationOf"	column="TranslationOfID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select"/>
 		<bag name="Translations" cascade="all" generic="true" inverse="true" lazy="true" batch-size="10">
 			<cache usage="read-write" />

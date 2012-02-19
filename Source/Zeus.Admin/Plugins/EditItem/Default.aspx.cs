@@ -65,13 +65,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			bool languagesVisible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
 			txiLanguages.Visible = ddlLanguages.Visible = languagesVisible;
 
-			if (!Engine.Resolve<AdminSection>().Versioning.Enabled || !Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
-			{
-				btnSaveUnpublished.Visible = btnSaveUnpublished2.Visible = false;
-				btnPreview.Visible = btnPreview2.Visible = false;
-				btnSave.Text = btnSave2.Text = "Save";
-			}
-
 			if (!ExtNet.IsAjaxRequest && GlobalizationEnabled)
 			{
 				foreach (Language language in Engine.Resolve<ILanguageManager>().GetAvailableLanguages())
@@ -110,10 +103,7 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		private void SaveChanges()
 		{
-			ItemEditorVersioningMode mode = (((ContentItem) zeusItemEditView.CurrentItem).VersionOf == null) ? ItemEditorVersioningMode.VersionAndSave : ItemEditorVersioningMode.SaveAsMaster;
-			if (!Engine.Resolve<AdminSection>().Versioning.Enabled)
-				mode = ItemEditorVersioningMode.SaveOnly;
-			ContentItem currentItem = (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem, mode);
+			ContentItem currentItem = (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem);
 
 			if (Request["before"] != null)
 			{
@@ -126,83 +116,10 @@ namespace Zeus.Admin.Plugins.EditItem
 				Engine.Resolve<ITreeSorter>().MoveTo(currentItem, NodePosition.After, after);
 			}
 
-			Refresh(currentItem.VersionOf ?? currentItem, AdminFrame.Both, false);
+			Refresh(currentItem, AdminFrame.Both, false);
 			Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
 			zeusItemEditView.Visible = false;
 		}
-
-		protected void btnSaveUnpublished_Click(object sender, EventArgs e)
-		{
-			if (!IsValid)
-				return;
-
-			ContentItem savedVersion = SaveVersion();
-			string redirectUrl = Engine.AdminManager.GetEditExistingItemUrl(savedVersion, SelectedLanguageCode);
-			Response.Redirect(redirectUrl);
-		}
-
-		protected void btnPreview_Click(object sender, EventArgs e)
-		{
-			if (!IsValid)
-				return;
-
-			ContentItem savedVersion = SaveVersion();
-
-			Url redirectTo = Engine.AdminManager.GetPreviewUrl(savedVersion);
-
-			redirectTo = redirectTo.AppendQuery("preview", savedVersion.ID);
-			if (savedVersion.VersionOf != null)
-				redirectTo = redirectTo.AppendQuery("original", savedVersion.VersionOf.ID);
-			if (!string.IsNullOrEmpty(Request["returnUrl"]))
-				redirectTo = redirectTo.AppendQuery("returnUrl", Request["returnUrl"]);
-
-			Response.Redirect(redirectTo);
-		}
-
-		#region Helper methods
-
-		private ContentItem SaveVersion()
-		{
-			ItemEditorVersioningMode mode = (((ContentItem) zeusItemEditView.CurrentItem).VersionOf == null) ? ItemEditorVersioningMode.VersionOnly : ItemEditorVersioningMode.SaveOnly;
-			return (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem, mode);
-		}
-
-		private void CheckRelatedVersions(ContentItem item)
-		{
-			hlNewerVersion.Visible = false;
-			hlOlderVersion.Visible = false;
-
-			if (item.VersionOf != null)
-			{
-				DisplayThisIsVersionInfo(item.VersionOf);
-			}
-			else if (item.ID > 0)
-			{
-				var unpublishedVersions = Zeus.Context.Finder.QueryItems().Where(ci => ci.VersionOf == item && ci.Updated > item.Updated)
-					.ToList()
-					.OrderByDescending(ci => ci.Updated)
-					.Take(1);
-
-				if (unpublishedVersions.Any() && unpublishedVersions.First().Updated > item.Updated)
-					DisplayThisHasNewerVersionInfo(unpublishedVersions.First());
-			}
-		}
-
-		private void DisplayThisHasNewerVersionInfo(ContentItem itemToLink)
-		{
-			string url = Url.ToAbsolute(Engine.AdminManager.GetEditExistingItemUrl(itemToLink, SelectedLanguageCode));
-			hlNewerVersion.NavigateUrl = url;
-			hlNewerVersion.Visible = true;
-		}
-
-		private void DisplayThisIsVersionInfo(ContentItem itemToLink)
-		{
-			string url = Url.ToAbsolute(Engine.AdminManager.GetEditExistingItemUrl(itemToLink, SelectedLanguageCode));
-			hlOlderVersion.NavigateUrl = url;
-			hlOlderVersion.Visible = true;
-		}
-
-		#endregion
 
 		/// <summary>Gets the type defined by <see cref="TypeDefinition"/>.</summary>
 		/// <returns>The item's type.</returns>
@@ -278,7 +195,6 @@ namespace Zeus.Admin.Plugins.EditItem
 
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");
-			CheckRelatedVersions((ContentItem) zeusItemEditView.CurrentItem);
 			ddlLanguages.SelectedItem.Value = SelectedLanguageCode;
 			base.OnPreRender(e);
 		}

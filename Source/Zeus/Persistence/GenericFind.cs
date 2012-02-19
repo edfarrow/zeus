@@ -74,8 +74,6 @@ namespace Zeus.Persistence
 		/// <returns>An enumeration of all children of an item.</returns>
 		public static IEnumerable<ContentItem> EnumerateChildren(ContentItem item)
 		{
-			if (item.VersionOf != null) item = item.VersionOf;
-
 			foreach (ContentItem child in item.Children)
 			{
 				yield return child;
@@ -90,7 +88,6 @@ namespace Zeus.Persistence
 		public static IEnumerable<ContentItem> EnumerateAccessibleChildren(ContentItem item)
 		{
             int depth = 200;
-			if (item.VersionOf != null) item = item.VersionOf;
 
 			foreach (ContentItem child in item.GetGlobalizedChildren())
 			{
@@ -105,8 +102,6 @@ namespace Zeus.Persistence
         /// <returns>An enumeration of all children of an item.</returns>
         public static IEnumerable<ContentItem> EnumerateAccessibleChildren(ContentItem item, int depth)
         {
-            if (item.VersionOf != null) item = item.VersionOf;
-
             foreach (ContentItem child in item.GetGlobalizedChildren())
             {
                 yield return child;

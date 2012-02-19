@@ -145,10 +145,6 @@
     <Compile Include="ExtensionMethods\IServiceProvider.cs" />
     <Compile Include="ExtensionMethods\Text\StringBuilder.cs" />
     <Compile Include="IContextAwareAttribute.cs" />
-    <Compile Include="Drawing\FastBitmap.cs" />
-    <Compile Include="Drawing\ImageHelper.cs" />
-    <Compile Include="Drawing\Imaging\ImageCodecInfoHelper.cs" />
-    <Compile Include="Drawing\RectangleHelper.cs" />
     <Compile Include="ExtensionMethods\Byte.cs" />
     <Compile Include="ExtensionMethods\Collections\Generic\IList.cs" />
     <Compile Include="ExtensionMethods\Collections\ICollection.cs" />

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Zeus.Templates.ContentTypes;
 using Zeus.Web;
 using Zeus.Web.Parts;
 
@@ -18,12 +17,7 @@ namespace Zeus.Templates.Services
 			ContentItem grandParentItem = parentItem;
 			foreach (string zoneName in zoneNames)
 				if (zoneName.StartsWith("Recursive") && grandParentItem is PageContentItem)
-				{
-					if (parentItem.VersionOf == null)
-						items.AddRange(GetItemsInZones(parentItem.Parent, zoneName));
-					else
-						items.AddRange(GetItemsInZones(parentItem.VersionOf.Parent, zoneName));
-				}
+					items.AddRange(GetItemsInZones(parentItem.Parent, zoneName));
 			return items;
 		}
 	}

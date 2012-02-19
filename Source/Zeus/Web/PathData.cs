@@ -96,9 +96,6 @@ namespace Zeus.Web
 					if (ancestor.IsPage)
 						return ancestor.FindPath(DefaultAction).RewrittenUrl.UpdateQuery(QueryParameters).SetQueryParameter(ItemQueryKey, CurrentItem.ID);
 
-				if (CurrentItem.VersionOf != null)
-					return CurrentItem.VersionOf.FindPath(DefaultAction).RewrittenUrl.UpdateQuery(QueryParameters).SetQueryParameter(ItemQueryKey, CurrentItem.ID);
-
 				throw new TemplateNotFoundException(CurrentItem);
 			}
 		}

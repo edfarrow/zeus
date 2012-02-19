@@ -37,7 +37,6 @@ namespace Zeus
         private string _url;
         private bool _visible;
 
-        [Copy]
         private IUrlParser _urlParser;
 
         #endregion
@@ -47,15 +46,13 @@ namespace Zeus
         /// <summary>Gets or sets item ID.</summary>
         public virtual int ID { get; set; }
 
-        /// <summary>Gets or sets this item's parent. This can be null for root items and previous versions but should be another page in other situations.</summary>
+        /// <summary>Gets or sets this item's parent. This can be null for root items but should be another page in other situations.</summary>
         public virtual ContentItem Parent { get; set; }
 
         /// <summary>Gets or sets the item's title. This is used in edit mode and probably in a custom implementation.</summary>
-        [Copy]
         public virtual string Title { get; set; }
 
         /// <summary>Gets or sets the item's name. This is used to compute the item's url and can be used to uniquely identify the item among other items on the same level.</summary>
-        [Copy]
         public virtual string Name
         {
             get
@@ -73,11 +70,9 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets when this item was initially created.</summary>
-        [Copy]
         public virtual DateTime Created { get; set; }
 
         /// <summary>Gets or sets the date this item was updated.</summary>
-        [Copy]
         public virtual DateTime Updated { get; set; }
 
         /// <summary>Gets or sets the publish date of this item.</summary>
@@ -91,11 +86,9 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets the sort order of this item.</summary>
-        [Copy]
         public virtual int SortOrder { get; set; }
 
         /// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
-        [Copy]
         public virtual bool Visible
         {
             get
@@ -111,26 +104,15 @@ namespace Zeus
             }
         }
 
-        /// <summary>Gets or sets the published version of this item. If this value is not null then this item is a previous version of the item specified by VersionOf.</summary>
-        public virtual ContentItem VersionOf { get; set; }
-
-        /// <summary>
-        /// Gets or sets the version number of this item. This starts at 1, and increases for later versions.
-        /// </summary>
-        [Copy]
-        public virtual int Version { get; set; }
-
         /// <summary>Gets or sets the original language version of this item. If this value is not null then this item is a translated version of the item specified by TranslationOf.</summary>
         public virtual ContentItem TranslationOf { get; set; }
 
         /// <summary>
         /// Gets or sets the language code of this item.
         /// </summary>
-        [Copy]
         public virtual string Language { get; set; }
 
         /// <summary>Gets or sets the name of the identity who saved this item.</summary>
-        [Copy]
         public virtual string SavedBy { get; set; }
 
         /// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
@@ -349,7 +331,6 @@ namespace Zeus
             Updated = DateTime.Now;
             Published = DateTime.Now;
             Visible = true;
-            Version = 1;
         }
 
         #region GetDetail & SetDetail<T> Methods
@@ -425,13 +406,10 @@ namespace Zeus
         {
             // Look up content property matching this name.
             IContentProperty property = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName);
-            if (property == null || property.Shared)
-            {
-                ContentItem currentItem = VersionOf ?? this;
-                if (currentItem.TranslationOf != null)
-                    return currentItem.TranslationOf.Details;
-            }
-            return Details;
+        	if (property == null || property.Shared)
+        		if (TranslationOf != null)
+        			return TranslationOf.Details;
+        	return Details;
         }
 
         public virtual void SetDetail(string detailName, object value)
@@ -708,8 +686,6 @@ namespace Zeus
         {
             // Get the actual item this item represents.
             ContentItem realItem = this;
-            if (VersionOf != null)
-                realItem = realItem.VersionOf;
             if (TranslationOf != null)
                 realItem = realItem.TranslationOf;
 

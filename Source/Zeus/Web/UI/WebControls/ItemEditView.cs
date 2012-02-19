@@ -17,24 +17,6 @@ namespace Zeus.Web.UI.WebControls
 
 		#endregion
 
-		/// <summary>Gets or sets wether a version should be saved before the item is updated.</summary>
-		public ItemEditorVersioningMode VersioningMode
-		{
-			get { return (ItemEditorVersioningMode) (ViewState["VersioningMode"] ?? ItemEditorVersioningMode.VersionAndSave); }
-			set { ViewState["VersioningMode"] = value; }
-		}
-
-		public override IEditableObject CurrentItem
-		{
-			get { return base.CurrentItem; }
-			set
-			{
-				base.CurrentItem = value;
-				if (value != null && ((ContentItem) value).VersionOf != null && ((ContentItem) value).ID == 0)
-					VersioningMode = ItemEditorVersioningMode.SaveOnly;
-			}
-		}
-
 		/*public override bool Enabled
 		{
 			get { return base.Enabled; }
@@ -97,12 +79,12 @@ namespace Zeus.Web.UI.WebControls
             }
 		}
 
-		public IEditableObject Save(ContentItem item, ItemEditorVersioningMode mode)
+		public IEditableObject Save(ContentItem item)
 		{
 			EnsureChildControls();
 
 			// TODO- remove this because it won't work with DynamicContent
-			item = Zeus.Context.AdminManager.Save(item, PropertyControls, mode, Page.User,
+			item = Zeus.Context.AdminManager.Save(item, PropertyControls, Page.User,
 				c => OnSaving(new ItemViewEditableObjectEventArgs(c)));
 
 			OnSaved(new ItemViewEditableObjectEventArgs(CurrentItem));
@@ -114,7 +96,7 @@ namespace Zeus.Web.UI.WebControls
 		/// <returns>The saved item.</returns>
 		public IEditableObject Save()
 		{
-			CurrentItem = Save((ContentItem) CurrentItem, VersioningMode);
+			CurrentItem = Save((ContentItem) CurrentItem);
 			return CurrentItem;
 		}
 

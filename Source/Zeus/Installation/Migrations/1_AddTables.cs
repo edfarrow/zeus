@@ -20,8 +20,6 @@ namespace Zeus.Installation.Migrations
 				.WithColumn("SortOrder").AsInt32().NotNullable()
 				.WithColumn("Visible").AsBoolean().NotNullable()
 				.WithColumn("SavedBy").AsString(50).Nullable()
-				.WithColumn("VersionOfID").AsInt32().Nullable()
-				.WithColumn("Version").AsInt32().NotNullable()
 				.WithColumn("TranslationOfID").AsInt32().Nullable()
 				.WithColumn("Language").AsString(50).Nullable()
 				.WithColumn("ParentID").AsInt32().Nullable();

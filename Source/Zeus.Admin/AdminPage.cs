@@ -97,7 +97,7 @@ jQuery(document).ready(function() {{
 
 		protected virtual string CancelUrl()
 		{
-			return Request["returnUrl"] ?? (SelectedItem.VersionOf ?? SelectedNode).PreviewUrl;
+			return Request["returnUrl"] ?? SelectedNode.PreviewUrl;
 		}
 
 		public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel)

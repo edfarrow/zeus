@@ -164,7 +164,6 @@
     <Compile Include="Plugins\PasteItem\PasteItemMenuPlugin.cs" />
     <Compile Include="Plugins\CopyItem\CopyItemMenuPlugin.cs" />
     <Compile Include="Plugins\Preview\PreviewMenuPlugin.cs" />
-    <Compile Include="Plugins\Versions\ListVersionsMenuPlugin.cs" />
     <Compile Include="Plugins\Globalization\LanguageSettings\LanguageSettingsMenuPlugin.cs" />
     <Compile Include="Plugins\Globalization\LanguageOverview\LanguageOverviewMenuPlugin.cs" />
     <Compile Include="Plugins\Globalization\DeleteLanguage\DeleteLanguageMenuPlugin.cs" />
@@ -288,13 +287,6 @@
     </Compile>
     <Compile Include="Plugins\ContextMenu\ContextMenuPluginInitializer.cs" />
     <Compile Include="Plugins\ContextMenu\ContextMenuTreePlugin.cs" />
-    <Compile Include="Plugins\Versions\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\Versions\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -443,7 +435,6 @@
     <EmbeddedResource Include="Assets\Css\jcrop_demos.css" />
     <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
     <Content Include="DynamicContent\Default.aspx" />
-    <EmbeddedResource Include="Plugins\Versions\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\DeleteLanguage\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageSettings\Default.aspx" />

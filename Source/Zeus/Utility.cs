@@ -193,7 +193,7 @@ namespace Zeus
 		/// <param name="finalAction">The default action to execute if the event didn't signal cancel.</param>
 		public static void InvokeEvent(EventHandler<CancelItemEventArgs> handler, ContentItem item, object sender, Action<ContentItem> finalAction)
 		{
-			if (handler != null && item.VersionOf == null)
+			if (handler != null)
 			{
 				CancelItemEventArgs args = new CancelItemEventArgs(item, finalAction);
 
@@ -215,7 +215,7 @@ namespace Zeus
 		/// <returns>The result of the action (if any).</returns>
 		public static ContentItem InvokeEvent(EventHandler<CancelDestinationEventArgs> handler, object sender, ContentItem source, ContentItem destination, Func<ContentItem, ContentItem, ContentItem> finalAction)
 		{
-			if (handler != null && source.VersionOf == null)
+			if (handler != null)
 			{
 				CancelDestinationEventArgs args = new CancelDestinationEventArgs(source, destination, finalAction);
 

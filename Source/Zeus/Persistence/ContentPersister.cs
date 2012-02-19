@@ -244,7 +244,7 @@ namespace Zeus.Persistence
 		protected virtual T Invoke<T>(EventHandler<T> handler, T args)
 						where T : ItemEventArgs
 		{
-			if (handler != null && args.AffectedItem.VersionOf == null)
+			if (handler != null)
 				handler.Invoke(this, args);
 			return args;
 		}
