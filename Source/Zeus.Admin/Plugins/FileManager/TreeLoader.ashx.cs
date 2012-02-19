@@ -20,7 +20,7 @@ namespace Zeus.Admin.Plugins.FileManager
 			{
 				ContentItem selectedItem = Context.Persister.Get(nodeId.Value);
 
-				SiteTree tree = SiteTree.From(selectedItem.TranslationOf ?? selectedItem, 2);
+				SiteTree tree = SiteTree.From(selectedItem, 2);
 
 				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read).Where(ci => !(ci is WidgetContentItem)))
 					.ToTreeNode(false, false);

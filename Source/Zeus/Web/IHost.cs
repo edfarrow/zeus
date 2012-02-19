@@ -12,7 +12,6 @@ namespace Zeus.Web
 	{
 		Site CurrentSite { get; }
 		IList<Site> Sites { get; }
-		string GetLanguageFromHostName();
 		Site GetSite(Url host);
 	}
 }

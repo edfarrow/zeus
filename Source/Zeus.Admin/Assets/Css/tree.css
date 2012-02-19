@@ -293,11 +293,6 @@ div#container
 	border-top: solid 1px #CCC;
 }
 
-.notAvailableInSelectedLanguage
-{
-	font-style: italic;
-}
-
 .day { color:#393; }
 .week { color:#363; }
 .invisible{ color:#999;}

@@ -188,7 +188,7 @@ namespace Zeus.Admin.Install
 					return;
 
 				ContentItem root = im.InsertRootNode(Type.GetType(ddlRoot.SelectedValue), "root", "Root Node");
-				ContentItem startPage = im.InsertStartPage(Type.GetType(ddlStartPage.SelectedValue), root, "start", "Start Page", Zeus.Context.Current.LanguageManager.GetDefaultLanguage());
+				ContentItem startPage = im.InsertStartPage(Type.GetType(ddlStartPage.SelectedValue), root, "start", "Start Page");
 
 				if (startPage.ID == Status.StartPageID && root.ID == Status.RootItemID)
 				{

@@ -20,11 +20,6 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			
-		}
-
 		protected override Control AddEditor(Control container)
 		{
 			CheckBoxList checkBoxList = new CheckBoxList();

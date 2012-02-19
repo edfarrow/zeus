@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -59,7 +58,7 @@ namespace Zeus.Web.Security
 						loginUrl = ((ILoginContext) currentPage).LoginUrl;
 						break;
 					}
-					currentPage = currentPage.GetParent();
+					currentPage = currentPage.Parent;
 				}
 			}
 			return new AuthenticationService(_webContext, location, loginUrl);

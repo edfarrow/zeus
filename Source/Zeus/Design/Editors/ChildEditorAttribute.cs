@@ -80,11 +80,6 @@ namespace Zeus.Design.Editors
 			return true;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((ItemEditView) editor).Enabled = false;
-		}
-
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 		}

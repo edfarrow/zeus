@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using System.Configuration;
 
 namespace Zeus.Configuration
@@ -23,15 +22,6 @@ namespace Zeus.Configuration
 		protected override object GetElementKey(ConfigurationElement element)
 		{
 			return ((HostNameElement) element).Name;
-		}
-
-		public StringDictionary GetMappings()
-		{
-			StringDictionary dictionary = new StringDictionary();
-			foreach (HostNameElement element in this)
-				if (!(element.Name == "*"))
-					dictionary.Add(element.Name, element.Language);
-			return dictionary;
 		}
 	}
 }

@@ -1,14 +1,12 @@
 ﻿using Ext.Net;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
-using Zeus.Globalization;
 
 namespace Zeus.Web
 {
 	[UI.Panel("Titles", "Page Identification", 10, Collapsible = true)]
 	[UI.Panel("Content", "Content", 20, Collapsible = true)]
 	[DefaultContainer("Content")]
-	[Translatable]
     [System.Serializable]
 	public abstract class PageContentItem : ContentItem
 	{

@@ -58,10 +58,5 @@ namespace Zeus.Web.Security.Details
 			container.Controls.Add(cbl);
 			return cbl;
 		}
-
-		protected override void DisableEditor(Control editor)
-		{
-			((CheckBoxList) editor).Enabled = false;
-		}
 	}
 }

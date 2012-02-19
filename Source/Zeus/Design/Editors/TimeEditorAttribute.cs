@@ -22,11 +22,6 @@ namespace Zeus.Design.Editors
 			return range;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((TimePicker) editor).Enabled = false;
-		}
-
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			TimePicker range = (TimePicker) editor;

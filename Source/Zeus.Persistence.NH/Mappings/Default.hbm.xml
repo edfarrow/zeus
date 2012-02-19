@@ -98,14 +98,6 @@
 		<property name="Visible"	  access="property" not-null="true" />
 		<property name="SavedBy"	  access="property" length="50" />
 
-		<many-to-one name="TranslationOf"	column="TranslationOfID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select"/>
-		<bag name="Translations" cascade="all" generic="true" inverse="true" lazy="true" batch-size="10">
-			<cache usage="read-write" />
-			<key column="TranslationOfID" />
-			<one-to-many class="Zeus.ContentItem, Zeus"/>
-		</bag>
-		<property name="Language" access="property" length="50" />
-
 		<many-to-one name="Parent" column="ParentID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select" />
 
 		<bag name="Children" cascade="all" generic="true" inverse="true" order-by="SortOrder" lazy="true" batch-size="10">
@@ -133,12 +125,6 @@
 			<key column="ItemID"/>
 			<one-to-many class="Zeus.Security.AuthorizationRule, Zeus"/>
 		</bag>
-
-		<bag name="LanguageSettings" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true" batch-size="10">
-			<cache usage="read-write" />
-			<key column="ItemID"/>
-			<one-to-many class="Zeus.Globalization.LanguageSetting, Zeus"/>
-		</bag>
 	</class>
 
 	<!-- DetailCollection -->
@@ -158,17 +144,4 @@
 			<one-to-many class="Zeus.ContentProperties.PropertyData, Zeus"/>
 		</bag>
 	</class>
-
-	<!-- LanguageSettings -->
-	<class name="Zeus.Globalization.LanguageSetting, Zeus" table="zeusLanguageSettings">
-		<cache usage="nonstrict-read-write" />
-
-		<id name="ID" column="ID" type="Int32" unsaved-value="0">
-			<generator class="native"/>
-		</id>
-		<many-to-one name="EnclosingItem" column="ItemID" class="Zeus.ContentItem, Zeus" not-null="true" />
-		<property name="Language" column="Language" type="String" not-null="true" length="50" />
-		<property name="FallbackLanguage" column="FallbackLanguage" type="String" not-null="false" length="50" />
-	</class>
-
 </hibernate-mapping>

@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI;
-using Coolite.Ext.UX;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
-using Zeus.BaseLibrary.Web;
-using Zeus.BaseLibrary.Web.UI;
-using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.Globalization;
-using Zeus.Globalization.ContentTypes;
-using Zeus.Integrity;
 using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.Hosting;
 using Zeus.Web.UI.WebControls;
-using TreeNode = Ext.Net.TreeNode;
 
 namespace Zeus.Admin.Plugins.EditItem
 {
@@ -36,42 +25,8 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 			else
 			{
-				if (SelectedLanguageCode != null)
-				{
-					ContentItem translatedItem = Engine.LanguageManager.GetTranslationDirect(SelectedItem, SelectedLanguageCode);
-					if (translatedItem == null)
-					{
-						Title = string.Format("New Translation of '{0}'", SelectedItem.Title);
-						ContentItem selectedItem = Engine.ContentTypes.CreateInstance(SelectedItem.GetType(), SelectedItem.Parent);
-						selectedItem.Language = SelectedLanguageCode;
-						selectedItem.TranslationOf = SelectedItem;
-						SelectedItem.Translations.Add(selectedItem);
-						selectedItem.Parent = null;
-						zeusItemEditView.CurrentItem = selectedItem;
-					}
-					else
-					{
-						zeusItemEditView.CurrentItem = translatedItem;
-						Title = "Edit \"" + translatedItem.Title + "\"";
-					}
-				}
-				else
-				{
-					zeusItemEditView.CurrentItem = SelectedItem;
-					Title = "Edit \"" + SelectedItem.Title + "\"";
-				}
-			}
-
-			bool languagesVisible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
-			txiLanguages.Visible = ddlLanguages.Visible = languagesVisible;
-
-			if (!ExtNet.IsAjaxRequest && GlobalizationEnabled)
-			{
-				foreach (Language language in Engine.Resolve<ILanguageManager>().GetAvailableLanguages())
-				{
-					IconComboListItem listItem = new IconComboListItem(language.Title, language.Name, language.IconUrl);
-					ddlLanguages.Items.Add(listItem);
-				}
+				zeusItemEditView.CurrentItem = SelectedItem;
+				Title = "Edit \"" + SelectedItem.Title + "\"";
 			}
 
 			base.OnInit(e);
@@ -140,7 +95,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			{
 				ContentItem parentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(SelectedItem.Path);
 				ContentItem contentItem = Zeus.Context.Current.ContentTypes.CreateInstance(CurrentItemType, parentItem);
-				contentItem.Language = SelectedLanguageCode;
 				if (contentItem is WidgetContentItem)
 					((WidgetContentItem) contentItem).ZoneName = Page.Request["zoneName"];
 				e.AffectedItem = contentItem;
@@ -195,13 +149,7 @@ namespace Zeus.Admin.Plugins.EditItem
 
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");
-			ddlLanguages.SelectedItem.Value = SelectedLanguageCode;
 			base.OnPreRender(e);
-		}
-
-		protected void ddlLanguages_ValueChanged(object sender, DirectEventArgs e)
-		{
-			ExtNet.Redirect(new Url(Request.RawUrl).SetQueryParameter("language", ddlLanguages.SelectedItem.Value));
 		}
 
 		protected void btnCancel_Click(object sender, EventArgs e)

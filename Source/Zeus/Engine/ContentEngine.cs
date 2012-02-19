@@ -8,7 +8,6 @@ using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.Globalization;
 using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
@@ -43,11 +42,6 @@ namespace Zeus.Engine
 		public IContentTypeManager ContentTypes
 		{
 			get { return Resolve<IContentTypeManager>(); }
-		}
-
-		public ILanguageManager LanguageManager
-		{
-			get { return Resolve<ILanguageManager>(); }
 		}
 
 		public IPersister Persister
@@ -97,7 +91,6 @@ namespace Zeus.Engine
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/contentTypes") as ContentTypesSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/customUrls") as CustomUrlsSection ?? new CustomUrlsSection());
 
 			if (hostSection != null && hostSection.Web != null)

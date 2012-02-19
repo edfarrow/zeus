@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 
@@ -16,19 +15,6 @@ namespace Zeus.Web.UI.WebControls
 		public event EventHandler<ItemViewEditableObjectEventArgs> Saved;
 
 		#endregion
-
-		/*public override bool Enabled
-		{
-			get { return base.Enabled; }
-			set
-			{
-				EnsureChildControls();
-				foreach (Control propertyControl in PropertyControls.Values)
-					if (propertyControl is WebControl)
-						((WebControl)propertyControl).Enabled = value;
-				base.Enabled = value;
-			}
-		}*/
 
 		protected override void AddPropertyControls()
 		{

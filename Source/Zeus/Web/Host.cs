@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 
@@ -37,16 +35,6 @@ namespace Zeus.Web
 		}
 
 		#endregion
-
-		public string GetLanguageFromHostName()
-		{
-			if (!_context.Request.Url.IsAbsoluteUri)
-				return null;
-			string host = _context.Request.Url.Host;
-			if (string.IsNullOrEmpty(host))
-				return null;
-			return CurrentSite.GetHostLanguageMappings()[host];
-		}
 
 		private void AddSite(HostSection hostSection, SiteElement element)
 		{

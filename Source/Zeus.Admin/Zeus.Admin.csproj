@@ -147,14 +147,6 @@
     <Compile Include="Plugins\FileManager\TreeLoader.ashx.cs">
       <DependentUpon>TreeLoader.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Globalization\LanguageChooserUserControl.ascx.cs">
-      <DependentUpon>LanguageChooserUserControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\Globalization\LanguageChooserUserControl.ascx.designer.cs">
-      <DependentUpon>LanguageChooserUserControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\Globalization\LanguageChooserTreePlugin.cs" />
     <Compile Include="Plugins\PluginUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -164,16 +156,12 @@
     <Compile Include="Plugins\PasteItem\PasteItemMenuPlugin.cs" />
     <Compile Include="Plugins\CopyItem\CopyItemMenuPlugin.cs" />
     <Compile Include="Plugins\Preview\PreviewMenuPlugin.cs" />
-    <Compile Include="Plugins\Globalization\LanguageSettings\LanguageSettingsMenuPlugin.cs" />
-    <Compile Include="Plugins\Globalization\LanguageOverview\LanguageOverviewMenuPlugin.cs" />
-    <Compile Include="Plugins\Globalization\DeleteLanguage\DeleteLanguageMenuPlugin.cs" />
     <Compile Include="Assets\Css\Resources.cs" />
     <Compile Include="Assets\Images\Resources.cs" />
     <Compile Include="Assets\JS\Resources.cs" />
     <Compile Include="Plugins\DeleteItem\DeleteGridToolbarPlugin.cs" />
     <Compile Include="Plugins\DeleteItem\DeleteItemMenuPlugin.cs" />
     <Compile Include="Plugins\EditItem\EditItemMenuPlugin.cs" />
-    <Compile Include="Plugins\Globalization\LanguageMenuPluginBase.cs" />
     <Compile Include="Plugins\NewItem\NewItemMenuPlugin.cs" />
     <Compile Include="AdminAssemblyManager.cs" />
     <Compile Include="AdminModule.cs" />
@@ -209,27 +197,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DynamicContent\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\Globalization\LanguageSettings\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\Globalization\LanguageSettings\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\Globalization\DeleteLanguage\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\Globalization\DeleteLanguage\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\Globalization\LanguageOverview\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\Globalization\LanguageOverview\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Plugins\ImportExport\ContentTypeNotFoundException.cs" />
@@ -435,9 +402,6 @@
     <EmbeddedResource Include="Assets\Css\jcrop_demos.css" />
     <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
     <Content Include="DynamicContent\Default.aspx" />
-    <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />
-    <EmbeddedResource Include="Plugins\Globalization\DeleteLanguage\Default.aspx" />
-    <EmbeddedResource Include="Plugins\Globalization\LanguageSettings\Default.aspx" />
     <EmbeddedResource Include="RecycleBin\Default.aspx" />
     <EmbeddedResource Include="Plugins\ImportExport\Default.aspx" />
     <EmbeddedResource Include="Plugins\CopyItem\Default.aspx" />
@@ -447,7 +411,6 @@
     <EmbeddedResource Include="Plugins\NewItem\Resources\Ext.ux.zeus.NewItemGridMenuPlugin.js" />
     <EmbeddedResource Include="Plugins\Tree\Resources\TreeCssInitializer.js" />
     <EmbeddedResource Include="Plugins\EditItem\KeepAlive.aspx" />
-    <EmbeddedResource Include="Plugins\Globalization\LanguageChooserUserControl.ascx" />
     <EmbeddedResource Include="Plugins\FileManager\FileManagerUserControl.ascx" />
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.js" />
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />

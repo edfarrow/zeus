@@ -1,6 +1,5 @@
 using Ext.Net;
 using Zeus.Design.Editors;
-using Zeus.Globalization;
 using Zeus.Integrity;
 using Zeus.Web;
 

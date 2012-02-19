@@ -203,12 +203,11 @@ namespace Zeus.Installation
 			return item;
 		}
 
-		public ContentItem InsertStartPage(Type type, ContentItem root, string name, string title, string languageCode)
+		public ContentItem InsertStartPage(Type type, ContentItem root, string name, string title)
 		{
 			ContentItem item = _contentTypeManager.CreateInstance(type, root);
 			item.Name = name;
 			item.Title = title;
-			item.Language = languageCode;
 			_persister.Save(item);
 			return item;
 		}

@@ -127,10 +127,3 @@ form {
 	margin-right: 10px;
 	height: 100%;
 }
-
-.zeus-tree-node.notAvailableInSelectedLanguage
-{
-	font-style: italic;
-}
-
-

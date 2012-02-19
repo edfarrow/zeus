@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
-using Zeus.Globalization;
 using Zeus.Persistence;
 
 namespace Zeus.Web
@@ -14,14 +11,8 @@ namespace Zeus.Web
 	{
 		#region Constructors
 
-		public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls)
-			: base(persister, host, webContext, notifier, config, languageManager, urls)
-		{
-			
-		}
-
-        public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls, GlobalizationSection globalizationConfig)
-			: base(persister, host, webContext, notifier, config, languageManager, urls, globalizationConfig)
+        public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, CustomUrlsSection urls)
+			: base(persister, host, webContext, notifier, config, urls)
 		{
 
 		}
@@ -54,10 +45,10 @@ namespace Zeus.Web
 			return Persister.Get(site.StartPageID);
 		}
 
-		public override string BuildUrl(ContentItem item, string languageCode)
+		public override string BuildUrl(ContentItem item)
 		{
 			ContentItem startPage;
-			Url url = BuildUrlInternal(item, languageCode, out startPage);
+			Url url = BuildUrlInternal(item, out startPage);
 
 			if (startPage != null)
 			{
@@ -79,7 +70,7 @@ namespace Zeus.Web
 
 		private static string GetHostedUrl(ContentItem item, string url, Site site)
 		{
-			string hostName = site.GetHostName(item.Language);
+			string hostName = site.GetHostName();
 			if (string.IsNullOrEmpty(hostName))
 				return item.FindPath(PathData.DefaultAction).RewrittenUrl;
 

@@ -75,12 +75,6 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		protected override void DisableEditor(Control editor)
-		{
-			((TextBox) editor).Enabled = false;
-			((TextBox) editor).ReadOnly = true;
-		}
-
 		private string GetDataTypeName(bool throwException)
 		{
 			Type propertyType = PropertyType.GetTypeOrUnderlyingType();

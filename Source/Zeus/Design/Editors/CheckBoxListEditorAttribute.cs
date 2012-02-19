@@ -75,11 +75,6 @@ namespace Zeus.Design.Editors
 			return cbl;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((CheckBoxList) editor).Enabled = false;
-		}
-
 		protected virtual CheckBoxList CreateEditor()
 		{
 			return new CheckBoxList();

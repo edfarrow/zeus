@@ -44,7 +44,7 @@ namespace Zeus.Tests.Integrity
 			IItemNotifier notifier = mocks.DynamicMock<IItemNotifier>();
 			mocks.Replay(notifier);
 			definitions = new ContentTypeManager(builder, notifier);
-			integrityManger = new IntegrityManager(definitions, parser, null, null);
+			integrityManger = new IntegrityManager(definitions, parser);
 			IntegrityEnforcer enforcer = new IntegrityEnforcer(persister, integrityManger);
 			enforcer.Start();
 		}

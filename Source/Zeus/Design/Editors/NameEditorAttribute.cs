@@ -24,11 +24,6 @@ namespace Zeus.Design.Editors
 			return nameEditor;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((NameEditor) editor).Enabled = false;
-		}
-
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
             object editorValue = ((NameEditor)editor).Text;
@@ -50,14 +45,14 @@ namespace Zeus.Design.Editors
 			ne.Suffix = contentItem.Extension;
 			try
 			{
-				if (Context.UrlParser.StartPage == item || contentItem.GetParent() == null)
+				if (Context.UrlParser.StartPage == item || contentItem.Parent == null)
 				{
 					ne.Prefix = string.Empty;
 					ne.Suffix = string.Empty;
 				}
-				else if (Context.UrlParser.StartPage != contentItem.GetParent())
+				else if (Context.UrlParser.StartPage != contentItem.Parent)
 				{
-					string parentUrl = contentItem.GetParent().GetUrl(contentItem.Language);
+					string parentUrl = contentItem.Parent.Url;
 					if (!parentUrl.Contains("?"))
 					{
 						string prefix = parentUrl;

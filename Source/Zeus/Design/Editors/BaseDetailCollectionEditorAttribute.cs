@@ -59,11 +59,6 @@ namespace Zeus.Design.Editors
 			return detailCollectionEditor;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((BaseDetailCollectionEditor) editor).Enabled = false;
-		}
-
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			BaseDetailCollectionEditor detailCollectionEditor = (BaseDetailCollectionEditor) editor;

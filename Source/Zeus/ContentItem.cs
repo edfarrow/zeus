@@ -4,14 +4,12 @@ using Ext.Net;
 using Zeus.Admin;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
-using Zeus.Globalization;
 using Zeus.Integrity;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web;
 using System.Linq;
 using Zeus.Linq;
-using Zeus.Persistence;
 using Zeus.Web;
 using Zeus.Security;
 using System.Security.Principal;
@@ -27,15 +25,12 @@ namespace Zeus
         #region Private Fields
 
         private IList<AuthorizationRule> _authorizationRules;
-        private IList<LanguageSetting> _languageSettings;
         private string _name;
         private DateTime? _expires;
         private IList<ContentItem> _children = new List<ContentItem>();
-        private IList<ContentItem> _translations = new List<ContentItem>();
         private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
         private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
         private string _url;
-        private bool _visible;
 
         private IUrlParser _urlParser;
 
@@ -89,28 +84,7 @@ namespace Zeus
         public virtual int SortOrder { get; set; }
 
         /// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
-        public virtual bool Visible
-        {
-            get
-            {
-                if (this.TranslationOf == null)
-                    return _visible;
-                else
-                    return this.TranslationOf.Visible;
-            }
-            set
-            {
-                _visible = value;
-            }
-        }
-
-        /// <summary>Gets or sets the original language version of this item. If this value is not null then this item is a translated version of the item specified by TranslationOf.</summary>
-        public virtual ContentItem TranslationOf { get; set; }
-
-        /// <summary>
-        /// Gets or sets the language code of this item.
-        /// </summary>
-        public virtual string Language { get; set; }
+		public virtual bool Visible { get; set; }
 
         /// <summary>Gets or sets the name of the identity who saved this item.</summary>
         public virtual string SavedBy { get; set; }
@@ -134,13 +108,6 @@ namespace Zeus
         {
             get { return _children; }
             set { _children = value; }
-        }
-
-        /// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
-        public virtual IList<ContentItem> Translations
-        {
-            get { return _translations; }
-            set { _translations = value; }
         }
 
         #endregion
@@ -175,37 +142,13 @@ namespace Zeus
             {
                 if (_url == null)
                 {
-                    if (_urlParser != null)
-                        _url = GetUrl(LanguageSelector.Fallback(ContentLanguage.PreferredCulture.Name, false));
-                    else
-                        _url = FindPath(PathData.DefaultAction).RewrittenUrl;
+                	if (_urlParser != null)
+                		return _urlParser.BuildUrl(this);
+                	else
+                		_url = FindPath(PathData.DefaultAction).RewrittenUrl;
                 }
                 return _url;
             }
-        }
-
-        /// <summary>
-        /// Allows the default language code to be overridden for the purposes of generating a URL.
-        /// This is used by NameEditorAttribute to get the URL for a parent item using the new child's
-        /// language.
-        /// </summary>
-        /// <param name="languageCode"></param>
-        /// <returns></returns>
-        public virtual string GetUrl(string languageCode)
-        {
-            if (_urlParser != null)
-                return _urlParser.BuildUrl(this, languageCode);
-            return FindPath(PathData.DefaultAction).RewrittenUrl;
-        }
-
-        public virtual string GetUrl(ILanguageSelector languageSelector)
-        {
-            LanguageSelectorContext args = new LanguageSelectorContext(this);
-            languageSelector.LoadLanguage(args);
-
-            if (_urlParser != null)
-                return _urlParser.BuildUrl(this, args.SelectedLanguage);
-            return FindPath(PathData.DefaultAction).RewrittenUrl;
         }
 
         public string HierarchicalTitle
@@ -236,7 +179,7 @@ namespace Zeus
             get
             {
                 string path = "/";
-                ContentItem startingParent = (TranslationOf != null) ? TranslationOf.Parent : Parent;
+                ContentItem startingParent = Parent;
                 if (startingParent != null)
                     path += Name;
                 for (ContentItem item = startingParent; item != null && item.Parent != null; item = item.Parent)
@@ -257,18 +200,6 @@ namespace Zeus
                 return _authorizationRules;
             }
             set { _authorizationRules = value; }
-        }
-
-        /// <summary>Gets an array of language settings for this item. Null or empty list is interpreted as this item inheriting its settings from its parent.</summary>
-        public virtual IList<LanguageSetting> LanguageSettings
-        {
-            get
-            {
-                if (_languageSettings == null)
-                    _languageSettings = new List<LanguageSetting>();
-                return _languageSettings;
-            }
-            set { _languageSettings = value; }
         }
 
         #region this[]
@@ -351,7 +282,7 @@ namespace Zeus
         /// <returns>The value stored in the details bag or null if no item was found.</returns>
         public virtual T GetDetail<T>(string detailName, T defaultValue)
         {
-            IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
+            IDictionary<string, PropertyData> details = Details;
 
             //try inserted to stop "illegal access" error
             bool? bContains;
@@ -402,20 +333,8 @@ namespace Zeus
             }
         }
 
-        private IDictionary<string, PropertyData> GetCurrentOrMasterLanguageDetails(string detailName)
-        {
-            // Look up content property matching this name.
-            IContentProperty property = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName);
-        	if (property == null || property.Shared)
-        		if (TranslationOf != null)
-        			return TranslationOf.Details;
-        	return Details;
-        }
-
         public virtual void SetDetail(string detailName, object value)
         {
-            // TODO: Throw exception if this is a shared property and this is not the master language version.
-
             if (string.IsNullOrEmpty(detailName))
                 throw new ArgumentNullException("detailName");
 
@@ -525,16 +444,10 @@ namespace Zeus
             }
         }
 
+		/// <summary>Creats a copy of this item including details, authorization rules, while resetting ID.</summary>
+		/// <param name="includeChildren">Specifies whether this item's child items also should be cloned.</param>
+		/// <returns>The cloned item with or without cloned child items.</returns>
         public virtual ContentItem Clone(bool includeChildren)
-        {
-            return Clone(includeChildren, false);
-        }
-
-        /// <summary>Creats a copy of this item including details, authorization rules, and language settings, while resetting ID.</summary>
-        /// <param name="includeChildren">Specifies whether this item's child items also should be cloned.</param>
-        /// <param name="includeTranslations"></param>
-        /// <returns>The cloned item with or without cloned child items.</returns>
-        public virtual ContentItem Clone(bool includeChildren, bool includeTranslations)
         {
             ContentItem cloned = (ContentItem)MemberwiseClone();
             cloned.ID = 0;
@@ -542,9 +455,7 @@ namespace Zeus
 
             CloneDetails(cloned);
             CloneChildren(includeChildren, cloned);
-            CloneTranslations(includeTranslations, cloned);
             CloneAuthorizationRules(cloned);
-            CloneLanguageSettings(cloned);
 
             return cloned;
         }
@@ -565,20 +476,6 @@ namespace Zeus
             }
         }
 
-        private void CloneLanguageSettings(ContentItem cloned)
-        {
-            if (LanguageSettings != null)
-            {
-                cloned.LanguageSettings = new List<LanguageSetting>();
-                foreach (LanguageSetting languageSetting in LanguageSettings)
-                {
-                    LanguageSetting clonedLanguageSetting = languageSetting.Clone();
-                    clonedLanguageSetting.EnclosingItem = cloned;
-                    cloned.LanguageSettings.Add(clonedLanguageSetting);
-                }
-            }
-        }
-
         private void CloneChildren(bool includeChildren, ContentItem cloned)
         {
             cloned.Children = new List<ContentItem>();
@@ -587,17 +484,6 @@ namespace Zeus
                 {
                     ContentItem clonedChild = child.Clone(true);
                     clonedChild.AddTo(cloned);
-                }
-        }
-
-        private void CloneTranslations(bool includeTranslations, ContentItem cloned)
-        {
-            cloned.Translations = new List<ContentItem>();
-            if (includeTranslations)
-                foreach (ContentItem translation in Translations)
-                {
-                    ContentItem clonedTranslation = translation.Clone(true);
-                    clonedTranslation.AddTo(cloned);
                 }
         }
 
@@ -644,73 +530,12 @@ namespace Zeus
         /// <returns></returns>
         public virtual IEnumerable<ContentItem> GetChildren()
         {
-            return GetChildrenInternal().Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
-        }
-
-        /// <summary>
-        /// Gets child items that the user is allowed to access.
-        /// It doesn't have to return the same collection as
-        /// the Children property.
-        /// </summary>
-        /// <returns></returns>
-        public virtual IEnumerable<ContentItem> GetGlobalizedChildren()
-        {
-            return GetChildrenInternalWithLanguageSelection().Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
+            return Children.Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
         }
 
         public virtual IEnumerable<T> GetChildren<T>()
         {
-            return GetChildrenInternal().OfType<T>();
-        }
-
-        public virtual IEnumerable<T> GetGlobalizedChildren<T>()
-        {
-            return GetChildrenInternalWithLanguageSelection().OfType<T>();
-        }
-
-        private IEnumerable<ContentItem> GetChildrenInternalWithLanguageSelection()
-        {
-            return GetChildrenInternalWithLanguageSelection(LanguageSelector.AutoDetect());
-        }
-
-        private IEnumerable<ContentItem> GetChildrenInternalWithLanguageSelection(ILanguageSelector languageSelector)
-        {
-            IEnumerable<ContentItem> children = GetChildrenInternal();
-
-            LanguageSelectorContext args = new LanguageSelectorContext(this);
-            languageSelector.LoadLanguage(args);
-            return FilterLanguage(children, languageSelector);
-        }
-
-        private IEnumerable<ContentItem> GetChildrenInternal()
-        {
-            // Get the actual item this item represents.
-            ContentItem realItem = this;
-            if (TranslationOf != null)
-                realItem = realItem.TranslationOf;
-
-            return realItem.Children;
-        }
-
-        private static IEnumerable<ContentItem> FilterLanguage(IEnumerable<ContentItem> pages, ILanguageSelector langSelector)
-        {
-            List<ContentItem> datas = new List<ContentItem>();
-            foreach (ContentItem page in pages)
-            {
-                ContentItem translation = SelectLanguageBranch(page, langSelector);
-                if (translation != null)
-                    datas.Add(translation);
-            }
-            return datas;
-        }
-
-        private static ContentItem SelectLanguageBranch(ContentItem page, ILanguageSelector selector)
-        {
-            LanguageSelectorContext args = new LanguageSelectorContext(page);
-            selector.SelectPageLanguage(args);
-            if (string.IsNullOrEmpty(args.SelectedLanguage))
-                return null;
-            return Context.Current.LanguageManager.GetTranslationDirect(page, args.SelectedLanguage);
+			return Children.OfType<T>();
         }
 
         /// <summary>Finds children based on the given url segments. The method supports convering the last segments into action and parameter.</summary>
@@ -718,32 +543,22 @@ namespace Zeus
         /// <returns>A path data object which can be empty (check using data.IsEmpty()).</returns>
         public virtual PathData FindPath(string remainingUrl)
         {
-            return FindPath(remainingUrl, Context.Current.LanguageManager.GetDefaultLanguage());
-        }
-
-        public virtual PathData FindPath(string remainingUrl, string languageCode)
-        {
-            // Get correct translation.
-            ContentItem translation = Context.Current.LanguageManager.GetTranslation(this, languageCode) ?? this;
-
             if (remainingUrl == null)
-                return translation.GetTemplate(string.Empty);
+                return GetTemplate(string.Empty);
 
             remainingUrl = remainingUrl.TrimStart('/');
 
             if (remainingUrl.Length == 0)
-                return translation.GetTemplate(string.Empty);
+                return GetTemplate(string.Empty);
 
             int slashIndex = remainingUrl.IndexOf('/');
             string nameSegment = slashIndex < 0 ? remainingUrl : remainingUrl.Substring(0, slashIndex);
-            foreach (ContentItem child in translation.GetChildrenInternal())
+            foreach (ContentItem child in Children)
             {
-                // Get correct translation.
-                ContentItem childTranslation = Context.Current.LanguageManager.GetTranslation(child, languageCode);
-                if (childTranslation != null && childTranslation.Equals(nameSegment))
+                if (child.Equals(nameSegment))
                 {
                     remainingUrl = slashIndex < 0 ? null : remainingUrl.Substring(slashIndex + 1);
-                    return childTranslation.FindPath(remainingUrl, languageCode);
+                    return child.FindPath(remainingUrl);
                 }
             }
 
@@ -774,34 +589,6 @@ namespace Zeus
         }
 
         /// <summary>
-        /// Translations don't have their Parent object set, so this is an abstraction to allow
-        /// translations to act as normal content items.
-        /// </summary>
-        /// <returns></returns>
-        public virtual ContentItem GetParent()
-        {
-            return GetParent(ContentLanguage.PreferredCulture.Name);
-        }
-
-        /// <summary>
-        /// Translations don't have their Parent object set, so this is an abstraction to allow
-        /// translations to act as normal content items.
-        /// </summary>
-        /// <returns></returns>
-        public virtual ContentItem GetParent(string languageName)
-        {
-            ContentItem realItem = TranslationOf ?? this;
-            ContentItem parent = realItem.Parent;
-
-            if (parent == null)
-                return null;
-
-            return (Context.Current.LanguageManager.Enabled)
-                ? (Context.Current.LanguageManager.GetTranslation(parent, languageName) ?? parent)
-                : parent;
-        }
-
-        /// <summary>
         /// Tries to get a child item with a given name. This method ignores
         /// user permissions and any trailing '.aspx' that might be part of
         /// the name.
@@ -809,38 +596,36 @@ namespace Zeus
         /// <param name="childName">The name of the child item to get.</param>
         /// <returns>The child item if it is found otherwise null.</returns>
         /// <remarks>If the method is passed an empty or null string it will return itself.</remarks>
-        public virtual ContentItem GetChild(string childName)
+		public virtual ContentItem GetChild(string childName)
         {
-            if (string.IsNullOrEmpty(childName))
-                return null;
+        	if (string.IsNullOrEmpty(childName))
+        		return null;
 
-            int slashIndex = childName.IndexOf('/');
-            if (slashIndex == 0) // starts with slash
-            {
-                if (childName.Length == 1)
-                    return this;
-                return GetChild(childName.Substring(1));
-            }
+        	int slashIndex = childName.IndexOf('/');
+        	if (slashIndex == 0) // starts with slash
+        	{
+        		if (childName.Length == 1)
+        			return this;
+        		return GetChild(childName.Substring(1));
+        	}
 
-            if (slashIndex > 0) // contains a slash further down
-            {
-                string nameSegment = childName.Substring(0, slashIndex);
-                foreach (ContentItem child in GetChildrenInternal())
-                    foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
-                        if (translation.Equals(nameSegment))
-                            return translation.GetChild(childName.Substring(slashIndex));
-                return null;
-            }
+        	if (slashIndex > 0) // contains a slash further down
+        	{
+        		string nameSegment = childName.Substring(0, slashIndex);
+        		foreach (ContentItem child in Children)
+        			if (child.Equals(nameSegment))
+        				return child.GetChild(childName.Substring(slashIndex));
+        		return null;
+        	}
 
-            // no slash, only a name
-            foreach (ContentItem child in GetChildrenInternal())
-                foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
-                    if (translation.Equals(childName))
-                        return translation;
-            return null;
+        	// no slash, only a name
+			foreach (ContentItem child in Children)
+        		if (child.Equals(childName))
+					return child;
+        	return null;
         }
 
-        public override bool Equals(object obj)
+    	public override bool Equals(object obj)
         {
             if (this == obj) return true;
             if ((obj == null) || (obj.GetType() != GetType())) return false;

@@ -19,18 +19,6 @@ namespace Zeus.Design.Editors
 			
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			CompositeField placeHolder = (CompositeField)editor;
-			placeHolder.Items[0].Enabled = false;
-			((DateField)placeHolder.Items[0]).ReadOnly = true;
-			if (IncludeTime)
-			{
-				placeHolder.Items[1].Enabled = false;
-				((TimeField)placeHolder.Items[1]).ReadOnly = true;
-			}
-		}
-
 		protected override Control AddEditor(Control container)
 		{
 			CompositeField placeHolder = new CompositeField();

@@ -241,7 +241,6 @@
     <Compile Include="Configuration\ContentTypeZone.cs" />
     <Compile Include="Configuration\ContentTypeZoneCollection.cs" />
     <Compile Include="Configuration\TreeElement.cs" />
-    <Compile Include="Configuration\GlobalizationSection.cs" />
     <Compile Include="Configuration\DynamicContentControl.cs" />
     <Compile Include="Configuration\DynamicContentControlCollection.cs" />
     <Compile Include="Configuration\DynamicContentSection.cs" />
@@ -449,18 +448,6 @@
     <Compile Include="FileSystem\Images\ImageCachingServiceInitializer.cs" />
     <Compile Include="FileSystem\Images\ImageLayerBuilderExtensions.cs" />
     <Compile Include="FileSystem\Images\ZeusImageSource.cs" />
-    <Compile Include="Globalization\ContentLanguage.cs" />
-    <Compile Include="Globalization\ILanguageSelector.cs" />
-    <Compile Include="Globalization\LanguagePreferenceList.cs" />
-    <Compile Include="Globalization\LanguageSelection.cs" />
-    <Compile Include="Globalization\LanguageSelector.cs" />
-    <Compile Include="Globalization\LanguageSelectorContext.cs" />
-    <Compile Include="Globalization\LanguageSetting.cs" />
-    <Compile Include="Globalization\ContentTypes\LanguageContainer.cs" />
-    <Compile Include="Globalization\ContentTypes\Language.cs" />
-    <Compile Include="Globalization\ILanguageManager.cs" />
-    <Compile Include="Globalization\LanguageManager.cs" />
-    <Compile Include="Globalization\TranslatableAttribute.cs" />
     <Compile Include="Installation\DatabaseStatus.cs" />
     <Compile Include="Installation\InstallerHints.cs" />
     <Compile Include="Integrity\AllowedChildrenAttribute.cs" />
@@ -484,7 +471,6 @@
     <Compile Include="Serialization\AuthorizationRuleXmlWriter.cs" />
     <Compile Include="Serialization\ChildXmlWriter.cs" />
     <Compile Include="Serialization\ContentTypeNotFoundException.cs" />
-    <Compile Include="Serialization\LanguageSettingXmlWriter.cs" />
     <Compile Include="Serialization\DefinedPropertyXmlWriter.cs" />
     <Compile Include="Serialization\ElementWriter.cs" />
     <Compile Include="Serialization\Exporter.cs" />
@@ -493,7 +479,6 @@
     <Compile Include="Serialization\GZipImporter.cs" />
     <Compile Include="Serialization\ItemXmlWriter.cs" />
     <Compile Include="Serialization\IXmlWriter.cs" />
-    <Compile Include="Serialization\LanguageSettingXmlReader.cs" />
     <Compile Include="Serialization\IXmlReader.cs" />
     <Compile Include="Serialization\PropertyCollectionXmlReader.cs" />
     <Compile Include="Serialization\PropertyCollectionXmlWriter.cs" />

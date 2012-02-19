@@ -66,7 +66,6 @@ namespace Zeus.ContentTypes
 					{
 						overrideEditor.Title = property.Title;
 						overrideEditor.SortOrder = property.SortOrder;
-						overrideEditor.Shared = property.Shared;
 						if (overrideEditor is AbstractEditorAttribute && property is BaseContentPropertyAttribute)
 							((AbstractEditorAttribute) overrideEditor).Description = ((BaseContentPropertyAttribute) property).Description;
 						if (overrideEditor is AbstractEditorAttribute && property is ContentPropertyAttribute && !string.IsNullOrEmpty(((ContentPropertyAttribute)property).EditorContainerName))

@@ -3,12 +3,9 @@ using System.IO;
 using System.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
-using Zeus.Globalization;
-using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
 using System.Linq;
 using System.Collections.Generic;
-using NHibernate;
 
 namespace Zeus.Web
 {
@@ -20,21 +17,13 @@ namespace Zeus.Web
         private readonly IHost _host;
         protected readonly IWebContext _webContext;
         private readonly bool _ignoreExistingFiles;
-        private readonly ILanguageManager _languageManager;
-        private readonly bool _useBrowserLanguagePreferences;
         private readonly CustomUrlsSection _configUrlsSection;
 
         #endregion
 
         #region Constructors
 
-        public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls)
-            : this(persister, host, webContext, notifier, config, languageManager, urls, null)
-        {
-
-        }
-
-        public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls, GlobalizationSection globalizationConfig)
+        public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, CustomUrlsSection urls)
         {
             _persister = persister;
             _host = host;
@@ -44,11 +33,7 @@ namespace Zeus.Web
 
             notifier.ItemCreated += OnItemCreated;
 
-            _languageManager = languageManager;
-
             DefaultDocument = "default";
-
-            _useBrowserLanguagePreferences = (globalizationConfig != null) ? globalizationConfig.UseBrowserLanguagePreferences : false;
 
             _configUrlsSection = urls;
         }
@@ -91,18 +76,13 @@ namespace Zeus.Web
 
         #region Methods
 
-        public string BuildUrl(ContentItem item)
-        {
-            return BuildUrl(item, item.Language);
-        }
-
-        public virtual string BuildUrl(ContentItem item, string languageCode)
+        public virtual string BuildUrl(ContentItem item)
         {
             ContentItem startPage;
-            return BuildUrlInternal(item, languageCode, out startPage);
+            return BuildUrlInternal(item, out startPage);
         }
 
-        protected string BuildUrlInternal(ContentItem item, string languageCode, out ContentItem startPage)
+        protected string BuildUrlInternal(ContentItem item, out ContentItem startPage)
         {
             startPage = null;
             ContentItem current = item;
@@ -115,22 +95,13 @@ namespace Zeus.Web
                 {
                     startPage = current;
 
-                    // Prepend language identifier, if this is not the default language.
-                    if (_languageManager.Enabled && !LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name))
-                    {
-                        if (LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name) != _webContext.LocalUrl.Authority)
-                            url = url.SetAuthority(LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name));
-                        else if (!string.IsNullOrEmpty(languageCode))
-                            url = url.PrependSegment(languageCode, true);
-                    }
-
                     // we've reached the start page so we're done here
                     return VirtualPathUtility.ToAbsolute("~" + url.PathAndQuery);
                 }
 
                 url = url.PrependSegment(current.Name, current.Extension);
 
-                current = current.GetParent(languageCode);
+                current = current.Parent;
             } while (current != null);
 
             // If we didn't find the start page, it means the specified
@@ -146,7 +117,7 @@ namespace Zeus.Web
 
         protected static bool IsStartPage(ContentItem item, Site site)
         {
-            return item.ID == site.StartPageID || (item.TranslationOf != null && item.TranslationOf.ID == site.StartPageID);
+            return item.ID == site.StartPageID;
         }
 
         /// <summary>Handles virtual directories and non-page items.</summary>
@@ -221,11 +192,6 @@ namespace Zeus.Web
 
             if (url.Length == 0)
                 return current;
-
-            // Check if start of URL contains a language identifier.
-            foreach (Language language in Context.Current.LanguageManager.GetAvailableLanguages())
-                if (url.StartsWith(language.Name, StringComparison.InvariantCultureIgnoreCase))
-                    throw new NotImplementedException();
 
             return current.GetChild(url) ?? NotFoundPage(url);
         }
@@ -346,9 +312,8 @@ namespace Zeus.Web
                             .UpdateParameters(requestedUrl.GetQueries());
 
                 ContentItem startPage = GetStartPage(requestedUrl);
-                string languageCode = GetLanguage(ref requestedUrl);
                 string path = Url.ToRelative(requestedUrl.Path).TrimStart('~');
-                PathData data = startPage.FindPath(path, languageCode).UpdateParameters(requestedUrl.GetQueries());
+                PathData data = startPage.FindPath(path).UpdateParameters(requestedUrl.GetQueries());
 
                 if (data.IsEmpty())
                 {
@@ -549,21 +514,6 @@ namespace Zeus.Web
                 data.IsRewritable = IsRewritable(_webContext.PhysicalPath);
                 return data;
             }
-        }
-
-        protected virtual string GetLanguage(ref Url url)
-        {
-            // Check if start of URL contains a language identifier.
-            string priorityLanguage = null;
-            foreach (Language language in Context.Current.LanguageManager.GetAvailableLanguages())
-                if (url.Path.Equals("/" + language.Name, StringComparison.InvariantCultureIgnoreCase) || url.Path.StartsWith("/" + language.Name + "/", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    url = url.RemoveSegment(0);
-                    priorityLanguage = language.Name;
-                }
-
-            ContentLanguage.Instance.SetCulture(priorityLanguage);
-            return ContentLanguage.PreferredCulture.Name;
         }
 
         private bool IsRewritable(string path)

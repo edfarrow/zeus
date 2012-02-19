@@ -138,8 +138,6 @@ namespace Zeus.Admin.Plugins.ImportExport
 			item.Visible = Convert.ToBoolean(attributes["visible"]);
 			if (!string.IsNullOrEmpty(attributes["zoneName"]))
 				((WidgetContentItem) item).ZoneName = attributes["zoneName"];
-			if (!string.IsNullOrEmpty(attributes["language"]))
-				item.Language = attributes["language"];
 		}
 
 		private static Dictionary<string, string> GetAttributes(XPathNavigator navigator)

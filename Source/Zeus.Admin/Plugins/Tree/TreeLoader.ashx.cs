@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web;
 using Ext.Net;
-using Zeus.ContentTypes;
 using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web;
@@ -34,7 +33,7 @@ namespace Zeus.Admin.Plugins.Tree
 					tree = SiteTree.Between(selectedItem, Find.RootItem, true)
 						.OpenTo(selectedItem);
 				else
-					tree = SiteTree.From(selectedItem.TranslationOf ?? selectedItem, 2);
+					tree = SiteTree.From(selectedItem, 2);
 
 				if (sync)
 					tree = tree.ForceSync();

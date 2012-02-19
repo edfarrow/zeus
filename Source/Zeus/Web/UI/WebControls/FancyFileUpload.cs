@@ -74,12 +74,6 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
-		public bool Enabled
-		{
-			get { return (bool)(ViewState["Enabled"] ?? true); }
-			set { ViewState["Enabled"] = value; }
-		}
-
 		private string GetAnchorClientID()
 		{
 			return ClientID + "DemoAttach";

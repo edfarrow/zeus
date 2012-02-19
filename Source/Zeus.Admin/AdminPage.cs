@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.UI.WebControls;
 using Ext.Net;
 using Zeus.Admin.Plugins.Tree;
-using Zeus.Configuration;
-using Zeus.Globalization;
-using Zeus.Globalization.ContentTypes;
 using Zeus.Web;
 
 namespace Zeus.Admin
@@ -40,16 +36,6 @@ jQuery(document).ready(function() {{
 		#endregion
 
 		#region Properties
-
-		protected bool GlobalizationEnabled
-		{
-			get { return Engine.Resolve<GlobalizationSection>().Enabled; }
-		}
-
-		protected virtual string SelectedLanguageCode
-		{
-			get { return Engine.AdminManager.CurrentAdminLanguageBranch; }
-		}
 
 		public virtual ContentItem SelectedItem
 		{

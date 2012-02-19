@@ -48,7 +48,6 @@ namespace Zeus.Serialization
 			yield return new PropertyCollectionXmlWriter();
 			yield return new ChildXmlWriter();
 			yield return new AuthorizationRuleXmlWriter();
-			yield return new LanguageSettingXmlWriter();
 		}
 
 		protected virtual void WriteDefaultAttributes(ElementWriter itemElement, ContentItem item)
@@ -67,8 +66,6 @@ namespace Zeus.Serialization
 			//itemElement.WriteAttribute("url", parser.BuildUrl(item));
 			itemElement.WriteAttribute("visible", item.Visible);
 			itemElement.WriteAttribute("savedBy", item.SavedBy);
-			itemElement.WriteAttribute("language", item.Language);
-			itemElement.WriteAttribute("translationOf", (item.TranslationOf != null) ? item.TranslationOf.ID.ToString() : string.Empty);
 			itemElement.WriteAttribute("typeName", item.GetType().GetTypeAndAssemblyName());
 			itemElement.WriteAttribute("discriminator", definitions.GetContentType(item.GetType()).Discriminator);
 		}

@@ -43,10 +43,5 @@ namespace Zeus.Design.Editors
 			if (value != null)
 				checkBox.Checked = (bool) value;
 		}
-
-		protected override void DisableEditor(Control editor)
-		{
-			((CheckBox) editor).Enabled = false;
-		}
 	}
 }

@@ -54,10 +54,5 @@ namespace Zeus.Design.Editors
 			container.Controls.Add(childrenEditor);
 			return childrenEditor;
 		}
-
-		protected override void DisableEditor(Control editor)
-		{
-			((ChildrenEditor) editor).Enabled = false;
-		}
 	}
 }

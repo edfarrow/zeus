@@ -7,7 +7,6 @@ using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.DynamicContent;
 using Zeus.FileSystem;
-using Zeus.Globalization;
 using Zeus.Installation;
 using Zeus.Integrity;
 using Zeus.Net;
@@ -57,9 +56,6 @@ namespace Zeus.Engine
 
 			// File System
 			Bind<IFileSystemService>().To<FileSystemService>().InSingletonScope();
-
-			// Globalization
-			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();
 
 			// Installation
 			Bind<InstallationManager>().To<InstallationManager>().InSingletonScope();

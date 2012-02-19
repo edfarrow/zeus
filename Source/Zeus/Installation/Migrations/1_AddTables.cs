@@ -20,8 +20,6 @@ namespace Zeus.Installation.Migrations
 				.WithColumn("SortOrder").AsInt32().NotNullable()
 				.WithColumn("Visible").AsBoolean().NotNullable()
 				.WithColumn("SavedBy").AsString(50).Nullable()
-				.WithColumn("TranslationOfID").AsInt32().Nullable()
-				.WithColumn("Language").AsString(50).Nullable()
 				.WithColumn("ParentID").AsInt32().Nullable();
 
 			Create.Table("zeusDetailCollections")
@@ -36,12 +34,6 @@ namespace Zeus.Installation.Migrations
 				.WithColumn("Role").AsString(50).Nullable()
 				.WithColumn("[User]").AsString(50).Nullable()
 				.WithColumn("Allowed").AsBoolean().NotNullable();
-
-			Create.Table("zeusLanguageSettings")
-				.WithIDColumn()
-				.WithColumn("ItemID").AsInt32().NotNullable()
-				.WithColumn("Language").AsString(50).NotNullable()
-				.WithColumn("FallbackLanguage").AsString(50).Nullable();
 
 			Create.Table("zeusDetails")
 				.WithIDColumn()
@@ -69,10 +61,6 @@ namespace Zeus.Installation.Migrations
 				.FromTable("zeusAuthorizationRules").ForeignColumn("ItemID")
 				.ToTable("zeusItems").PrimaryColumn("ID");
 
-			Create.ForeignKey("FK_zeusLanguageSettings_ItemID_zeusItems_ID")
-				.FromTable("zeusLanguageSettings").ForeignColumn("ItemID")
-				.ToTable("zeusItems").PrimaryColumn("ID");
-
 			Create.ForeignKey("FK_zeusDetails_ItemID_zeusItems_ID")
 				.FromTable("zeusDetails").ForeignColumn("ItemID")
 				.ToTable("zeusItems").PrimaryColumn("ID");
@@ -84,19 +72,12 @@ namespace Zeus.Installation.Migrations
 			Create.ForeignKey("FK_zeusDetails_DetailBlobID_zeusDetailBlobs_ID")
 				.FromTable("zeusDetails").ForeignColumn("DetailBlobID")
 				.ToTable("zeusDetailBlobs").PrimaryColumn("ID");
-
-			Create.Index("IX_Language")
-				.OnTable("zeusLanguageSettings")
-				.OnColumn("ItemID").Ascending()
-				.OnColumn("Language").Ascending()
-				.WithOptions().Unique();
 		}
 
 		public override void Down()
 		{
 			Delete.Table("zeusDetailBlobs");
 			Delete.Table("zeusDetails");
-			Delete.Table("zeusLanguageSettings");
 			Delete.Table("zeusAuthorizationRules");
 			Delete.Table("zeusDetailCollections");
 			Delete.Table("zeusItems");

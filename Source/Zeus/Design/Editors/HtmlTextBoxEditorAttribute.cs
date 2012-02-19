@@ -27,12 +27,6 @@ namespace Zeus.Design.Editors
 		public string CustomCssUrl { get; set; }
 		public string CustomStyleList { get; set; }
 
-		protected override void DisableEditor(Control editor)
-		{
-			((HtmlTextBox) editor).Enabled = false;
-			((HtmlTextBox) editor).ReadOnly = true;
-		}
-
 		/// <summary>Creates a text box editor.</summary>
 		/// <param name="container">The container control the tetx box will be placed in.</param>
 		/// <returns>A text box control.</returns>

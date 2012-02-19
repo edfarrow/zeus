@@ -61,12 +61,6 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		protected override void DisableEditor(Control editor)
-		{
-			((TextArea) editor).Enabled = false;
-			((TextArea) editor).ReadOnly = true;
-		}
-
 		/// <summary>Creates a text box editor.</summary>
 		/// <param name="container">The container control the tetx box will be placed in.</param>
 		/// <returns>A text box control.</returns>

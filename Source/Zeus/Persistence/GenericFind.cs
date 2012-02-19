@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Zeus.Collections;
-using Zeus.FileSystem;
-using Zeus.Web;
-using Zeus.Security;
 using Zeus.Web.Security.Items;
 using Zeus.Security.ContentTypes;
 
@@ -89,7 +85,7 @@ namespace Zeus.Persistence
 		{
             int depth = 200;
 
-			foreach (ContentItem child in item.GetGlobalizedChildren())
+			foreach (ContentItem child in item.GetChildren())
 			{
 				yield return child;
 				foreach (ContentItem childItem in EnumerateAccessibleChildren(child, depth))
@@ -102,7 +98,7 @@ namespace Zeus.Persistence
         /// <returns>An enumeration of all children of an item.</returns>
         public static IEnumerable<ContentItem> EnumerateAccessibleChildren(ContentItem item, int depth)
         {
-            foreach (ContentItem child in item.GetGlobalizedChildren())
+            foreach (ContentItem child in item.GetChildren())
             {
                 yield return child;
                 if (depth > 1)
@@ -153,7 +149,7 @@ namespace Zeus.Persistence
 			if (includeSelf)
 				item = initialItem;
 			else if (initialItem != lastAncestor)
-				item = initialItem.GetParent();
+				item = initialItem.Parent;
 			else
 				yield break;
 
@@ -162,7 +158,7 @@ namespace Zeus.Persistence
 				yield return item;
 				if (item == lastAncestor)
 					break;
-				item = item.GetParent();
+				item = item.Parent;
 			}
 		}
 

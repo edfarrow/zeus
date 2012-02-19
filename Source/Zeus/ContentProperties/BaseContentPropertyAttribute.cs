@@ -8,25 +8,13 @@ namespace Zeus.ContentProperties
 	public abstract class BaseContentPropertyAttribute : Attribute, IContentProperty
 	{
 		protected BaseContentPropertyAttribute(string title, int sortOrder)
-			: this()
 		{
 			Title = title;
 			SortOrder = sortOrder;
 		}
 
-		private BaseContentPropertyAttribute()
-		{
-			Shared = true;
-		}
-
 		public string Description { get; set; }
 		public string Name { get; set; }
-
-		/// <summary>
-		/// Gets or sets a value indicating whether this property is shared among all translations of a page.
-		/// True if the property is shared, or false if the property is unique for each translation.
-		/// </summary>
-		public bool Shared { get; set; }
 
 		public int SortOrder { get; set; }
 		public string Title { get; set; }
@@ -43,7 +31,6 @@ namespace Zeus.ContentProperties
 			IEditor editor = GetDefaultEditorInternal(propertyType);
 			editor.Name = Name;
 			editor.PropertyType = propertyType;
-			editor.Shared = Shared;
 
 			// TODO - clean this up.
 			if (editor is AbstractEditorAttribute)
@@ -85,8 +72,7 @@ namespace Zeus.ContentProperties
 			return Title == other.Title
 				&& SortOrder == other.SortOrder
 				&& Description == other.Description
-				&& Name == other.Name
-				&& Shared == other.Shared;
+				&& Name == other.Name;
 		}
 	}
 }

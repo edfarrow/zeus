@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 using Ext.Net;
 using Newtonsoft.Json;
 
-//[assembly: WebResource("Coolite.Ext.UX.Extensions.IconCombo.resources.ext.ux.IconCombo.css", "text/css")]
 [assembly: WebResource("Coolite.Ext.UX.Extensions.TinyMCE.resources.Ext.ux.TinyMCE.js", "text/javascript")]
 
 namespace Coolite.Ext.UX

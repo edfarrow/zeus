@@ -34,11 +34,6 @@ namespace Zeus.Design.Editors
 			return range;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((TimeRange) editor).Enabled = false;
-		}
-
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			TimeRange range = (TimeRange) editor;

@@ -30,12 +30,6 @@
 									</ext:Button>
 									<ext:Button runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
 									<ext:ToolbarFill runat="server" />
-									<ext:ToolbarTextItem runat="server" ID="txiLanguages" Text="Page view: " />
-									<ext:IconCombo runat="server" ID="ddlLanguages" Width="100" Editable="false">
-										<DirectEvents>
-											<Select OnEvent="ddlLanguages_ValueChanged" />
-										</DirectEvents>
-									</ext:IconCombo>
 								</Items>
 							</ext:Toolbar>
 						</TopBar>

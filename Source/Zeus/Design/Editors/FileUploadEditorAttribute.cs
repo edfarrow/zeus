@@ -92,11 +92,6 @@ namespace Zeus.Design.Editors
 			return fileUpload;
 		}
 
-		protected override void DisableEditor(Control editor)
-		{
-			((FancyFileUpload)editor).Enabled = false;
-		}
-        
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;

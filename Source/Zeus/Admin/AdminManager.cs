@@ -9,7 +9,6 @@ using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Engine;
-using Zeus.Globalization;
 using Zeus.Linq;
 using Zeus.Persistence;
 using Zeus.Security;
@@ -30,8 +29,6 @@ namespace Zeus.Admin
 		private readonly IAdminAssemblyManager _adminAssembly;
 		private readonly IPersister _persister;
 		private readonly IContentTypeManager _contentTypeManager;
-		private readonly Web.IWebContext _webContext;
-		private readonly ILanguageManager _languageManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
 
@@ -41,7 +38,6 @@ namespace Zeus.Admin
 
 		public AdminManager(AdminSection configSection, ISecurityManager securityManager, IAdminAssemblyManager adminAssembly,
 			IPersister persister, IContentTypeManager contentTypeManager,
-			Web.IWebContext webContext, ILanguageManager languageManager,
 			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder,
 			IEmbeddedResourceManager embeddedResourceManager)
 		{
@@ -53,8 +49,6 @@ namespace Zeus.Admin
 			NewItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
 			_persister = persister;
 			_contentTypeManager = contentTypeManager;
-			_webContext = webContext;
-			_languageManager = languageManager;
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
 		}
@@ -66,22 +60,6 @@ namespace Zeus.Admin
 		public string DeleteItemUrl { get; set; }
 		public string EditItemUrl { get; set; }
 		public string NewItemUrl { get; set; }
-
-		public string CurrentAdminLanguageBranch
-		{
-			get
-			{
-				return _webContext.Request.QueryString["language"] ??
-					((_webContext.Request.Cookies["editlanguagebranch"] != null)
-						? _webContext.Request.Cookies["editlanguagebranch"].Value
-						: _languageManager.GetDefaultLanguage());
-			}
-			set
-			{
-				_webContext.Response.Cookies["editlanguagebranch"].Value = value;
-				_webContext.Request.Cookies["editlanguagebranch"].Value = value;
-			}
-		}
 
 		public bool TreeTooltipsEnabled
 		{
@@ -168,27 +146,15 @@ namespace Zeus.Admin
 			return Context.Current.GetServerResourceUrl(_adminAssembly.Assembly, "Zeus.Admin.Default.aspx");
 		}
 
-		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
+		/// <summary>Gets the url to the edit page where to edit an existing item.</summary>
 		/// <param name="item">The item to edit.</param>
 		/// <returns>The url to the edit page</returns>
 		public string GetEditExistingItemUrl(ContentItem item)
 		{
-			return GetEditExistingItemUrl(item, item.Language);
-		}
-
-		/// <summary>Gets the url to the edit page where to edit an existing item.</summary>
-		/// <param name="item">The item to edit.</param>
-		/// <param name="language">The language to edit (or create if it doesn't exist).</param>
-		/// <returns>The url to the edit page</returns>
-		public string GetEditExistingItemUrl(ContentItem item, string languageCode)
-		{
 			if (item == null)
 				return null;
 
-			if (string.IsNullOrEmpty(languageCode))
-				languageCode = item.Language;
-
-			return string.Format("{0}?selected={1}&language={2}", EditItemUrl, item.Path, languageCode);
+			return string.Format("{0}?selected={1}", EditItemUrl, item.Path);
 		}
 
 		public Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user)

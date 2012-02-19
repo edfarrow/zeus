@@ -1,6 +1,5 @@
 using Ext.Net;
 using Zeus.Design.Editors;
-using Zeus.Globalization;
 using Zeus.Integrity;
 using Zeus.Web;
 
@@ -15,12 +14,7 @@ namespace Zeus.Templates.ContentTypes
 	{
 		public override string Url
 		{
-			get { return BaseLibrary.Web.Url.ToAbsolute(GetRedirectItem().Url); }
-		}
-
-		protected virtual ContentItem GetRedirectItem()
-		{
-			return Context.Current.LanguageManager.GetTranslation(RedirectItem, ContentLanguage.PreferredCulture.Name) ?? RedirectItem;
+			get { return BaseLibrary.Web.Url.ToAbsolute(RedirectItem.Url); }
 		}
 
 		[LinkedItemDropDownListEditor("Redirect to", 30, Required = true, TypeFilter = typeof(PageContentItem), ContainerName = "Content")]

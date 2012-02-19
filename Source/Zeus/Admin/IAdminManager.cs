@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.UI;
-using Zeus.Admin.Plugins;
 using Zeus.ContentTypes;
-using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin
 {
@@ -14,25 +12,14 @@ namespace Zeus.Admin
 	/// </summary>
 	public interface IAdminManager
 	{
-		/// <summary>
-		/// Gets or sets the language branch currently being edited.
-		/// </summary>
-		string CurrentAdminLanguageBranch { get; set; }
-
 		IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups();
 
 		string GetAdminDefaultUrl();
 
-		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
+		/// <summary>Gets the url to the edit page where to edit an existing item.</summary>
 		/// <param name="item">The item to edit.</param>
 		/// <returns>The url to the edit page</returns>
 		string GetEditExistingItemUrl(ContentItem item);
-
-		/// <summary>Gets the url to the edit page where to edit an existing item.</summary>
-		/// <param name="item">The item to edit.</param>
-		/// <param name="languageCode">The translation to edit (or create if it doesn't exist).</param>
-		/// <returns>The url to the edit page</returns>
-		string GetEditExistingItemUrl(ContentItem item, string languageCode);
 
 		/// <summary>Gets the url to edit page creating new items.</summary>
 		/// <param name="selected">The selected item.</param>

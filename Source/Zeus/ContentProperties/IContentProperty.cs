@@ -7,7 +7,6 @@ namespace Zeus.ContentProperties
 {
 	public interface IContentProperty : IUniquelyNamed
 	{
-		bool Shared { get; set; }
 		int SortOrder { get; set; }
 		string Title { get; set; }
 

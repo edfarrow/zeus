@@ -157,8 +157,6 @@ namespace Zeus.Design.Editors
 			return editor;
 		}
 
-		protected abstract void DisableEditor(Control editor);
-
 		protected virtual void AddValidators(Control panel, Control editor)
 		{
 			if (BaseValidator.GetValidationProperty(editor) == null)
@@ -266,25 +264,6 @@ namespace Zeus.Design.Editors
 		public void UpdateEditor(IEditableObject item, Control editor)
 		{
 			UpdateEditorInternal(item, editor);
-
-			if (Context.Current.LanguageManager.Enabled && Context.Current.LanguageManager.CanBeTranslated((ContentItem) item) && !editor.Page.IsPostBack)
-			{
-				bool enabled = !Shared || ((ContentItem) item).TranslationOf == null;
-				string globeTooltip = null;
-				if (!enabled)
-				{
-					globeTooltip =
-						"This property is shared between all language variations of this page and must be edited in the master language.";
-					DisableEditor(editor);
-				}
-				else if (Shared)
-				{
-					globeTooltip = "This property is shared between all language variations of this page.";
-				}
-
-				if (_label != null && globeTooltip != null)
-					_label.Text += " <img src=\"" + Utility.GetCooliteIconUrl(Icon.WorldLink) + "\" title=\"" + globeTooltip + "\" />";
-			}
 		}
 
 		protected abstract void UpdateEditorInternal(IEditableObject item, Control editor);

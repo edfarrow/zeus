@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Specialized;
 using Zeus.Configuration;
 
 namespace Zeus.Web
@@ -59,24 +57,14 @@ namespace Zeus.Web
 			}
 		}
 
-		public StringDictionary GetHostLanguageMappings()
-		{
-			StringDictionary dictionary = new StringDictionary();
-			foreach (HostNameElement element in _hostNames)
-				if (element.Name != "*")
-					dictionary.Add(element.Name, element.Language);
-			return dictionary;
-		}
-
-		public string GetHostName(string languageCode)
+		public string GetHostName()
 		{
 			foreach (HostNameElement element in _hostNames)
+			{
 				if (element.Name == "*")
 					return null;
-				else if (string.IsNullOrEmpty(element.Language))
-					return element.Name;
-				else if (element.Language == languageCode)
-					return element.Name;
+				return element.Name;
+			}
 			return null;
 		}
 

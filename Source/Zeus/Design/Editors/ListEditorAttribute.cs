@@ -19,11 +19,6 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		protected override void DisableEditor(Control editor)
-		{
-			((ListControl) editor).Enabled = false;
-		}
-
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			ListControl ddl = (ListControl) editor;

@@ -1,7 +1,5 @@
 using Ninject;
-using SoundInTheory.DynamicImage.Caching;
 using Zeus.Persistence;
-using Zeus.Globalization.ContentTypes;
 
 namespace Zeus.Admin.NavigationFlag
 {

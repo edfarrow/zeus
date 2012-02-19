@@ -22,7 +22,7 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static IEnumerable<ContentItem> NavigationPages(this HtmlHelper html, ContentItem startPage)
 		{
-			return startPage.GetGlobalizedChildren().NavigablePages();
+			return startPage.Children.NavigablePages();
 		}
 
 		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, Func<string, string> layoutCallback,
@@ -217,9 +217,8 @@ namespace Zeus.Templates.Mvc.Html
 
         public static IList<NavigationItem> LoadNav(this HtmlHelper html)
         {
-            string Lang = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
-            DateTime lastChecked = System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] == null ? DateTime.MinValue : (DateTime)System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang];
-            if (System.Web.HttpContext.Current.Application["primaryNav" + Lang] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1))
+            DateTime lastChecked = System.Web.HttpContext.Current.Application["primaryNavLastLoaded"] == null ? DateTime.MinValue : (DateTime)System.Web.HttpContext.Current.Application["primaryNavLastLoaded"];
+            if (System.Web.HttpContext.Current.Application["primaryNav"] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1))
             {
                 var result = new List<NavigationItem>();
 
@@ -246,13 +245,13 @@ namespace Zeus.Templates.Mvc.Html
                     }
                 }
 
-                System.Web.HttpContext.Current.Application["primaryNav" + Lang] = result;
-                System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] = DateTime.Now;
+                System.Web.HttpContext.Current.Application["primaryNav"] = result;
+                System.Web.HttpContext.Current.Application["primaryNavLastLoaded"] = DateTime.Now;
                 return result;
             }
             else
             {
-                return (IList<NavigationItem>)System.Web.HttpContext.Current.Application["primaryNav" + Lang];
+                return (IList<NavigationItem>)System.Web.HttpContext.Current.Application["primaryNav"];
             }
         }
 
@@ -266,24 +265,9 @@ namespace Zeus.Templates.Mvc.Html
             return result;
         }
 
-        public static string GetCacheKey(this HtmlHelper html, int ContentID, string Key, bool Lang)
+        public static string GetCacheKey(this HtmlHelper html, int contentID, string key)
         {
-            string LangCode = "";
-
-            if (Lang)
-                LangCode = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
-
-            return "ZeusCache_" + ContentID.ToString() + "_" + Key + (Lang ? "_" + LangCode : "");
-        }
-
-        public static string GetCacheKey(this HtmlHelper html, string ContentID, string Key, bool Lang)
-        {
-            string LangCode = "";
-
-            if (Lang)
-                LangCode = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
-
-            return "ZeusCache_" + ContentID + "_" + Key + (Lang ? "_" + LangCode : "");
+            return "ZeusCache_" + contentID.ToString() + "_" + key;
         }
 	}
 }

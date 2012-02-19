@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
@@ -23,12 +19,6 @@ namespace Zeus.FileSystem.Details
 			public FileUpload Upload = new FileUpload();
 			public TextBox ChangeName = new TextBox();
 
-			public bool Enabled
-			{
-				get { return (bool) (ViewState["Enabled"] ?? true); }
-				set { ViewState["Enabled"] = value; }
-			}
-
 			public string Name
 			{
 				get { return (Upload != null) ? Upload.FileName : ChangeName.Text; }
@@ -37,10 +27,8 @@ namespace Zeus.FileSystem.Details
 			protected override void OnInit(EventArgs e)
 			{
 				Upload.ID = "u";
-				Upload.Enabled = Enabled;
 				Controls.Add(Upload);
 				ChangeName.ID = "n";
-				ChangeName.Enabled = Enabled;
 				Controls.Add(ChangeName);
 
 				base.OnInit(e);
@@ -87,11 +75,6 @@ namespace Zeus.FileSystem.Details
 			editor.ID = "compositeEditor";
 			container.Controls.Add(editor);
 			return editor;
-		}
-
-		protected override void DisableEditor(Control editor)
-		{
-			((CompositeEditor) editor).Enabled = false;
 		}
 	}
 }

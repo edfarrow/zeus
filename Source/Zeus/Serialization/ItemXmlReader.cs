@@ -33,7 +33,6 @@ namespace Zeus.Serialization
 			readers["properties"] = new PropertyXmlReader();
 			readers["propertyCollections"] = new PropertyCollectionXmlReader();
 			readers["authorizationRules"] = new AuthorizationRuleXmlReader();
-			readers["languageSettings"] = new LanguageSettingXmlReader();
 			return readers;
 		}
 
@@ -89,9 +88,6 @@ namespace Zeus.Serialization
 			item.Visible = Convert.ToBoolean(attributes["visible"]);
 			if (attributes.ContainsKey("zoneName"))
 				((WidgetContentItem) item).ZoneName = attributes["zoneName"];
-			HandleTranslationRelation(item, attributes["translationOf"], journal);
-			if (!string.IsNullOrEmpty(attributes["language"]))
-				item.Language = attributes["language"];
 			HandleParentRelation(item, attributes["parent"], journal);
 		}
 
@@ -102,16 +98,6 @@ namespace Zeus.Serialization
 				int parentID = int.Parse(parent);
 				ContentItem parentItem = journal.Find(parentID);
 				item.AddTo(parentItem);
-			}
-		}
-
-		protected virtual void HandleTranslationRelation(ContentItem item, string translationOf, ReadingJournal journal)
-		{
-			if (!string.IsNullOrEmpty(translationOf))
-			{
-				int translationOfID = int.Parse(translationOf);
-				ContentItem masterItem = journal.Find(translationOfID);
-				item.TranslationOf = masterItem;
 			}
 		}
 

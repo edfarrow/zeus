@@ -8,13 +8,11 @@ namespace Zeus.ContentProperties
 	{
 		public DefaultProperty()
 		{
-			Shared = true;
 			SortOrder = int.MaxValue;
 			Title = "[None]";
 		}
 
 		public string Name { get; set; }
-		public bool Shared { get; set; }
 		public int SortOrder { get; set; }
 		public string Title { get; set; }
 

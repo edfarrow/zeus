@@ -1,15 +1,12 @@
 using System;
-using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
-using Zeus.Globalization;
 using Zeus.Web.UI;
 
 namespace Zeus.Templates.ContentTypes
 {
 	[TabPanel("Content", "Content", 10)]
-	[Translatable]
 	[DefaultContainer("Content")]
 	public abstract class BaseContentItem : ContentItem
 	{

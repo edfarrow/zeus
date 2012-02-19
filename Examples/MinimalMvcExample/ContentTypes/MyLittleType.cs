@@ -1,18 +1,12 @@
-using System.Web.UI.WebControls;
-using Zeus;
-using Zeus.Web;
-using Zeus.Integrity;
 using Zeus.Design.Editors;
-using Zeus.ContentProperties;
 using Zeus.Templates.ContentTypes;
-using Zeus.Web.UI;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
 	[ContentType("My Little Type")]
 	public class MyLittleType : BaseContentItem
 	{
-		[ContentProperty("Test String", 10, Shared = false)]
+		[ContentProperty("Test String", 10)]
 		public virtual string TestString
 		{
 			get { return GetDetail("TestString", string.Empty); }

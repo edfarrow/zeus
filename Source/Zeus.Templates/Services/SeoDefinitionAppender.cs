@@ -83,7 +83,7 @@ namespace Zeus.Templates.Services
 			if (multiline)
 				editor.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
 			contentType.Add(editor);
-			contentType.AddProperty(new ContentPropertyAttribute(typeof(StringProperty), title, sortOrder) { Name = name, Description = description, EditorContainerName = "SEO", Shared = false });
+			contentType.AddProperty(new ContentPropertyAttribute(typeof(StringProperty), title, sortOrder) { Name = name, Description = description, EditorContainerName = "SEO" });
 		}
 
 		private static bool IsPage(ContentType contentType)

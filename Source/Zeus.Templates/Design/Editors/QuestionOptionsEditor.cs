@@ -62,10 +62,5 @@ namespace Zeus.Templates.Design.Editors
 			container.Controls.Add(tb);
 			return tb;
 		}
-
-		protected override void DisableEditor(Control editor)
-		{
-			((TextBox) editor).Enabled = false;
-		}
 	}
 }

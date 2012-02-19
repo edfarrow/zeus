@@ -14,11 +14,6 @@ namespace Zeus.Configuration
 			get { return (DynamicContentSection) Sections["dynamicContent"]; }
 		}
 
-		public GlobalizationSection Globalization
-		{
-			get { return (GlobalizationSection) Sections["globalization"]; }
-		}
-
 		public HostSection Host
 		{
 			get { return (HostSection) Sections["host"]; }
