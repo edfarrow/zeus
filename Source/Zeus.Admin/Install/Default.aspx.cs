@@ -159,10 +159,7 @@ namespace Zeus.Admin.Install
 
 		protected void btnInstall_Click(object sender, EventArgs e)
 		{
-			InstallationManager im = CurrentInstallationManager;
-			if (ExecuteWithErrorHandling(im.Install) != null)
-				if (ExecuteWithErrorHandling(im.Install) == null)
-					lblInstall.Text = "Database created, now insert root items.";
+			// TODO: Don't need this step
 		}
 
 		/*protected void btnExportSchema_Click(object sender, EventArgs e)

@@ -4,13 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using FluentMigrator;
-using FluentMigrator.Runner;
-using FluentMigrator.Runner.Processors;
 using Microsoft.SqlServer.Management.Smo;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.Installation.Migrations;
 using Zeus.Persistence;
 using Zeus.Serialization;
 using Zeus.Web;
@@ -54,19 +50,6 @@ namespace Zeus.Installation
 		#endregion
 
 		#region Methods
-
-		/// <summary>Executes sql create database scripts.</summary>
-		public void Install()
-		{
-			IMigrationProcessorFactory processorFactory = ProcessorFactory.GetFactory("SqlServer");
-			IMigrationProcessor processor = processorFactory.Create(GetConnectionString());
-
-			MigrationVersionRunner runner = new MigrationVersionRunner(
-				new MigrationConventions(),
-				processor, 
-				new MigrationLoader(new MigrationConventions()), typeof(AddTables).Assembly, "Zeus.Installation.Migrations");
-			runner.MigrateUp();
-		}
 
 		public DatabaseStatus GetStatus()
 		{

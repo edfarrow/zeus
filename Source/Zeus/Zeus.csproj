@@ -79,18 +79,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ext.Net\Ext.Net.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\FluentMigrator.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentMigrator.Runner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\FluentMigrator.Runner.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\NHibernate\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\log4net.dll</HintPath>
@@ -106,10 +94,6 @@
     <Reference Include="Microsoft.Web.Mvc, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\NHibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -314,9 +298,6 @@
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
     <Compile Include="IContentManager.cs" />
-    <Compile Include="Installation\Migrations\1_AddTables.cs" />
-    <Compile Include="Installation\Migrations\2_AddTimeSpanDetail.cs" />
-    <Compile Include="Installation\Migrations\MigrationExtensions.cs" />
     <Compile Include="Net\Mail\FakeMailSender.cs" />
     <Compile Include="Net\Mail\MailSender.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
