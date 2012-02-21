@@ -9,11 +9,6 @@ namespace Zeus.Configuration
 			get { return (AdminSection) Sections["admin"]; }
 		}
 
-		public DynamicContentSection DynamicContent
-		{
-			get { return (DynamicContentSection) Sections["dynamicContent"]; }
-		}
-
 		public HostSection Host
 		{
 			get { return (HostSection) Sections["host"]; }

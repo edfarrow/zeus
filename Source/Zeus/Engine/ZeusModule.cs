@@ -5,7 +5,6 @@ using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
-using Zeus.DynamicContent;
 using Zeus.FileSystem;
 using Zeus.Installation;
 using Zeus.Integrity;
@@ -42,9 +41,6 @@ namespace Zeus.Engine
 			Bind<IContentTypeBuilder>().To<ContentTypeBuilder>().InSingletonScope();
 			Bind<IContentTypeManager>().To<ContentTypeManager>().InSingletonScope();
 			Bind<ContentTypeConfigurationService>().ToSelf().InSingletonScope();
-
-			// Dynamic Content
-			Bind<IDynamicContentManager>().To<DynamicContentManager>().InSingletonScope();
 
 			// Engine
 			Bind<IContentAdapterProvider>().To<ContentAdapterProvider>().InSingletonScope();

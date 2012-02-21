@@ -1,5 +1,3 @@
-using System;
-using Zeus.DynamicContent;
 using Zeus.Web;
 
 namespace Zeus.ContentProperties
@@ -26,10 +24,6 @@ namespace Zeus.ContentProperties
 		{
 			// TODO: Make this pluggable, so we don't explicitly call DynamicContent, and allow other things to hook in here.
 			string result = StringValue;
-
-			// Squirt DynamicContent in here.
-			IDynamicContentManager dynamicContentManager = Context.Current.Resolve<IDynamicContentManager>();
-			result = dynamicContentManager.RenderDynamicContent(result);
 
 			// Resolve permanent links.
 			IPermanentLinkManager permanentLinkManager = Context.Current.Resolve<IPermanentLinkManager>();

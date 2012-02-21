@@ -186,13 +186,6 @@
     <Compile Include="Plugins\DeleteItem\AffectedItems.ashx.cs">
       <DependentUpon>AffectedItems.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DynamicContent\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicContent\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\ImportExport\ContentTypeNotFoundException.cs" />
     <Compile Include="Plugins\ImportExport\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -395,7 +388,6 @@
     <EmbeddedResource Include="Assets\JS\jcrop\jquery.min.js" />
     <EmbeddedResource Include="Assets\Css\jcrop_demos.css" />
     <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
-    <Content Include="DynamicContent\Default.aspx" />
     <EmbeddedResource Include="RecycleBin\Default.aspx" />
     <EmbeddedResource Include="Plugins\ImportExport\Default.aspx" />
     <EmbeddedResource Include="Plugins\CopyItem\Default.aspx" />

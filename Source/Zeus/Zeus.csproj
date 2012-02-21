@@ -227,9 +227,6 @@
     <Compile Include="Configuration\ContentTypeRuleAction.cs" />
     <Compile Include="Configuration\ContentTypeRuleCollection.cs" />
     <Compile Include="Configuration\TreeElement.cs" />
-    <Compile Include="Configuration\DynamicContentControl.cs" />
-    <Compile Include="Configuration\DynamicContentControlCollection.cs" />
-    <Compile Include="Configuration\DynamicContentSection.cs" />
     <Compile Include="Configuration\HostNameCollection.cs" />
     <Compile Include="Configuration\HostNameElement.cs" />
     <Compile Include="Configuration\InstallationMode.cs" />
@@ -295,9 +292,6 @@
     <Compile Include="Design\Editors\FileUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\StringCollectionEditorAttribute.cs" />
-    <Compile Include="DynamicContent\DateTimeDynamicContent.cs" />
-    <Compile Include="DynamicContent\SimpleEditableObject.cs" />
-    <Compile Include="DynamicContent\SimpleTypeDefinition.cs" />
     <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
@@ -506,10 +500,6 @@
     <Compile Include="Web\UI\WebControls\ItemViewEditableObjectEventArgs.cs" />
     <Compile Include="ContentTypes\IEditableObject.cs" />
     <Compile Include="ContentTypes\ITypeDefinition.cs" />
-    <Compile Include="DynamicContent\DynamicContentManager.cs" />
-    <Compile Include="DynamicContent\IDynamicContent.cs" />
-    <Compile Include="DynamicContent\DynamicPageProperty.cs" />
-    <Compile Include="DynamicContent\IDynamicContentManager.cs" />
     <Compile Include="Configuration\AdminSection.cs" />
     <Compile Include="Configuration\FileSystemSection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
@@ -819,8 +809,6 @@
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\contextmenu\editor_plugin_src.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\directionality\editor_plugin.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\directionality\editor_plugin_src.js" />
-    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamiccontent\editor_plugin.js" />
-    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamiccontent\editor_plugin_src.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamicimage\editor_plugin.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamicimage\editor_plugin_src.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\editor_plugin.js" />

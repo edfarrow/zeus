@@ -104,14 +104,13 @@ namespace Zeus.Web.UI.WebControls
 			tinyMce.Settings.ThemeAdvancedToolbarAlign = "left";
 			tinyMce.Settings.ThemeAdvancedPathLocation = "bottom";
 			tinyMce.Settings.ExtendedValidElements =
-				"hr[class|width|size|noshade],span[class|align|style],pre[class],code[class],iframe[src|width|height|name|align],dynamiccontent[state]";
+				"hr[class|width|size|noshade],span[class|align|style],pre[class],code[class],iframe[src|width|height|name|align]";
 			tinyMce.Settings.FileBrowserCallback = "fileBrowserCallBack";
 			tinyMce.Settings.ThemeAdvancedResizeHorizontal = false;
 			tinyMce.Settings.ThemeAdvancedResizing = false;
 			tinyMce.Settings.ThemeAdvancedDisable = "help,fontselect,fontsizeselect,forecolor,backcolor";
 			tinyMce.Settings.RelativeUrls = false;
 			tinyMce.Settings.NonEditableClass = "nonEditable";
-			//custom_elements: '~dynamiccontent', // Notice the ~ prefix to force a span element for the element
 			tinyMce.Settings.RemoveScriptHost = !DomainAbsoluteUrls;
 			tinyMce.Settings.DocumentBaseUrl = Page.Request.Url.GetLeftPart(UriPartial.Authority);
 			tinyMce.Settings.ConvertUrls = true;

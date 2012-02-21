@@ -69,7 +69,6 @@ namespace Zeus.Web.UI.WebControls
 		{
 			EnsureChildControls();
 
-			// TODO- remove this because it won't work with DynamicContent
 			item = Zeus.Context.AdminManager.Save(item, PropertyControls, Page.User,
 				c => OnSaving(new ItemViewEditableObjectEventArgs(c)));
 

@@ -117,7 +117,6 @@
     </Compile>
     <Compile Include="Definitions\DefinitionTests.cs" />
     <Compile Include="Definitions\Items\TestTextPage.cs" />
-    <Compile Include="DynamicContent\DynamicContentManagerTests.cs" />
     <Compile Include="Fakes\StaticContextAccessor.cs" />
     <Compile Include="Integrity\ContentTypes\AlternativePage.cs" />
     <Compile Include="Integrity\ContentTypes\AlternativeStartPage.cs" />
