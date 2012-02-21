@@ -191,7 +191,6 @@
     <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
     <Compile Include="Admin\SecurityInitializer.cs" />
     <Compile Include="Admin\Targets.cs" />
-    <Compile Include="Admin\TestRecomplile.cs" />
     <Compile Include="CancelDestinationEventArgs.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
     <Compile Include="Collections\ItemComparer.cs" />
@@ -397,13 +396,10 @@
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
-    <Compile Include="Web\UI\WebControls\DropDownList.cs" />
     <Compile Include="Web\UI\WebControls\ExtendedListView.cs" />
     <Compile Include="Web\UI\WebControls\FakePropertyInfo.cs" />
     <Compile Include="Web\UI\WebControls\LoginName.cs" />
     <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
-    <Compile Include="Web\UI\WebControls\LoginView.cs" />
-    <Compile Include="Web\UI\WebControls\SimpleTemplateContainer.cs" />
     <Compile Include="Web\UI\WebControls\TemplateField.cs" />
     <Compile Include="Web\UI\WebControls\TypedGridView.cs" />
     <Compile Include="Web\UI\WebControls\TypedGridViewControlBuilder.cs" />
@@ -623,7 +619,6 @@
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
     <Compile Include="Persistence\ContentPersister.cs" />
-    <Compile Include="Web\UI\ItemAwareControl.cs" />
     <Compile Include="Web\UI\ItemUtility.cs" />
     <Compile Include="Web\UI\WebControls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
@@ -635,15 +630,9 @@
     <Compile Include="Security\ISecurityManager.cs" />
     <Compile Include="Security\SecurityEnforcer.cs" />
     <Compile Include="Security\SecurityManager.cs" />
-    <Compile Include="Web\Adapters\FormAdapter.cs" />
-    <Compile Include="Web\Compilation\CodeExpressionBuilder.cs" />
-    <Compile Include="Web\Compilation\HasItemsExpressionBuilder.cs" />
-    <Compile Include="Web\Compilation\HasValueExpressionBuilder.cs" />
     <Compile Include="Web\Security\Details\RolesEditorAttribute.cs" />
     <Compile Include="Security\ISecurityEnforcer.cs" />
     <Compile Include="Utility.cs" />
-    <Compile Include="Web\Compilation\CurrentPageExpressionBuilder.cs" />
-    <Compile Include="Web\Compilation\ZeusExpressionBuilder.cs" />
     <Compile Include="Web\Handlers\FileHandler.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\ExtensionMethods.cs" />
@@ -652,7 +641,6 @@
     <Compile Include="Web\IUrlParserDependency.cs" />
     <Compile Include="Web\PageNotFoundEventArgs.cs" />
     <Compile Include="Web\TemplateNotFoundException.cs" />
-    <Compile Include="Web\Tree.cs" />
     <Compile Include="Web\UI\Control.extensions.cs" />
     <Compile Include="Web\UI\IContentItemContainer.cs" />
     <Compile Include="Web\UI\IContentTemplate.cs">
@@ -660,26 +648,14 @@
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ColourPickerTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\DatePicker.cs" />
-    <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\IItemView.cs" />
-    <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\UI\WebControls\ItemDisplayView.cs" />
-    <Compile Include="Web\UI\WebControls\ItemEditorList.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditView.cs" />
     <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
     <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
-    <Compile Include="Web\UI\WebControls\P.cs" />
     <Compile Include="Web\UI\WebControls\TabItem.cs" />
-    <Compile Include="Web\UI\WebControls\TreeNode.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\UrlParser.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
     <Compile Include="ZeusException.cs" />
