@@ -17,21 +17,12 @@ namespace Zeus.Admin.Plugins.NewItem
 
 		public ContentItem ActualItem
 		{
-			get
-			{
-				if (rblPosition.SelectedIndex == 1)
-					return base.SelectedItem;
-				return base.SelectedItem.Parent;
-			}
+			get { return base.SelectedItem.Parent; }
 		}
 
 		protected void Page_Init(object sender, EventArgs e)
 		{
 			hlCancel.NavigateUrl = CancelUrl();
-			if (SelectedItem.Parent == null)
-			{
-				rblPosition.Enabled = false;
-			}
 		}
 
 		protected override void OnLoad(EventArgs e)
@@ -53,19 +44,9 @@ namespace Zeus.Admin.Plugins.NewItem
 			lsvChildTypes.DataBind();
 		}
 
-		protected CreationPosition GetCreationPosition()
-		{
-			if (rblPosition.SelectedIndex == 0)
-				return CreationPosition.Before;
-			else if (rblPosition.SelectedIndex == 2)
-				return CreationPosition.After;
-			else
-				return CreationPosition.Below;
-		}
-
 		protected string GetEditUrl(ContentType contentType)
 		{
-			return Engine.AdminManager.GetEditNewPageUrl(SelectedItem, contentType, ZoneName, GetCreationPosition());
+			return Engine.AdminManager.GetEditNewPageUrl(SelectedItem, contentType, ZoneName);
 		}
 
 		protected void rblPosition_OnSelectedIndexChanged(object sender, EventArgs e)

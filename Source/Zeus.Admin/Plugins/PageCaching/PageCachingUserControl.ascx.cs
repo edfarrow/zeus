@@ -1,5 +1,6 @@
 ﻿using System;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Web.Caching;
 
 namespace Zeus.Admin.Plugins.PageCaching
@@ -8,7 +9,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 	public partial class PageCachingUserControl : PluginUserControlBase
 	{
 		[DirectMethod]
-		public void ShowDialog(int id)
+		public void ShowDialog(ObjectId id)
 		{
 			ContentItem contentItem = Engine.Persister.Get(id);
 
@@ -59,7 +60,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 		}
 
 		[DirectMethod]
-		public void SavePageCachingSettings(int id, bool enabled, string duration)
+		public void SavePageCachingSettings(ObjectId id, bool enabled, string duration)
 		{
 			TimeSpan durationTime = TimeSpan.Parse(duration);
 
@@ -75,7 +76,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 			if (string.IsNullOrEmpty(id))
 				return;
 
-			ContentItem contentItem = Engine.Persister.Get(Convert.ToInt32(id));
+			ContentItem contentItem = Engine.Persister.Get(ObjectId.Parse(id));
 			Engine.Resolve<ICachingService>().DeleteCachedPage(contentItem);
 		}
 	}

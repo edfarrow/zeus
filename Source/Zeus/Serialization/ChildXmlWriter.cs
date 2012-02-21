@@ -17,7 +17,7 @@ namespace Zeus.Serialization
 		{
 			using (ElementWriter childElement = new ElementWriter("child", writer))
 			{
-				childElement.WriteAttribute("id", child.ID);
+				childElement.WriteAttribute("id", child.ID.ToString());
 			}
 		}
 	}

@@ -25,9 +25,8 @@ namespace Zeus.Admin
 		/// <param name="selected">The selected item.</param>
 		/// <param name="contentType">The type of item to edit.</param>
 		/// <param name="zoneName">The zone to add the item to.</param>
-		/// <param name="position">The position relative to the selected item to add the item.</param>
 		/// <returns>The url to the edit page.</returns>
-		string GetEditNewPageUrl(ContentItem selected, ContentType contentType, string zoneName, CreationPosition position);
+		string GetEditNewPageUrl(ContentItem selected, ContentType contentType, string zoneName);
 
 		/// <summary>Gets the url to the select type of item to create.</summary>
 		/// <param name="selectedItem">The currently selected item.</param>

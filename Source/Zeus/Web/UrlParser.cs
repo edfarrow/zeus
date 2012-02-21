@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Persistence;
@@ -64,7 +65,7 @@ namespace Zeus.Web
         /// <summary>Gets the current start page.</summary>
         public virtual ContentItem StartPage
         {
-            get { return _persister.Repository.Load(_host.CurrentSite.StartPageID); }
+            get { return _persister.Load(_host.CurrentSite.StartPageID); }
         }
 
         public ContentItem CurrentPage
@@ -150,7 +151,7 @@ namespace Zeus.Web
             ((IUrlParserDependency)e.AffectedItem).SetUrlParser(this);
         }
 
-        private int? FindQueryStringReference(string url, params string[] parameters)
+        private ObjectId? FindQueryStringReference(string url, params string[] parameters)
         {
             string queryString = Url.QueryPart(url);
             if (!string.IsNullOrEmpty(queryString))
@@ -164,8 +165,8 @@ namespace Zeus.Web
                     {
                         if (query.StartsWith(parameter + "=", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            int id;
-                            if (int.TryParse(query.Substring(parameterLength), out id))
+                            ObjectId id;
+                            if (ObjectId.TryParse(query.Substring(parameterLength), out id))
                             {
                                 return id;
                             }
@@ -178,7 +179,7 @@ namespace Zeus.Web
 
         protected virtual ContentItem TryLoadingFromQueryString(string url, params string[] parameters)
         {
-            int? itemID = FindQueryStringReference(url, parameters);
+            ObjectId? itemID = FindQueryStringReference(url, parameters);
             if (itemID.HasValue)
                 return _persister.Get<ContentItem>(itemID.Value);
             return null;
@@ -423,7 +424,7 @@ namespace Zeus.Web
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] != null)
                                     {
                                         //we now have a match without any more calls to the database
-                                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                        ContentItem ci = _persister.Get((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
                                         System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
@@ -474,7 +475,7 @@ namespace Zeus.Web
                                     }
                                     else
                                     {
-                                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                        ContentItem ci = _persister.Get((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
                                         System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
@@ -485,7 +486,7 @@ namespace Zeus.Web
                         }
                         else
                         {
-                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
+							ContentItem ci = _persister.Get((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
                             string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
                             if (string.IsNullOrEmpty(act))
                                 return ci.FindPath(PathData.DefaultAction);

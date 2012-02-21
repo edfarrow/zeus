@@ -5,6 +5,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.ContentTypes;
 using Zeus.Security;
 using Zeus.Web.UI.WebControls;
@@ -67,7 +68,7 @@ namespace Zeus.Design.Editors
 		/// <summary>Gets or sets the label used for presentation.</summary>
         public string Title { get; set; }
 
-        public int? CurrentID { get; set; }
+        public ObjectId? CurrentID { get; set; }
 
 		public string ContainerName { get; set; }
 

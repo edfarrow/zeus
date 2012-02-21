@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Services;
@@ -34,7 +34,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				string selectedValue = formValues["variationSet" + variationSet.ID];
 				if (!string.IsNullOrEmpty(selectedValue.Trim()))
 				{
-					int variationID = Convert.ToInt32(selectedValue);
+					ObjectId variationID = ObjectId.Parse(selectedValue);
 					Variation variation = Engine.Persister.Get<Variation>(variationID);
 					variations.Add(variation);
 				}

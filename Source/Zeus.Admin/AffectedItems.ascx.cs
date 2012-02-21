@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.UI.HtmlControls;
 using Zeus.BaseLibrary.Web;
 using Zeus.Web.UI;
@@ -23,7 +24,7 @@ namespace Zeus.Admin
 			li.InnerHtml = string.Format("<a href='{0}'><img src='{1}'/>{2}</a>", Url.ToAbsolute(((INode) item).PreviewUrl), Url.ToAbsolute(item.IconUrl), item.Title);
 			container.Controls.Add(li);
 
-			if (item.Children.Count > 0)
+			if (item.Children.Any())
 			{
 				HtmlGenericControl ul = new HtmlGenericControl("ul");
 				li.Controls.Add(ul);

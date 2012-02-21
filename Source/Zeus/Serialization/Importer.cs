@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.XPath;
+using MongoDB.Bson;
 using Zeus.ContentProperties;
 using Zeus.Persistence;
 
@@ -67,9 +69,9 @@ namespace Zeus.Serialization
 			else if ((options & ImportOptions.Children) == ImportOptions.Children)
 			{
 				RemoveReferences(record.ReadItems, record.RootItem);
-				while (record.RootItem.Children.Count > 0)
+				while (record.RootItem.Children.Any())
 				{
-					ContentItem child = record.RootItem.Children[0];
+					ContentItem child = record.RootItem.Children.First();
 					child.AddTo(destination);
 					persister.Save(child);
 				}
@@ -116,7 +118,7 @@ namespace Zeus.Serialization
 		protected virtual void ResetIDs(IEnumerable<ContentItem> items)
 		{
 			foreach (ContentItem item in items)
-				item.ID = 0;
+				item.ID = ObjectId.Empty;
 		}
 	}
 }

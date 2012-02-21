@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace Zeus.Serialization
 {
@@ -46,7 +47,7 @@ namespace Zeus.Serialization
 				ItemAdded.Invoke(this, new ItemEventArgs(item));
 		}
 
-		public ContentItem Find(int itemiD)
+		public ContentItem Find(ObjectId itemiD)
 		{
 			foreach (ContentItem previousItem in readItems)
 				if (previousItem.ID == itemiD)

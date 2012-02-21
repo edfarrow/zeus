@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ormongo;
 
 namespace Zeus.Admin.RecycleBin
 {
@@ -11,6 +12,6 @@ namespace Zeus.Admin.RecycleBin
 		bool Enabled { get; }
 
 		/// <summary>Currently thrown items.</summary>
-		IList<ContentItem> Children { get; }
+		Relation<ContentItem> Children { get; }
 	}
 }

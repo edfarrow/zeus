@@ -1,4 +1,5 @@
 using System;
+using MongoDB.Bson;
 
 namespace Zeus.Installation
 {
@@ -18,8 +19,8 @@ namespace Zeus.Installation
 		public Exception SchemaException { get; set; }
 		public ContentItem StartPage { get; set; }
 		public ContentItem RootItem { get; set; }
-		public int StartPageID { get; set; }
-		public int RootItemID { get; set; }
+		public ObjectId StartPageID { get; set; }
+		public ObjectId RootItemID { get; set; }
 		public bool IsInstalled { get; set; }
 		public string ItemsError { get; set; }
 

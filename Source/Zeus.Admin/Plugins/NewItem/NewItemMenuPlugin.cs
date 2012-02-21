@@ -90,7 +90,7 @@ namespace Zeus.Admin.Plugins.NewItem
 						Text = child.Title,
 						IconUrl = child.IconUrl,
 						Handler = string.Format("function() {{ new top.{0}('New {1}', '{2}').execute(); }}", clientPluginClass,
-							child.Title, Context.AdminManager.GetEditNewPageUrl(contentItem, child, null, CreationPosition.Below))
+							child.Title, Context.AdminManager.GetEditNewPageUrl(contentItem, child, null))
 					};
 					childMenu.Items.Add(childMenuItem);
 				}

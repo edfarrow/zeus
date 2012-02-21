@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using MongoDB.Bson;
 using Zeus.ContentTypes;
 using Zeus.Web.UI;
 using Zeus.Web.UI.WebControls;
@@ -23,7 +24,7 @@ namespace Zeus.Design.Editors
 			{
 				if (childrenEditor.DeletedIndexes.Contains(i))
 				{
-					if (((ContentItem) childrenEditor.ItemEditors[i].CurrentItem).ID != 0)
+					if (((ContentItem) childrenEditor.ItemEditors[i].CurrentItem).ID != ObjectId.Empty)
 						Context.Persister.Delete((ContentItem) childrenEditor.ItemEditors[i].CurrentItem);
 				}
 				else

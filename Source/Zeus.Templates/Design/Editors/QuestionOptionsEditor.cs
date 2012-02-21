@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
@@ -20,11 +21,12 @@ namespace Zeus.Templates.Design.Editors
 			ContentItem item = (ContentItem)itemTemp;
 			TextBox tb = (TextBox)editor;
 			string[] rows = tb.Text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-			for (int i = item.Children.Count - 1; i >= 0; --i)
+			var children = item.Children.ToList();
+			for (int i = children.Count - 1; i >= 0; --i)
 			{
-				int index = Array.FindIndex(rows, row => row == item.Children[i].Title);
+				int index = Array.FindIndex(rows, row => row == children[i].Title);
 				if (index < 0)
-					Context.Persister.Delete(item.Children[i]);
+					Context.Persister.Delete(children[i]);
 			}
 			for (int i = 0; i < rows.Length; i++)
 			{

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using Microsoft.SqlServer.Management.Smo;
+using MongoDB.Bson;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
@@ -104,9 +105,9 @@ namespace Zeus.Installation
 			try
 			{
 				status.Items = _finder.QueryItems().Count();
-				status.Details = _finder.QueryDetails().Count();
-				status.DetailCollections = _finder.QueryDetailCollections().Count();
-				status.AuthorizedRoles = _finder.Query<AuthorizationRule>().Count();
+				//status.Details = _finder.QueryDetails().Count();
+				//status.DetailCollections = _finder.QueryDetailCollections().Count();
+				//status.AuthorizedRoles = _finder.Query<AuthorizationRule>().Count();
 				status.HasSchema = true;
 			}
 			catch (Exception ex)
@@ -143,19 +144,20 @@ namespace Zeus.Installation
 		public string CheckDatabase()
 		{
 			int itemCount = _finder.QueryItems().Count();
-			int detailCount = _finder.QueryDetails().Count();
-			int detailCollectionCount = _finder.QueryDetailCollections().Count();
-			int authorizationRuleCount = _finder.Query<AuthorizationRule>().Count();
+			//int detailCount = _finder.QueryDetails().Count();
+			//int detailCollectionCount = _finder.QueryDetailCollections().Count();
+			//int authorizationRuleCount = _finder.Query<AuthorizationRule>().Count();
 
-			return string.Format("Database OK, items: {0}, details: {1}, authorization rules: {2}, detail collections: {3}",
-													 itemCount, detailCount, authorizationRuleCount, detailCollectionCount);
+			//return string.Format("Database OK, items: {0}, details: {1}, authorization rules: {2}, detail collections: {3}",
+			//                                         itemCount, detailCount, authorizationRuleCount, detailCollectionCount);
+			return string.Format("Database OK, items: {0}", itemCount);
 		}
 
 		/// <summary>Checks the root node in the database. Throws an exception if there is something really wrong with it.</summary>
 		/// <returns>A diagnostic string about the root node.</returns>
 		public string CheckRootItem()
 		{
-			int rootID = _host.CurrentSite.RootItemID;
+			ObjectId rootID = _host.CurrentSite.RootItemID;
 			ContentItem rootItem = _persister.Get(rootID);
 			if (rootItem != null)
 				return string.Format("Root node OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
@@ -168,7 +170,7 @@ namespace Zeus.Installation
 		/// <returns>A diagnostic string about the root node.</returns>
 		public string CheckStartPage()
 		{
-			int startID = _host.CurrentSite.StartPageID;
+			ObjectId startID = _host.CurrentSite.StartPageID;
 			ContentItem startPage = _persister.Get(startID);
 			if (startPage != null)
 				return string.Format("Start page OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
@@ -204,13 +206,14 @@ namespace Zeus.Installation
 
 		public string GetConnectionStringName()
 		{
-			DatabaseSection configSection = ConfigurationManager.GetSection("zeus/database") as DatabaseSection;
-			if (configSection == null)
-				throw new ZeusException("Missing <zeus/database> configuration section");
-			ConnectionStringSettings connectionString = ConfigurationManager.ConnectionStrings[configSection.ConnectionStringName];
-			if (connectionString == null)
-				throw new ZeusException("Missing connection string '" + configSection.ConnectionStringName + "'");
-			return configSection.ConnectionStringName;
+			throw new NotImplementedException();
+			//DatabaseSection configSection = ConfigurationManager.GetSection("zeus/database") as DatabaseSection;
+			//if (configSection == null)
+			//    throw new ZeusException("Missing <zeus/database> configuration section");
+			//ConnectionStringSettings connectionString = ConfigurationManager.ConnectionStrings[configSection.ConnectionStringName];
+			//if (connectionString == null)
+			//    throw new ZeusException("Missing connection string '" + configSection.ConnectionStringName + "'");
+			//return configSection.ConnectionStringName;
 		}
 
 		public IDbConnection GetConnection()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.XPath;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.Serialization
@@ -29,7 +30,7 @@ namespace Zeus.Serialization
 			}
 			else
 			{
-				int referencedItemID = int.Parse(navigator.Value);
+				ObjectId referencedItemID = ObjectId.Parse(navigator.Value);
 				ContentItem referencedItem = journal.Find(referencedItemID);
 				if (referencedItem != null)
 					item[name] = referencedItem;

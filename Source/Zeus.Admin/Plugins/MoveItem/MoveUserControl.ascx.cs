@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Security;
 using System;
 
@@ -9,15 +10,16 @@ namespace Zeus.Admin.Plugins.MoveItem
 	public partial class MoveUserControl : PluginUserControlBase
 	{
 		[DirectMethod]
-		public void MoveNode(int source, int destination, int pos)
+		public void MoveNode(ObjectId source, ObjectId destination, int pos)
 		{
-            int destinationID = Convert.ToInt32(destination);
-            if (destinationID < 0)
-                destinationID = -1 * (destinationID % 100000);
+			// TODO: Work out what this does...
+			//int destinationID = Convert.ToInt32(destination);
+			//if (destinationID < 0)
+			//    destinationID = -1 * (destinationID % 100000);
 
 			ContentItem sourceContentItem = Engine.Persister.Get(source);
             //get abs value of destination - this sorts out placement folders, which have to have the a negative value of their parent node so that sorting, moving etc can work
-            ContentItem destinationContentItem = Engine.Persister.Get(destinationID);
+            ContentItem destinationContentItem = Engine.Persister.Get(destination);
 
 			// Check user has permission to create items under the SelectedItem
 			if (!Engine.SecurityManager.IsAuthorized(destinationContentItem, Page.User, Operations.Create))
@@ -26,15 +28,8 @@ namespace Zeus.Admin.Plugins.MoveItem
 				return;
 			}
 
-			// Change parent if necessary.
-			if (sourceContentItem.Parent.ID != destinationContentItem.ID)
-				Zeus.Context.Persister.Move(sourceContentItem, destinationContentItem);
-
-			// Update sort order based on new pos.
-			IList<ContentItem> siblings = sourceContentItem.Parent.Children;
-			Utility.MoveToIndex(siblings, sourceContentItem, pos);
-			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
-				Zeus.Context.Persister.Save(updatedItem);
+			// TODO: Uncomment this!
+			//sourceContentItem.MoveToIndex(pos);
 
             //set the updated value on the parent of the item that has been moved (for caching purposes)
             sourceContentItem.Parent.Updated = Utility.CurrentTime();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
+using MongoDB.Bson;
 using Rhino.Mocks;
 using Zeus.Tests.Fakes;
 using Zeus.Web;
@@ -30,10 +31,11 @@ namespace Zeus.Tests
 			}
 		}
 
-		protected virtual T CreateOneItem<T>(int id, string name, ContentItem parent) where T : ContentItem
+		protected virtual T CreateOneItem<T>(string name, ContentItem parent) 
+			where T : ContentItem
 		{
 			T item = (T)Activator.CreateInstance(typeof(T), true);
-			item.ID = id;
+			item.ID = ObjectId.GenerateNewId();
 			item.Name = name;
 			item.Title = name;
 			item.AddTo(parent);

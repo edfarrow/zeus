@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Admin.Plugins.Tree;
 using Zeus.Linq;
 using Zeus.Security;
@@ -14,7 +15,7 @@ namespace Zeus.Admin.Plugins.FileManager
 		public void ProcessRequest(HttpContext context)
 		{
 			context.Response.ContentType = "text/json";
-			int? nodeId = !string.IsNullOrEmpty(context.Request["node"]) ? Convert.ToInt32(context.Request["node"]) as int? : null;
+			ObjectId? nodeId = !string.IsNullOrEmpty(context.Request["node"]) ? ObjectId.Parse(context.Request["node"]) as ObjectId? : null;
 
 			if (nodeId != null)
 			{

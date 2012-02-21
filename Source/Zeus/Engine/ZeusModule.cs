@@ -70,6 +70,7 @@ namespace Zeus.Engine
 			// Persistence
 			Bind<IItemNotifier>().To<ItemNotifier>().InSingletonScope();
 			Bind<IPersister>().To<ContentPersister>().InSingletonScope();
+			Bind<IFinder>().To<Finder>().InSingletonScope();
 
 			// Plugin
 			Bind<IPluginBootstrapper>().To<PluginBootstrapper>().InSingletonScope();

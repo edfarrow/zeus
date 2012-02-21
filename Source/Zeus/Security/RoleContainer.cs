@@ -46,7 +46,7 @@ namespace Zeus.Web.Security.Items
 		{
 			Role role = Children.Cast<Role>().SingleOrDefault(ci => ci.Name == roleName);
 			if (role != null)
-				Children.Remove(role);
+				role.Parent = null;
 		}
 
 		public virtual Role GetRole(string roleName)

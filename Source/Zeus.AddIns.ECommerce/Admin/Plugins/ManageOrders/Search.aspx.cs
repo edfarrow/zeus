@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
@@ -21,7 +22,8 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
             if (!string.IsNullOrEmpty(txtOrderNumber.Text))
             {
                 //see if valid order number
-                int OrderID = Convert.ToInt32(txtOrderNumber.Text);
+				// TODO: Probably should use integer for order number, not ObjectId
+				ObjectId OrderID = ObjectId.Parse(txtOrderNumber.Text);
                 lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.ID == OrderID).ToList();
             }
             else

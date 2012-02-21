@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Web
@@ -39,7 +40,7 @@ namespace Zeus.Web
 
 		}
 
-		public PathData(int id, string path, string templateUrl, string action, string arguments)
+		public PathData(ObjectId id, string path, string templateUrl, string action, string arguments)
 			: this()
 		{
 			ID = id;
@@ -74,7 +75,7 @@ namespace Zeus.Web
 		public bool SslSecured { get; set; }
 
 		public string TemplateUrl { get; set; }
-		public int ID { get; set; }
+		public ObjectId ID { get; set; }
 		public string Path { get; set; }
 		public string Action { get; set; }
 		public string Argument { get; set; }
@@ -90,11 +91,11 @@ namespace Zeus.Web
 
 				string templateUrl = !string.IsNullOrEmpty(TemplateUrl) ? TemplateUrl : "/";
 				if (CurrentItem.IsPage)
-					return Url.Parse(templateUrl).UpdateQuery(QueryParameters).SetQueryParameter(PageQueryKey, CurrentItem.ID);
+					return Url.Parse(templateUrl).UpdateQuery(QueryParameters).SetQueryParameter(PageQueryKey, CurrentItem.ID.ToString());
 
 				for (ContentItem ancestor = CurrentItem.Parent; ancestor != null; ancestor = ancestor.Parent)
 					if (ancestor.IsPage)
-						return ancestor.FindPath(DefaultAction).RewrittenUrl.UpdateQuery(QueryParameters).SetQueryParameter(ItemQueryKey, CurrentItem.ID);
+						return ancestor.FindPath(DefaultAction).RewrittenUrl.UpdateQuery(QueryParameters).SetQueryParameter(ItemQueryKey, CurrentItem.ID.ToString());
 
 				throw new TemplateNotFoundException(CurrentItem);
 			}
@@ -133,7 +134,7 @@ namespace Zeus.Web
 
 		public virtual PathData Attach(Persistence.IPersister persister)
 		{
-			ContentItem item = persister.Repository.Load(ID);
+			ContentItem item = persister.Load(ID);
 			PathData data = new PathData(item, TemplateUrl, Action, Argument)
     	{
     		QueryParameters = new Dictionary<string, string>(QueryParameters)

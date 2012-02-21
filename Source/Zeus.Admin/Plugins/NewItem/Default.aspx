@@ -31,59 +31,6 @@
 				</Content>
 			</ext:Panel>
 			
-			<ext:Panel runat="server" ID="tbpPosition" Title="Position">
-				<Content>
-					<asp:Label ID="lblPosition" runat="server" Text="Select at what position to create the item" />
-					<asp:RadioButtonList runat="server" ID="rblPosition" AutoPostBack="true" OnSelectedIndexChanged="rblPosition_OnSelectedIndexChanged" CssClass="position">
-						<asp:ListItem Value="0">
-							Before the selected item (at the same depth)
-							<blockquote>
-								<ul>
-									<li>other items</li>
-									<li><em>new item</em></li>
-									<li>
-										<strong>selected item</strong>
-										<ul>
-											<li>other item</li>
-										</ul>
-									</li>
-								</ul>
-							</blockquote>
-						</asp:ListItem>
-						<asp:ListItem Value="1" Selected="true">
-							Below the selected item (one level deeper)
-							<blockquote>
-								<ul>
-									<li>
-										<strong>selected item</strong>
-										<ul>
-											<li>other item</li>
-											<li><em>new item</em></li>
-										</ul>
-									</li>
-									<li>other item</li>
-								</ul>
-							</blockquote>
-						</asp:ListItem>
-						<asp:ListItem Value="2">
-							After the selected item (at the same depth)
-							<blockquote>
-								<ul>
-									<li>
-										<strong>selected item</strong>
-										<ul>
-											<li>other item</li>
-										</ul>
-									</li>
-									<li><em>new item</em></li>
-									<li>other items</li>
-								</ul>
-							</blockquote>
-						</asp:ListItem>
-					</asp:RadioButtonList>
-				</Content>
-			</ext:Panel>
-			
 			<ext:Panel runat="server" ID="tbpZone" Title="Zone">
 				<Content>
 					<asp:Label ID="lblZone" runat="server" Text="Create new item in zone" />

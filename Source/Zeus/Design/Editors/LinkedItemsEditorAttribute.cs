@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.ContentProperties;
 using Zeus.Web.UI.WebControls;
 using DropDownList=System.Web.UI.WebControls.DropDownList;
@@ -25,7 +25,7 @@ namespace Zeus.Design.Editors
 		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, PropertyData existingDetail, Control editor, out object newDetail)
 		{
 			DropDownList ddl = (DropDownList) editor;
-			newDetail = Context.Persister.Get(Convert.ToInt32(ddl.SelectedValue));
+			newDetail = Context.Persister.Get(ObjectId.Parse(ddl.SelectedValue));
 		}
 	}
 }

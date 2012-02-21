@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web;
@@ -18,8 +19,8 @@ namespace Zeus.Admin.Plugins.Tree
 			if (!string.IsNullOrEmpty(fromRootTemp))
 				fromRoot = Convert.ToBoolean(fromRootTemp);
 			bool sync = (context.Request["sync"] == "true");
-			int? nodeId = !string.IsNullOrEmpty(context.Request["node"]) ? Convert.ToInt32(context.Request["node"]) as int? : null;
-			int? overrideNodeId = !string.IsNullOrEmpty(context.Request["overrideNode"]) ? Convert.ToInt32(context.Request["overrideNode"]) as int? : null;
+			ObjectId? nodeId = !string.IsNullOrEmpty(context.Request["node"]) ? ObjectId.Parse(context.Request["node"]) as ObjectId? : null;
+			ObjectId? overrideNodeId = !string.IsNullOrEmpty(context.Request["overrideNode"]) ? ObjectId.Parse(context.Request["overrideNode"]) as ObjectId? : null;
 
 			nodeId = overrideNodeId ?? nodeId;
 			if (nodeId != null)

@@ -138,7 +138,7 @@ namespace Zeus.Tests.Integrity
 		public void CannotMoveItemBelowItself()
 		{
 			Page page = new Page();
-			Page page2 = CreateOneItem<Page>(2, "Rutger", page);
+			Page page2 = CreateOneItem<Page>("Rutger", page);
 
 			bool canMove = integrityManger.CanMove(page, page2);
 			Assert.IsFalse(canMove, "The page could be moved below itself.");
@@ -148,7 +148,7 @@ namespace Zeus.Tests.Integrity
 		public void CannotMoveItemBelowItselfEvent()
 		{
 			Page page = new Page();
-			Page page2 = CreateOneItem<Page>(2, "Rutger", page);
+			Page page2 = CreateOneItem<Page>("Rutger", page);
 
 			ExceptionAssert.Throws<DestinationOnOrBelowItselfException>(delegate
 			{
@@ -159,9 +159,9 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotMoveIfNameIsOccupied()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
-			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
+			Page page2 = CreateOneItem<Page>("Sasha", startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", null);
 
 			bool canMove = integrityManger.CanMove(page3, startPage);
 			Assert.IsFalse(canMove, "The page could be moved even though the name was occupied.");
@@ -170,9 +170,9 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotMoveIfNameIsOccupiedEvent()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
-			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
+			Page page2 = CreateOneItem<Page>("Sasha", startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", null);
 
 			ExceptionAssert.Throws<NameOccupiedException>(delegate
 			{
@@ -227,9 +227,9 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotCopyIfNameIsOccupied()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
-			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
+			Page page2 = CreateOneItem<Page>("Sasha", startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", null);
 
 			bool canCopy = integrityManger.CanCopy(page3, startPage);
 			Assert.IsFalse(canCopy, "The page could be copied even though the name was occupied.");
@@ -238,9 +238,9 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotCopyIfNameIsOccupiedEvent()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
-			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
+			Page page2 = CreateOneItem<Page>("Sasha", startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", null);
 
 			ExceptionAssert.Throws<NameOccupiedException>(delegate
 			{
@@ -358,10 +358,10 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotSaveNotLocallyUniqueItem()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
 
-			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", startPage);
+			Page page2 = CreateOneItem<Page>("Sasha", startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", startPage);
 
 			bool canSave = integrityManger.CanSave(page3);
 			Assert.IsFalse(canSave, "Could save even though the item isn't the only sibling with the same name.");
@@ -370,10 +370,10 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void LocallyUniqueItemThatWithoutNameYet()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
 
-			Page page2 = CreateOneItem<Page>(2, null, startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", startPage);
+			Page page2 = CreateOneItem<Page>(null, startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", startPage);
 
 			bool isUnique = integrityManger.IsLocallyUnique("Sasha", page2);
 			Assert.IsFalse(isUnique, "Shouldn't have been locally unique.");
@@ -382,10 +382,10 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotSaveNotLocallyUniqueItemEvent()
 		{
-			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
+			StartPage startPage = CreateOneItem<StartPage>("start", null);
 
-			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
-			Page page3 = CreateOneItem<Page>(3, "Sasha", startPage);
+			Page page2 = CreateOneItem<Page>("Sasha", startPage);
+			Page page3 = CreateOneItem<Page>("Sasha", startPage);
 
 			ExceptionAssert.Throws<NameOccupiedException>(delegate
 			{
@@ -396,8 +396,8 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotSaveUnallowedItem()
 		{
-			Page page = CreateOneItem<Page>(1, "John", null);
-			StartPage startPage = CreateOneItem<StartPage>(2, "Leonidas", page);
+			Page page = CreateOneItem<Page>("John", null);
+			StartPage startPage = CreateOneItem<StartPage>("Leonidas", page);
 
 			bool canSave = integrityManger.CanSave(startPage);
 			Assert.IsFalse(canSave, "Could save even though the start page isn't below a page.");
@@ -406,8 +406,8 @@ namespace Zeus.Tests.Integrity
 		[TestMethod]
 		public void CannotSaveUnallowedItemEvent()
 		{
-			Page page = CreateOneItem<Page>(1, "John", null);
-			StartPage startPage = CreateOneItem<StartPage>(2, "Leonidas", page);
+			Page page = CreateOneItem<Page>("John", null);
+			StartPage startPage = CreateOneItem<StartPage>("Leonidas", page);
 
 			ExceptionAssert.Throws<NotAllowedParentException>(delegate
 			{

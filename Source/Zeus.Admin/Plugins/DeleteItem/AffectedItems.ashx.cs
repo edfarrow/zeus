@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Admin.Plugins.Tree;
 using Zeus.Linq;
 using Zeus.Security;
@@ -20,11 +21,11 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			if (!string.IsNullOrEmpty(node))
 			{
 				string[] nodeIDsTemp = node.Split(',');
-				var nodeIDs = nodeIDsTemp.Select(s => Convert.ToInt32(s));
+				var nodeIDs = nodeIDsTemp.Select(s => ObjectId.Parse(s));
 
 				TreeNodeCollection treeNodes = new TreeNodeCollection();
 
-				foreach (int nodeID in nodeIDs)
+				foreach (ObjectId nodeID in nodeIDs)
 				{
 					ContentItem selectedItem = Context.Persister.Get(nodeID);
 

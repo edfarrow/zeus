@@ -2,6 +2,7 @@
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.ContentTypes;
 using System.Web.UI;
 using System.Web.Compilation;
@@ -63,9 +64,9 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		/// <summary>Gets the parent item where to look for items.</summary>
-		public int ParentItemID
+		public ObjectId ParentItemID
 		{
-			get { return (int) (ViewState["CurrentItemID"] ?? 0); }
+			get { return (ObjectId)(ViewState["CurrentItemID"] ?? 0); }
 			set { ViewState["CurrentItemID"] = value; }
 		}
 
@@ -278,8 +279,8 @@ namespace Zeus.Web.UI.WebControls
 		protected virtual void AddToContainer(Control container, ItemEditView itemEditor, ContentItem item)
 		{
 			FieldSet fs = new FieldSet();
-			string status = (item.ID != 0) ? "ID #" + item.ID : "(Unsaved)";
-            fs.Title = (item.ID != 0) ? Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status : "New Item " + status;
+			string status = !item.IsNewRecord ? "ID #" + item.ID : "(Unsaved)";
+            fs.Title = !item.IsNewRecord ? Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status : "New Item " + status;
 			container.Controls.Add(fs);
 			fs.ContentControls.Add(itemEditor);
 		}

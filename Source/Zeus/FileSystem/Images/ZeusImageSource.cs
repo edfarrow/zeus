@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using SoundInTheory.DynamicImage;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Sources;
@@ -10,9 +11,9 @@ namespace Zeus.FileSystem.Images
 	{
 		#region Properties
 
-		public int ContentID
+		public ObjectId ContentID
 		{
-			get { return (int) (this["ContentID"] ?? 0); }
+			get { return (ObjectId)(this["ContentID"] ?? ObjectId.Empty); }
 			set { this["ContentID"] = value; }
 		}
 

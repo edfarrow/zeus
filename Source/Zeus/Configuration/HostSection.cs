@@ -1,14 +1,16 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.Configuration;
+using MongoDB.Bson;
 
 namespace Zeus.Configuration
 {
 	public class HostSection : ConfigurationSection
 	{
-		[ConfigurationProperty("rootItemID", DefaultValue = 1)]
-		public int RootItemID
+		[ConfigurationProperty("rootItemID")]
+		[TypeConverter(typeof(ObjectIdConverter))]
+		public ObjectId RootItemID
 		{
-			get { return (int) base["rootItemID"]; }
+			get { return (ObjectId)base["rootItemID"]; }
 			set { base["rootItemID"] = value; }
 		}
 

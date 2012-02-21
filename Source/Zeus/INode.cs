@@ -1,8 +1,10 @@
-﻿namespace Zeus
+﻿using MongoDB.Bson;
+
+namespace Zeus
 {
 	public interface INode : Web.ILink
 	{
-		int ID { get; }
+		ObjectId ID { get; }
 
 		/// <summary>The logical path to the node from the root node.</summary>
 		string Path { get; }

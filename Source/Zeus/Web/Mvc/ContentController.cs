@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using Zeus.Engine;
 using Zeus.Security;
 using Zeus.Web.Caching;
@@ -61,8 +62,8 @@ namespace Zeus.Web.Mvc
 
 		private T GetCurrentItemById()
 		{
-			int itemId;
-			if (Int32.TryParse(ControllerContext.RouteData.Values[ContentRoute.ContentItemIdKey] as string, out itemId))
+			ObjectId itemId;
+			if (ObjectId.TryParse(ControllerContext.RouteData.Values[ContentRoute.ContentItemIdKey] as string, out itemId))
 				return Engine.Persister.Get(itemId) as T;
 
 			return null;

@@ -5,6 +5,7 @@ using System.Data;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
@@ -21,14 +22,14 @@ namespace Zeus.Admin.Install
 
 		private DatabaseStatus status;
 
-		protected int RootId
+		protected ObjectId RootId
 		{
-			get { return (int) (ViewState["rootId"] ?? 0); }
+			get { return (ObjectId)(ViewState["rootId"] ?? ObjectId.Empty); }
 			set { ViewState["rootId"] = value; }
 		}
-		protected int StartId
+		protected ObjectId StartId
 		{
-			get { return (int) (ViewState["startId"] ?? 0); }
+			get { return (ObjectId)(ViewState["startId"] ?? ObjectId.Empty); }
 			set { ViewState["startId"] = value; }
 		}
 

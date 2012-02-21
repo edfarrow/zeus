@@ -1,40 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Zeus.ContentProperties;
+using MongoDB.Bson;
 
 namespace Zeus.Persistence
 {
 	public class ContentPersister : IPersister
 	{
-		#region Fields
-
-		private readonly IRepository<int, ContentItem> _contentRepository;
-		private readonly IRepository<int, LinkProperty> _linkRepository;
-		private readonly IFinder _linkFinder;
-
-		#endregion
-
-		#region Constructor
-
-		public ContentPersister(IRepository<int, ContentItem> contentRepository, IRepository<int, LinkProperty> linkRepository, IFinder linkFinder)
-		{
-			_contentRepository = contentRepository;
-			_linkRepository = linkRepository;
-			_linkFinder = linkFinder;
-		}
-
-		#endregion
-
-		#region Properties
-
-		public IRepository<int, ContentItem> Repository
-		{
-			get { return _contentRepository; }
-		}
-
-		#endregion
-
 		#region Events
 
 		/// <summary>Occurs before an item is saved</summary>
@@ -86,9 +58,6 @@ namespace Zeus.Persistence
 		{
 			return Utility.InvokeEvent(ItemCopying, this, source, destination, (copiedItem, destinationItem) =>
 			{
-				if (source is ISelfPersister)
-					return (source as ISelfPersister).CopyTo(destination);
-
 				ContentItem cloned = source.Clone(includeChildren);
 
 				cloned.Parent = destination;
@@ -107,18 +76,7 @@ namespace Zeus.Persistence
 
 		private void DeleteAction(ContentItem itemNoMore)
 		{
-			if (itemNoMore is ISelfPersister)
-			{
-				((ISelfPersister) itemNoMore).Delete();
-			}
-			else
-			{
-				using (ITransaction transaction = _contentRepository.BeginTransaction())
-				{
-					DeleteRecursive(itemNoMore);
-					transaction.Commit();
-				}
-			}
+			DeleteRecursive(itemNoMore);
 			Invoke(ItemDeleted, new ItemEventArgs(itemNoMore));
 		}
 
@@ -132,36 +90,37 @@ namespace Zeus.Persistence
 
 			DeleteInboundLinks(contentItem);
 
-			_contentRepository.Delete(contentItem);
+			contentItem.Destroy();
 		}
 
 		private void DeleteInboundLinks(ContentItem itemNoMore)
 		{
-			foreach (LinkProperty detail in _linkFinder.QueryDetails<LinkProperty>().Where(ld => ld.LinkedItem == itemNoMore))
-			{
-				if (detail.EnclosingCollection != null)
-					detail.EnclosingCollection.Remove(detail);
-				IDictionary<string, PropertyData> test = detail.EnclosingItem.Details; // TODO: Investigate why this is necessary, on a PersistentGenericMap
-				int count = test.Count;
-				detail.EnclosingItem.Details.Remove(detail.Name);
-				_linkRepository.Delete(detail);
-			}
+			// TODO: Reimplement for Mongo
+			//foreach (LinkProperty detail in _linkFinder.QueryDetails<LinkProperty>().Where(ld => ld.LinkedItem == itemNoMore))
+			//{
+			//    if (detail.EnclosingCollection != null)
+			//        detail.EnclosingCollection.Remove(detail);
+			//    IDictionary<string, PropertyData> test = detail.EnclosingItem.Details; // TODO: Investigate why this is necessary, on a PersistentGenericMap
+			//    int count = test.Count;
+			//    detail.EnclosingItem.Details.Remove(detail.Name);
+			//    _linkRepository.Delete(detail);
+			//}
 		}
 
-		public ContentItem Get(int id)
+		public ContentItem Get(ObjectId id)
 		{
-			return _contentRepository.Get(id);
+			return ContentItem.FindOneByID(id);
 		}
 
-		public T Get<T>(int id)
+		public T Get<T>(ObjectId id)
 			where T : ContentItem
 		{
-			return _contentRepository.Get<T>(id);
+			return (T) ContentItem.FindOneByID(id);
 		}
 
-		public ContentItem Load(int id)
+		public ContentItem Load(ObjectId id)
 		{
-			return _contentRepository.Load(id);
+			return ContentItem.FindOneByID(id);
 		}
 
 		public void Move(ContentItem toMove, ContentItem newParent)
@@ -171,19 +130,8 @@ namespace Zeus.Persistence
 
 		private ContentItem MoveAction(ContentItem toMove, ContentItem newParent)
 		{
-			if (toMove is ISelfPersister)
-			{
-				((ISelfPersister) toMove).MoveTo(newParent);
-			}
-			else
-			{
-				using (ITransaction transaction = _contentRepository.BeginTransaction())
-				{
-					toMove.AddTo(newParent);
-					_contentRepository.Save(toMove);
-					transaction.Commit();
-				}
-			}
+			toMove.AddTo(newParent);
+			toMove.Save();
 			Invoke(ItemMoved, new DestinationEventArgs(toMove, newParent));
 			return null;
 		}
@@ -212,22 +160,11 @@ namespace Zeus.Persistence
 
 		private void SaveAction(ContentItem contentItem)
 		{
-			if (contentItem is ISelfPersister)
-			{
-				((ISelfPersister) contentItem).Save();
-			}
-			else
-            {
-                contentItem.Updated = DateTime.Now;
-                
-                using (ITransaction transaction = _contentRepository.BeginTransaction())
-                {
-                    _contentRepository.SaveOrUpdate(contentItem);
-                    contentItem.AddTo(contentItem.Parent);
-                    EnsureSortOrder(contentItem);
-                    transaction.Commit();
-                }
-            }
+			contentItem.Updated = DateTime.Now;
+			contentItem.Save();
+			contentItem.AddTo(contentItem.Parent);
+			EnsureSortOrder(contentItem);
+
 			Invoke(ItemSaved, new ItemEventArgs(contentItem));
 		}
 
@@ -237,7 +174,7 @@ namespace Zeus.Persistence
 			{
 				IEnumerable<ContentItem> updatedItems = Utility.UpdateSortOrder(unsavedItem.Parent.Children);
 				foreach (ContentItem updatedItem in updatedItems)
-					_contentRepository.SaveOrUpdate(updatedItem);
+					updatedItem.Save();
 			}
 		}
 

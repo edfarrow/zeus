@@ -75,15 +75,12 @@ namespace Zeus.AddIns.ECommerce.Services
 			if (item == null)
 				return;
 
-            if (newQuantity == 0)
-            {
-                shoppingBasket.Children.Remove(item);
-                _persister.Delete(item);
-            }
-            else
-                item.Quantity = newQuantity;
+        	if (newQuantity == 0)
+        		_persister.Delete(item);
+        	else
+        		item.Quantity = newQuantity;
 
-			_persister.Save(shoppingBasket);
+        	_persister.Save(shoppingBasket);
 		}
 
         public virtual ShoppingBasket GetBasket(Shop shop)
@@ -94,7 +91,7 @@ namespace Zeus.AddIns.ECommerce.Services
         public virtual void ClearBasket(Shop shop)
 		{
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop, false);
-			if (shoppingBasket != null && shoppingBasket.ID > 0)
+			if (shoppingBasket != null && !shoppingBasket.IsNewRecord)
 			{
 				_persister.Delete(shoppingBasket);
 				_webContext.Response.Cookies.Remove(GetCookieKey(shop));
@@ -170,8 +167,7 @@ namespace Zeus.AddIns.ECommerce.Services
 					if (item.Product == null)
 						itemsToRemove.Add(item);
 				foreach (ShoppingBasketItem item in itemsToRemove)
-					shoppingBasket.Children.Remove(item);
-				_persister.Save(shoppingBasket);
+					item.Destroy();
 			}
 			else
 			{

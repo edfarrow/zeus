@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.XPath;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
@@ -128,7 +129,7 @@ namespace Zeus.Admin.Plugins.ImportExport
 			if (!string.IsNullOrEmpty(attributes["expires"]))
 				item.Expires = Convert.ToDateTime(attributes["expires"]);
 			if (KeepItemID)
-				item.ID = Convert.ToInt32(attributes["id"]);
+				item.ID = ObjectId.Parse(attributes["id"]);
 			item.Name = attributes["name"];
 			item.Published = Convert.ToDateTime(attributes["published"]);
 			item.SavedBy = attributes["savedBy"];

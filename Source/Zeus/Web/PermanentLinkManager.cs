@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using MongoDB.Bson;
 
 namespace Zeus.Web
 {
@@ -16,7 +17,7 @@ namespace Zeus.Web
 		private string OnPatternMatched(Match match)
 		{
 			// Get ContentID from link.
-			int contentID = Convert.ToInt32(match.Groups[1].Value);
+			ObjectId contentID = ObjectId.Parse(match.Groups[1].Value);
 
 			// Load content item and get URL.
 			ContentItem contentItem = Context.Persister.Get(contentID);

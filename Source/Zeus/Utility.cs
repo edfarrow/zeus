@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
@@ -114,52 +115,13 @@ namespace Zeus
 			return false;
 		}
 
-		/// <summary>Inserts an item among a parent item's children using a comparer to determine the location.</summary>
-		/// <param name="item">The item to insert.</param>
-		/// <param name="newParent">The parent item.</param>
-		/// <param name="sortExpression">The sort expression to use.</param>
-		/// <returns>The index of the item among it's siblings.</returns>
-		public static int Insert(ContentItem item, ContentItem newParent, string sortExpression)
-		{
-			return Insert(item, newParent, new Collections.ItemComparer(sortExpression));
-		}
-
-		/// <summary>Inserts an item among a parent item's children using a comparer to determine the location.</summary>
-		/// <param name="item">The item to insert.</param>
-		/// <param name="newParent">The parent item.</param>
-		/// <param name="comparer">The comparer to use.</param>
-		/// <returns>The index of the item among it's siblings.</returns>
-		public static int Insert(ContentItem item, ContentItem newParent, IComparer<ContentItem> comparer)
-		{
-			if (item.Parent != null && item.Parent.Children.Contains(item))
-				item.Parent.Children.Remove(item);
-
-			item.Parent = newParent;
-			if (newParent != null)
-			{
-				if (IsDestinationBelowSource(item, newParent))
-					throw new DestinationOnOrBelowItselfException(item, newParent);
-
-				IList<ContentItem> siblings = newParent.Children;
-				for (int i = 0; i < siblings.Count; i++)
-				{
-					if (comparer.Compare(item, siblings[i]) < 0)
-					{
-						siblings.Insert(i, item);
-						return i;
-					}
-				}
-				siblings.Add(item);
-				return siblings.Count - 1;
-			}
-			return -1;
-		}
-
 		/// <summary>Moves an item in a list to a new index.</summary>
 		/// <param name="siblings">A list of items where the item to move is listed.</param>
 		/// <param name="itemToMove">The item that should be moved (must be in the list)</param>
 		/// <param name="newIndex">The new index onto which to place the item.</param>
-		/// <remarks>To persist the new ordering one should call <see cref="Utility.UpdateSortOrder"/> and save the returned items. If the items returned from the <see cref="ContentItem.GetChildren"/> are moved with this method the changes will not be persisted since this is a new list instance.</remarks>
+		/// <remarks>To persist the new ordering one should call <see cref="Utility.UpdateSortOrder"/> and save the returned items. 
+		/// If the items returned from the <see cref="ContentItem.GetChildren"/> are moved with this method the 
+		/// changes will not be persisted since this is a new list instance.</remarks>
 		public static void MoveToIndex(IList<ContentItem> siblings, ContentItem itemToMove, int newIndex)
 		{
 			siblings.Remove(itemToMove);

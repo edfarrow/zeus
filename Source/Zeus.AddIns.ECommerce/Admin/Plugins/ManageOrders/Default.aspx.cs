@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
@@ -35,7 +36,7 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 
 		protected void btnProcess_Command(object sender, CommandEventArgs e)
 		{
-			int orderID = Convert.ToInt32(e.CommandArgument);
+			ObjectId orderID = ObjectId.Parse(e.CommandArgument.ToString());
 
 			Order order = Engine.Persister.Get<Order>(orderID);
 			order.Status = OrderStatus.Processed;

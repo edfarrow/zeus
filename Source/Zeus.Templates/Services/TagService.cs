@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Driver.Builders;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
@@ -72,11 +74,13 @@ namespace Zeus.Templates.Services
 
 		public IEnumerable<ContentItem> GetTaggedItems(Tag tag)
 		{
-			return _tagFinder.QueryDetails<LinkProperty>()
-				.Where(lp => lp.LinkedItem == tag)
-				.ToList()
-				.Select(lp => lp.EnclosingItem)
-				.Distinct();
+			// TODO: Need to find a way to re-implement this
+			throw new NotImplementedException();
+			//return _tagFinder.QueryDetails<LinkProperty>()
+			//    .Where(lp => lp.LinkedItem == tag)
+			//    .ToList()
+			//    .Select(lp => lp.EnclosingItem)
+			//    .Distinct();
 		}
 	}
 }

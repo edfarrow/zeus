@@ -1,12 +1,9 @@
 using System;
-using System.Configuration;
-using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
-using Zeus.Configuration;
-using Zeus.Web.Security;
-using Zeus.Web.UI;
-using Zeus.FileSystem.Images;
-using SoundInTheory.DynamicImage;
 using System.IO;
+using MongoDB.Bson;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
+using Zeus.FileSystem.Images;
+using Zeus.Web.UI;
 
 namespace Zeus.Admin
 {
@@ -25,7 +22,7 @@ namespace Zeus.Admin
 			//ltlAdminName.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
             if (Request.Form["id"] == null)
             {
-                int id = Convert.ToInt32(Request.QueryString["id"]);
+                ObjectId id = ObjectId.Parse(Request.QueryString["id"]);
                 ImageToEdit = Zeus.Context.Persister.Get<CroppedImage>(id);
                 bFixedAspectRatio = ImageToEdit.FixedWidthValue > 0 && ImageToEdit.FixedHeightValue > 0;
                 if (bFixedAspectRatio)
@@ -58,7 +55,7 @@ namespace Zeus.Admin
             }
             else
             {
-                int id = Convert.ToInt32(Request.Form["id"]);
+                ObjectId id = ObjectId.Parse(Request.Form["id"]);
                 int x1 = Convert.ToInt32(Request.Form["x1"]);
                 int y1 = Convert.ToInt32(Request.Form["y1"]);
                 int w = Convert.ToInt32(Request.Form["w"]);

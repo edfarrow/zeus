@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.BaseLibrary.Collections.Generic;
@@ -44,8 +45,8 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 			foreach (ListItem listItem in checkBoxList.Items.Cast<ListItem>().Where(li => li.Selected))
 			{
 				VariationPermutation variationPermutation = new VariationPermutation();
-				int[] variationIDs = listItem.Value.Split(',').Select(s => Convert.ToInt32(s)).ToArray();
-				foreach (int variationID in variationIDs)
+				ObjectId[] variationIDs = listItem.Value.Split(',').Select(s => ObjectId.Parse(s)).ToArray();
+				foreach (ObjectId variationID in variationIDs)
 					variationPermutation.Variations.Add(Context.Persister.Get(variationID));
 
 				VariationConfiguration variationConfiguration = new VariationConfiguration

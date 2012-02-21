@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using MongoDB.Bson;
 using Zeus.Linq;
 using Zeus.Persistence;
 using Zeus.Security;
@@ -33,7 +33,7 @@ namespace Zeus.Web.Security
 
 		#region Properties
 
-		protected int RootItemID
+		protected ObjectId RootItemID
 		{
 			get { return _host.CurrentSite.RootItemID; }
 		}
@@ -161,7 +161,7 @@ namespace Zeus.Web.Security
 
 		private SecurityContainer GetSecurityContainer(bool create)
 		{
-			ContentItem root = _persister.Get(RootItemID);
+			ContentItem root = ContentItem.FindOneByID(RootItemID);
 			SystemNode systemNode = root.GetChildren<SystemNode>().FirstOrDefault();
 			if (systemNode == null && create)
 				systemNode = CreateSystemNode(root);

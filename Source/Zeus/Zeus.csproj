@@ -95,9 +95,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\Libraries\Ormongo\MongoDB.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ormongo">
+      <HintPath>..\..\Libraries\Ormongo\Ormongo.dll</HintPath>
+    </Reference>
+    <Reference Include="Ormongo.Ancestry">
+      <HintPath>..\..\Libraries\Ormongo\Ormongo.Ancestry.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="SoundInTheory.DynamicImage, Version=2.0.2.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
@@ -170,14 +179,12 @@
     <Compile Include="Admin\AdminTargetFrame.cs" />
     <Compile Include="Admin\ActionPluginGroupAttribute.cs" />
     <Compile Include="Admin\GridToolbarPluginBase.cs" />
-    <Compile Include="Admin\CreationPosition.cs" />
     <Compile Include="Admin\Plugins\IContextMenuPlugin.cs" />
     <Compile Include="Admin\Plugins\IGridMenuPlugin.cs" />
     <Compile Include="Admin\Plugins\IGridToolbarPlugin.cs" />
     <Compile Include="Admin\Plugins\IMainToolbarPlugin.cs" />
     <Compile Include="Admin\IAdminAssemblyManager.cs" />
     <Compile Include="Admin\IAdminManager.cs" />
-    <Compile Include="Admin\ITreeSorter.cs" />
     <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Admin\NodePosition.cs" />
     <Compile Include="Admin\Plugins\IToolbarPlugin.cs" />
@@ -185,7 +192,6 @@
     <Compile Include="Admin\SecurityInitializer.cs" />
     <Compile Include="Admin\Targets.cs" />
     <Compile Include="Admin\TestRecomplile.cs" />
-    <Compile Include="Admin\TreeSorter.cs" />
     <Compile Include="CancelDestinationEventArgs.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
     <Compile Include="Collections\ItemComparer.cs" />
@@ -217,6 +223,7 @@
     <Compile Include="Configuration\CredentialsSection.cs" />
     <Compile Include="Configuration\CredentialCollection.cs" />
     <Compile Include="Configuration\MachineKeySectionWrapper.cs" />
+    <Compile Include="Configuration\ObjectIdConverter.cs" />
     <Compile Include="Configuration\RecycleBinElement.cs" />
     <Compile Include="Configuration\ContentTypesSection.cs" />
     <Compile Include="Configuration\ContentTypeRule.cs" />
@@ -273,6 +280,9 @@
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
     <Compile Include="FileSystem\Images\CroppedImage.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
+    <Compile Include="Persistence\Finder.cs" />
+    <Compile Include="Persistence\GenericFind.cs" />
+    <Compile Include="Persistence\IFinder.cs" />
     <Compile Include="Web\ContentPropertyAttribute.cs" />
     <Compile Include="ContentProperties\PropertyData.cs" />
     <Compile Include="ContentProperties\PropertyDataType.cs" />
@@ -627,17 +637,12 @@
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
     <Compile Include="Persistence\ContentPersister.cs" />
-    <Compile Include="Persistence\IFinder.cs" />
-    <Compile Include="Persistence\ITransaction.cs" />
     <Compile Include="Web\UI\ItemAwareControl.cs" />
     <Compile Include="Web\UI\ItemUtility.cs" />
     <Compile Include="Web\UI\WebControls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
-    <Compile Include="Persistence\GenericFind.cs" />
     <Compile Include="Persistence\IItemNotifier.cs" />
     <Compile Include="Persistence\IPersister.cs" />
-    <Compile Include="Persistence\IRepository.cs" />
-    <Compile Include="Persistence\ISelfPersister.cs" />
     <Compile Include="Persistence\ItemNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationRule.cs" />

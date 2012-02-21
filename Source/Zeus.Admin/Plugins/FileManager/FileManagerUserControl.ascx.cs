@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Admin.Plugins.Tree;
 using Zeus.FileSystem;
 using Zeus.Linq;
@@ -83,7 +84,7 @@ namespace Zeus.Admin.Plugins.FileManager
 
 		protected void filesStore_RefreshData(object sender, StoreRefreshDataEventArgs e)
 		{
-			int nodeID = Convert.ToInt32(e.Parameters["node"]);
+			ObjectId nodeID = ObjectId.Parse(e.Parameters["node"]);
 			FileType type = e.Parameters.Any(p => p.Name == "type") ? (FileType) Enum.Parse(typeof(FileType), e.Parameters["type"], true) : FileType.Both;
 			ContentItem contentItem = Engine.Persister.Get(nodeID);
 			filesStore.DataSource = GetFiles(contentItem, type);

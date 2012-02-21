@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins.DeleteItem
@@ -137,12 +138,12 @@ namespace Zeus.Admin.Plugins.DeleteItem
 				return;
 
 			string[] nodeIDsTemp = ids.Split(',');
-			var nodeIDs = nodeIDsTemp.Select(s => Convert.ToInt32(s));
+			var nodeIDs = nodeIDsTemp.Select(s => ObjectId.Parse(s));
 			if (!nodeIDs.Any())
 				return;
 
 			ContentItem parent = Engine.Persister.Get(nodeIDs.First()).Parent;
-			foreach (int id in nodeIDs)
+			foreach (ObjectId id in nodeIDs)
 			{
 				ContentItem item = Engine.Persister.Get(id);
 				Zeus.Context.Persister.Delete(item);

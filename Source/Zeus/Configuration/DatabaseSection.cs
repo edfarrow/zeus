@@ -1,29 +1,28 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace Zeus.Configuration
 {
 	public class DatabaseSection : ConfigurationSection
 	{
-		[ConfigurationProperty("connectionStringName", DefaultValue = "Zeus")]
-		public string ConnectionStringName
+		[ConfigurationProperty("serverHost", DefaultValue = "localhost")]
+		public string ServerHost
 		{
-			get { return (string) base["connectionStringName"]; }
-			set { base["connectionStringName"] = value; }
+			get { return (string)base["serverHost"]; }
+			set { base["serverHost"] = value; }
 		}
 
-		[ConfigurationProperty("cacheEnabled", DefaultValue = false)]
-		public bool CacheEnabled
+		[ConfigurationProperty("serverPort", DefaultValue = 27017)]
+		public int ServerPort
 		{
-			get { return (bool) base["cacheEnabled"]; }
-			set { base["cacheEnabled"] = value; }
+			get { return (int)base["serverPort"]; }
+			set { base["serverPort"] = value; }
 		}
 
-		[ConfigurationProperty("cacheProviderClass", DefaultValue = "NHibernate.Cache.HashtableCacheProvider, NHibernate")]
-		public string CacheProviderClass
+		[ConfigurationProperty("databaseName", DefaultValue = "Zeus")]
+		public string DatabaseName
 		{
-			get { return (string) base["cacheProviderClass"]; }
-			set { base["cacheProviderClass"] = value; }
+			get { return (string)base["databaseName"]; }
+			set { base["databaseName"] = value; }
 		}
 	}
 }

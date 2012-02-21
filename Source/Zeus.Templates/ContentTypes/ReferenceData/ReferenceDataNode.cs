@@ -21,7 +21,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 
 		public void Populate()
 		{
-			Children.Add(new CountryList() { Parent = this });
+			Children.Create(new CountryList());
 		}
 	}
 }

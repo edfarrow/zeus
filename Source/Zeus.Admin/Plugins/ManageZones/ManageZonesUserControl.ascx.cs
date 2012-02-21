@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
 using Zeus.Integrity;
@@ -16,7 +17,7 @@ namespace Zeus.Admin.Plugins.ManageZones
 	public partial class ManageZonesUserControl : PluginUserControlBase
 	{
 		[DirectMethod]
-		public void OpenZonesPanel(int id)
+		public void OpenZonesPanel(ObjectId id)
 		{
 			ContentItem contentItem = Engine.Persister.Get(id);
 
@@ -151,7 +152,7 @@ namespace Zeus.Admin.Plugins.ManageZones
 		}
 
 		[DirectMethod]
-		public void DeleteWidget(int id)
+		public void DeleteWidget(ObjectId id)
 		{
 			ContentItem parent = Engine.Persister.Get(id).Parent;
 			ContentItem item = Engine.Persister.Get(id);
@@ -159,7 +160,7 @@ namespace Zeus.Admin.Plugins.ManageZones
 		}
 
 		[DirectMethod]
-		public void MoveWidget(int id, string destinationZone, int pos)
+		public void MoveWidget(ObjectId id, string destinationZone, int pos)
 		{
 			WidgetContentItem contentItem = (WidgetContentItem) Engine.Persister.Get(id);
 
@@ -175,15 +176,16 @@ namespace Zeus.Admin.Plugins.ManageZones
 			Utility.MoveToIndex(siblingWidgets, contentItem, pos);
 
 			// Get index of widget before this one in full Children collection.
-			IList<ContentItem> siblings = contentItem.Parent.Children;
+			var siblings = contentItem.Parent.Children;
 			WidgetContentItem previousWidget = siblingWidgets.Previous(contentItem) as WidgetContentItem;
-			int index = (previousWidget != null) ? siblings.IndexOf(previousWidget) : 0;
-			Utility.MoveToIndex(siblings, contentItem, index);
+			throw new NotImplementedException();
+			//int index = (previousWidget != null) ? siblings.IndexOf(previousWidget) : 0;
+			//Utility.MoveToIndex(siblings, contentItem, index);
 
-			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
-				Zeus.Context.Persister.Save(updatedItem);
+			//foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
+			//    Zeus.Context.Persister.Save(updatedItem);
 
-			Engine.Persister.Save(contentItem);
+			//Engine.Persister.Save(contentItem);
 		}
 	}
 }

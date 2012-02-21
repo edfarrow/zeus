@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zeus.BaseLibrary.ExtensionMethods.Web;
 using Zeus.Security;
 
@@ -26,7 +27,7 @@ namespace Zeus.Admin.Plugins.MoveItem
 
 			// Update sort order based on new pos.
 			int pos = Request.GetRequiredInt("pos");
-			IList<ContentItem> siblings = sourceContentItem.Parent.Children;
+			IList<ContentItem> siblings = sourceContentItem.Parent.Children.ToList();
 			Utility.MoveToIndex(siblings, sourceContentItem, pos);
 			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
 				Zeus.Context.Persister.Save(updatedItem);

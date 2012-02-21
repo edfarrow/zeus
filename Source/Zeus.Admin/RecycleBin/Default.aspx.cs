@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Integrity;
 
@@ -41,7 +42,7 @@ namespace Zeus.Admin.RecycleBin
 
 		protected void grvRecycleBinItems_RowCommand(object sender, GridViewCommandEventArgs e)
 		{
-			int itemID = Convert.ToInt32(e.CommandArgument);
+			ObjectId itemID = ObjectId.Parse(e.CommandArgument.ToString());
 			ContentItem item = Zeus.Context.Persister.Get(itemID);
 
 			switch (e.CommandName)

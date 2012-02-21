@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
 using System.Web.UI;
@@ -33,7 +34,7 @@ namespace Zeus.Design.Editors
 		protected override object GetValue(ListControl ddl)
 		{
 			if (!string.IsNullOrEmpty(ddl.SelectedValue))
-				return Context.Current.Persister.Get(Convert.ToInt32(ddl.SelectedValue));
+				return Context.Current.Persister.Get(ObjectId.Parse(ddl.SelectedValue));
 			return null;
 		}
 

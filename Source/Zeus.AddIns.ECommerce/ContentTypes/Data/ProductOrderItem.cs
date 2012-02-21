@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using Zeus.ContentProperties;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
@@ -10,9 +11,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return ProductTitle; }
 		}
 
-		public int WeakProductLink
+		public ObjectId WeakProductLink
 		{
-            get { return GetDetail("WeakProductLink", 0); }
+			get { return GetDetail("WeakProductLink", ObjectId.Empty); }
             set { SetDetail("WeakProductLink", value); }
 		}
 

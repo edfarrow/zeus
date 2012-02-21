@@ -37,6 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ormongo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Ormongo.Ancestry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="paypal_base, Version=5.6.60.0, Culture=neutral, PublicKeyToken=b37401294aaf5617">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Paypal\paypal_base.dll</HintPath>

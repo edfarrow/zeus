@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Text;
 using Ext.Net;
+using MongoDB.Bson;
+using Ormongo;
+using Ormongo.Ancestry;
 using Zeus.Admin;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
@@ -20,14 +23,13 @@ namespace Zeus
 {
     [RestrictParents(typeof(ContentItem))]
     [System.Serializable]
-    public abstract class ContentItem : IUrlParserDependency, INode, IEditableObject
-    {
-        #region Private Fields
+    public abstract class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode, IEditableObject
+	{
+		#region Private Fields
 
-        private IList<AuthorizationRule> _authorizationRules;
+		private IList<AuthorizationRule> _authorizationRules;
         private string _name;
         private DateTime? _expires;
-        private IList<ContentItem> _children = new List<ContentItem>();
         private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
         private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
         private string _url;
@@ -38,12 +40,6 @@ namespace Zeus
 
         #region Public Properties (persisted)
 
-        /// <summary>Gets or sets item ID.</summary>
-        public virtual int ID { get; set; }
-
-        /// <summary>Gets or sets this item's parent. This can be null for root items but should be another page in other situations.</summary>
-        public virtual ContentItem Parent { get; set; }
-
         /// <summary>Gets or sets the item's title. This is used in edit mode and probably in a custom implementation.</summary>
         public virtual string Title { get; set; }
 
@@ -52,7 +48,7 @@ namespace Zeus
         {
             get
             {
-                return _name ?? (ID > 0 ? ID.ToString() : null);
+                return _name ?? (!IsNewRecord ? ID.ToString() : null);
             }
             set
             {
@@ -101,13 +97,6 @@ namespace Zeus
         {
             get { return _detailCollections; }
             set { _detailCollections = value; }
-        }
-
-        /// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
-        public virtual IList<ContentItem> Children
-        {
-            get { return _children; }
-            set { _children = value; }
         }
 
         #endregion
@@ -411,14 +400,15 @@ namespace Zeus
         /// <param name="newParent">The new parent of the item. If this parameter is null the item is detached from the hierarchical structure.</param>
         public virtual void AddTo(ContentItem newParent)
         {
-            if (Parent != null && Parent != newParent && Parent.Children.Contains(this))
-                Parent.Children.Remove(this);
+			// TODO: Don't think this is necessary, but not sure.
+			//if (Parent != null && Parent != newParent && Parent.Children.Contains(this))
+			//    Parent.Children.Remove(this);
 
             Parent = newParent;
 
             if (newParent != null && !newParent.Children.Contains(this))
             {
-                IList<ContentItem> siblings = newParent.Children;
+                var siblings = newParent.Children.ToList();
                 if (siblings.Count > 0)
                 {
                     int lastOrder = siblings[siblings.Count - 1].SortOrder;
@@ -450,7 +440,7 @@ namespace Zeus
         public virtual ContentItem Clone(bool includeChildren)
         {
             ContentItem cloned = (ContentItem)MemberwiseClone();
-            cloned.ID = 0;
+            cloned.ID = ObjectId.Empty;
             cloned._url = null;
 
             CloneDetails(cloned);
@@ -478,7 +468,6 @@ namespace Zeus
 
         private void CloneChildren(bool includeChildren, ContentItem cloned)
         {
-            cloned.Children = new List<ContentItem>();
             if (includeChildren)
                 foreach (ContentItem child in Children)
                 {
@@ -630,7 +619,7 @@ namespace Zeus
             if (this == obj) return true;
             if ((obj == null) || (obj.GetType() != GetType())) return false;
             ContentItem item = obj as ContentItem;
-            if (ID != 0 && item.ID != 0)
+            if (!IsNewRecord && !item.IsNewRecord)
                 return ID == item.ID;
             else
                 return ReferenceEquals(this, item);

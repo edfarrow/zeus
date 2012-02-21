@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using Zeus.Configuration;
 
 namespace Zeus.Web
@@ -12,7 +13,7 @@ namespace Zeus.Web
 
 		#region Constructor
 
-		public Site(int rootItemID, int startPageID, HostNameCollection hostNames)
+		public Site(ObjectId rootItemID, ObjectId startPageID, HostNameCollection hostNames)
 		{
 			RootItemID = rootItemID;
 			StartPageID = startPageID;
@@ -26,8 +27,8 @@ namespace Zeus.Web
 		/// <summary>Matches hosts that ends with the site's authority, e.g. match both www.zeus.com and zeus.com.</summary>
 		public bool Wildcards { get; set; }
 
-		public int StartPageID { get; set; }
-		public int RootItemID { get; set; }
+		public ObjectId StartPageID { get; set; }
+		public ObjectId RootItemID { get; set; }
 
 		#endregion
 

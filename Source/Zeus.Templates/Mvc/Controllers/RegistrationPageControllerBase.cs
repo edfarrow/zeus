@@ -78,11 +78,11 @@ namespace Zeus.Templates.Mvc.Controllers
                 User NewUser = null;
                 try
                 {
-                    NewUser = Zeus.Find.UserContainer().GetChildren<User>().Where(u => u.Username == registrationForm.Username.ToLower()).Single();
+                    NewUser = Find.UserContainer().GetChildren<User>().Where(u => u.Username == registrationForm.Username.ToLower()).Single();
                 }
                 catch
                 {
-                    System.Web.HttpContext.Current.Response.Write("User Count = " + Zeus.Find.UserContainer().GetChildren<User>().Count());
+                    System.Web.HttpContext.Current.Response.Write("User Count = " + Find.UserContainer().GetChildren<User>().Count());
                     System.Web.HttpContext.Current.Response.Write("Error: user not found = " + registrationForm.Username);
                     System.Web.HttpContext.Current.Response.End();
                 }

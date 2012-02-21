@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Bson;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
@@ -45,8 +46,8 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		}
 
 		public ActionResult UpdateQuantity(
-			[Bind(Prefix = "id")] int productID,
-			[Bind(Prefix = "varid")] int? variationPermutationID,
+			[Bind(Prefix = "id")] ObjectId productID,
+			[Bind(Prefix = "varid")] ObjectId? variationPermutationID,
 			[Bind(Prefix = "qty")] int quantity)
 		{
 			Product product = Engine.Persister.Get<Product>(productID);
@@ -57,8 +58,8 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		}
 
 		public ActionResult RemoveItem(
-			[Bind(Prefix = "id")] int productID,
-			[Bind(Prefix = "varid")] int? variationPermutationID)
+			[Bind(Prefix = "id")] ObjectId productID,
+			[Bind(Prefix = "varid")] ObjectId? variationPermutationID)
 		{
 			return UpdateQuantity(productID, variationPermutationID, 0);
 		}
@@ -66,7 +67,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		[ActionName("Checkout")]
 		[AcceptVerbs(HttpVerbs.Post)]
 		[AcceptImageSubmit(Name = "updateDeliveryMethod")]
-		public ActionResult UpdateDeliveryMethod(int deliveryMethodID)
+		public ActionResult UpdateDeliveryMethod(ObjectId deliveryMethodID)
 		{
 			UpdateDeliveryMethodInternal(deliveryMethodID);
 			return Redirect(CurrentItem.Url);
@@ -74,7 +75,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 
 		[AcceptVerbs(HttpVerbs.Post)]
 		[AcceptImageSubmit(Name = "checkout")]
-		public ActionResult Checkout(int deliveryMethodID)
+		public ActionResult Checkout(ObjectId deliveryMethodID)
 		{
 			UpdateDeliveryMethodInternal(deliveryMethodID);
 
@@ -90,7 +91,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			return _shoppingBasketService.GetBasket(CurrentShop);
 		}
 
-		private void UpdateDeliveryMethodInternal(int deliveryMethodID)
+		private void UpdateDeliveryMethodInternal(ObjectId deliveryMethodID)
 		{
 			IShoppingBasket shoppingBasket = GetShoppingBasket();
 			shoppingBasket.DeliveryMethod = _finder.QueryItems<DeliveryMethod>().Single(dm => dm.ID == deliveryMethodID);

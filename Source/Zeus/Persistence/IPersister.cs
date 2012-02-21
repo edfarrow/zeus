@@ -1,12 +1,10 @@
 ﻿using System;
+using MongoDB.Bson;
 
 namespace Zeus.Persistence
 {
 	public interface IPersister
 	{
-		/// <summary>Gets the store implementation used by this persister. Please note that using the using the store circumvent events exposed by the persister and is not run in a transaction. Do net expect the behaviour to be exactly the same.</summary>
-		IRepository<int, ContentItem> Repository { get; }
-
 		/// <summary>Occurs before an item is saved</summary>
 		event EventHandler<CancelItemEventArgs> ItemSaving;
 		/// <summary>Occurs when an item has been saved</summary>
@@ -29,9 +27,9 @@ namespace Zeus.Persistence
 		ContentItem Copy(ContentItem source, ContentItem destination);
 		ContentItem Copy(ContentItem source, ContentItem destination, bool includeChildren);
 		void Delete(ContentItem contentItem);
-		ContentItem Get(int id);
-		T Get<T>(int id) where T : ContentItem;
-		ContentItem Load(int id);
+		ContentItem Get(ObjectId id);
+		T Get<T>(ObjectId id) where T : ContentItem;
+		ContentItem Load(ObjectId id);
 		void Move(ContentItem toMove, ContentItem newParent);
 		void Save(ContentItem contentItem);
 		void UpdateSortOrder(ContentItem contentItem, int newPos);

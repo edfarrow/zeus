@@ -60,17 +60,6 @@ namespace Zeus.Admin.Plugins.EditItem
 		{
 			ContentItem currentItem = (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem);
 
-			if (Request["before"] != null)
-			{
-				ContentItem before = Engine.Resolve<Navigator>().Navigate(Request["before"]);
-				Engine.Resolve<ITreeSorter>().MoveTo(currentItem, NodePosition.Before, before);
-			}
-			else if (Request["after"] != null)
-			{
-				ContentItem after = Engine.Resolve<Navigator>().Navigate(Request["after"]);
-				Engine.Resolve<ITreeSorter>().MoveTo(currentItem, NodePosition.After, after);
-			}
-
 			Refresh(currentItem, AdminFrame.Both, false);
 			Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
 			zeusItemEditView.Visible = false;

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace Zeus.BaseLibrary.Navigation
 {
@@ -9,7 +7,7 @@ namespace Zeus.BaseLibrary.Navigation
     {
         public string Title;
         public string Url;
-        public int ID;
+        public ObjectId ID;
         public string ParentUrl { get; set; }
         public IList<NavigationItem> SubNav { get; set; }
 

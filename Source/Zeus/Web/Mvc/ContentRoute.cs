@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
@@ -97,8 +98,8 @@ namespace Zeus.Web.Mvc
 
             if (td.QueryParameters.ContainsKey("preview"))
             {
-                int itemId;
-                if (int.TryParse(td.QueryParameters["preview"], out itemId))
+                ObjectId itemId;
+                if (ObjectId.TryParse(td.QueryParameters["preview"], out itemId))
                     item = engine.Persister.Get(itemId);
             }
             var controllerName = controllerMapper.GetControllerName(item.GetType());

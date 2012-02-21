@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using System.Configuration;
+using MongoDB.Bson;
 
 namespace Zeus.Configuration
 {
@@ -12,9 +14,10 @@ namespace Zeus.Configuration
 		}
 
 		[ConfigurationProperty("startPageID", IsRequired = true)]
-		public int StartPageID
+		[TypeConverter(typeof(ObjectIdConverter))]
+		public ObjectId StartPageID
 		{
-			get { return (int) base["startPageID"]; }
+			get { return (ObjectId)base["startPageID"]; }
 			set { base["startPageID"] = value; }
 		}
 

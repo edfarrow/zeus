@@ -108,12 +108,12 @@ namespace Zeus.Admin
 		/// <param name="zoneName">The zone to add the item to.</param>
 		/// <param name="position">The position relative to the selected item to add the item.</param>
 		/// <returns>The url to the edit page.</returns>
-		public string GetEditNewPageUrl(ContentItem selected, ContentType definition, string zoneName, CreationPosition position)
+		public string GetEditNewPageUrl(ContentItem selected, ContentType definition, string zoneName)
 		{
 			if (selected == null) throw new ArgumentNullException("selected");
 			if (definition == null) throw new ArgumentNullException("definition");
 
-			ContentItem parent = (position != CreationPosition.Below) ? selected.Parent : selected;
+			ContentItem parent = selected;
 
 			if (selected == null)
 				throw new ZeusException("Cannot insert item before or after the root page.");
@@ -122,16 +122,6 @@ namespace Zeus.Admin
 			url = url.AppendQuery("selected", parent.Path);
 			url = url.AppendQuery("discriminator", definition.Discriminator);
 			url = url.AppendQuery("zoneName", zoneName);
-
-			switch (position)
-			{
-				case CreationPosition.Before:
-					url = url.AppendQuery("before", selected.Path);
-					break;
-				case CreationPosition.After:
-					url = url.AppendQuery("after", selected.Path);
-					break;
-			}
 
 			return url.ToString();
 		}
@@ -183,7 +173,7 @@ namespace Zeus.Admin
 			Action<ContentItem> onSavingCallback)
 		{
 			bool wasUpdated = UpdateItem(item, addedEditors, user);
-			if (wasUpdated || IsNew(item))
+			if (wasUpdated || item.IsNewRecord)
 			{
 				onSavingCallback(item);
 				_persister.Save(item);
@@ -234,15 +224,6 @@ namespace Zeus.Admin
 
 			return updated;
 		}
-
-		#region Helper methods
-
-		private static bool IsNew(ContentItem current)
-		{
-			return current.ID == 0;
-		}
-
-		#endregion
 
 		#endregion
 	}

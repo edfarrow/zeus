@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.XPath;
+using MongoDB.Bson;
 using Ninject;
 using Zeus.ContentTypes;
 using Zeus.Web;
@@ -78,7 +79,7 @@ namespace Zeus.Serialization
 		{
 			item.Created = ToNullableDateTime(attributes["created"]).Value;
 			item.Expires = ToNullableDateTime(attributes["expires"]);
-			item.ID = Convert.ToInt32(attributes["id"]);
+			item.ID = ObjectId.Parse(attributes["id"]);
 			item.Name = attributes["name"];
 			item.Published = ToNullableDateTime(attributes["published"]);
 			item.SavedBy = attributes["savedBy"];
@@ -95,7 +96,7 @@ namespace Zeus.Serialization
 		{
 			if (!string.IsNullOrEmpty(parent))
 			{
-				int parentID = int.Parse(parent);
+				ObjectId parentID = ObjectId.Parse(parent);
 				ContentItem parentItem = journal.Find(parentID);
 				item.AddTo(parentItem);
 			}

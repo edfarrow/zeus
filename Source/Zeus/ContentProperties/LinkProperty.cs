@@ -1,4 +1,5 @@
 using System;
+using MongoDB.Bson;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
@@ -35,7 +36,7 @@ namespace Zeus.ContentProperties
 			}
 		}
 
-		internal virtual int? LinkValue { get; set; }
+		internal virtual ObjectId? LinkValue { get; set; }
 
 		public override PropertyDataType Type
 		{

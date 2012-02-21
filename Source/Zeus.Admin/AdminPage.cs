@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI.WebControls;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.Admin.Plugins.Tree;
 using Zeus.Web;
 
@@ -51,7 +52,7 @@ jQuery(document).ready(function() {{
 				if (value != null)
 					SelectedItemID = value.ID;
 				else
-					SelectedItemID = 0;
+					SelectedItemID = ObjectId.Empty;
 			}
 		}
 
@@ -60,9 +61,9 @@ jQuery(document).ready(function() {{
 			get { return SelectedItem; }
 		}
 
-		private int SelectedItemID
+		private ObjectId SelectedItemID
 		{
-			get { return (int) (ViewState["SelectedItemID"] ?? 0); }
+			get { return (ObjectId)(ViewState["SelectedItemID"] ?? 0); }
 			set { ViewState["SelectedItemID"] = value; }
 		}
 
@@ -138,7 +139,7 @@ jQuery(document).ready(function() {{
 
 		private ContentItem GetFromViewState()
 		{
-			if (SelectedItemID != 0)
+			if (SelectedItemID != ObjectId.Empty)
 				return Zeus.Context.Persister.Get(SelectedItemID);
 			return null;
 		}
@@ -155,7 +156,7 @@ jQuery(document).ready(function() {{
 
 			string itemId = Request[PathData.ItemQueryKey];
 			if (!string.IsNullOrEmpty(itemId))
-				return Engine.Persister.Get(int.Parse(itemId));
+				return Engine.Persister.Get(ObjectId.Parse(itemId));
 
 			return null;
 		}

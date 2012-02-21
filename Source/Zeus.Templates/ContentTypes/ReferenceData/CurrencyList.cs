@@ -30,12 +30,9 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 
 		public void Populate()
 		{
-			Children.Add(new Currency("US Dollar", "USD", "$"));
-			Children.Add(new Currency("British Pound Sterling", "GBP", "£"));
-			Children.Add(new Currency("Euro", "EUR", "€"));
-
-			foreach (Currency currency in Children)
-				currency.Parent = this;
+			Children.Create(new Currency("US Dollar", "USD", "$"));
+			Children.Create(new Currency("British Pound Sterling", "GBP", "£"));
+			Children.Create(new Currency("Euro", "EUR", "€"));
 		}
 
 		#endregion

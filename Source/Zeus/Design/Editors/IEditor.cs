@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using MongoDB.Bson;
 using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors
@@ -24,6 +25,6 @@ namespace Zeus.Design.Editors
 		/// <param name="editor">The editor to load with a value.</param>
 		void UpdateEditor(IEditableObject item, Control editor);
 
-        int? CurrentID { get; set; }
+        ObjectId? CurrentID { get; set; }
 	}
 }

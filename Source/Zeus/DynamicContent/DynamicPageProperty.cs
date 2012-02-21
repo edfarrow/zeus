@@ -1,4 +1,4 @@
-using System;
+using MongoDB.Bson;
 using Zeus.Design.Editors;
 
 namespace Zeus.DynamicContent
@@ -7,7 +7,7 @@ namespace Zeus.DynamicContent
 	{
 		#region Fields
 
-		private int _contentID;
+		private ObjectId _contentID;
 		private string _detailName;
 
 		#endregion
@@ -34,7 +34,7 @@ namespace Zeus.DynamicContent
 			set
 			{
 				string[] values = value.Split(new[] { ',' });
-				_contentID = Convert.ToInt32(values[0]);
+				_contentID = ObjectId.Parse(values[0]);
 				_detailName = values[1];
 			}
 		}

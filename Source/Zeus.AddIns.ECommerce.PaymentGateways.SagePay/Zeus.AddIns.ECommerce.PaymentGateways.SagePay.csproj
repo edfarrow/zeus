@@ -75,6 +75,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Ormongo">
+      <HintPath>..\..\Libraries\Ormongo\Ormongo.dll</HintPath>
+    </Reference>
+    <Reference Include="Ormongo.Ancestry">
+      <HintPath>..\..\Libraries\Ormongo\Ormongo.Ancestry.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">

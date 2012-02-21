@@ -5,6 +5,7 @@ using System.Web.Compilation;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ext.Net;
+using MongoDB.Bson;
 using Zeus.ContentTypes;
 
 namespace Zeus.Web.UI.WebControls
@@ -26,9 +27,9 @@ namespace Zeus.Web.UI.WebControls
 		#region Properties
 
 		/// <summary>Gets the parent item where to look for items.</summary>
-		public int ParentItemID
+		public ObjectId ParentItemID
 		{
-			get { return (int) (ViewState["CurrentItemID"] ?? 0); }
+			get { return (ObjectId)(ViewState["CurrentItemID"] ?? ObjectId.Empty); }
 			set { ViewState["CurrentItemID"] = value; }
 		}
 

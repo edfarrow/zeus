@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using Ormongo;
 using Zeus.Admin;
 using Zeus.BaseLibrary.DependencyInjection;
 using Zeus.BaseLibrary.Reflection;
@@ -85,13 +86,18 @@ namespace Zeus.Engine
 			_dependencyInjectionManager = new DependencyInjectionManager();
 			_dependencyInjectionManager.Bind<IAssemblyFinder, AssemblyFinder>();
 
+			DatabaseSection databaseSection = (DatabaseSection) ConfigurationManager.GetSection("zeus/database");
 			_dependencyInjectionManager.BindInstance(eventBroker);
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
+			_dependencyInjectionManager.BindInstance(databaseSection);
 			_dependencyInjectionManager.BindInstance(hostSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/contentTypes") as ContentTypesSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/customUrls") as CustomUrlsSection ?? new CustomUrlsSection());
+
+			OrmongoConfiguration.Database = databaseSection.DatabaseName;
+			OrmongoConfiguration.ServerHost = databaseSection.ServerHost;
+			OrmongoConfiguration.ServerPort = databaseSection.ServerPort;
 
 			if (hostSection != null && hostSection.Web != null)
 				Url.DefaultExtension = hostSection.Web.Extension;
