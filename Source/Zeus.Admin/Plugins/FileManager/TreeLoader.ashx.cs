@@ -23,7 +23,7 @@ namespace Zeus.Admin.Plugins.FileManager
 
 				SiteTree tree = SiteTree.From(selectedItem, 2);
 
-				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read).Where(ci => !(ci is WidgetContentItem)))
+				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read))
 					.ToTreeNode(false, false);
 
 				if (treeNode is TreeNode)

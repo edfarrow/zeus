@@ -77,13 +77,6 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["CurrentItemType"] = value; }
 		}
 
-		/// <summary>Gets or sets the zone name to list.</summary>
-		public string ZoneName
-		{
-			get { return (string) (ViewState["ZoneName"] ?? ""); }
-			set { ViewState["ZoneName"] = value; }
-		}
-
 		public IList<string> AddedTypes
 		{
 			get { return addedTypes; }
@@ -198,10 +191,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private ContentItem CreateItem(Type itemType)
 		{
-			ContentItem item = Zeus.Context.Current.ContentTypes.CreateInstance(itemType, ParentItem);
-			if (item is WidgetContentItem)
-				((WidgetContentItem) item).ZoneName = ZoneName;
-			return item;
+			return Zeus.Context.Current.ContentTypes.CreateInstance(itemType, ParentItem);
 		}
 
 		private void AddNewItemDdl(UpdatePanel container)

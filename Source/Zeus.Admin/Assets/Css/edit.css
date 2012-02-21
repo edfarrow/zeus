@@ -186,35 +186,6 @@ span.edit a:hover {
 	margin-right: 0;
 }
 
-/* Zones */
-.zonesBox a
-{
-	color:#333;
-	font-weight:normal;
-	text-decoration:none;
-}
-.zonesBox dl
-{
-	margin:0;
-}
-.zonesBox dt
-{
-	padding:5px 0;
-	font-size:1.1em;
-	font-weight:bold;
-	display:block;
-}
-.zonesBox dt a
-{
-	float:right;
-	padding:2px;
-}
-.zonesBox dd
-{
-	margin:0;
-	padding:0 0 5px 5px;
-}
-
 .linkedItemsEditor
 {
 	float: left;

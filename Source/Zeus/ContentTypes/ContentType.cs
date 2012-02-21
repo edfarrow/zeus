@@ -15,8 +15,6 @@ namespace Zeus.ContentTypes
 		#region Fields
 
 		private readonly IList<ContentType> _allowedChildren = new List<ContentType>();
-		private readonly IList<AvailableZoneAttribute> _availableZones = new List<AvailableZoneAttribute>();
-		private IList<string> _allowedZoneNames = new List<string>();
 
 		#endregion
 
@@ -41,21 +39,6 @@ namespace Zeus.ContentTypes
 		public IList<EditorContainerAttribute> EditorContainers { get; set; }
 
 		public Type ItemType { get; set; }
-
-		/// <summary>Gets zones this class of items can be placed in.</summary>
-		public IList<string> AllowedZoneNames
-		{
-			get { return _allowedZoneNames; }
-			internal set { _allowedZoneNames = value; }
-		}
-
-		/// <summary>Gets zones available in this items of this class.</summary>
-		public IList<AvailableZoneAttribute> AvailableZones
-		{
-			get { return _availableZones; }
-		}
-
-		public AllowedZones AllowedIn { get; set; }
 
 		public string IconUrl
 		{
@@ -184,45 +167,6 @@ namespace Zeus.ContentTypes
 		{
 			if (!AllowedChildren.Contains(definition))
 				AllowedChildren.Add(definition);
-		}
-
-		/// <summary>Adds an available zone to the list of available zones.</summary>
-		/// <param name="zoneName">The zone name to add.</param>
-		/// <param name="title"></param>
-		public void AddAvailableZone(string zoneName, string title)
-		{
-			if (!AvailableZones.Any(az => az.ZoneName == zoneName))
-				AvailableZones.Add(new AvailableZoneAttribute(title, zoneName));
-		}
-
-		public bool HasZone(string zone)
-		{
-			if (string.IsNullOrEmpty(zone))
-				return true;
-			if (AvailableZones != null)
-				foreach (AvailableZoneAttribute a in AvailableZones)
-					if (a.ZoneName == zone)
-						return true;
-			return false;
-		}
-
-		/// <summary>Used to determine wether a child definition is allowed in a zone.</summary>
-		public bool IsAllowedInZone(string zoneName)
-		{
-			if (AllowedIn == AllowedZones.All)
-				return true;
-			if (AllowedIn == AllowedZones.AllNamed && !string.IsNullOrEmpty(zoneName))
-				return true;
-			if (AllowedIn == AllowedZones.None)
-				return false;
-
-			if (AllowedZoneNames == null)
-				return true;
-
-			if (string.IsNullOrEmpty(zoneName) && AllowedZoneNames.Count == 0 && AllowedIn != AllowedZones.AllNamed)
-				return true;
-
-			return AllowedZoneNames.Contains(zoneName);
 		}
 
 		public bool IsAuthorized(IPrincipal user)

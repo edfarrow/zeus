@@ -17,6 +17,6 @@ namespace Zeus.ContentTypes
 
 		ICollection<ContentType> GetContentTypes();
 		ContentType GetContentType(Type type);
-		IList<ContentType> GetAllowedChildren(ContentType contentType, string zone, IPrincipal user);
+		IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user);
 	}
 }

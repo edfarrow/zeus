@@ -95,7 +95,6 @@ namespace Zeus.Design.Editors
 		{
 			ItemEditView editor = new ItemEditView();
 			editor.ID = Name;
-            //editor.ZoneName = DefaultChildZoneName;
             editor.Init += OnChildEditorInit;
 
 			panel.Controls.Add(editor);

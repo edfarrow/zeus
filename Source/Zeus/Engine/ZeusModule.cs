@@ -30,9 +30,6 @@ namespace Zeus.Engine
 		public override void Load()
 		{
 			// Admin
-			Bind<IContentManager>().To<ContentManager>().InSingletonScope();
-			
-			// Admin
 			Bind<IAdminManager>().To<AdminManager>().InSingletonScope();
 			Bind<Navigator>().To<Navigator>().InSingletonScope();
 

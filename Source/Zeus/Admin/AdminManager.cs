@@ -86,14 +86,6 @@ namespace Zeus.Admin
 			return FormatSelectedUrl(selectedItem, NewItemUrl);
 		}
 
-		/// <summary>Gets the url to the select type of item to create.</summary>
-		/// <param name="selectedItem">The currently selected item.</param>
-		/// <returns>The url to the select new item to create page.</returns>
-		public string GetSelectNewItemUrl(ContentItem selectedItem, string zoneName)
-		{
-			return FormatSelectedUrl(selectedItem, NewItemUrl + "?zoneName=" + zoneName);
-		}
-
 		private static string FormatSelectedUrl(ContentItem selectedItem, string path)
 		{
 			Url url = new Url(path);
@@ -105,10 +97,8 @@ namespace Zeus.Admin
 		/// <summary>Gets the url to edit page creating new items.</summary>
 		/// <param name="selected">The selected item.</param>
 		/// <param name="definition">The type of item to edit.</param>
-		/// <param name="zoneName">The zone to add the item to.</param>
-		/// <param name="position">The position relative to the selected item to add the item.</param>
 		/// <returns>The url to the edit page.</returns>
-		public string GetEditNewPageUrl(ContentItem selected, ContentType definition, string zoneName)
+		public string GetEditNewPageUrl(ContentItem selected, ContentType definition)
 		{
 			if (selected == null) throw new ArgumentNullException("selected");
 			if (definition == null) throw new ArgumentNullException("definition");
@@ -121,7 +111,6 @@ namespace Zeus.Admin
 			Url url = new Url(EditItemUrl);
 			url = url.AppendQuery("selected", parent.Path);
 			url = url.AppendQuery("discriminator", definition.Discriminator);
-			url = url.AppendQuery("zoneName", zoneName);
 
 			return url.ToString();
 		}

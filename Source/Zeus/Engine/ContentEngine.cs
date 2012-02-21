@@ -35,11 +35,6 @@ namespace Zeus.Engine
 			get { return Resolve<IFinder>(); }
 		}
 
-		public IContentManager ContentManager
-		{
-			get { return Resolve<IContentManager>(); }
-		}
-
 		public IContentTypeManager ContentTypes
 		{
 			get { return Resolve<IContentTypeManager>(); }

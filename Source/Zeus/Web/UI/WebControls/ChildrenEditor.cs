@@ -195,10 +195,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private ContentItem CreateItem(Type itemType)
 		{
-			ContentItem item = Zeus.Context.Current.ContentTypes.CreateInstance(itemType, ParentItem);
-			/*if (item is WidgetContentItem)
-				((WidgetContentItem) item).ZoneName = ZoneName;*/
-			return item;
+			return Zeus.Context.Current.ContentTypes.CreateInstance(itemType, ParentItem);
 		}
 
 		private Window AddEditorWindow(ContentItem contentItem)

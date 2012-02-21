@@ -42,9 +42,8 @@ namespace Zeus.Admin.Plugins.Tree
 				//if (context.User.Identity.Name != "administrator")
 				//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
 				TreeNodeBase treeNode = tree.Filter(items => items
-						.Authorized(context.User, Context.SecurityManager, Operations.Read)
-						.Where(TreeMainInterfacePlugin.IsVisibleInTree)
-						.Where(ci => !(ci is WidgetContentItem)))
+					.Authorized(context.User, Context.SecurityManager, Operations.Read)
+					.Where(TreeMainInterfacePlugin.IsVisibleInTree))
 					.ToTreeNode(false);
 
 				if (treeNode is TreeNode)

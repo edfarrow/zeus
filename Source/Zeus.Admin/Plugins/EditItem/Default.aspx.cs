@@ -84,8 +84,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			{
 				ContentItem parentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(SelectedItem.Path);
 				ContentItem contentItem = Zeus.Context.Current.ContentTypes.CreateInstance(CurrentItemType, parentItem);
-				if (contentItem is WidgetContentItem)
-					((WidgetContentItem) contentItem).ZoneName = Page.Request["zoneName"];
 				e.AffectedItem = contentItem;
 			}
 		}

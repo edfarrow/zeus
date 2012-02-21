@@ -149,17 +149,6 @@
     <Compile Include="ContentTypes\ITagGroupContainer.cs" />
     <Compile Include="ContentTypes\RegistrationPage.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
-    <Compile Include="ContentTypes\BaseWidget.cs" />
-    <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Form.cs" />
-    <Compile Include="ContentTypes\Forms\FormPage.cs" />
-    <Compile Include="ContentTypes\Forms\IQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\MultipleSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Option.cs" />
-    <Compile Include="ContentTypes\Forms\OptionSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Question.cs" />
-    <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
     <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\ReferenceData\Currency.cs" />
     <Compile Include="ContentTypes\ReferenceData\CurrencyList.cs" />
@@ -169,21 +158,14 @@
     <Compile Include="ContentTypes\Tag.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\TagGroup.cs" />
-    <Compile Include="ContentTypes\Widgets\LoginWidget.cs" />
-    <Compile Include="ContentTypes\Widgets\TagCloud.cs" />
-    <Compile Include="ContentTypes\Widgets\FeedLink.cs" />
     <Compile Include="ContentTypes\Page.cs" />
     <Compile Include="ContentTypes\Redirect.cs" />
     <Compile Include="ContentTypes\RssFeed.cs" />
     <Compile Include="ContentTypes\Sitemap.cs" />
-    <Compile Include="ContentTypes\Widgets\TextItem.cs" />
-    <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Mvc\Controllers\LoginPageController.cs" />
     <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
-    <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageControllerBase.cs" />
-    <Compile Include="Mvc\Controllers\LoginWidgetController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageController.cs" />
     <Compile Include="Mvc\Feed.cs" />
     <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
@@ -194,8 +176,6 @@
     <Compile Include="Mvc\ViewModels\BaseLoginFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LoginPageFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LoginPageViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetConfirmationViewModel.cs" />
@@ -203,8 +183,6 @@
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\IConfirmPassword.cs" />
-    <Compile Include="Mvc\ViewModels\LoginWidgetFormViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\LoginWidgetViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PasswordConfirmMatchesPasswordAttribute.cs" />
     <Compile Include="Mvc\ViewModels\RegistrationPageConfirmationViewModel.cs" />
     <Compile Include="Mvc\ViewModels\RegistrationPageFormViewModel.cs" />
@@ -222,38 +200,27 @@
     <Compile Include="Services\IUserRegistrationService.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="TemplatesModule.cs" />
-    <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
-    <Compile Include="Mvc\Controllers\FormPageController.cs" />
     <Compile Include="Mvc\Controllers\PageController.cs" />
     <Compile Include="Mvc\Controllers\PageNavigationController.cs" />
     <Compile Include="Mvc\Controllers\RssFeedController.cs" />
     <Compile Include="Mvc\Controllers\SitemapController.cs" />
     <Compile Include="Mvc\Controllers\WebsiteNodeController.cs" />
-    <Compile Include="Mvc\Controllers\TagCloudController.cs" />
     <Compile Include="Mvc\Controllers\TagController.cs" />
     <Compile Include="Mvc\Controllers\TagGroupController.cs" />
-    <Compile Include="Mvc\Controllers\TextItemController.cs" />
-    <Compile Include="Mvc\Controllers\WidgetController.generic.cs" />
     <Compile Include="Mvc\Controllers\ZeusController.generic.cs" />
     <Compile Include="Mvc\Html\FileExtensions.cs" />
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Html\ImageExtensions.cs" />
     <Compile Include="Mvc\Html\NavigationExtensions.cs" />
     <Compile Include="Mvc\Html\ReferenceDataExtensions.cs" />
-    <Compile Include="Mvc\Html\WidgetExtensions.cs" />
-    <Compile Include="Mvc\Html\WidgetHelper.cs" />
     <Compile Include="Mvc\RssResult.cs" />
     <Compile Include="Mvc\TemplatesAreaRegistration.cs" />
-    <Compile Include="Mvc\ViewModels\FeedLinkViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\SitemapViewModel.cs" />
     <Compile Include="Mvc\ViewModels\WebsiteNodeViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\TagCloudViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TagGroupViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TagViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\TextItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeoUtility.cs" />
     <Compile Include="Services\CurrencyService.cs" />
@@ -266,7 +233,6 @@
     <Compile Include="Services\SeoDefinitionAppender.cs" />
     <Compile Include="Services\Syndication\SyndicatableDefinitionAppender.cs" />
     <Compile Include="Services\TagService.cs" />
-    <Compile Include="Services\TemplatesPartsAdapter.cs" />
     <Compile Include="Web\Routing\BBCodeRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -280,20 +246,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Views\FeedLink\Header.spark" />
-    <EmbeddedResource Include="Mvc\Views\FeedLink\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\Form\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\Form\Submit.spark" />
     <EmbeddedResource Include="Mvc\Views\Page\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Sitemap\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\WebsiteNode\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\TagCloud\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\TagGroup\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Tag\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\TextItem\Index.spark" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Views\LoginWidget\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\RegistrationPage\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\RegistrationPage\RegisterConfirmation.spark" />
     <EmbeddedResource Include="Mvc\Views\RegistrationPage\Verify.spark" />
@@ -324,9 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\ResetError.spark" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mvc\Views\FormPage\Index.spark" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Assets\markitup\jquery.markitup.js" />

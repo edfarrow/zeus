@@ -10,12 +10,5 @@ namespace Zeus.Configuration
 			get { return (ContentTypeRuleCollection)base["rules"]; }
 			set { base["rules"] = value; }
 		}
-
-		[ConfigurationProperty("settings")]
-		public ContentTypeSettingsCollection Settings
-		{
-			get { return (ContentTypeSettingsCollection)base["settings"]; }
-			set { base["settings"] = value; }
-		}
 	}
 }

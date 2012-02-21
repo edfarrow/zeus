@@ -30,15 +30,6 @@
 					</asp:ListView>
 				</Content>
 			</ext:Panel>
-			
-			<ext:Panel runat="server" ID="tbpZone" Title="Zone">
-				<Content>
-					<asp:Label ID="lblZone" runat="server" Text="Create new item in zone" />
-					<asp:RadioButtonList runat="server" ID="rblZone" CssClass="zones" DataTextField="Title" DataValueField="ZoneName" AutoPostBack="true" OnSelectedIndexChanged="rblZone_OnSelectedIndexChanged">
-						<asp:ListItem Value="" Selected="true">Default</asp:ListItem>
-					</asp:RadioButtonList>
-				</Content>
-			</ext:Panel>
 		</Items>
 	</ext:TabPanel>
 </asp:Content>

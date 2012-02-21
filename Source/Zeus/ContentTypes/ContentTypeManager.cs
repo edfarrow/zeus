@@ -112,11 +112,8 @@ namespace Zeus.ContentTypes
 			return null;
 		}
 
-		public IList<ContentType> GetAllowedChildren(ContentType contentType, string zone, IPrincipal user)
+		public IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user)
 		{
-			if (!contentType.HasZone(zone))
-				throw new ZeusException("The content type '{0}' does not allow a zone named '{1}'.", contentType.Title, zone);
-
 			List<ContentType> allowedChildren = new List<ContentType>();
 			foreach (ContentType childItem in contentType.AllowedChildren)
 			{
@@ -125,8 +122,6 @@ namespace Zeus.ContentTypes
 				if (!childItem.Enabled)
 					continue;
 				if (!childItem.IsAuthorized(user))
-					continue;
-				if (!childItem.IsAllowedInZone(zone))
 					continue;
 				allowedChildren.Add(childItem);
 			}

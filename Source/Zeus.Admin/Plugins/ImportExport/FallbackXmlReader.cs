@@ -137,8 +137,6 @@ namespace Zeus.Admin.Plugins.ImportExport
 			item.Title = attributes["title"];
 			item.Updated = Convert.ToDateTime(attributes["updated"]);
 			item.Visible = Convert.ToBoolean(attributes["visible"]);
-			if (!string.IsNullOrEmpty(attributes["zoneName"]))
-				((WidgetContentItem) item).ZoneName = attributes["zoneName"];
 		}
 
 		private static Dictionary<string, string> GetAttributes(XPathNavigator navigator)

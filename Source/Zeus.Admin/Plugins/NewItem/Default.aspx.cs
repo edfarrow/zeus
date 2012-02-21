@@ -13,7 +13,6 @@ namespace Zeus.Admin.Plugins.NewItem
 	public partial class Default : PreviewFrameAdminPage
 	{
 		private ContentType ParentItemDefinition = null;
-		private string ZoneName = null;
 
 		public ContentItem ActualItem
 		{
@@ -30,9 +29,6 @@ namespace Zeus.Admin.Plugins.NewItem
 			base.OnLoad(e);
 
 			ParentItemDefinition = Engine.ContentTypes.GetContentType(ActualItem.GetType());
-			if (!IsPostBack)
-				LoadZones();
-			ZoneName = rblZone.SelectedValue;
 		}
 
 		protected void Page_Load(object sender, EventArgs e)
@@ -40,25 +36,13 @@ namespace Zeus.Admin.Plugins.NewItem
 			ContentItem parentItem = SelectedItem;
 			IContentTypeManager manager = Zeus.Context.Current.Resolve<IContentTypeManager>();
 			ContentType contentType = manager.GetContentType(parentItem.GetType());
-			lsvChildTypes.DataSource = manager.GetAllowedChildren(contentType, Request.QueryString["zoneName"], User);
+			lsvChildTypes.DataSource = manager.GetAllowedChildren(contentType, User);
 			lsvChildTypes.DataBind();
 		}
 
 		protected string GetEditUrl(ContentType contentType)
 		{
-			return Engine.AdminManager.GetEditNewPageUrl(SelectedItem, contentType, ZoneName);
-		}
-
-		protected void rblPosition_OnSelectedIndexChanged(object sender, EventArgs e)
-		{
-			ParentItemDefinition = Engine.ContentTypes.GetContentType(ActualItem.GetType());
-			LoadZones();
-			ZoneName = rblZone.SelectedValue;
-		}
-
-		protected void rblZone_OnSelectedIndexChanged(object sender, EventArgs args)
-		{
-			ZoneName = rblZone.SelectedValue;
+			return Engine.AdminManager.GetEditNewPageUrl(SelectedItem, contentType);
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -71,7 +55,7 @@ namespace Zeus.Admin.Plugins.NewItem
 		private void LoadAllowedTypes()
 		{
 			int allowedChildrenCount = ParentItemDefinition.AllowedChildren.Count;
-			IList<ContentType> allowedChildren = Engine.ContentTypes.GetAllowedChildren(ParentItemDefinition, ZoneName, User);
+			IList<ContentType> allowedChildren = Engine.ContentTypes.GetAllowedChildren(ParentItemDefinition, User);
 
 			if (allowedChildrenCount == 0)
 			{
@@ -88,24 +72,6 @@ namespace Zeus.Admin.Plugins.NewItem
 				lsvChildTypes.DataSource = allowedChildren;
 				lsvChildTypes.DataBind();
 			}
-		}
-
-		private void LoadZones()
-		{
-			string selectedZone = rblZone.SelectedValue;
-			ListItem initialItem = rblZone.Items[0];
-
-			rblZone.Items.Clear();
-			rblZone.Items.Insert(0, initialItem);
-			foreach (AvailableZoneAttribute zone in ParentItemDefinition.AvailableZones)
-			{
-				string title = zone.Title;
-				rblZone.Items.Add(new ListItem(title, zone.ZoneName));
-			}
-
-			string z = IsPostBack ? selectedZone : Request.QueryString["zoneName"];
-			if (rblZone.Items.FindByValue(z) != null)
-				rblZone.SelectedValue = z;
 		}
 	}
 }

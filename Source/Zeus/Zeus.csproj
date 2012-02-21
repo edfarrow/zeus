@@ -209,8 +209,6 @@
     <Compile Include="Configuration\AuthorizationSection.cs" />
     <Compile Include="Configuration\AuthorizedRoleCollection.cs" />
     <Compile Include="Configuration\AuthorizedRoleElement.cs" />
-    <Compile Include="Configuration\ContentTypeSettingsElement.cs" />
-    <Compile Include="Configuration\ContentTypeSettingsCollection.cs" />
     <Compile Include="Configuration\CustomUrlsMandatoryStringsCollection.cs" />
     <Compile Include="Configuration\CustomUrlsMandatoryStringsElement.cs" />
     <Compile Include="Configuration\CustomUrlsRapidCheckCollection.cs" />
@@ -229,8 +227,6 @@
     <Compile Include="Configuration\ContentTypeRule.cs" />
     <Compile Include="Configuration\ContentTypeRuleAction.cs" />
     <Compile Include="Configuration\ContentTypeRuleCollection.cs" />
-    <Compile Include="Configuration\ContentTypeZone.cs" />
-    <Compile Include="Configuration\ContentTypeZoneCollection.cs" />
     <Compile Include="Configuration\TreeElement.cs" />
     <Compile Include="Configuration\DynamicContentControl.cs" />
     <Compile Include="Configuration\DynamicContentControlCollection.cs" />
@@ -242,7 +238,6 @@
     <Compile Include="Configuration\SiteElement.cs" />
     <Compile Include="Configuration\SiteElementCollection.cs" />
     <Compile Include="Configuration\UserElement.cs" />
-    <Compile Include="ContentManager.cs" />
     <Compile Include="ContentProperties\BasePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
     <Compile Include="ContentProperties\TimeSpanProperty.cs" />
@@ -307,7 +302,6 @@
     <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
-    <Compile Include="IContentManager.cs" />
     <Compile Include="Net\Mail\FakeMailSender.cs" />
     <Compile Include="Net\Mail\MailSender.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -341,7 +335,6 @@
     <Compile Include="Web\Mvc\CustomDataAnnotationsModelMetadataProvider.cs" />
     <Compile Include="Web\Mvc\Descriptors\MobileDeviceDescriptorFilter.cs" />
     <Compile Include="Web\Mvc\HideSurroundingChromeAttribute.cs" />
-    <Compile Include="Web\Mvc\Html\BaseWidgetHelper.cs" />
     <Compile Include="Web\Mvc\Html\DisplayExtensions.cs" />
     <Compile Include="Web\Mvc\Html\DisplayHelper.cs" />
     <Compile Include="Web\Mvc\Html\HtmlHelperExtensions.cs" />
@@ -352,8 +345,6 @@
     <Compile Include="Web\Mvc\Html\StringExtensions.cs" />
     <Compile Include="Web\Mvc\Html\TemplateRenderer.cs" />
     <Compile Include="Web\Mvc\Html\ValidationExtensions.cs" />
-    <Compile Include="Web\Mvc\Html\ZoneExtensions.cs" />
-    <Compile Include="Web\Mvc\Html\ZoneHelper.cs" />
     <Compile Include="Web\Mvc\IContentItemContainer.generic.cs" />
     <Compile Include="Web\Mvc\IControllerMapper.cs" />
     <Compile Include="Web\Mvc\ModelStateDictionaryExtensions.cs" />
@@ -425,7 +416,6 @@
     <Compile Include="Web\UI\WebControls\TypedTemplateField.cs" />
     <Compile Include="Web\UI\WebControls\TypedTemplateFieldControlBuilder.cs" />
     <Compile Include="Web\UI\WebControls\TypedTemplateFieldFakeType.cs" />
-    <Compile Include="Web\WidgetContentItem.cs" />
     <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
@@ -502,7 +492,6 @@
     <Compile Include="Web\IHost.cs" />
     <Compile Include="Web\IPermanentLinkManager.cs" />
     <Compile Include="Web\MultipleSitesUrlParser.cs" />
-    <Compile Include="Web\Parts\PartsAdapter.cs" />
     <Compile Include="Web\PathDictionary.cs" />
     <Compile Include="Web\PermanentLinkManager.cs" />
     <Compile Include="Web\RequestAdapter.cs" />
@@ -562,7 +551,6 @@
     <Compile Include="Engine\EventBroker.cs" />
     <Compile Include="Engine\IPluginFinder.cs" />
     <Compile Include="Engine\PluginFinder.cs" />
-    <Compile Include="Integrity\AllowedZones.cs" />
     <Compile Include="Integrity\CannotDeleteRootException.cs" />
     <Compile Include="Integrity\DestinationOnOrBelowItselfException.cs" />
     <Compile Include="Integrity\IIntegrityEnforcer.cs" />
@@ -628,8 +616,6 @@
     <Compile Include="INode.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />
-    <Compile Include="Integrity\AllowedZonesAttribute.cs" />
-    <Compile Include="Integrity\AvailableZoneAttribute.cs" />
     <Compile Include="Integrity\IIntegrityManager.cs" />
     <Compile Include="Integrity\IntegrityManager.cs" />
     <Compile Include="Integrity\NameOccupiedException.cs" />

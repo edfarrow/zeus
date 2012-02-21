@@ -87,8 +87,6 @@ namespace Zeus.Serialization
 			item.Title = attributes["title"];
 			item.Updated = ToNullableDateTime(attributes["updated"]).Value;
 			item.Visible = Convert.ToBoolean(attributes["visible"]);
-			if (attributes.ContainsKey("zoneName"))
-				((WidgetContentItem) item).ZoneName = attributes["zoneName"];
 			HandleParentRelation(item, attributes["parent"], journal);
 		}
 
