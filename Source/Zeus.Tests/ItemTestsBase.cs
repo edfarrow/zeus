@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using MongoDB.Bson;
 using NUnit.Framework;
+using Ormongo;
 using Rhino.Mocks;
 using Zeus.Tests.Fakes;
 using Zeus.Web;
@@ -24,6 +25,7 @@ namespace Zeus.Tests
 		[TearDown]
 		public virtual void TearDown()
 		{
+			OrmongoConfiguration.DropAllCollections();
 			if (mocks != null)
 			{
 				mocks.ReplayAll();
@@ -35,10 +37,10 @@ namespace Zeus.Tests
 			where T : ContentItem
 		{
 			T item = (T)Activator.CreateInstance(typeof(T), true);
-			item.ID = ObjectId.GenerateNewId();
 			item.Name = name;
 			item.Title = name;
 			item.AddTo(parent);
+			item.Save();
 			return item;
 		}
 

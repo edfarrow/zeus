@@ -1017,6 +1017,7 @@
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\validate.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ObjectModel\" />
     <Folder Include="Web\Resources\TinyMCE\plugins\autosave\images\" />
     <Folder Include="Web\Resources\TinyMCE\plugins\spellchecker\classes\utils\" />
     <Folder Include="Web\Resources\TinyMCE\plugins\spellchecker\includes\" />

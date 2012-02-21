@@ -347,10 +347,14 @@ namespace Zeus.Tests.Integrity
 		[Test]
 		public void LocallyUniqueItemThatWithoutNameYet()
 		{
-			StartPage startPage = CreateOneItem<StartPage>("start", null);
+			//StartPage startPage = CreateOneItem<StartPage>("start", null);
 
-			Page page2 = CreateOneItem<Page>(null, startPage);
-			Page page3 = CreateOneItem<Page>("Sasha", startPage);
+			//Page page2 = CreateOneItem<Page>(null, startPage);
+			//Page page3 = CreateOneItem<Page>("Sasha", startPage);
+			var startPage = ContentItem.Create(new StartPage { Name = "start" });
+
+			var page2 = ContentItem.Create(new Page { Name = null, Parent = startPage });
+			var page3 = ContentItem.Create(new Page { Name = "Sasha", Parent = startPage });
 
 			bool isUnique = integrityManger.IsLocallyUnique("Sasha", page2);
 			Assert.IsFalse(isUnique, "Shouldn't have been locally unique.");

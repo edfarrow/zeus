@@ -118,6 +118,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ContentItemTests.cs" />
     <Compile Include="Definitions\DefinitionTests.cs" />
     <Compile Include="Definitions\Items\TestTextPage.cs" />
     <Compile Include="Fakes\StaticContextAccessor.cs" />

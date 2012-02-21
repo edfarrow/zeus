@@ -23,11 +23,11 @@ namespace Zeus
 {
     [RestrictParents(typeof(ContentItem))]
     [System.Serializable]
-    public abstract class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode, IEditableObject
+    public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode, IEditableObject
 	{
 		#region Private Fields
 
-		private IList<AuthorizationRule> _authorizationRules;
+		private List<AuthorizationRule> _authorizationRules;
         private string _name;
         private DateTime? _expires;
         private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
@@ -180,15 +180,10 @@ namespace Zeus
         #endregion
 
         /// <summary>Gets an array of roles allowed to read this item. Null or empty list is interpreted as this item has no access restrictions (anyone may read).</summary>
-        public virtual IList<AuthorizationRule> AuthorizationRules
+        public virtual List<AuthorizationRule> AuthorizationRules
         {
-            get
-            {
-                if (_authorizationRules == null)
-                    _authorizationRules = new List<AuthorizationRule>();
-                return _authorizationRules;
-            }
-            set { _authorizationRules = value; }
+            get { return _authorizationRules ?? (_authorizationRules = new List<AuthorizationRule>()); }
+        	set { _authorizationRules = value; }
         }
 
         #region this[]
@@ -400,38 +395,8 @@ namespace Zeus
         /// <param name="newParent">The new parent of the item. If this parameter is null the item is detached from the hierarchical structure.</param>
         public virtual void AddTo(ContentItem newParent)
         {
-			// TODO: Don't think this is necessary, but not sure.
-			//if (Parent != null && Parent != newParent && Parent.Children.Contains(this))
-			//    Parent.Children.Remove(this);
-
-            Parent = newParent;
-
-            if (newParent != null && !newParent.Children.Contains(this))
-            {
-                var siblings = newParent.Children.ToList();
-                if (siblings.Count > 0)
-                {
-                    int lastOrder = siblings[siblings.Count - 1].SortOrder;
-
-                    for (int i = siblings.Count - 2; i >= 0; i--)
-                    {
-                        if (siblings[i].SortOrder < lastOrder - SORT_ORDER_THRESHOLD)
-                        {
-                            siblings.Insert(i + 1, this);
-                            return;
-                        }
-                        lastOrder = siblings[i].SortOrder;
-                    }
-
-                    if (lastOrder > SORT_ORDER_THRESHOLD)
-                    {
-                        siblings.Insert(0, this);
-                        return;
-                    }
-                }
-
-                siblings.Add(this);
-            }
+			// TODO: Can remove this method, use property directly.
+			Parent = newParent;
         }
 
 		/// <summary>Creats a copy of this item including details, authorization rules, while resetting ID.</summary>

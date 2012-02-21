@@ -45,14 +45,18 @@ namespace Zeus.BaseLibrary.DependencyInjection
 			try
 			{
 				// Get all DLLS in bin folder.
-				IEnumerable<string> files = Directory.GetFiles(Path.GetDirectoryName(HttpRuntime.BinDirectory), "*.dll");
+				// TODO: Remove this hack.
+				string directory = (HttpContext.Current != null)
+					? Path.GetDirectoryName(HttpRuntime.BinDirectory)
+					: AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+				IEnumerable<string> files = Directory.GetFiles(directory, "*.dll");
 
-				// Load modules in Zeus DLLs first.
+				//// Load modules in Zeus DLLs first.
 				_kernel.Load(FindAssemblies(files.Where(s => Path.GetFileName(s).StartsWith("Zeus."))));
 
-				// Then load non-Zeus DLLs - this gives projects a chance to override Zeus modules.
-				// Actually we just load all DLLs, because DLLs that have already been loaded
-				// won't get loaded again.
+				//// Then load non-Zeus DLLs - this gives projects a chance to override Zeus modules.
+				//// Actually we just load all DLLs, because DLLs that have already been loaded
+				//// won't get loaded again.
 				_kernel.Load(FindAssemblies(files.Where(s => !Path.GetFileName(s).StartsWith("Zeus."))));
 			}
 			catch (TypeLoadException)
