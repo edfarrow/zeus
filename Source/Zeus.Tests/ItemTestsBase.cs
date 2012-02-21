@@ -2,26 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Security.Principal;
 using MongoDB.Bson;
+using NUnit.Framework;
 using Rhino.Mocks;
 using Zeus.Tests.Fakes;
 using Zeus.Web;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Zeus.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public abstract class ItemTestsBase
 	{
 		protected MockRepository mocks;
 
-		[TestInitialize]
+		[SetUp]
 		public virtual void SetUp()
 		{
 			RequestItem.Accessor = new StaticContextAccessor();
 			mocks = new MockRepository();
 		}
 
-		[TestCleanup]
+		[TearDown]
 		public virtual void TearDown()
 		{
 			if (mocks != null)
