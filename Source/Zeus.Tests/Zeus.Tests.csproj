@@ -89,6 +89,9 @@
     <Reference Include="Ormongo.Ancestry">
       <HintPath>..\..\Libraries\Ormongo\Ormongo.Ancestry.dll</HintPath>
     </Reference>
+    <Reference Include="Ormongo.TestHelper">
+      <HintPath>..\..\Libraries\Ormongo\Ormongo.TestHelper.dll</HintPath>
+    </Reference>
     <Reference Include="pnunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
@@ -126,6 +129,7 @@
     <Compile Include="Integrity\ContentTypes\SubPage.cs" />
     <Compile Include="Integrity\IntegrityTests.cs" />
     <Compile Include="ItemTestsBase.cs" />
+    <Compile Include="MongoTestServerSetup.cs" />
     <Compile Include="Persistence\Specifications\SpecificationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityUtilities.cs" />
