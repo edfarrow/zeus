@@ -1,5 +1,4 @@
 using System;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
@@ -17,11 +16,6 @@ namespace Zeus.ContentProperties
 		public string Title { get; set; }
 
 		public Type PropertyType { get; set; }
-
-		public IDisplayer GetDefaultDisplayer()
-		{
-			throw new NotImplementedException();
-		}
 
 		public IEditor GetDefaultEditor()
 		{

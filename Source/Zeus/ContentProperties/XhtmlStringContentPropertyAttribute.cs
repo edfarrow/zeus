@@ -1,5 +1,4 @@
 using System;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties

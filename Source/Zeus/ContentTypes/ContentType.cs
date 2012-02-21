@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using Zeus.ContentProperties;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
-using Zeus.Integrity;
 using Zeus.Web;
 
 namespace Zeus.ContentTypes
@@ -84,8 +82,6 @@ namespace Zeus.ContentTypes
 
 		public IList<IEditor> Editors { get; internal set; }
 
-		public IEnumerable<IDisplayer> Displayers { get; internal set; }
-
 		public IEditorContainer RootContainer { get; set; }
 
 		public IList<IEditorContainer> Containers { get; internal set; }
@@ -139,19 +135,6 @@ namespace Zeus.ContentTypes
 				return Context.Current.Resolve<IContentPropertyManager>().CreateProperty(name, value.GetType());
 			}
 			return property;
-		}
-
-		public IDisplayer GetDisplayer(string propertyName)
-		{
-			IDisplayer displayer = Displayers.SingleOrDefault(d => d.Name == propertyName);
-			if (displayer != null)
-				return displayer;
-
-			IContentProperty property = Properties.SingleOrDefault(p => p.Name == propertyName);
-			if (property != null)
-				return property.GetDefaultDisplayer();
-
-			return null;
 		}
 
 		/// <summary>Gets editable attributes available to user.</summary>

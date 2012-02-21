@@ -4,7 +4,6 @@ using Rhino.Mocks.Interfaces;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Persistence;
@@ -38,8 +37,8 @@ namespace Zeus.Tests.Integrity
 			parser = mocks.StrictMock<IUrlParser>();
 
 			ITypeFinder typeFinder = CreateTypeFinder();
-			ContentTypeBuilder builder = new ContentTypeBuilder(typeFinder, new EditableHierarchyBuilder<IEditor>(),
-				new AttributeExplorer<IDisplayer>(), new AttributeExplorer<IEditor>(),
+			ContentTypeBuilder builder = new ContentTypeBuilder(typeFinder, 
+				new EditableHierarchyBuilder<IEditor>(), new AttributeExplorer<IEditor>(),
 				new AttributeExplorer<IContentProperty>(), new AttributeExplorer<IEditorContainer>());
 			IItemNotifier notifier = mocks.DynamicMock<IItemNotifier>();
 			mocks.Replay(notifier);

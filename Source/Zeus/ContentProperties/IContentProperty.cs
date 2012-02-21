@@ -1,6 +1,5 @@
 using System;
 using Zeus.ContentTypes;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
@@ -10,7 +9,6 @@ namespace Zeus.ContentProperties
 		int SortOrder { get; set; }
 		string Title { get; set; }
 
-		IDisplayer GetDefaultDisplayer();
 		IEditor GetDefaultEditor();
 
 		PropertyData CreatePropertyData(ContentItem enclosingItem, object value);

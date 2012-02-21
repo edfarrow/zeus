@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.ContentProperties;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentTypes
@@ -15,7 +14,6 @@ namespace Zeus.ContentTypes
 		private readonly ITypeFinder _typeFinder;
 		private readonly IEditableHierarchyBuilder<IEditor> _hierarchyBuilder;
 		private readonly AttributeExplorer<IEditor> _editableExplorer;
-		private readonly AttributeExplorer<IDisplayer> _displayableExplorer;
 		private readonly AttributeExplorer<IContentProperty> _propertyExplorer;
 		private readonly AttributeExplorer<IEditorContainer> _containableExplorer;
 
@@ -23,14 +21,15 @@ namespace Zeus.ContentTypes
 
 		#region Constructor
 
-		public ContentTypeBuilder(ITypeFinder typeFinder, IEditableHierarchyBuilder<IEditor> hierarchyBuilder,
-			AttributeExplorer<IDisplayer> displayableExplorer, AttributeExplorer<IEditor> editableExplorer,
-			AttributeExplorer<IContentProperty> propertyExplorer, AttributeExplorer<IEditorContainer> containableExplorer)
+		public ContentTypeBuilder(ITypeFinder typeFinder, 
+			IEditableHierarchyBuilder<IEditor> hierarchyBuilder,
+			AttributeExplorer<IEditor> editableExplorer,
+			AttributeExplorer<IContentProperty> propertyExplorer,
+			AttributeExplorer<IEditorContainer> containableExplorer)
 		{
 			_typeFinder = typeFinder;
 			_hierarchyBuilder = hierarchyBuilder;
 			_editableExplorer = editableExplorer;
-			_displayableExplorer = displayableExplorer;
 			_propertyExplorer = propertyExplorer;
 			_containableExplorer = containableExplorer;
 		}
@@ -86,7 +85,6 @@ namespace Zeus.ContentTypes
 				editors.Sort();
 				itemDefinition.Editors = editors;
 
-				itemDefinition.Displayers = _displayableExplorer.Find(itemDefinition.ItemType);
 				itemDefinition.Containers = _containableExplorer.Find(itemDefinition.ItemType);
 
 				itemDefinition.RootContainer = _hierarchyBuilder.Build(itemDefinition.Containers, editors);

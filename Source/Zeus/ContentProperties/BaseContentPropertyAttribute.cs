@@ -1,5 +1,4 @@
 using System;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
@@ -18,11 +17,6 @@ namespace Zeus.ContentProperties
 
 		public int SortOrder { get; set; }
 		public string Title { get; set; }
-
-		public virtual IDisplayer GetDefaultDisplayer()
-		{
-			return new LiteralDisplayerAttribute { Title = Title, Name = Name };
-		}
 
 		public virtual IEditor GetDefaultEditor()
 		{

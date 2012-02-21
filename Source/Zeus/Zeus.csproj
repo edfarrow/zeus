@@ -292,7 +292,6 @@
     <Compile Include="Design\Editors\FileUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\StringCollectionEditorAttribute.cs" />
-    <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
     <Compile Include="Net\Mail\FakeMailSender.cs" />
@@ -521,18 +520,15 @@
     <Compile Include="Design\Editors\ChildrenEditorAttribute.cs" />
     <Compile Include="Design\Editors\ColourEditorAttribute.cs" />
     <Compile Include="Design\Editors\CheckBoxListEditorAttribute.cs" />
-    <Compile Include="Design\Displayers\ColourDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\BaseDetailCollectionEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiFileUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\TimeEditorAttribute.cs" />
     <Compile Include="Design\Editors\ListBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\ListEditorAttribute.cs" />
     <Compile Include="Design\Editors\EnumEditorAttribute.cs" />
-    <Compile Include="Design\Displayers\DateDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\DateEditorAttribute.cs" />
     <Compile Include="DestinationEventArgs.cs" />
     <Compile Include="Design\Editors\DropDownListEditorAttribute.cs" />
-    <Compile Include="Design\Displayers\DisplayerAttribute.cs" />
     <Compile Include="Design\Editors\LinkedItemsEditorAttribute.cs" />
     <Compile Include="Engine\EventBroker.cs" />
     <Compile Include="Engine\IPluginFinder.cs" />
@@ -571,10 +567,8 @@
     <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
     <Compile Include="Web\UI\WebControls\TimePicker.cs" />
     <Compile Include="Web\UI\WebControls\HtmlTextBox.cs" />
-    <Compile Include="Design\Displayers\IDisplayer.cs" />
     <Compile Include="Design\Editors\LinkedItemDropDownListEditorAttribute.cs" />
     <Compile Include="Design\Editors\LinkedItemsCheckBoxListEditorAttribute.cs" />
-    <Compile Include="Design\Displayers\LiteralDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\NameEditorAttribute.cs" />
     <Compile Include="Design\Editors\TimeRangeEditorAttribute.cs" />
     <Compile Include="ContentTypes\RootEditorContainer.cs" />

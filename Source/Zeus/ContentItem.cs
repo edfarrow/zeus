@@ -687,7 +687,7 @@ namespace Zeus
             {
                 if (IsPage)
                     return Url;
-                return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.View.aspx") + "?selected=" + Path;
+            	throw new NotSupportedException();
             }
         }
 

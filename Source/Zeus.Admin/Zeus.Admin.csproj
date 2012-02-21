@@ -241,13 +241,6 @@
     </Compile>
     <Compile Include="Plugins\ContextMenu\ContextMenuPluginInitializer.cs" />
     <Compile Include="Plugins\ContextMenu\ContextMenuTreePlugin.cs" />
-    <Compile Include="View.aspx.cs">
-      <DependentUpon>View.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View.aspx.designer.cs">
-      <DependentUpon>View.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\CopyItem\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -367,7 +360,6 @@
     <EmbeddedResource Include="Assets\Css\globalization.css" />
     <EmbeddedResource Include="Assets\Css\new.css" />
     <EmbeddedResource Include="AffectedItems.ascx" />
-    <EmbeddedResource Include="View.aspx" />
     <EmbeddedResource Include="Plugins\Permissions\Default.aspx" />
     <EmbeddedResource Include="Plugins\Children\Default.aspx" />
     <EmbeddedResource Include="Plugins\DeleteItem\DeleteUserControl.ascx" />
