@@ -2,6 +2,7 @@
 using System.Text;
 using Ext.Net;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Ormongo;
 using Ormongo.Ancestry;
 using Zeus.Admin;
@@ -23,6 +24,7 @@ namespace Zeus
 {
     [RestrictParents(typeof(ContentItem))]
     [System.Serializable]
+	[BsonDiscriminator(RootClass = true)]
     public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode, IEditableObject
 	{
 		#region Private Fields
@@ -577,24 +579,6 @@ namespace Zeus
         		if (child.Equals(childName))
 					return child;
         	return null;
-        }
-
-    	public override bool Equals(object obj)
-        {
-            if (this == obj) return true;
-            if ((obj == null) || (obj.GetType() != GetType())) return false;
-            ContentItem item = obj as ContentItem;
-            if (!IsNewRecord && !item.IsNewRecord)
-                return ID == item.ID;
-            else
-                return ReferenceEquals(this, item);
-        }
-
-        /// <summary>Gets a hash code based on the item's id.</summary>
-        /// <returns>A hash code.</returns>
-        public override int GetHashCode()
-        {
-            return this.ID.GetHashCode();
         }
 
         protected virtual bool Equals(string name)

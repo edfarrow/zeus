@@ -274,6 +274,7 @@
     <Compile Include="Persistence\Finder.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
     <Compile Include="Persistence\IFinder.cs" />
+    <Compile Include="Persistence\MappingInitializer.cs" />
     <Compile Include="Web\ContentPropertyAttribute.cs" />
     <Compile Include="ContentProperties\PropertyData.cs" />
     <Compile Include="ContentProperties\PropertyDataType.cs" />
@@ -1017,7 +1018,6 @@
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\validate.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ObjectModel\" />
     <Folder Include="Web\Resources\TinyMCE\plugins\autosave\images\" />
     <Folder Include="Web\Resources\TinyMCE\plugins\spellchecker\classes\utils\" />
     <Folder Include="Web\Resources\TinyMCE\plugins\spellchecker\includes\" />

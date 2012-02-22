@@ -32,19 +32,20 @@ namespace Zeus.Web.Security.Items
 		/// <param name="roleName">The role to add.</param>
 		public virtual void AddRole(string roleName)
 		{
-			Role existingRole = Children.Cast<Role>().SingleOrDefault(ci => ci.Name == roleName);
+			Role existingRole = Children.OfType<Role>().SingleOrDefault(ci => ci.Name == roleName);
 			if (existingRole != null)
 				return;
 
 			Role role = new Role { Name = roleName };
 			role.AddTo(this);
+			role.Save();
 		}
 
 		/// <summary>Removes a role if existing.</summary>
 		/// <param name="roleName">The role to remove.</param>
 		public virtual void RemoveRole(string roleName)
 		{
-			Role role = Children.Cast<Role>().SingleOrDefault(ci => ci.Name == roleName);
+			Role role = Children.OfType<Role>().SingleOrDefault(ci => ci.Name == roleName);
 			if (role != null)
 				role.Parent = null;
 		}

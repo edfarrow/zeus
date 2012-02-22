@@ -132,17 +132,17 @@ namespace Zeus.Tests.Integrity
 		[Test]
 		public void CannotMoveItemBelowItself()
 		{
-			Page page = new Page();
-			Page page2 = CreateOneItem<Page>("Rutger", page);
+			var page1 = ContentItem.Create(new Page());
+			var page2 = CreateOneItem<Page>("Rutger", page1);
 
-			bool canMove = integrityManger.CanMove(page, page2);
+			bool canMove = integrityManger.CanMove(page1, page2);
 			Assert.IsFalse(canMove, "The page could be moved below itself.");
 		}
 
 		[Test, ExpectedException(typeof(DestinationOnOrBelowItselfException))]
 		public void CannotMoveItemBelowItselfEvent()
 		{
-			Page page = new Page();
+			var page = ContentItem.Create(new Page());
 			Page page2 = CreateOneItem<Page>("Rutger", page);
 
 			moving.Raise(persister, new CancelDestinationEventArgs(page, page2));

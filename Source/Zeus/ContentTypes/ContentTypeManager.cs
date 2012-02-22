@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using Ormongo.Internal.Proxying;
 using Zeus.Persistence;
 using Zeus.Security;
 
@@ -107,6 +108,7 @@ namespace Zeus.ContentTypes
 
 		public ContentType GetContentType(Type type)
 		{
+			type = ProxyManager.GetUnderlyingType(type);
 			if (_definitions.ContainsKey(type))
 				return _definitions[type];
 			return null;

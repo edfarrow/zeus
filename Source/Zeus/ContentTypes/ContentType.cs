@@ -54,7 +54,7 @@ namespace Zeus.ContentTypes
         {
             get
             {
-                if (Activator.CreateInstance(ItemType) is PageContentItem)
+                if (typeof(PageContentItem).IsAssignableFrom(ItemType))
                     return ((PageContentItem)Activator.CreateInstance(ItemType)).UseProgrammableSEOAssets;
                 else
                     return false;
@@ -63,7 +63,7 @@ namespace Zeus.ContentTypes
         public string IgnoreSEOExplanation {
             get
             {
-                if (Activator.CreateInstance(ItemType) is PageContentItem)
+				if (typeof(PageContentItem).IsAssignableFrom(ItemType))
                     return ((PageContentItem)Activator.CreateInstance(ItemType)).UseProgrammableSEOAssetsExplanation;
                 else
                     return string.Empty;

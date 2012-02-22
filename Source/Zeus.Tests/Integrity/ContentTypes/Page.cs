@@ -12,7 +12,7 @@ namespace Zeus.Tests.Integrity.ContentTypes
 		[PropertyAuthorizedRoles("ACertainGroup")]
 		public virtual string MyProperty
 		{
-			get { return (string)(GetDetail("MyProperty") ?? ""); }
+			get { return (string)(GetDetail("MyProperty") ?? null); }
 			set { SetDetail("MyProperty", value); }
 		}
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using MongoDB.Bson.Serialization;
 using Ormongo;
 using Zeus.Admin;
 using Zeus.BaseLibrary.DependencyInjection;

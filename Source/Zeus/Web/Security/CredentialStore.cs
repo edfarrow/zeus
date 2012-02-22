@@ -183,15 +183,18 @@ namespace Zeus.Web.Security
 		private SecurityContainer CreateSecurityContainer(ContentItem parent)
 		{
 			SecurityContainer security = Context.ContentTypes.CreateInstance<SecurityContainer>(parent);
+			security.Save();
 
 			RoleContainer roles = Context.ContentTypes.CreateInstance<RoleContainer>(security);
 			roles.AddTo(security);
+			roles.Save();
 
 			foreach (string role in DefaultRoles)
 				roles.AddRole(role);
 
 			UserContainer users = Context.ContentTypes.CreateInstance<UserContainer>(security);
 			users.AddTo(security);
+			users.Save();
 
 			_persister.Save(security);
 			return security;

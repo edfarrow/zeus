@@ -15,27 +15,15 @@ namespace Zeus.Web
 		}
 
 		[ContentProperty("404 Page", 25, Description = "This page will be used if a user requests a page that does not exist.")]
-		public virtual PageContentItem PageNotFoundPage
-		{
-			get { return GetDetail<PageContentItem>("PageNotFoundPage", null); }
-			set { SetDetail("PageNotFoundPage", value); }
-		}
+		public virtual PageContentItem PageNotFoundPage { get; set; }
 
 		#region Implementation of ILoginContext
 
 		[ContentProperty("Login Page", 30, Description = "This page will be used if a user requests a page that they do not have access to.")]
-		public virtual PageContentItem LoginPage
-		{
-			get { return GetDetail<PageContentItem>("LoginPage", null); }
-			set { SetDetail("LoginPage", value); }
-		}
+		public virtual PageContentItem LoginPage { get; set; }
 
-        [ContentProperty("Forgotten Password Page", 40, Description = "This page will be pointed to from any 'Lost your details' links.")]
-        public virtual PageContentItem ForgottenPasswordPage
-        {
-            get { return GetDetail<PageContentItem>("ForgottenPasswordPage", null); }
-            set { SetDetail("ForgottenPasswordPage", value); }
-        }
+		[ContentProperty("Forgotten Password Page", 40, Description = "This page will be pointed to from any 'Lost your details' links.")]
+		public virtual PageContentItem ForgottenPasswordPage { get; set; }
 
 		public string LoginUrl
 		{
