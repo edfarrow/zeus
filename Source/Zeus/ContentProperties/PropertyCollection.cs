@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
+using Ormongo;
 using Zeus.ContentTypes;
 
 namespace Zeus.ContentProperties
 {
-	public class PropertyCollection : IEnumerable<object>, IList, ICloneable, IUniquelyNamed
+	public class PropertyCollection : EmbeddedDocument<ContentItem>, IEnumerable<object>, IList, ICloneable, IUniquelyNamed
 	{
 		#region Private fields
 
@@ -30,6 +32,7 @@ namespace Zeus.ContentProperties
 		}
 
 		/// <summary>Gets or sets the the item containing this collection.</summary>
+		[BsonIgnore]
 		public virtual ContentItem EnclosingItem
 		{
 			get { return _enclosingItem; }

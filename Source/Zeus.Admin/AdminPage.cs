@@ -63,7 +63,7 @@ jQuery(document).ready(function() {{
 
 		private ObjectId SelectedItemID
 		{
-			get { return (ObjectId)(ViewState["SelectedItemID"] ?? 0); }
+			get { return (ObjectId)(ViewState["SelectedItemID"] ?? ObjectId.Empty); }
 			set { ViewState["SelectedItemID"] = value; }
 		}
 

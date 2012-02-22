@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
+using Ormongo;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;
@@ -7,7 +9,7 @@ using Zeus.FileSystem.Images;
 
 namespace Zeus.ContentProperties
 {
-	public abstract class PropertyData : ICloneable, IUniquelyNamed
+	public abstract class PropertyData : EmbeddedDocument<ContentItem>, ICloneable, IUniquelyNamed
 	{
 		#region Private fields
 
@@ -60,6 +62,7 @@ namespace Zeus.ContentProperties
 		}
 
 		/// <summary>Gets or sets the content item that this detail belong to.</summary>
+		[BsonIgnore]
 		public virtual ContentItem EnclosingItem
 		{
 			get { return _enclosingItem; }
@@ -72,6 +75,7 @@ namespace Zeus.ContentProperties
 		}
 
 		/// <summary>Gets or sets the <see cref="Zeus.Details.DetailCollection"/> associated with this detail. This value can be null which means it's a named detail directly on the item.</summary>
+		[BsonIgnore]
 		public virtual PropertyCollection EnclosingCollection { get; set; }
 
 		#endregion
