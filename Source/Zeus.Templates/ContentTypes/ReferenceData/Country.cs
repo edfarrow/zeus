@@ -1,4 +1,5 @@
 ﻿using Ext.Net;
+using MongoDB.Bson.Serialization.Attributes;
 using Zeus.BaseLibrary;
 using Zeus.Integrity;
 using Zeus.Design.Editors;
@@ -35,35 +36,14 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 		}
 
 		[TextBoxEditor("CountryCode", 20, Required = false)]
-		public string CountryCode
-		{
-			get { return GetDetail<string>("CountryCode", null); }
-			set { SetDetail("CountryCode", value); }
-		}
+		public string CountryCode { get; set; }
 
-		public string Numeric
-		{
-			get { return GetDetail<string>("Numeric", null); }
-			set { SetDetail("Numeric", value); }
-		}
+		public string Numeric { get; set; }
+		public string Alpha2 { get; set; }
+		public string Alpha3 { get; set; }
 
-		public string Alpha2
-		{
-			get { return GetDetail<string>("Alpha2", null); }
-			set { SetDetail("Alpha2", value); }
-		}
-
-		public string Alpha3
-		{
-			get { return GetDetail<string>("Alpha3", null); }
-			set { SetDetail("Alpha3", value); }
-		}
-
-		public Icon FlagIcon
-		{
-			get { return GetDetail("FlagIcon", Icon.Map); }
-			set { SetDetail("FlagIcon", value); }
-		}
+		[BsonDefaultValue(Icon.Map)]
+		public Icon FlagIcon { get; set; }
 
 		public override string IconUrl
 		{

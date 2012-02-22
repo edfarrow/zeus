@@ -65,7 +65,7 @@ namespace Zeus.Web.UI.WebControls
             }
 		}
 
-		public IEditableObject Save(ContentItem item)
+		public ContentItem Save(ContentItem item)
 		{
 			EnsureChildControls();
 
@@ -79,7 +79,7 @@ namespace Zeus.Web.UI.WebControls
 
 		/// <summary>Saves <see cref="CurrentItem"/> with the values entered in the form.</summary>
 		/// <returns>The saved item.</returns>
-		public IEditableObject Save()
+		public ContentItem Save()
 		{
 			CurrentItem = Save((ContentItem) CurrentItem);
 			return CurrentItem;

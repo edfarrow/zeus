@@ -1,5 +1,6 @@
 ﻿using Ext.Net;
 using Zeus.ContentTypes;
+using Zeus.Design.Editors;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes.ReferenceData
@@ -19,12 +20,8 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			get { return Utility.GetCooliteIconUrl(Icon.Money); }
 		}
 
-		[ContentProperty("Base Currency", 100)]
-		public Currency BaseCurrency
-		{
-			get { return GetDetail<Currency>("BaseCurrency", null); }
-			set { SetDetail("BaseCurrency", value); }
-		}
+		[LinkedItemDropDownListEditor("Base Currency", 100)]
+		public virtual Currency BaseCurrency { get; set; }
 
 		#region ISelfPopulator Members
 

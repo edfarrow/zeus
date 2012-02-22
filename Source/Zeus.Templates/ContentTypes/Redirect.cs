@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using Ext.Net;
+using MongoDB.Bson.Serialization.Attributes;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Web;
@@ -18,18 +20,11 @@ namespace Zeus.Templates.ContentTypes
 		}
 
 		[LinkedItemDropDownListEditor("Redirect to", 30, Required = true, TypeFilter = typeof(PageContentItem), ContainerName = "Content")]
-		public virtual ContentItem RedirectItem
-		{
-			get { return GetDetail<ContentItem>("RedirectItem", null); }
-			set { SetDetail("RedirectItem", value); }
-		}
+		public virtual ContentItem RedirectItem { get; set; }
 
-		[ContentProperty("Check Children for Navigation State", 40, Description = "For example, uncheck this for a 'Home' redirect item, otherwise you will have two highlighted items in the navigation.")]
-		public virtual bool CheckChildrenForNavigationState
-		{
-			get { return GetDetail("CheckChildrenForNavigationState", true); }
-			set { SetDetail("CheckChildrenForNavigationState", value); }
-		}
+		[CheckBoxEditor("Check Children for Navigation State", "", 40, Description = "For example, uncheck this for a 'Home' redirect item, otherwise you will have two highlighted items in the navigation.")]
+		[BsonDefaultValue(true)]
+		public virtual bool CheckChildrenForNavigationState { get; set; }
 
 		public override string IconUrl
 		{

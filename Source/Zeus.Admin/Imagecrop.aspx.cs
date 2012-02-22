@@ -31,7 +31,7 @@ namespace Zeus.Admin
                 //need to set the min and max sizes...this will stop people upscaling their images
                 CroppedImage imageToEdit = Zeus.Context.Persister.Get<CroppedImage>(id);
 
-                System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(imageToEdit.Data));
+                System.Drawing.Image image = System.Drawing.Image.FromStream(imageToEdit.Data.Content);
                 int ActualWidth = image.Width;
                 int ActualHeight = image.Height;
                 image.Dispose();
@@ -64,7 +64,7 @@ namespace Zeus.Admin
 
                 CroppedImage imageToEdit = Zeus.Context.Persister.Get<CroppedImage>(id);
 
-                System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(imageToEdit.Data));
+                System.Drawing.Image image = System.Drawing.Image.FromStream(imageToEdit.Data.Content);
                 int ActualWidth = image.Width;
                 int ActualHeight = image.Height;
                 image.Dispose();

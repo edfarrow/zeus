@@ -1,11 +1,8 @@
-using Zeus;
-using Zeus.Web;
-using Zeus.Integrity;
-using Zeus.Design.Editors;
 using System.Collections.Generic;
-using Zeus.Web.UI;
-using Zeus.ContentTypes;
+using Zeus.Design.Editors;
+using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web.UI;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
@@ -17,13 +14,9 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 	public class MyPage : BasePage
 	{
 		[LinkedItemDropDownListEditor("Product", 99)]
-		public virtual ContentItem Product
-		{
-			get { return GetDetail<ContentItem>("Product", null); }
-			set { SetDetail("Product", value); }
-		}
+		public virtual ContentItem Product { get; set; }
 
-		[Zeus.Design.Editors.ChildEditor("Image", 100, ContainerName="ImageContainer")]
+		[ChildEditor("Image", 100, ContainerName="ImageContainer")]
 		public virtual Zeus.FileSystem.Images.Image Image
 		{
 			get { return GetChild("Image") as Zeus.FileSystem.Images.Image; }
@@ -37,7 +30,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			}
 		}
 
-		[Zeus.Design.Editors.ChildEditor("Another Image", 110, ContainerName = "AnotherImageContainer")]
+		[ChildEditor("Another Image", 110, ContainerName = "AnotherImageContainer")]
 		public virtual Zeus.FileSystem.Images.Image AnotherImage
 		{
 			get { return GetChild("AnotherImage") as Zeus.FileSystem.Images.Image; }

@@ -56,7 +56,7 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			ITextControl tb = editor as ITextControl;
 			string value = (tb.Text == DefaultValue) ? null : tb.Text;
@@ -68,7 +68,7 @@ namespace Zeus.Design.Editors
 			return false;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			ITextControl tb = editor as ITextControl;
 			tb.Text = Utility.Convert<string>(item[Name]) ?? DefaultValue;

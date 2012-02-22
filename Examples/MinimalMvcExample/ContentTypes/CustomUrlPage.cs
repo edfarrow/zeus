@@ -1,16 +1,12 @@
-using Zeus;
-using Zeus.Web;
-using Zeus.Integrity;
-using Zeus.Design.Editors;
 using System.Collections.Generic;
-using Zeus.Web.UI;
-using Zeus.ContentTypes;
 using Zeus.BaseLibrary.ExtensionMethods;
+using Zeus.Design.Editors;
 using Zeus.Examples.MinimalMvcExample.Design.Editors;
 using Zeus.Examples.MinimalMvcExample.Enums;
-using Zeus.ContentProperties;
-using Zeus.Templates.ContentTypes;
 using Zeus.FileSystem.Images;
+using Zeus.Integrity;
+using Zeus.Templates.ContentTypes;
+using Zeus.Web.UI;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
@@ -22,38 +18,24 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 	{
         public override string Url
         {
-            get
-            {
-                return this.Parent.Url + "/" + "moomooBabyBoo" + "/" + this.Title.ToSafeUrl();;
-            }
+			get { return Parent.Url + "/" + "moomooBabyBoo" + "/" + Title.ToSafeUrl(); }
         }
 
         public override bool HasCustomUrl
         {
-            get
-            {
-                return true;
-            }
+			get { return true; }
         }
 
-        [ContentProperty("Selection Of Pages", 110)]
-        [PageListBoxEditor("Selection Of Pages", 110)]
-        public IList<int> PagesSelection
-        {
-            get { return GetDetail<IList<int>>("PagesSelection", new List<int>()); }
-            set { SetDetail("PagesSelection", value); }
-        }
-
+		[PageListBoxEditor("Selection Of Pages", 110)]
+		public List<int> PagesSelection { get; set; }
 
         /// <summary>
         /// Banner image
         /// </summary>
-        
-        [ContentProperty("Banner", 200)]
         [ChildEditor("Banner", 200, arg1="400", arg2="200")]
-        public Zeus.FileSystem.Images.CroppedImage Banner
+        public CroppedImage Banner
         {
-            get { return GetChild("Banner") as Zeus.FileSystem.Images.CroppedImage; }
+            get { return GetChild("Banner") as CroppedImage; }
             set
             {
                 if (value != null)
@@ -63,60 +45,34 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
                 }
             }
         }
-        
-        [ContentProperty("MyPage", 200)]
-        [ChildEditor("MyPage", 200)]
-        public virtual MyLittleType MyPage
-        {
-            get { return GetDetail("MyPage", (default(MyLittleType))); }
-            set { SetDetail("MyPage", value); }
-        }
 
-        [ContentProperty("Vegetable", 300)]
-        public virtual Vegetable Vegetable
-        {
-            get { return GetDetail("Vegetable", Vegetable.Potato); }
-            set { SetDetail("Vegetable", value); }
-        }
+		[ChildEditor("MyPage", 200)]
+		public virtual MyLittleType MyPage { get; set; }
 
-        [XhtmlStringContentProperty("Tiny MCE Content", 350)]
-        public virtual string TinyMCEContent
-        {
-            get { return GetDetail("TinyMCEContent", string.Empty); }
-            set { SetDetail("TinyMCEContent", value); }
-        }
+		[EnumEditor("Vegetable", 300, typeof(Vegetable))]
+		public virtual Vegetable Vegetable { get; set; }
+
+		[HtmlTextBoxEditor("Tiny MCE Content", 350)]
+		public virtual string TinyMCEContent { get; set; }
 
         public override bool UseProgrammableSEOAssets
         {
-            get
-            {
-                return true;
-            }
+			get { return true; }
         }
 
         public override string UseProgrammableSEOAssetsExplanation
         {
-            get
-            {
-                return "no SEO assets cos you suck balls!";
-            }
+			get { return "no SEO assets cos you suck balls!"; }
         }
 
         public override string ProgrammableHtmlTitle
         {
-            get
-            {
-                return "moo";
-            }
+			get { return "moo"; }
         }
 
         public override string ProgrammableMetaDescription
         {
-            get
-            {
-                return "This is a programmatical desc";
-            }
+			get { return "This is a programmatical desc"; }
         }
-
 	}
 }

@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
-using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.AddIns.ECommerce.Services;
@@ -13,17 +11,8 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(ShoppingBasket))]
 	public class ShoppingBasketItem : BaseContentItem, IShoppingBasketItem
 	{
-		public Product Product
-		{
-			get { return GetDetail<Product>("Product", null); }
-			set { SetDetail("Product", value); }
-		}
-
-		public int Quantity
-		{
-			get { return GetDetail("Quantity", 0); }
-			set { SetDetail("Quantity", value); }
-		}
+		public Product Product { get; set; }
+		public int Quantity { get; set; }
 
 		public decimal LineTotal
 		{

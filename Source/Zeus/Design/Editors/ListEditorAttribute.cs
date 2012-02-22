@@ -19,7 +19,7 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			ListControl ddl = (ListControl) editor;
 			if (GetValue(ddl) != GetValue(item))
@@ -38,7 +38,7 @@ namespace Zeus.Design.Editors
 			return ddl.SelectedValue;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			ListControl ddl = (ListControl) editor;
 			ddl.Items.AddRange(GetListItems(item));
@@ -54,7 +54,7 @@ namespace Zeus.Design.Editors
 		/// <summary>Gets a string value for the drop down list editor from the content item.</summary>
 		/// <param name="item">The item containing the value.</param>
 		/// <returns>A string to use as selected value.</returns>
-		protected virtual object GetValue(IEditableObject item)
+		protected virtual object GetValue(ContentItem item)
 		{
 			return item[Name] as string;
 		}
@@ -75,6 +75,6 @@ namespace Zeus.Design.Editors
 		protected abstract ListControl CreateEditor();
 		protected virtual void ModifyEditor(ListControl listControl) {}
 
-		protected abstract ListItem[] GetListItems(IEditableObject item);
+		protected abstract ListItem[] GetListItems(ContentItem item);
 	}
 }

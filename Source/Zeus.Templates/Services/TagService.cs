@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Driver.Builders;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
 using Zeus.Templates.ContentTypes;
@@ -38,7 +36,9 @@ namespace Zeus.Templates.Services
 
 		public void AddTagToItem(Tag tag, ContentItem item)
 		{
-			PropertyCollection tags = item.GetDetailCollection("Tags", true);
+			var tags = item.ExtraData["Tags"] as List<Tag>;
+			if (tags == null)
+				item.ExtraData["Tags"] = tags = new List<Tag>();
 			if (!tags.Contains(tag))
 				tags.Add(tag);
 		}
@@ -51,7 +51,7 @@ namespace Zeus.Templates.Services
 
 		public IEnumerable<Tag> GetTags(ContentItem contentItem)
 		{
-			return contentItem.GetDetailCollection("Tags", true).Cast<Tag>();
+			return contentItem.ExtraData["Tags"] as List<Tag> ?? new List<Tag>();
 		}
 
 		public TagGroup GetCurrentTagGroup(ContentItem currentItem)

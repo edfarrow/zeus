@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
 using Zeus.BaseLibrary.Web.UI;
-using Zeus.ContentProperties;
 using Zeus.Web.Mvc.ViewModels;
 using Zeus.Web.UI.WebControls;
 using System.Text.RegularExpressions;
@@ -46,32 +45,37 @@ namespace Zeus.Web.Mvc.Html
 			return string.Format(@"<link rel=""stylesheet"" type=""text/css"" href=""{0}"" />", url);
 		}
 
-		public static string DisplayProperty<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression)
-			where TItem : ContentItem
+		//public static string DisplayProperty<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression)
+		//    where TItem : ContentItem
+		//{
+		//    MemberExpression memberExpression = (MemberExpression) expression.Body;
+
+		//    if (!contentItem.Details.ContainsKey(memberExpression.Member.Name))
+		//        return string.Empty;
+
+		//    PropertyData propertyData = contentItem.Details[memberExpression.Member.Name];
+		//    return propertyData.GetXhtmlValue();
+		//}
+
+		public static string DisplayHtml(this HtmlHelper helper, string value)
 		{
-			MemberExpression memberExpression = (MemberExpression) expression.Body;
-
-			if (!contentItem.Details.ContainsKey(memberExpression.Member.Name))
-				return string.Empty;
-
-			PropertyData propertyData = contentItem.Details[memberExpression.Member.Name];
-			return propertyData.GetXhtmlValue();
+			// Resolve permanent links.
+			var permanentLinkManager = Context.Current.Resolve<IPermanentLinkManager>();
+			return permanentLinkManager.ResolvePermanentLinks(value);
 		}
 
-		public static string DisplayProperty<TModel, TItem>(this HtmlHelper<TModel> helper, Expression<Func<TItem, object>> expression)
-			where TModel : ViewModel<TItem>
-			where TItem : ContentItem
+		public static string DisplayText(this HtmlHelper helper, string value)
 		{
-			ContentItem contentItem = helper.ViewData.Model.CurrentItem;
-
-			MemberExpression memberExpression = (MemberExpression)expression.Body;
-
-			if (!contentItem.Details.ContainsKey(memberExpression.Member.Name))
-				return string.Empty;
-
-			PropertyData propertyData = contentItem.Details[memberExpression.Member.Name];
-			return propertyData.GetXhtmlValue();
+			return value.Replace(Environment.NewLine, "<br />");
 		}
+
+		//public static string DisplayProperty<TModel, TItem>(this HtmlHelper<TModel> helper, Expression<Func<TItem, object>> expression)
+		//    where TModel : ViewModel<TItem>
+		//    where TItem : ContentItem
+		//{
+		//    var contentItem = helper.ViewData.Model.CurrentItem;
+		//    return DisplayProperty(helper, contentItem, expression);
+		//}
 
 		public static Url Url(this HtmlHelper html, ContentItem contentItem)
 		{

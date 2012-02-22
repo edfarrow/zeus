@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Web.UI;
-using Zeus.ContentProperties;
-using Zeus.ContentTypes;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
@@ -14,41 +13,41 @@ namespace Zeus.Design.Editors
 			
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
-			PropertyCollection detailCollection = item.GetDetailCollection(Name, true);
+			IList detailCollection = item[Name] as IList;
 			BaseDetailCollectionEditor detailCollectionEditor = (BaseDetailCollectionEditor) editor;
 
-			List<PropertyData> propertyDataToDelete = new List<PropertyData>();
+			List<object> propertyDataToDelete = new List<object>();
 
 			// First pass saves or creates items.
 			for (int i = 0; i < detailCollectionEditor.Editors.Count; i++)
 			{
 				if (!detailCollectionEditor.DeletedIndexes.Contains(i))
 				{
-					PropertyData existingDetail = (detailCollection.Count > i) ? detailCollection.Details[i] : null;
+					object existingDetail = (detailCollection.Count > i) ? detailCollection[i] : null;
 					object newDetail;
 					CreateOrUpdateDetailCollectionItem((ContentItem) item, existingDetail, detailCollectionEditor.Editors[i], out newDetail);
 					if (newDetail != null)
-						if (existingDetail != null)
-							existingDetail.Value = newDetail;
+						if (detailCollection.Count > i)
+							detailCollection[i] = newDetail;
 						else
 							detailCollection.Add(newDetail);
 				}
 				else
 				{
-					propertyDataToDelete.Add(detailCollection.Details[i]);
+					propertyDataToDelete.Add(detailCollection[i]);
 				}
 			}
 
 			// Do a second pass to delete the items, this is so we don't mess with the indices on the first pass.
-			foreach (PropertyData propertyData in propertyDataToDelete)
+			foreach (var propertyData in propertyDataToDelete)
 				detailCollection.Remove(propertyData);
 
 			return detailCollectionEditor.DeletedIndexes.Count > 0 || detailCollectionEditor.AddedEditors;
 		}
 
-		protected abstract void CreateOrUpdateDetailCollectionItem(ContentItem item,PropertyData existingDetail, Control editor, out object newDetail);
+		protected abstract void CreateOrUpdateDetailCollectionItem(ContentItem item, object existingDetail, Control editor, out object newDetail);
 		protected abstract BaseDetailCollectionEditor CreateEditor();
 
 		protected override Control AddEditor(Control container)
@@ -59,13 +58,11 @@ namespace Zeus.Design.Editors
 			return detailCollectionEditor;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			BaseDetailCollectionEditor detailCollectionEditor = (BaseDetailCollectionEditor) editor;
-			PropertyCollection detailCollection = item.GetDetailCollection(Name, true);
-			PropertyData[] details = new PropertyData[detailCollection.Count];
-			detailCollection.CopyTo(details, 0);
-			detailCollectionEditor.Initialize(details);
+			IEnumerable detailCollection = item[Name] as IEnumerable ?? new List<object>();
+			detailCollectionEditor.Initialize(detailCollection);
 		}
 	}
 }

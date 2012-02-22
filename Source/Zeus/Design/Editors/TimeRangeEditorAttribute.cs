@@ -34,14 +34,14 @@ namespace Zeus.Design.Editors
 			return range;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			TimeRange range = (TimeRange) editor;
 			range.From = (string) item[Name];
 			range.To = (string) item[NameEndRange];
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			TimeRange range = editor as TimeRange;
 			if ((string) item[Name] != range.From || (string) item[NameEndRange] != range.To)

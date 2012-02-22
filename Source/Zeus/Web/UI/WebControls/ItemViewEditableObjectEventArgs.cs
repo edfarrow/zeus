@@ -10,12 +10,12 @@ namespace Zeus.Web.UI.WebControls
 	{
 		/// <summary>Creates a new instance of the ItemEventArgs.</summary>
 		/// <param name="item">The item the associated with these event arguments.</param>
-		public ItemViewEditableObjectEventArgs(IEditableObject item)
+		public ItemViewEditableObjectEventArgs(ContentItem item)
 		{
 			AffectedItem = item;
 		}
 
 		/// <summary>Gets or sets the item associated with these arguments.</summary>
-		public IEditableObject AffectedItem { get; set; }
+		public ContentItem AffectedItem { get; set; }
 	}
 }

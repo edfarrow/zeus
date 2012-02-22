@@ -60,7 +60,7 @@ namespace Zeus.Design.Editors
         public string arg1 { get; set; }
         public string arg2 { get; set; }
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			ItemEditView itemEditor = (ItemEditView) editor;
 			//itemEditor.Update();
@@ -80,7 +80,7 @@ namespace Zeus.Design.Editors
 			return true;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 		}
 

@@ -2,11 +2,11 @@
 using System.Text;
 using Ext.Net;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using Ormongo;
 using Ormongo.Ancestry;
 using Zeus.Admin;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Integrity;
 using System.Collections.Generic;
@@ -25,15 +25,13 @@ namespace Zeus
     [RestrictParents(typeof(ContentItem))]
     [System.Serializable]
 	[BsonDiscriminator(RootClass = true)]
-    public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode, IEditableObject
+    public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode
 	{
 		#region Private Fields
 
 		private List<AuthorizationRule> _authorizationRules;
         private string _name;
         private DateTime? _expires;
-        private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
-        private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
         private string _url;
 
         private IUrlParser _urlParser;
@@ -87,19 +85,10 @@ namespace Zeus
         /// <summary>Gets or sets the name of the identity who saved this item.</summary>
         public virtual string SavedBy { get; set; }
 
-        /// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-        public IDictionary<string, PropertyData> Details
-        {
-            get { return _details; }
-            set { _details = value; }
-        }
-
-        /// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-        public IDictionary<string, PropertyCollection> DetailCollections
-        {
-            get { return _detailCollections; }
-            set { _detailCollections = value; }
-        }
+		/// <summary>
+		/// Data store for arbitrary key/value pairs
+		/// </summary>
+		public Dictionary<string, object> ExtraData { get; set; }
 
         #endregion
 
@@ -190,53 +179,47 @@ namespace Zeus
 
         #region this[]
 
-        /// <summary>Gets or sets the detail or property with the supplied name. If a property with the supplied name exists this is always returned in favour of any detail that might have the same name.</summary>
+        /// <summary>Used primarily by editors to provide untyped access to this item's properties. If this class
+        /// does not contain the specified property, it falls back to the ExtraData dictionary.</summary>
         /// <param name="detailName">The name of the propery or detail.</param>
-        /// <returns>The value of the property or detail. If now property exists null is returned.</returns>
+        /// <returns>The value of the property. If no property exists, null is returned.</returns>
         public virtual object this[string detailName]
         {
             get
             {
-                if (detailName == null)
-                    throw new ArgumentNullException("detailName");
+				if (detailName == null)
+					throw new ArgumentNullException("detailName");
 
-                switch (detailName)
-                {
-                    case "ID":
-                        return ID;
-                    case "Title":
-                        return Title;
-                    case "Name":
-                        return Name;
-                    case "Url":
-                        return Url;
-                    default:
-                        return Utility.Evaluate(this, detailName)
-                            ?? GetDetail(detailName)
-                            ?? GetDetailCollection(detailName, false);
-                }
+				// If we have a class property matching this name, get the property value.
+				// TODO: Cache this reflection
+				var propertyInfo = GetType().GetProperty(detailName);
+				if (propertyInfo != null && propertyInfo.CanRead)
+					return propertyInfo.GetValue(this, null);
+
+				if (ExtraData.ContainsKey(detailName))
+					return ExtraData[detailName];
+
+				return null;
             }
             set
             {
+				if (string.IsNullOrEmpty(detailName))
+					throw new ArgumentNullException("detailName");
+
+				// If we have a class property matching this name, set the property value.
+				// TODO: Cache this reflection
+				var propertyInfo = GetType().GetProperty(detailName);
+				if (propertyInfo != null && propertyInfo.CanWrite)
+				{
+					if (value != null && propertyInfo.PropertyType != value.GetType())
+						value = Utility.Convert(value, propertyInfo.PropertyType);
+					propertyInfo.SetValue(this, value, null);
+				}
+				else
+					ExtraData[detailName] = value;
+
                 if (string.IsNullOrEmpty(detailName))
                     throw new ArgumentNullException("detailName", "Parameter 'detailName' cannot be null or empty.");
-
-                PropertyInfo info = GetType().GetProperty(detailName);
-                if (info != null && info.CanWrite)
-                {
-                    if (value != null && info.PropertyType != value.GetType())
-                        value = Utility.Convert(value, info.PropertyType);
-                    info.SetValue(this, value, null);
-                }
-                else if (value is PropertyCollection)
-                {
-                    DetailCollections[detailName] = (PropertyCollection)value;
-                    //throw new ZeusException("Cannot set a detail collection this way, add it to the DetailCollections collection instead.");
-                }
-                else
-                {
-                    SetDetail(detailName, value);
-                }
             }
         }
 
@@ -250,148 +233,7 @@ namespace Zeus
             Visible = true;
         }
 
-        #region GetDetail & SetDetail<T> Methods
-
-        /// <summary>Gets a detail from the details bag.</summary>
-        /// <param name="detailName">The name of the value to get.</param>
-        /// <returns>The value stored in the details bag or null if no item was found.</returns>
-        public virtual object GetDetail(string detailName)
-        {
-            return Details.ContainsKey(detailName)
-                ? Details[detailName].Value
-                : null;
-        }
-
-        /// <summary>Gets a detail from the details bag.</summary>
-        /// <param name="detailName">The name of the value to get.</param>
-        /// <param name="defaultValue">The default value to return when no detail is found.</param>
-        /// <returns>The value stored in the details bag or null if no item was found.</returns>
-        public virtual T GetDetail<T>(string detailName, T defaultValue)
-        {
-            IDictionary<string, PropertyData> details = Details;
-
-            //try inserted to stop "illegal access" error
-            bool? bContains;
-            bContains = tryAndWaitIfNecessary(details, detailName);
-
-            //if failed try again
-            if (bContains == null)
-            {
-                bContains = tryAndWaitIfNecessary(details, detailName);
-                //if still failed, then another second has already passed so try a final time with no catch
-                if (bContains == null)
-                    bContains = details.ContainsKey(detailName);
-            }
-
-            if (bContains.Value)
-                return Utility.Convert<T>(details[detailName].Value);
-            return defaultValue;
-        }
-
-        private bool? tryAndWaitIfNecessary(IDictionary<string, PropertyData> details, string detailName)
-        {
-            try
-            {
-                return details.ContainsKey(detailName);
-            }
-            catch (System.Exception ex)
-            {
-                if (ex.Message.ToLower().IndexOf("illegal access to loading collection") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else if (ex.Message.ToLower().IndexOf("could not initialize a collection batch") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else if (ex.Message.ToLower().IndexOf("was deadlocked on lock resources with another process and has been chosen as the deadlock victim") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    throw (ex);
-                }
-                return null;
-            }
-        }
-
-        public virtual void SetDetail(string detailName, object value)
-        {
-            if (string.IsNullOrEmpty(detailName))
-                throw new ArgumentNullException("detailName");
-
-            PropertyData detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
-
-            if (detail != null && value != null && value.GetType().IsAssignableFrom(detail.ValueType))
-            {
-                // update an existing detail
-                detail.Value = value;
-            }
-            else
-            {
-                if (detail != null)
-                    // delete detail or remove detail of wrong type
-                    Details.Remove(detailName);
-                if (value != null)
-                {
-                    // add new detail
-                    PropertyData propertyData = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName, value).CreatePropertyData(this, value);
-                    Details.Add(detailName, propertyData);
-                }
-            }
-        }
-
-        /// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten. If the value equals the default value it will be removed from the details bag.</summary>
-        /// <param name="detailName">The name of the item to set.</param>
-        /// <param name="value">The value to set. If this parameter is null or equal to defaultValue the detail is removed.</param>
-        /// <param name="defaultValue">The default value. If the value is equal to this value the detail will be removed.</param>
-        protected virtual void SetDetail<T>(string detailName, T value, T defaultValue)
-        {
-            if (value == null || !value.Equals(defaultValue))
-                SetDetail(detailName, value);
-            else if (Details.ContainsKey(detailName))
-                Details.Remove(detailName);
-        }
-
-        /// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten.</summary>
-        /// <param name="detailName">The name of the item to set.</param>
-        /// <param name="value">The value to set. If this parameter is null the detail is removed.</param>
-        protected virtual void SetDetail<T>(string detailName, T value)
-        {
-            SetDetail(detailName, (object)value);
-        }
-
-        #endregion
-
-        #region GetDetailCollection
-
-        /// <summary>Gets a named detail collection.</summary>
-        /// <param name="collectionName">The name of the detail collection to get.</param>
-        /// <param name="createWhenEmpty">Wether a new collection should be created if none exists. Setting this to false means null will be returned if no collection exists.</param>
-        /// <returns>A new or existing detail collection or null if the createWhenEmpty parameter is false and no collection with the given name exists..</returns>
-        public virtual PropertyCollection GetDetailCollection(string collectionName, bool createWhenEmpty)
-        {
-            if (DetailCollections.ContainsKey(collectionName))
-                return DetailCollections[collectionName];
-            else if (createWhenEmpty)
-            {
-                PropertyCollection collection = new PropertyCollection(this, collectionName);
-                DetailCollections.Add(collectionName, collection);
-                return collection;
-            }
-            else
-                return null;
-        }
-
-        #endregion
-
         #region Methods
-
-        private const int SORT_ORDER_THRESHOLD = 9999;
 
         /// <summary>Adds an item to the children of this item updating it's parent refernce.</summary>
         /// <param name="newParent">The new parent of the item. If this parameter is null the item is detached from the hierarchical structure.</param>
@@ -402,80 +244,19 @@ namespace Zeus
         }
 
 		/// <summary>Creats a copy of this item including details, authorization rules, while resetting ID.</summary>
-		/// <param name="includeChildren">Specifies whether this item's child items also should be cloned.</param>
 		/// <returns>The cloned item with or without cloned child items.</returns>
-        public virtual ContentItem Clone(bool includeChildren)
-        {
-            ContentItem cloned = (ContentItem)MemberwiseClone();
-            cloned.ID = ObjectId.Empty;
-            cloned._url = null;
-
-            CloneDetails(cloned);
-            CloneChildren(includeChildren, cloned);
-            CloneAuthorizationRules(cloned);
-
-            return cloned;
-        }
-
-        #region Clone Helper Methods
-
-        private void CloneAuthorizationRules(ContentItem cloned)
-        {
-            if (AuthorizationRules != null)
-            {
-                cloned.AuthorizationRules = new List<AuthorizationRule>();
-                foreach (AuthorizationRule rule in AuthorizationRules)
-                {
-                    AuthorizationRule clonedRule = rule.Clone();
-                    clonedRule.EnclosingItem = cloned;
-                    cloned.AuthorizationRules.Add(clonedRule);
-                }
-            }
-        }
-
-        private void CloneChildren(bool includeChildren, ContentItem cloned)
-        {
-            if (includeChildren)
-                foreach (ContentItem child in Children)
-                {
-                    ContentItem clonedChild = child.Clone(true);
-                    clonedChild.AddTo(cloned);
-                }
-        }
-
-        private void CloneDetails(ContentItem cloned)
-        {
-            cloned.Details = new Dictionary<string, PropertyData>();
-            foreach (var detail in Details.Values)
-                cloned[detail.Name] = detail.Value;
-
-            cloned.DetailCollections = new Dictionary<string, PropertyCollection>();
-            foreach (PropertyCollection collection in DetailCollections.Values)
-            {
-                PropertyCollection clonedCollection = collection.Clone();
-                clonedCollection.EnclosingItem = cloned;
-                cloned.DetailCollections[collection.Name] = clonedCollection;
-            }
-        }
-
-        #endregion
-
-        public TAncestor FindFirstAncestor<TAncestor>()
-            where TAncestor : ContentItem
-        {
-            return FindFirstAncestorRecursive<TAncestor>(this);
-        }
-
-        private static TAncestor FindFirstAncestorRecursive<TAncestor>(ContentItem contentItem)
-            where TAncestor : ContentItem
-        {
-            if (contentItem == null)
-                return null;
-
-            if (contentItem is TAncestor)
-                return (TAncestor)contentItem;
-
-            return FindFirstAncestorRecursive<TAncestor>(contentItem.Parent);
+        public virtual ContentItem Clone()
+		{
+			var bsonDocument = this.ToBsonDocument();
+			var cloned = (ContentItem) BsonSerializer.Deserialize(bsonDocument, GetType());
+			foreach (ContentItem child in Children)
+			{
+				ContentItem clonedChild = child.Clone();
+				clonedChild.AddTo(cloned);
+			}
+			cloned.ID = ObjectId.Empty;
+			cloned._url = null;
+			return cloned;
         }
 
         /// <summary>
@@ -541,7 +322,8 @@ namespace Zeus
         /// <returns></returns>
         public virtual bool IsEmpty()
         {
-            return string.IsNullOrEmpty(Title) && !Details.Any() && !DetailCollections.Any();
+			// TODO: Check if anything is broken if this only checks Title
+			return string.IsNullOrEmpty(Title); //&& !Details.Any() && !DetailCollections.Any();
         }
 
         /// <summary>

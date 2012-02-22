@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
+using MongoDB.Bson.Serialization.Attributes;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Linq;
@@ -18,41 +19,22 @@ namespace Zeus.Templates.ContentTypes
 			get { return Utility.GetCooliteIconUrl(Icon.Feed); }
 		}
 
-		[ContentProperty("Feed root", 90)]
-		public virtual ContentItem FeedRoot
-		{
-			get { return (ContentItem)GetDetail("FeedRoot"); }
-			set { SetDetail("FeedRoot", value); }
-		}
+		[LinkedItemDropDownListEditor("Feed root", 90)]
+		public virtual ContentItem FeedRoot { get; set; }
 
-		[ContentProperty("Number of items", 100)]
-		public virtual int NumberOfItems
-		{
-			get { return (int)(GetDetail("NumberOfItems") ?? 10); }
-			set { SetDetail("NumberOfItems", value, 10); }
-		}
+		[TextBoxEditor("Number of items", 100, 10)]
+		[BsonDefaultValue(10)]
+		public virtual int NumberOfItems { get; set; }
 
-		[ContentProperty("Tagline", 110)]
-		[TextBoxEditor(Required = true)]
-		public virtual string Tagline
-		{
-			get { return (string)(GetDetail("Tagline") ?? string.Empty); }
-			set { SetDetail("Tagline", value, string.Empty); }
-		}
+		[TextBoxEditor("Tagline", 110, Required = true)]
+		public virtual string Tagline { get; set; }
 
-		[ContentProperty("Author", 120)]
-		public virtual string Author
-		{
-			get { return (string)(GetDetail("Author") ?? string.Empty); }
-			set { SetDetail("Author", value, string.Empty); }
-		}
+		[TextBoxEditor("Author", 120)]
+		public virtual string Author { get; set; }
 
-		[ContentProperty("RFC 3229 Delta Encoding Enabled", 130)]
-		public virtual bool Rfc3229DeltaEncodingEnabled
-		{
-			get { return GetDetail("Rfc3229DeltaEncodingEnabled", true); }
-			set { SetDetail("Rfc3229DeltaEncodingEnabled", value); }
-		}
+		[TextBoxEditor("RFC 3229 Delta Encoding Enabled", 130)]
+		[BsonDefaultValue(true)]
+		public virtual bool Rfc3229DeltaEncodingEnabled { get; set; }
 
 		public override string Url
 		{
@@ -65,7 +47,7 @@ namespace Zeus.Templates.ContentTypes
 				.OfType<ISyndicatable>()
 				.OfType<ContentItem>()
 				.NavigablePages()
-				.Where(ci => ci.GetDetail(SyndicatableDefinitionAppender.SyndicatableDetailName, true))
+				.Where(ci => (bool) (ci[SyndicatableDefinitionAppender.SyndicatableDetailName] ?? true))
 				.OrderByDescending(ci => ci.Published)
 				.Take(NumberOfItems)
 				.Cast<ISyndicatable>();

@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ext.Net;
 using Zeus.AddIns.ECommerce.Services;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
-using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
@@ -58,33 +55,14 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-        public virtual DeliveryMethod DeliveryMethod
-		{
-			get { return GetDetail<DeliveryMethod>("DeliveryMethod", null); }
-			set { SetDetail("DeliveryMethod", value); }
-		}
-
-        public virtual string EmailAddress
-		{
-			get { return GetDetail("EmailAddress", string.Empty); }
-			set { SetDetail("EmailAddress", value); }
-		}
-
-        public virtual string TelephoneNumber
-		{
-			get { return GetDetail("TelephoneNumber", string.Empty); }
-			set { SetDetail("TelephoneNumber", value); }
-		}
-
-        public virtual string MobileTelephoneNumber
-		{
-			get { return GetDetail("MobileTelephoneNumber", string.Empty); }
-			set { SetDetail("MobileTelephoneNumber", value); }
-		}
+		public virtual DeliveryMethod DeliveryMethod { get; set; }
+		public virtual string EmailAddress { get; set; }
+		public virtual string TelephoneNumber { get; set; }
+		public virtual string MobileTelephoneNumber { get; set; }
 
         public virtual IEnumerable<IShoppingBasketItem> Items
 		{
-			get { return GetChildren<ShoppingBasketItem>().Cast<IShoppingBasketItem>(); }
+			get { return GetChildren<ShoppingBasketItem>(); }
 		}
 
         public virtual int TotalItemCount
@@ -102,22 +80,8 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             get { return Items.Where(p => !p.Product.OutOfStock && !p.Product.VatZeroRated).Sum(i => i.Product.CurrentPrice * i.Quantity); }
         }
 
-        public virtual decimal TotalDeliveryPrice
-        {
-            get { return GetDetail<decimal>("TotalDeliveryPrice", default(decimal)); }
-            set { SetDetail("TotalDeliveryPrice", value); }
-        }
-
-        public virtual decimal TotalVatPrice
-        {
-            get { return GetDetail<decimal>("TotalVatPrice", default(decimal)); }
-            set { SetDetail("TotalVatPrice", value); }
-        }
-
-        public virtual decimal TotalPrice
-		{
-            get { return GetDetail<decimal>("TotalPrice", default(decimal)); }
-            set { SetDetail("TotalPrice", value); }
-		}
+		public virtual decimal TotalDeliveryPrice { get; set; }
+		public virtual decimal TotalVatPrice { get; set; }
+		public virtual decimal TotalPrice { get; set; }
 	}
 }

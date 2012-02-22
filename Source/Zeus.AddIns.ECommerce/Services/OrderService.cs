@@ -182,9 +182,9 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 
 			Order order = PlaceOrder(shop, cardNumber, cardVerificationCode, shoppingBasket.DeliveryMethod,
-				shoppingBasket.DeliveryMethod.Price, (Address) shoppingBasket.BillingAddress.Clone(true),
-				(Address) (shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
-				(PaymentCard) shoppingBasket.PaymentCard.Clone(true), shoppingBasket.EmailAddress,
+				shoppingBasket.DeliveryMethod.Price, (Address) shoppingBasket.BillingAddress.Clone(),
+				(Address) (shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(),
+				(PaymentCard) shoppingBasket.PaymentCard.Clone(), shoppingBasket.EmailAddress,
 				shoppingBasket.TelephoneNumber, shoppingBasket.MobileTelephoneNumber,
 				items, shoppingBasket.TotalDeliveryPrice, shoppingBasket.TotalPrice);
 

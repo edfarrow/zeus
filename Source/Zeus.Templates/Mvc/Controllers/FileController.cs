@@ -9,7 +9,7 @@ namespace Zeus.Templates.Mvc.Controllers
 	{
 		public override ActionResult Index()
 		{
-			return new FileContentResult(CurrentItem.Data, CurrentItem.ContentType);
+			return File(CurrentItem.Data.Content, CurrentItem.Data.ContentType);
 		}
 	}
 }

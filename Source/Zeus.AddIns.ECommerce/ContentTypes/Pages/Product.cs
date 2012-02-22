@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
+using Ormongo;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.Design.Editors;
-using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -22,28 +22,14 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return Icon.Package; }
 		}
 
-		[ContentProperty("Product Code", 200)]
-		public virtual string ProductCode
-		{
-			get { return GetDetail("ProductCode", string.Empty); }
-			set { SetDetail("ProductCode", value); }
-		}
+		[TextBoxEditor("Product Code", 200)]
+		public virtual string ProductCode { get; set; }
 
-		[ContentProperty("Regular Price", 210)]
-		[TextBoxEditor(Required = true, EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
-		public decimal RegularPrice
-		{
-			get { return GetDetail("RegularPrice", 0m); }
-			set { SetDetail("RegularPrice", value); }
-		}
+		[TextBoxEditor("Regular Price", 210, Required = true, EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
+		public decimal RegularPrice { get; set; }
 
-		[ContentProperty("Sale Price", 220)]
-		[TextBoxEditor(EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
-		public virtual decimal? SalePrice
-		{
-			get { return GetDetail<decimal?>("SalePrice", null); }
-			set { SetDetail("SalePrice", value); }
-		}
+		[TextBoxEditor("Sale Price", 220, EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
+		public virtual decimal? SalePrice { get; set; }
 
 		public decimal CurrentPrice
 		{
@@ -65,10 +51,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		}
 
 		[MultiImageUploadEditor("Extra Images", 250, ContainerName = "Images")]
-		public PropertyCollection ExtraImages
-		{
-			get { return GetDetailCollection("ExtraImages", true); }
-		}
+		public List<Attachment> ExtraImages { get; set; }
 
 		[VariationConfigurationEditor("Variations", 260)]
 		public IEnumerable<VariationConfiguration> VariationConfigurations
@@ -81,7 +64,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get
 			{
 				return VariationConfigurations
-					.SelectMany(vc => vc.Permutation.Variations.Cast<Variation>().Select(v => v.VariationSet))
+					.SelectMany(vc => vc.Permutation.Variations.Select(v => v.VariationSet))
 					.Distinct();
 			}
 		}
@@ -91,18 +74,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return (Category) ((Parent is Category) ? Parent : Parent.Parent); }
 		}
 
-        [ContentProperty("Item is Out of Stock", 300)]
-        public virtual bool OutOfStock
-        {
-            get { return GetDetail("OutOfStock", false); }
-            set { SetDetail("OutOfStock", value); }
-        }
+		[CheckBoxEditor("Item is Out of Stock", "", 300)]
+		public virtual bool OutOfStock { get; set; }
 
-        [ContentProperty("VAT Zero Rated", 300, Description="Please check if VAT is not added to this product")]
-        public virtual bool VatZeroRated
-        {
-            get { return GetDetail("VatZeroRated", false); }
-            set { SetDetail("VatZeroRated", value); }
-        }
+		[CheckBoxEditor("VAT Zero Rated", "", 300, Description = "Please check if VAT is not added to this product")]
+		public virtual bool VatZeroRated { get; set; }
 	}
 }

@@ -1,52 +1,48 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
-using SoundInTheory.DynamicImage;
+using Ormongo;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Sources;
 using SoundInTheory.DynamicImage.Util;
 
 namespace Zeus.FileSystem.Images
 {
-	public class ZeusImageSource : ImageSource
+	public class OrmongoImageSource : ImageSource
 	{
-		#region Properties
-
-		public ObjectId ContentID
+		public ObjectId AttachmentID
 		{
-			get { return (ObjectId)(this["ContentID"] ?? ObjectId.Empty); }
-			set { this["ContentID"] = value; }
+			get { return (ObjectId) (this["AttachmentID"] ?? ObjectId.Empty); }
+			set { this["AttachmentID"] = value; }
 		}
 
-		public bool ThrowExceptionOnFormatError
+		public OrmongoImageSource(Attachment attachment)
 		{
-			get { return (bool)(this["ThrowExceptionOnFormatError"] ?? false); }
-			set { this["ThrowExceptionOnFormatError"] = value; }
+			AttachmentID = attachment.ID;
 		}
 
-		#endregion
+		public OrmongoImageSource(ObjectId attachmentID)
+		{
+			AttachmentID = attachmentID;
+		}
 
 		public override FastBitmap GetBitmap()
 		{
-			Image image = Context.Persister.Get(ContentID) as Image;
-			if (image != null && image.Data != null)
-			{
-				try
-				{
-					return new FastBitmap(image.Data);
-				}
-				catch (DynamicImageException ex)
-				{
-					if (ThrowExceptionOnFormatError)
-						throw new ZeusException("Could not load image from file with file extension '" + image.FileExtension + "' and content type '" + image.ContentType + "'", ex);
-					return null;
-				}
-			}
-			return null;
+			Attachment attachment = Attachment.FindOneByID(AttachmentID);
+			var bytes = new byte[attachment.Content.Length];
+			attachment.Content.Read(bytes, 0, bytes.Length);
+
+			return new FastBitmap(bytes);
 		}
 
 		public override void PopulateDependencies(List<Dependency> dependencies)
 		{
-			dependencies.Add(new Dependency { Text1 = ContentID.ToString() });
+			dependencies.Add(new Dependency
+			{
+				Text1 = AttachmentID.ToString(),
+				Text2 = string.Empty,
+				Text3 = string.Empty,
+				Text4 = string.Empty,
+			});
 		}
 	}
 }

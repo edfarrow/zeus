@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Zeus.ContentProperties;
 using Zeus.Security;
 
 namespace Zeus.ContentTypes

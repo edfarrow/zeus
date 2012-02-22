@@ -1,4 +1,4 @@
-using Zeus.ContentProperties;
+using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -10,10 +10,6 @@ namespace Zeus.Tests.Integrity.ContentTypes
 	{
 		[TextBoxEditor("My Property", 100)]
 		[PropertyAuthorizedRoles("ACertainGroup")]
-		public virtual string MyProperty
-		{
-			get { return (string)(GetDetail("MyProperty") ?? null); }
-			set { SetDetail("MyProperty", value); }
-		}
+		public virtual string MyProperty { get; set; }
 	}
 }

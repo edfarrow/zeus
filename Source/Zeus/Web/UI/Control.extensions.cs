@@ -15,9 +15,9 @@ namespace Zeus.Web.UI
 			return null;
 		}
 
-		public static IEditableObject FindCurrentEditableObject(this Control control)
+		public static ContentItem FindCurrentEditableObject(this Control control)
 		{
-			IEditableObjectEditor container = FindParent<IEditableObjectEditor>(control.Parent);
+			ContentItemEditor container = FindParent<ContentItemEditor>(control.Parent);
 			if (container != null)
 				return container.CurrentItem;
 

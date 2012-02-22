@@ -1,4 +1,5 @@
 using Ext.Net;
+using Zeus.Design.Editors;
 using Zeus.FileSystem;
 using Zeus.Integrity;
 using Zeus.Web.Security;
@@ -14,15 +15,15 @@ namespace Zeus.Web
 			get { return Utility.GetCooliteIconUrl(Icon.PageWorld); }
 		}
 
-		[ContentProperty("404 Page", 25, Description = "This page will be used if a user requests a page that does not exist.")]
+		[LinkedItemDropDownListEditor("404 Page", 25, Description = "This page will be used if a user requests a page that does not exist.")]
 		public virtual PageContentItem PageNotFoundPage { get; set; }
 
 		#region Implementation of ILoginContext
 
-		[ContentProperty("Login Page", 30, Description = "This page will be used if a user requests a page that they do not have access to.")]
+		[LinkedItemDropDownListEditor("Login Page", 30, Description = "This page will be used if a user requests a page that they do not have access to.")]
 		public virtual PageContentItem LoginPage { get; set; }
 
-		[ContentProperty("Forgotten Password Page", 40, Description = "This page will be pointed to from any 'Lost your details' links.")]
+		[LinkedItemDropDownListEditor("Forgotten Password Page", 40, Description = "This page will be pointed to from any 'Lost your details' links.")]
 		public virtual PageContentItem ForgottenPasswordPage { get; set; }
 
 		public string LoginUrl

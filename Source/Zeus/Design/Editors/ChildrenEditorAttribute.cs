@@ -17,7 +17,7 @@ namespace Zeus.Design.Editors
 
 		public Type TypeFilter { get; set; }
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			ChildrenEditor childrenEditor = (ChildrenEditor) editor;
 			for (int i = 0; i < childrenEditor.ItemEditors.Count; i++)
@@ -37,7 +37,7 @@ namespace Zeus.Design.Editors
 			return childrenEditor.DeletedIndexes.Count > 0 || childrenEditor.AddedTypes.Count > 0;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			ChildrenEditor listEditor = (ChildrenEditor) editor;
 			listEditor.ParentItem = (ContentItem) item;
@@ -48,7 +48,7 @@ namespace Zeus.Design.Editors
 			ChildrenEditor childrenEditor = new ChildrenEditor
 			{
 				ID = Name,
-				ParentItem = (ContentItem) container.FindParent<IEditableObjectEditor>().CurrentItem,
+				ParentItem = (ContentItem) container.FindParent<ContentItemEditor>().CurrentItem,
 			};
 			if (TypeFilter != null)
 				childrenEditor.TypeFilter = TypeFilter.ToString();

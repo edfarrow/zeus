@@ -257,17 +257,17 @@ namespace Zeus.Design.Editors
 		/// <param name="item">The object to update.</param>
 		/// <param name="editor">The editor contorl whose values to update the object with.</param>
 		/// <returns>True if the item was changed (and needs to be saved).</returns>
-		public abstract bool UpdateItem(IEditableObject item, Control editor);
+		public abstract bool UpdateItem(ContentItem item, Control editor);
 
 		/// <summary>Updates the editor with the values from the item.</summary>
 		/// <param name="item">The item that contains values to assign to the editor.</param>
 		/// <param name="editor">The editor to load with a value.</param>
-		public void UpdateEditor(IEditableObject item, Control editor)
+		public void UpdateEditor(ContentItem item, Control editor)
 		{
 			UpdateEditorInternal(item, editor);
 		}
 
-		protected abstract void UpdateEditorInternal(IEditableObject item, Control editor);
+		protected abstract void UpdateEditorInternal(ContentItem item, Control editor);
 
 		int IComparable<IContainable>.CompareTo(IContainable other)
 		{

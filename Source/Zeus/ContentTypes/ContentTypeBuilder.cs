@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.BaseLibrary.Reflection;
-using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 
 namespace Zeus.ContentTypes
@@ -14,7 +13,6 @@ namespace Zeus.ContentTypes
 		private readonly ITypeFinder _typeFinder;
 		private readonly IEditableHierarchyBuilder<IEditor> _hierarchyBuilder;
 		private readonly AttributeExplorer<IEditor> _editableExplorer;
-		private readonly AttributeExplorer<IContentProperty> _propertyExplorer;
 		private readonly AttributeExplorer<IEditorContainer> _containableExplorer;
 
 		#endregion
@@ -24,13 +22,11 @@ namespace Zeus.ContentTypes
 		public ContentTypeBuilder(ITypeFinder typeFinder, 
 			IEditableHierarchyBuilder<IEditor> hierarchyBuilder,
 			AttributeExplorer<IEditor> editableExplorer,
-			AttributeExplorer<IContentProperty> propertyExplorer,
 			AttributeExplorer<IEditorContainer> containableExplorer)
 		{
 			_typeFinder = typeFinder;
 			_hierarchyBuilder = hierarchyBuilder;
 			_editableExplorer = editableExplorer;
-			_propertyExplorer = propertyExplorer;
 			_containableExplorer = containableExplorer;
 		}
 
@@ -51,37 +47,9 @@ namespace Zeus.ContentTypes
 			List<ContentType> definitions = new List<ContentType>();
 			foreach (Type type in EnumerateTypes())
 			{
-				ContentType itemDefinition = new ContentType(type);
+				var itemDefinition = new ContentType(type);
 
-				itemDefinition.Properties = _propertyExplorer.Find(itemDefinition.ItemType);
-				IList<IEditor> tempEditors = _editableExplorer.Find(itemDefinition.ItemType);
-
-				// Get the "distinct" union of actual editors, and default editors for properties
-				List<IEditor> editors = new List<IEditor>();
-				foreach (IContentProperty property in itemDefinition.Properties)
-				{
-					IEditor overrideEditor = tempEditors.SingleOrDefault(e => e.Name == property.Name);
-					if (overrideEditor != null)
-					{
-						overrideEditor.Title = property.Title;
-						overrideEditor.SortOrder = property.SortOrder;
-						if (overrideEditor is AbstractEditorAttribute && property is BaseContentPropertyAttribute)
-							((AbstractEditorAttribute) overrideEditor).Description = ((BaseContentPropertyAttribute) property).Description;
-						if (overrideEditor is AbstractEditorAttribute && property is ContentPropertyAttribute && !string.IsNullOrEmpty(((ContentPropertyAttribute)property).EditorContainerName))
-							((AbstractEditorAttribute)overrideEditor).ContainerName = ((ContentPropertyAttribute)property).EditorContainerName;
-						editors.Add(overrideEditor);
-					}
-					else
-					{
-						IEditor editor = property.GetDefaultEditor();
-						if (editor != null)
-							editors.Add(editor);
-					}
-				}
-
-				foreach (IEditor editor in tempEditors.Where(e => !editors.Any(oe => e.Name == oe.Name)))
-					editors.Add(editor);
-
+				var editors = _editableExplorer.Find(itemDefinition.ItemType).ToList();
 				editors.Sort();
 				itemDefinition.Editors = editors;
 

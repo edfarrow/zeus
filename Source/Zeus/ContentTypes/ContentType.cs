@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Web;
 
@@ -78,8 +77,6 @@ namespace Zeus.ContentTypes
 		/// <summary>Gets roles or users allowed to edit items defined by this content type.</summary>
 		public IList<string> AuthorizedRoles { get; internal set; }
 
-		public IEnumerable<IContentProperty> Properties { get; internal set; }
-
 		public IList<IEditor> Editors { get; internal set; }
 
 		public IEditorContainer RootContainer { get; set; }
@@ -111,31 +108,6 @@ namespace Zeus.ContentTypes
 		#endregion
 
 		#region Methods
-
-		public void AddProperty(IContentProperty property)
-		{
-			var properties = Properties.ToList();
-			properties.Add(property);
-			Properties = properties;
-		}
-
-		public IContentProperty GetProperty(string name)
-		{
-			return Properties.SingleOrDefault(p => p.Name == name);
-		}
-
-		public IContentProperty GetProperty(string name, object value)
-		{
-			IContentProperty property = GetProperty(name);
-			if (property == null)
-			{
-				// Create a property, based on the type of value.
-				if (value == null)
-					throw new ArgumentNullException("value", "Cannot create a property for name '" + name + "' if 'value' is null");
-				return Context.Current.Resolve<IContentPropertyManager>().CreateProperty(name, value.GetType());
-			}
-			return property;
-		}
 
 		/// <summary>Gets editable attributes available to user.</summary>
 		/// <returns>A filtered list of editable fields.</returns>

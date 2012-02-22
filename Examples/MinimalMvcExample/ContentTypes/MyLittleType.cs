@@ -6,12 +6,8 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 	[ContentType("My Little Type")]
 	public class MyLittleType : BaseContentItem
 	{
-		[ContentProperty("Test String", 10)]
-		public virtual string TestString
-		{
-			get { return GetDetail("TestString", string.Empty); }
-			set { SetDetail("TestString", value); }
-		}
+		[TextBoxEditor("Test String", 10)]
+		public virtual string TestString { get; set; }
 
         /*
 		[XhtmlStringContentProperty("Test Rich String", 35)]
@@ -22,13 +18,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		}
          */
 
-		[ContentProperty("Multi Line Textbox", 35)]
-		[TextAreaEditor(Height = 200, Width = 500)]
-		public virtual string MultiTextBox
-		{
-			get { return GetDetail("MultiTextBox", string.Empty); }
-			set { SetDetail("MultiTextBox", value); }
-		}
-        
+		[TextAreaEditor("Multi Line Textbox", 35, Height = 200, Width = 500)]
+		public virtual string MultiTextBox { get; set; }
 	}
 }

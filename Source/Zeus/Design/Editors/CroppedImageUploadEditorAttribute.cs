@@ -1,10 +1,7 @@
 using System;
-using Zeus.Web.UI.WebControls;
 using System.Web.UI;
 using Zeus.FileSystem.Images;
-using Zeus.FileSystem;
-using Zeus.ContentTypes;
-using System.IO;
+using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
 {
@@ -33,7 +30,7 @@ namespace Zeus.Design.Editors
             
 		}
 
-        protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+        protected override void UpdateEditorInternal(ContentItem item, Control editor)
         {
             base.UpdateEditorInternal(item, editor);
 
@@ -42,7 +39,7 @@ namespace Zeus.Design.Editors
                 //check to see if the image is large enough...
                 CroppedImage image = (CroppedImage)item;
 
-                System.Drawing.Image imageForSize = System.Drawing.Image.FromStream(new MemoryStream(image.Data));
+                System.Drawing.Image imageForSize = System.Drawing.Image.FromStream(image.Data.Content);
                 int ActualWidth = imageForSize.Width;
                 int ActualHeight = imageForSize.Height;
                 imageForSize.Dispose();

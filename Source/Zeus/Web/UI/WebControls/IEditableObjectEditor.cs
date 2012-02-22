@@ -2,8 +2,8 @@
 
 namespace Zeus.Web.UI.WebControls
 {
-	public interface IEditableObjectEditor
+	public interface ContentItemEditor
 	{
-		IEditableObject CurrentItem { get; }
+		ContentItem CurrentItem { get; }
 	}
 }

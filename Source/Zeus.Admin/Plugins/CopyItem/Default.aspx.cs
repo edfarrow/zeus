@@ -62,7 +62,7 @@ namespace Zeus.Admin.Plugins.CopyItem
 			try
 			{
 				pnlNewName.Visible = false;
-				ContentItem newItem = MemorizedItem.Clone(true);
+				ContentItem newItem = MemorizedItem.Clone();
 				newItem.Name = txtNewName.Text;
 				newItem = Engine.Persister.Copy(newItem, SelectedItem);
 				Refresh(newItem, AdminFrame.Both, false);

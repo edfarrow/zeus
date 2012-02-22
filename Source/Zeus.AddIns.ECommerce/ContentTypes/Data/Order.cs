@@ -4,7 +4,6 @@ using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Security;
 using Zeus.Templates.ContentTypes;
-using System;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
@@ -17,11 +16,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.BasketPut; }
 		}
 
-        public User User
-		{
-			get { return GetDetail<User>("User", null); }
-			set { SetDetail("User", value); }
-		}
+		public User User { get; set; }
 
 		public Address ShippingAddress
 		{
@@ -62,47 +57,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		public OrderStatus Status
-		{
-			get { return GetDetail("Status", OrderStatus.Unpaid); }
-			set { SetDetail("Status", value); }
-        }
-
-        public PaymentMethod PaymentMethod
-        {
-            get { return GetDetail("PaymentMethod", PaymentMethod.SagePay); }
-            set { SetDetail("PaymentMethod", value); }
-        }
-
-		public string BookingRef
-		{
-            get { return GetDetail("BookingRef", string.Empty); }
-            set { SetDetail("BookingRef", value); }
-		}
-
-		public DeliveryMethod DeliveryMethod
-		{
-			get { return GetDetail<DeliveryMethod>("DeliveryMethod", null); }
-			set { SetDetail("DeliveryMethod", value); }
-		}
-
-		public string EmailAddress
-		{
-			get { return GetDetail("EmailAddress", string.Empty); }
-			set { SetDetail("EmailAddress", value); }
-		}
-
-		public string TelephoneNumber
-		{
-			get { return GetDetail("TelephoneNumber", string.Empty); }
-			set { SetDetail("TelephoneNumber", value); }
-		}
-
-		public string MobileTelephoneNumber
-		{
-			get { return GetDetail("MobileTelephoneNumber", string.Empty); }
-			set { SetDetail("MobileTelephoneNumber", value); }
-		}
+		public OrderStatus Status { get; set; }
+		public PaymentMethod PaymentMethod { get; set; }
+		public string BookingRef { get; set; }
+		public DeliveryMethod DeliveryMethod { get; set; }
+		public string EmailAddress { get; set; }
+		public string TelephoneNumber { get; set; }
+		public string MobileTelephoneNumber { get; set; }
 
 		public IEnumerable<OrderItem> Items
 		{
@@ -119,22 +80,8 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Items.Sum(i => i.LineTotal); }
 		}
 
-        public decimal TotalDeliveryPrice
-        {
-            get { return GetDetail("TotalDeliveryPrice", 0m); }
-            set { SetDetail("TotalDeliveryPrice", value); }
-        }
-
-        public virtual decimal TotalVatPrice
-        {
-            get { return GetDetail("TotalVatPrice", 0m); }
-            set { SetDetail("TotalVatPrice", value); }
-        }
-
-		public decimal TotalPrice
-		{
-            get { return GetDetail("TotalPrice", 0m); }
-            set { SetDetail("TotalPrice", value); }
-		}
+		public decimal TotalDeliveryPrice { get; set; }
+		public virtual decimal TotalVatPrice { get; set; }
+		public decimal TotalPrice { get; set; }
 	}
 }

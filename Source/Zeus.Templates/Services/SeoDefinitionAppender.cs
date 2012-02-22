@@ -1,5 +1,4 @@
 using Ninject;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Templates.Configuration;
@@ -83,7 +82,6 @@ namespace Zeus.Templates.Services
 			if (multiline)
 				editor.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
 			contentType.Add(editor);
-			contentType.AddProperty(new ContentPropertyAttribute(typeof(StringProperty), title, sortOrder) { Name = name, Description = description, EditorContainerName = "SEO" });
 		}
 
 		private static bool IsPage(ContentType contentType)

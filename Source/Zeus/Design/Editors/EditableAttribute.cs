@@ -89,7 +89,7 @@ namespace Zeus.Design.Editors
 		/// <summary>Updates the item with the values from the editor.</summary>
 		/// <param name="item">The item to update.</param>
 		/// <param name="editor">The editor contorl whose values to update the item with.</param>
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			object editorValue = GetEditorValue(editor);
 			object itemValue = item[Name];
@@ -116,7 +116,7 @@ namespace Zeus.Design.Editors
 		/// <summary>Updates the editor with the values from the item.</summary>
 		/// <param name="item">The item that contains values to assign to the editor.</param>
 		/// <param name="editor">The editor to load with a value.</param>
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			SetEditorValue(editor, item[Name]);
 		}

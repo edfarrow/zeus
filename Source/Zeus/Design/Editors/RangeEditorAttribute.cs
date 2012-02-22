@@ -24,7 +24,7 @@ namespace Zeus.Design.Editors
 			_max = max;
 		}
 
-		protected override ListItem[] GetListItems(IEditableObject contentItem)
+		protected override ListItem[] GetListItems(ContentItem contentItem)
 		{
 			List<ListItem> items = Enumerable.Range(_min, _max - _min + 1).Select(i => new ListItem(i.ToString())).ToList();
 			if (!Required)
@@ -32,7 +32,7 @@ namespace Zeus.Design.Editors
 			return items.ToArray();
 		}
 
-		protected override object GetValue(IEditableObject item)
+		protected override object GetValue(ContentItem item)
 		{
 			return item[Name];
 		}

@@ -33,10 +33,6 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		public bool Available
-		{
-			get { return GetDetail("Available", false); }
-			set { SetDetail("Available", value); }
-		}
+		public bool Available { get; set; }
 	}
 }

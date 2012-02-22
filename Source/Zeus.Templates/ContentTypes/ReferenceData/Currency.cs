@@ -1,4 +1,5 @@
 ﻿using Ext.Net;
+using MongoDB.Bson.Serialization.Attributes;
 using Zeus.Integrity;
 using Zeus.Design.Editors;
 
@@ -36,6 +37,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 					break;
 			}
 			CurrencyIcon = icon;
+			const decimal v = 1.0m;
 		}
 
 		[TextBoxEditor("Name", 10, Required = true)]
@@ -45,32 +47,18 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			set { base.Title = value; }
 		}
 
-		[ContentProperty("ISO Code", 100)]
-		public string IsoCode
-		{
-			get { return GetDetail("IsoCode", string.Empty); }
-			set { SetDetail("IsoCode", value); }
-		}
+		[TextBoxEditor("ISO Code", 100)]
+		public string IsoCode { get; set; }
 
-		[ContentProperty("Symbol", 110)]
-		public string Symbol
-		{
-			get { return GetDetail("Symbol", string.Empty); }
-			set { SetDetail("Symbol", value); }
-		}
+		[TextBoxEditor("Symbol", 110)]
+		public string Symbol { get; set; }
 
-		[ContentProperty("Exchange Rate", 120)]
-		public decimal ExchangeRate
-		{
-			get { return GetDetail("ExchangeRate", 1.0m); }
-			set { SetDetail("ExchangeRate", value); }
-		}
+		[TextBoxEditor("Exchange Rate", 120)]
+		[BsonDefaultValue(1)]
+		public decimal ExchangeRate { get; set; }
 
-		public Icon CurrencyIcon
-		{
-			get { return GetDetail("CurrencyIcon", Icon.MoneyAdd); }
-			set { SetDetail("CurrencyIcon", value); }
-		}
+		[BsonDefaultValue(Icon.MoneyAdd)]
+		public Icon CurrencyIcon { get; set; }
 
 		public override string IconUrl
 		{

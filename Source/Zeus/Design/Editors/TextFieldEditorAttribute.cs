@@ -137,7 +137,7 @@ namespace Zeus.Design.Editors
 			throw new NotSupportedException();
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			TextFieldBase tb = editor as TextFieldBase;
 			string value = (tb.Text == DefaultValue) ? null : tb.Text;
@@ -149,7 +149,7 @@ namespace Zeus.Design.Editors
 			return false;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			TextFieldBase tb = editor as TextFieldBase;
 			tb.Text = Utility.Convert<string>(item[Name]) ?? DefaultValue;

@@ -1,5 +1,4 @@
 using System;
-using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
@@ -16,40 +15,20 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return GetIconUrl(typeof(PaymentCard), "Zeus.AddIns.ECommerce.Icons.visa.png"); }
 		}
 
-		[ContentProperty("CardType", 200)]
-		public PaymentCardType CardType
-		{
-			get { return GetDetail("CardType", PaymentCardType.None); }
-			set { SetDetail("CardType", value); }
-		}
+		[TextBoxEditor("CardType", 200)]
+		public PaymentCardType CardType { get; set; }
 
-		[ContentProperty("Name On Card", 210)]
-		public string NameOnCard
-		{
-			get { return GetDetail("NameOnCard", string.Empty); }
-			set { SetDetail("NameOnCard", value); }
-		}
+		[TextBoxEditor("Name On Card", 210)]
+		public string NameOnCard { get; set; }
 
-		[ContentProperty("MaskedCardNumber", 220)]
-		public string MaskedCardNumber
-		{
-			get { return GetDetail("MaskedCardNumber", string.Empty); }
-			set { SetDetail("MaskedCardNumber", value); }
-		}
+		[TextBoxEditor("MaskedCardNumber", 220)]
+		public string MaskedCardNumber { get; set; }
 
-		[ContentProperty("Expiry Month", 230)]
-		public int ExpiryMonth
-		{
-			get { return GetDetail("ExpiryMonth", 0); }
-			set { SetDetail("ExpiryMonth", value); }
-		}
+		[TextBoxEditor("Expiry Month", 230, 10)]
+		public int ExpiryMonth { get; set; }
 
-		[ContentProperty("Expiry Year", 240)]
-		public int ExpiryYear
-		{
-			get { return GetDetail("ExpiryYear", 0); }
-			set { SetDetail("ExpiryYear", value); }
-		}
+		[TextBoxEditor("Expiry Year", 240, 10)]
+		public int ExpiryYear { get; set; }
 
 		public DateTime ValidTo
 		{
@@ -60,19 +39,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		[ContentProperty("Start Month", 250)]
-		public int? StartMonth
-		{
-			get { return GetDetail<int?>("StartMonth", null); }
-			set { SetDetail("StartMonth", value); }
-		}
+		[TextBoxEditor("Start Month", 250)]
+		public int? StartMonth { get; set; }
 
-		[ContentProperty("Start Year", 260)]
-		public int? StartYear
-		{
-			get { return GetDetail<int?>("StartYear", null); }
-			set { SetDetail("StartYear", value); }
-		}
+		[TextBoxEditor("Start Year", 260)]
+		public int? StartYear { get; set; }
 
 		public DateTime? ValidFrom
 		{
@@ -85,11 +56,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		[ContentProperty("Issue Number", 270)]
-		public string IssueNumber
-		{
-			get { return GetDetail("IssueNumber", string.Empty); }
-			set { SetDetail("IssueNumber", value); }
-		}
+		[TextBoxEditor("Issue Number", 270)]
+		public string IssueNumber { get; set; }
 	}
 }

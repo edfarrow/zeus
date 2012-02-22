@@ -38,7 +38,7 @@ namespace Zeus.Design.Editors
 			return null;
 		}
 
-		protected override object GetValue(IEditableObject item)
+		protected override object GetValue(ContentItem item)
 		{
 			ContentItem linkedItem = (ContentItem) item[Name];
 			if (linkedItem != null)
@@ -46,7 +46,7 @@ namespace Zeus.Design.Editors
 			return string.Empty;
 		}
 
-        public override bool UpdateItem(IEditableObject item, Control editor)
+        public override bool UpdateItem(ContentItem item, Control editor)
         {
             ListControl ddl = (ListControl)editor;
             object one = GetValue(ddl);
@@ -78,7 +78,7 @@ namespace Zeus.Design.Editors
             return false;
         }
 
-		protected override ListItem[] GetListItems(IEditableObject item)
+		protected override ListItem[] GetListItems(ContentItem item)
 		{
 			IQueryable<ContentItem> items = Context.Current.Finder.QueryItems();
 			if (TypeFilter != null)

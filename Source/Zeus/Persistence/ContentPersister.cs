@@ -58,7 +58,7 @@ namespace Zeus.Persistence
 		{
 			return Utility.InvokeEvent(ItemCopying, this, source, destination, (copiedItem, destinationItem) =>
 			{
-				ContentItem cloned = source.Clone(includeChildren);
+				ContentItem cloned = source.Clone();
 
 				cloned.Parent = destination;
 				Save(cloned);

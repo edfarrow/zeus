@@ -14,12 +14,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.Lorry; }
 		}
 
-		[ContentProperty("Price", 200)]
-		[TextBoxEditor(Required = true, EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
-		public virtual decimal Price
-		{
-			get { return GetDetail("Price", 0m); }
-			set { SetDetail("Price", value); }
-		}
+		[TextBoxEditor("Price", 200, Required = true, EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
+		public virtual decimal Price { get; set; }
 	}
 }

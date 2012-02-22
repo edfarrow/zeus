@@ -1,5 +1,5 @@
 using Ext.Net;
-using Zeus.ContentProperties;
+using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 
@@ -14,11 +14,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return Utility.GetCooliteIconUrl(Icon.MoneyPound); }
 		}
 
-		[XhtmlStringContentProperty("Extra Information", 210)]
-		public string ExtraInformation
-		{
-			get { return GetDetail("ExtraInformation", string.Empty); }
-			set { SetDetail("ExtraInformation", value); }
-		}
+		[HtmlTextBoxEditor("Extra Information", 210)]
+		public string ExtraInformation { get; set; }
 	}
 }

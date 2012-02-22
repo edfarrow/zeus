@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
-using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
@@ -19,12 +19,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		string ILink.Contents
 		{
-			get { return Variations.Cast<Variation>().Join(v => v.Title, ", "); }
+			get { return Variations.Join(v => v.Title, ", "); }
 		}
 
-		public PropertyCollection Variations
-		{
-			get { return GetDetailCollection("Variations", true); }
-		}
+		public virtual List<Variation> Variations { get; set; }
 	}
 }

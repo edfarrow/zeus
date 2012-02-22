@@ -15,18 +15,10 @@ namespace Zeus.Templates.ContentTypes
 			get { return Utility.GetCooliteIconUrl(Ext.Net.Icon.Key); }
 		}
 
-		[ContentProperty("Forgotten Password Page", 100)]
-		public virtual PageContentItem ForgottenPasswordPage
-		{
-			get { return GetDetail<PageContentItem>("ForgottenPasswordPage", null); }
-			set { SetDetail("ForgottenPasswordPage", value); }
-		}
+		[LinkedItemDropDownListEditor("Forgotten Password Page", 100)]
+		public virtual PageContentItem ForgottenPasswordPage { get; set; }
 
-		[ContentProperty("Registration Page", 110)]
-		public virtual PageContentItem RegistrationPage
-		{
-			get { return GetDetail<PageContentItem>("RegistrationPage", null); }
-			set { SetDetail("RegistrationPage", value); }
-		}
+		[LinkedItemDropDownListEditor("Registration Page", 110)]
+		public virtual PageContentItem RegistrationPage { get; set; }
 	}
 }

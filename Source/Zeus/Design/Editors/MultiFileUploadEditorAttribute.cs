@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Web.UI;
+using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
-using Zeus.ContentProperties;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
@@ -19,16 +19,13 @@ namespace Zeus.Design.Editors
 			
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, PropertyData existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, object existingDetail, Control editor, out object newDetail)
 		{
 			FancyFileUpload fileEditor = (FancyFileUpload)editor;
-			LinkProperty existingFileProperty = existingDetail as LinkProperty;
 			if (fileEditor.HasNewOrChangedFile)
 			{
 				// Add new file.
-				File newFile = null;
-				if (existingFileProperty != null)
-					newFile = existingFileProperty.LinkedItem as File;
+				File newFile = existingDetail as File;
 				if (newFile == null)
 				{
 					newFile = CreateNewItem();
@@ -42,8 +39,9 @@ namespace Zeus.Design.Editors
 				string uploadedFile = Path.Combine(uploadFolder, fileEditor.FileName);
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
-					newFile.Data = fs.ReadAllBytes();
-					newFile.ContentType = MimeUtility.GetMimeType(newFile.Data);
+					byte[] data = fs.ReadAllBytes();
+					fs.Position = 0;
+					newFile.Data = Attachment.Create(fs, fileEditor.FileName, MimeUtility.GetMimeType(data));
 					newFile.Size = fs.Length;
 				}
 
@@ -53,7 +51,7 @@ namespace Zeus.Design.Editors
 
 				newDetail = newFile;
 
-				if (existingFileProperty != null)
+				if (existingDetail != null)
 					HandleUpdatedFile(newFile);
 			}
 			else

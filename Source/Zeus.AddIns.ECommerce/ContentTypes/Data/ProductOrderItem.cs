@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using MongoDB.Bson;
-using Zeus.ContentProperties;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
@@ -11,25 +11,15 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return ProductTitle; }
 		}
 
-		public ObjectId WeakProductLink
+		public ObjectId WeakProductLink { get; set; }
+
+		public Pages.Product Product
 		{
-			get { return GetDetail("WeakProductLink", ObjectId.Empty); }
-            set { SetDetail("WeakProductLink", value); }
+			get { return (Pages.Product) Context.Persister.Get(WeakProductLink); }
 		}
 
-        public Zeus.AddIns.ECommerce.ContentTypes.Pages.Product Product {
-            get { return (Zeus.AddIns.ECommerce.ContentTypes.Pages.Product)Zeus.Context.Persister.Get(WeakProductLink); }
-        }
+		public string ProductTitle { get; set; }
 
-		public string ProductTitle
-		{
-			get { return GetDetail("ProductTitle", string.Empty); }
-			set { SetDetail("ProductTitle", value); }
-		}
-
-		public PropertyCollection Variations
-		{
-			get { return GetDetailCollection("Variations", true); }
-		}
+		public virtual List<string> Variations { get; set; }
 	}
 }

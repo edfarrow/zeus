@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.ContentTypes;
+using Ormongo;
 using Zeus.Design.Editors;
 
 namespace Zeus.FileSystem.Details
@@ -35,15 +35,14 @@ namespace Zeus.FileSystem.Details
 			}
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			CompositeEditor ce = editor as CompositeEditor;
 			File f = item as File;
 			if (ce.Upload.PostedFile != null && ce.Upload.PostedFile.ContentLength > 0)
 			{
 				f.Name = System.IO.Path.GetFileName(ce.Upload.PostedFile.FileName);
-				f.Data = ce.Upload.FileBytes;
-				f.ContentType = ce.Upload.PostedFile.ContentType;
+				f.Data = Attachment.Create(ce.Upload.PostedFile.InputStream, f.Name, ce.Upload.PostedFile.ContentType);
 				f.Size = ce.Upload.PostedFile.ContentLength;
 				return true;
 			}
@@ -54,7 +53,7 @@ namespace Zeus.FileSystem.Details
 			return false;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			CompositeEditor ce = editor as CompositeEditor;
 			File f = item as File;

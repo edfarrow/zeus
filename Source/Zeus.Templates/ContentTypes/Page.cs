@@ -1,4 +1,3 @@
-using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
@@ -12,11 +11,7 @@ namespace Zeus.Templates.ContentTypes
 	[AllowedChildren(typeof(File), typeof(Image))]
 	public class Page : BasePage
 	{
-		[XhtmlStringContentProperty("Content", 30), HtmlTextBoxEditor(ContainerName = "Content")]
-		public virtual string Content
-		{
-			get { return GetDetail("Content", string.Empty); }
-			set { SetDetail("Content", value); }
-		}
+		[HtmlTextBoxEditor("Content", 30, ContainerName = "Content")]
+		public virtual string Content { get; set; }
 	}
 }

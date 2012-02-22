@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Web.UI.WebControls;
 using Zeus.Security;
-using Zeus.Serialization;
+//using Zeus.Serialization;
 
 namespace Zeus.Admin.Plugins.ImportExport
 {
@@ -26,11 +26,12 @@ namespace Zeus.Admin.Plugins.ImportExport
 
 		protected void btnExport_Command(object sender, CommandEventArgs e)
 		{
-			ExportOptions options = ExportOptions.Default;
-			if (chkDefinedDetails.Checked)
-				options |= ExportOptions.OnlyDefinedProperties;
+			throw new NotImplementedException();
+			//ExportOptions options = ExportOptions.Default;
+			//if (chkDefinedDetails.Checked)
+			//    options |= ExportOptions.OnlyDefinedProperties;
 
-			Engine.Resolve<Exporter>().Export(SelectedItem, options, Response);
+			//Engine.Resolve<Exporter>().Export(SelectedItem, options, Response);
 		}
 
 		protected void btnVerify_Click(object sender, EventArgs e)
@@ -38,114 +39,77 @@ namespace Zeus.Admin.Plugins.ImportExport
 			UploadedFilePath = Path.GetTempFileName() + Path.GetExtension(fuImport.PostedFile.FileName);
 			fuImport.PostedFile.SaveAs(UploadedFilePath);
 
-			try
-			{
-				IImportRecord record = Engine.Resolve<Importer>().Read(UploadedFilePath);
-				importedItems.CurrentItem = record.RootItem;
-				ShowErrors(record);
-			}
-			catch (WrongVersionException)
-			{
-				using (Stream s = File.OpenRead(UploadedFilePath))
-				{
-					FallbackXmlReader xr = new FallbackXmlReader(Zeus.Context.Current);
-					importedItems.CurrentItem = xr.Read(s);
-				}
-			}
-			uploadFlow.ActiveViewIndex = 1;
-			uploadFlow.Views[1].DataBind();
+			throw new NotImplementedException();
+			//IImportRecord record = Engine.Resolve<Importer>().Read(UploadedFilePath);
+			//importedItems.CurrentItem = record.RootItem;
+			//ShowErrors(record);
+
+			//uploadFlow.ActiveViewIndex = 1;
+			//uploadFlow.Views[1].DataBind();
 		}
 
 		protected void btnUploadImport_Click(object sender, EventArgs e)
 		{
-			Importer importer = Engine.Resolve<Importer>();
-
-			IImportRecord record;
-			try
-			{
-				record = importer.Read(fuImport.FileContent, fuImport.FileName);
-			}
-			catch (WrongVersionException)
-			{
-				FallbackXmlReader xr = new FallbackXmlReader(Zeus.Context.Current);
-				ContentItem item = xr.Read(fuImport.FileContent);
-				record = CreateRecord(item);
-				ShowErrors(record);
-			}
-
-			Import(importer, record);
+			throw new NotImplementedException();
+			//Importer importer = Engine.Resolve<Importer>();
+			//IImportRecord record = importer.Read(fuImport.FileContent, fuImport.FileName);
+			//Import(importer, record);
 		}
 
 		protected void btnImportUploaded_Click(object sender, EventArgs e)
 		{
-			Importer importer = Engine.Resolve<Importer>();
+			throw new NotImplementedException();
+			//Importer importer = Engine.Resolve<Importer>();
 
-			IImportRecord record;
-			try
-			{
-				record = importer.Read(UploadedFilePath);
-				ShowErrors(record);
-			}
-			catch (WrongVersionException)
-			{
-				FallbackXmlReader xr = new FallbackXmlReader(Zeus.Context.Current);
-				ContentItem item = xr.Read(File.OpenRead(UploadedFilePath));
-				record = CreateRecord(item);
-			}
+			//IImportRecord record = importer.Read(UploadedFilePath);
+			//ShowErrors(record);
 
-			Import(importer, record);
+			//Import(importer, record);
 		}
 
-		private static IImportRecord CreateRecord(ContentItem item)
-		{
-			ReadingJournal rj = new ReadingJournal();
-			rj.Report(item);
-			return rj;
-		}
+		//private void Import(Importer importer, IImportRecord record)
+		//{
+		//    try
+		//    {
+		//        if (chkSkipRoot.Checked)
+		//        {
+		//            importer.Import(record, SelectedItem, ImportOptions.Children);
+		//            Refresh(SelectedItem, AdminFrame.Both, false);
+		//        }
+		//        else
+		//        {
+		//            importer.Import(record, SelectedItem, ImportOptions.AllItems);
+		//            Refresh(record.RootItem, AdminFrame.Both, false);
+		//        }
 
-		private void Import(Importer importer, IImportRecord record)
-		{
-			try
-			{
-				if (chkSkipRoot.Checked)
-				{
-					importer.Import(record, SelectedItem, ImportOptions.Children);
-					Refresh(SelectedItem, AdminFrame.Both, false);
-				}
-				else
-				{
-					importer.Import(record, SelectedItem, ImportOptions.AllItems);
-					Refresh(record.RootItem, AdminFrame.Both, false);
-				}
+		//        ShowErrors(record);
+		//    }
+		//    catch (ZeusException ex)
+		//    {
+		//        cvImport.ErrorMessage = ex.Message;
+		//        cvImport.IsValid = false;
+		//        btnImportUploaded.Enabled = false;
+		//    }
+		//    finally
+		//    {
+		//        if (File.Exists(UploadedFilePath))
+		//            File.Delete(UploadedFilePath);
+		//    }
+		//}
 
-				ShowErrors(record);
-			}
-			catch (ZeusException ex)
-			{
-				cvImport.ErrorMessage = ex.Message;
-				cvImport.IsValid = false;
-				btnImportUploaded.Enabled = false;
-			}
-			finally
-			{
-				if (File.Exists(UploadedFilePath))
-					File.Delete(UploadedFilePath);
-			}
-		}
+		//void ShowErrors(IImportRecord record)
+		//{
+		//    if (record.Errors.Count > 0)
+		//    {
+		//        StringBuilder errorText = new StringBuilder("<ul>");
+		//        foreach (Exception ex in record.Errors)
+		//            errorText.Append("<li>").Append(ex.Message).Append("</li>");
+		//        errorText.Append("</ul>");
 
-		void ShowErrors(IImportRecord record)
-		{
-			if (record.Errors.Count > 0)
-			{
-				StringBuilder errorText = new StringBuilder("<ul>");
-				foreach (Exception ex in record.Errors)
-					errorText.Append("<li>").Append(ex.Message).Append("</li>");
-				errorText.Append("</ul>");
-
-				cvImport.IsValid = false;
-				cvImport.ErrorMessage = errorText.ToString();
-			}
-		}
+		//        cvImport.IsValid = false;
+		//        cvImport.ErrorMessage = errorText.ToString();
+		//    }
+		//}
 
 		protected void btnImport_Click(object sender, EventArgs e)
 		{

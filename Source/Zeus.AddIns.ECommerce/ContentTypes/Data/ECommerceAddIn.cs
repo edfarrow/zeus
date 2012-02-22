@@ -9,7 +9,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(AddInContainer))]
 	public class ECommerceAddIn : DataContentItem, IECommerceConfiguration, ISelfPopulator
 	{
-		private const string ORDERS_NAME = "orders";
+		private const string OrdersName = "orders";
 
 		public ECommerceAddIn()
 		{
@@ -22,37 +22,25 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.Plugin; }
 		}
 
-        [ContentProperty("Confirmation Email From", 220)]
-		public string ConfirmationEmailFrom
-		{
-			get { return GetDetail("ConfirmationEmailFrom", string.Empty); }
-			set { SetDetail("ConfirmationEmailFrom", value); }
-		}
+		[TextBoxEditor("Confirmation Email From", 220)]
+		public string ConfirmationEmailFrom { get; set; }
 
-		[ContentProperty("Confirmation Email Text", 221), TextBoxEditor(TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
-		public string ConfirmationEmailText
-		{
-			get { return GetDetail("ConfirmationEmailText", string.Empty); }
-			set { SetDetail("ConfirmationEmailText", value); }
-		}
+		[TextBoxEditor("Confirmation Email Text", 221, TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
+		public string ConfirmationEmailText { get; set; }
 
-		[ContentProperty("Vendor Email", 222, Description = "This is the email address which will receive the vendor's copy of the order confirmation email.")]
-		public string VendorEmail
-		{
-			get { return GetDetail("VendorEmail", string.Empty); }
-			set { SetDetail("VendorEmail", value); }
-		}
+		[TextBoxEditor("Vendor Email", 222, Description = "This is the email address which will receive the vendor's copy of the order confirmation email.")]
+		public string VendorEmail { get; set; }
 
 		public OrderContainer Orders
 		{
-			get { return GetChild(ORDERS_NAME) as OrderContainer; }
+			get { return GetChild(OrdersName) as OrderContainer; }
 		}
 
 		void ISelfPopulator.Populate()
 		{
 			OrderContainer orders = new OrderContainer
 			{
-				Name = ORDERS_NAME,
+				Name = OrdersName,
 				Title = "Orders"
 			};
 			orders.AddTo(this);

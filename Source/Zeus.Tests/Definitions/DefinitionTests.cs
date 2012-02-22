@@ -16,7 +16,7 @@ namespace Zeus.Tests.Definitions
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();
 			ITypeFinder typeFinder = new TypeFinder(assemblyFinder);
-			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, null, null, null, null);
+			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, null, null, null);
 			_definitionManager = new ContentTypeManager(contentTypeBuilder, null);
 		}
 

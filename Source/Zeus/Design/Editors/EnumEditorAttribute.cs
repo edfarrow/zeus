@@ -29,7 +29,7 @@ namespace Zeus.Design.Editors
 			_enumType = enumType;
 		}
 
-		protected override ListItem[] GetListItems(IEditableObject contentItem)
+		protected override ListItem[] GetListItems(ContentItem contentItem)
 		{
 			Array values = Enum.GetValues(_enumType);
 			ListItem[] items = new ListItem[values.Length];
@@ -42,7 +42,7 @@ namespace Zeus.Design.Editors
 			return items;
 		}
 
-		protected override object GetValue(IEditableObject item)
+		protected override object GetValue(ContentItem item)
 		{
 			object value = item[Name];
 
@@ -76,7 +76,7 @@ namespace Zeus.Design.Editors
 			return null;
 		}
 
-        public override bool UpdateItem(IEditableObject item, Control editor)
+        public override bool UpdateItem(ContentItem item, Control editor)
         {
             ListControl ddl = (ListControl)editor;
             string selectedText = "";

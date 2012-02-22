@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
-using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Web.Security.Details;
@@ -37,65 +37,51 @@ namespace Zeus.Security
 			set { Name = value; }
 		}
 
-		[ContentProperty("Change Password", 30, Description = "Passwords are encrypted and cannot be viewed, but they can be changed.")]
-		[PasswordEditor]
-		public virtual string Password
-		{
-			get { return (string) (GetDetail("Password") ?? string.Empty); }
-			set { SetDetail("Password", value, string.Empty); }
-		}
+		[PasswordEditor("Change Password", 30, Description = "Passwords are encrypted and cannot be viewed, but they can be changed.")]
+		public virtual string Password { get; set; }
 
-		[ContentProperty("Email", 40)]
-		public virtual string Email
-		{
-			get { return (string) (GetDetail("Email") ?? string.Empty); }
-			set { SetDetail("Email", value, string.Empty); }
-		}
+		[TextBoxEditor("Email", 40)]
+		public virtual string Email { get; set; }
 
-		[RolesEditor(Title="Roles", SortOrder = 50)]
-		public virtual PropertyCollection RolesInternal
-		{
-			get { return GetDetailCollection("RolesInternal", true); }
-		}
+		[RolesEditor(Title = "Roles", SortOrder = 50)]
+		public virtual List<Role> RolesInternal { get; set; }
 
 		public string[] Roles
 		{
-			get { return RolesInternal.Cast<Role>().Select(r => r.Name).ToArray(); }
+			get { return RolesInternal.Select(r => r.Name).ToArray(); }
 		}
 
-		[ContentProperty("Nonce", 141)]
-		public virtual string Nonce
+		[TextBoxEditor("Nonce", 141)]
+		public virtual string Nonce { get; set; }
+
+		[CheckBoxEditor("Verified", "", 142)]
+		public bool Verified { get; set; }
+
+		private DateTime? _lastLoginDate;
+
+		[DateEditor("Last Login Date", 160)]
+		public DateTime? LastLoginDate
 		{
-			get { return GetDetail("Nonce", string.Empty); }
-			set { SetDetail("Nonce", value); }
+			get { return _lastLoginDate ?? Published; }
+			set { _lastLoginDate = value; }
 		}
 
-		[ContentProperty("Verified", 142)]
-		public virtual bool Verified
+		private DateTime? _lastActivityDate;
+
+		[DateEditor("Last Activity Date", 162)]
+		public DateTime? LastActivityDate
 		{
-			get { return GetDetail("Verified", true); }
-			set { SetDetail("Verified", value); }
+			get { return _lastActivityDate ?? Published; }
+			set { _lastActivityDate = value; }
 		}
 
-		[ContentProperty("Last Login Date", 160)]
-		public virtual DateTime LastLoginDate
-		{
-			get { return (DateTime) (GetDetail("LastLoginDate") ?? Published.Value); }
-			set { SetDetail("LastLoginDate", value, Published.Value); }
-		}
+		private DateTime? _lastPasswordChangedDate;
 
-		[ContentProperty("Last Activity Date", 162)]
-		public virtual DateTime LastActivityDate
+		[DateEditor("Last Password Changed Date", 164)]
+		public DateTime? LastPasswordChangedDate
 		{
-			get { return (DateTime) (GetDetail("LastActivityDate") ?? Published.Value); }
-			set { SetDetail("LastActivityDate", value, Published.Value); }
-		}
-
-		[ContentProperty("Last Password Changed Date", 164)]
-		public virtual DateTime LastPasswordChangedDate
-		{
-			get { return (DateTime) (GetDetail("LastPasswordChangedDate") ?? Published.Value); }
-			set { SetDetail("LastPasswordChangedDate", value, Published.Value); }
+			get { return _lastPasswordChangedDate ?? Published; }
+			set { _lastPasswordChangedDate = value; }
 		}
 
 		public override string IconUrl
@@ -116,5 +102,10 @@ namespace Zeus.Security
 
             }
         }
+
+		public User()
+		{
+			Verified = true;
+		}
 	}
 }

@@ -9,10 +9,8 @@ using MongoDB.Bson;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
-using Zeus.Serialization;
 using Zeus.Web;
 using Zeus.Web.Security;
-using AuthorizationRule=Zeus.Security.AuthorizationRule;
 
 namespace Zeus.Installation
 {
@@ -25,7 +23,7 @@ namespace Zeus.Installation
 		#region Fields
 
 		private readonly IContentTypeManager _contentTypeManager;
-		private readonly Importer _importer;
+		//private readonly Importer _importer;
 		private readonly IPersister _persister;
 		private readonly IFinder _finder;
 		private readonly ICredentialService _credentialService;
@@ -36,12 +34,12 @@ namespace Zeus.Installation
 
 		#region Constructor
 
-		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, Importer importer, IPersister persister,
+		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, /*Importer importer,*/ IPersister persister,
 			IFinder finder, ICredentialService credentialService, AdminSection adminConfig)
 		{
 			_host = host;
 			_contentTypeManager = contentTypeManager;
-			_importer = importer;
+			//_importer = importer;
 			_persister = persister;
 			_finder = finder;
 			_credentialService = credentialService;
@@ -252,10 +250,11 @@ namespace Zeus.Installation
 
 		public ContentItem InsertExportFile(Stream stream, string filename)
 		{
-			IImportRecord record = _importer.Read(stream, filename);
-			_importer.Import(record, null, ImportOptions.AllItems);
+			throw new NotImplementedException();
+			//IImportRecord record = _importer.Read(stream, filename);
+			//_importer.Import(record, null, ImportOptions.AllItems);
 
-			return record.RootItem;
+			//return record.RootItem;
 		}
 
 		#endregion

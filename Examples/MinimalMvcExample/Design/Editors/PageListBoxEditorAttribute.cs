@@ -53,7 +53,7 @@ namespace Zeus.Examples.MinimalMvcExample.Design.Editors
                 .ToList();
         }
 
-        protected override object GetValue(IEditableObject item)
+        protected override object GetValue(ContentItem item)
         {
             string [] result = new string [0];
 
@@ -64,7 +64,7 @@ namespace Zeus.Examples.MinimalMvcExample.Design.Editors
             return result;
         }
 
-        protected override ListItem[] GetListItems(IEditableObject item)
+        protected override ListItem[] GetListItems(ContentItem item)
         {
             return Zeus.Find.EnumerateAccessibleChildren(Zeus.Find.StartPage).NavigablePages()
                 .ToList()

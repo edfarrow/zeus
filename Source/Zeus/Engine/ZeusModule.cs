@@ -3,7 +3,6 @@ using Ninject.Modules;
 using Zeus.Admin;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.FileSystem;
 using Zeus.Installation;
@@ -12,7 +11,6 @@ using Zeus.Net;
 using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
-using Zeus.Serialization;
 using Zeus.Web;
 using Zeus.Web.Caching;
 using Zeus.Web.Hosting;
@@ -31,9 +29,6 @@ namespace Zeus.Engine
 			// Admin
 			Bind<IAdminManager>().To<AdminManager>().InSingletonScope();
 			Bind<Navigator>().To<Navigator>().InSingletonScope();
-
-			// Content Properties
-			Bind<IContentPropertyManager>().To<ContentPropertyManager>().InSingletonScope();
 
 			// Content Types
 			Bind(typeof(AttributeExplorer<>)).To(typeof(AttributeExplorer<>)).InSingletonScope();
@@ -73,11 +68,11 @@ namespace Zeus.Engine
 			Bind<ISecurityEnforcer>().To<SecurityEnforcer>().InSingletonScope();
 			Bind<ISecurityManager>().To<SecurityManager>().InSingletonScope();
 
-			// Serialization
-			Bind<Exporter>().To<GZipExporter>().InSingletonScope();
-			Bind<ItemXmlWriter>().To<ItemXmlWriter>().InSingletonScope();
-			Bind<Importer>().To<GZipImporter>().InSingletonScope();
-			Bind<ItemXmlReader>().To<ItemXmlReader>().InSingletonScope();
+			//// Serialization
+			//Bind<Exporter>().To<GZipExporter>().InSingletonScope();
+			//Bind<ItemXmlWriter>().To<ItemXmlWriter>().InSingletonScope();
+			//Bind<Importer>().To<GZipImporter>().InSingletonScope();
+			//Bind<ItemXmlReader>().To<ItemXmlReader>().InSingletonScope();
 
 			// Web
 			Bind<IErrorHandler>().To<ErrorHandler>().InSingletonScope();

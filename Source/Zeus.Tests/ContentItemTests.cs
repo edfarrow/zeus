@@ -12,11 +12,7 @@ namespace Zeus.Tests
 
 		private class MyPage : ContentItem
 		{
-			public virtual string MyProperty
-			{
-				get { return (string)(GetDetail("MyProperty") ?? null); }
-				set { SetDetail("MyProperty", value); }
-			}
+			public virtual string MyProperty { get; set; }
 		}
 
 		#region Sanity checks on AncestryDocument<T> properties

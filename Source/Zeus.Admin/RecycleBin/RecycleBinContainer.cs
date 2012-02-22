@@ -1,7 +1,8 @@
 using System.Linq;
 using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
+using MongoDB.Bson.Serialization.Attributes;
 using Zeus.ContentTypes;
+using Zeus.Design.Editors;
 using Zeus.Installation;
 using Zeus.Integrity;
 using Zeus.Web.Hosting;
@@ -15,19 +16,13 @@ namespace Zeus.Admin.RecycleBin
 	[NotThrowable]
 	public class RecycleBinContainer : ContentItem, INode, IRecycleBin
 	{
-		[ContentProperty("Enabled", 80)]
-		public virtual bool Enabled
-		{
-			get { return GetDetail("Enabled", true); }
-			set { SetDetail("Enabled", value); }
-		}
+		[CheckBoxEditor("Enabled", "", 80)]
+		[BsonDefaultValue(true)]
+		public virtual bool Enabled { get; set; }
 
-		[ContentProperty("Number of days to keep deleted items", 100)]
-		public virtual int KeepDays
-		{
-			get { return GetDetail("KeepDays", 31); }
-			set { SetDetail("KeepDays", value); }
-		}
+		[TextBoxEditor("Number of days to keep deleted items", 100, 10)]
+		[BsonDefaultValue(31)]
+		public virtual int KeepDays { get; set; }
 
 		string INode.PreviewUrl
 		{

@@ -14,11 +14,11 @@ namespace Zeus.FileSystem.Images
     public class CroppedImage : Image, AcceptArgsFromChildEditor
     {
         [CroppedImageUploadEditor("CroppedImage", 100)]
-        public override byte[] Data
-        {
-            get { return base.Data; }
-            set { base.Data = value; }
-        }
+		public override Ormongo.Attachment Data
+		{
+			get { return base.Data; }
+			set { base.Data = value; }
+		}
 
         /* These are the base settings - not sure where they should sit...possibly in the editor code? */
         /*
@@ -38,29 +38,10 @@ namespace Zeus.FileSystem.Images
         */
         /* Vals from jcrop... */
 
-        public virtual int TopLeftXVal
-        {
-            get { return GetDetail("TopLeftXVal", 0); }
-            set { SetDetail("TopLeftXVal", value); }
-        }
-
-        public virtual int TopLeftYVal
-        {
-            get { return GetDetail("TopLeftYVal", 0); }
-            set { SetDetail("TopLeftYVal", value); }
-        }
-
-        public virtual int CropWidth
-        {
-            get { return GetDetail("CropWidth", 0); }
-            set { SetDetail("CropWidth", value); }
-        }
-
-        public virtual int CropHeight
-        {
-            get { return GetDetail("CropHeight", 0); }
-            set { SetDetail("CropHeight", value); }
-        }
+		public int TopLeftXVal { get; set; }
+		public int TopLeftYVal { get; set; }
+		public int CropWidth { get; set; }
+		public int CropHeight { get; set; }
 
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
         {
@@ -70,8 +51,7 @@ namespace Zeus.FileSystem.Images
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
             //first construct the crop
-            var imageSource = new ZeusImageSource();
-            imageSource.ContentID = this.ID;
+            var imageSource = new OrmongoImageSource(Data);
 
             if (this.Data == null)
                 return "";
@@ -150,17 +130,8 @@ namespace Zeus.FileSystem.Images
         
         #region AcceptArgsFromChildEditor Members
 
-        public string arg1
-        {
-            get { return GetDetail("arg1", string.Empty); }
-            set { SetDetail("arg1", value); }
-        }
-
-        public string arg2
-        {
-            get { return GetDetail("arg2", string.Empty); }
-            set { SetDetail("arg2", value); }
-        }
+    	public string arg1 { get; set; }
+		public string arg2 { get; set; }
 
         public int FixedWidthValue
         {

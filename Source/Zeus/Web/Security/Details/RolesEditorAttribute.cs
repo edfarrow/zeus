@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.ContentProperties;
-using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 
 namespace Zeus.Web.Security.Details
 {
 	public class RolesEditorAttribute : AbstractEditorAttribute
 	{
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			CheckBoxList cbl = editor as CheckBoxList;
 			List<Items.Role> roles = new List<Items.Role>();
@@ -19,17 +17,15 @@ namespace Zeus.Web.Security.Details
 					Items.Role role = Context.Current.Resolve<IWebSecurityManager>().GetRole(li.Value);
 					roles.Add(role);
 				}
-
-			PropertyCollection dc = item.GetDetailCollection(Name, true);
-			dc.Replace(roles);
+			item[Name] = roles;
 
 			return true;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			CheckBoxList cbl = editor as CheckBoxList;
-			PropertyCollection dc = item.GetDetailCollection(Name, false);
+			var dc = item[Name] as List<Items.Role>;
 			if (dc != null)
 			{
 				foreach (Items.Role role in dc)

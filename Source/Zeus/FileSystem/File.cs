@@ -1,4 +1,5 @@
 ﻿using Ext.Net;
+using Ormongo;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -51,36 +52,14 @@ namespace Zeus.FileSystem
 		}
 
 		[FileUploadEditor("File", 100)]
-		public virtual byte[] Data
-		{
-			get { return GetDetail<byte[]>("Data", null); }
-			set { SetDetail("Data", value); }
-		}
+		public virtual Attachment Data { get; set; }
 
-		public string ContentType
-		{
-			get { return GetDetail<string>("ContentType", null); }
-			set { SetDetail("ContentType", value); }
-		}
+		public long? Size { get; set; }
 
-		public long? Size
-		{
-			get { return GetDetail<long?>("Size", null); }
-			set { SetDetail("Size", value); }
-		}
+		[TextBoxEditor("Caption", 200)]
+		public string Caption { get; set; }
 
-		[ContentProperty("Caption", 200)]
-		public virtual string Caption
-		{
-			get { return GetDetail("Caption", string.Empty); }
-			set { SetDetail("Caption", value); }
-		}
-
-		public string FileName
-		{
-			get { return GetDetail("FileName", string.Empty); }
-			set { SetDetail("FileName", value); }
-		}
+		public string FileName { get; set; }
 
 		public override bool IsEmpty()
 		{

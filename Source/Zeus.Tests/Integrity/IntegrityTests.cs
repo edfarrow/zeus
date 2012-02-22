@@ -2,7 +2,6 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 using Zeus.BaseLibrary.Reflection;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
@@ -39,7 +38,7 @@ namespace Zeus.Tests.Integrity
 			ITypeFinder typeFinder = CreateTypeFinder();
 			ContentTypeBuilder builder = new ContentTypeBuilder(typeFinder, 
 				new EditableHierarchyBuilder<IEditor>(), new AttributeExplorer<IEditor>(),
-				new AttributeExplorer<IContentProperty>(), new AttributeExplorer<IEditorContainer>());
+				new AttributeExplorer<IEditorContainer>());
 			IItemNotifier notifier = mocks.DynamicMock<IItemNotifier>();
 			mocks.Replay(notifier);
 			definitions = new ContentTypeManager(builder, notifier);

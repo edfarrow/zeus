@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.ContentProperties;
-using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors
 {
@@ -23,23 +21,22 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			CheckBoxList cbl = (CheckBoxList) editor;
 			IEnumerable selected = GetSelectedItems(cbl.Items.Cast<ListItem>().Where(li => li.Selected));
-			PropertyCollection dc = item.GetDetailCollection(Name, true);
-			dc.Replace(selected);
+			item[Name] = selected;
 			return true;
 		}
 
 		protected abstract IEnumerable GetSelectedItems(IEnumerable<ListItem> selectedListItems);
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			CheckBoxList cbl = (CheckBoxList) editor;
 			cbl.Items.AddRange(GetListItems(item));
 
-			PropertyCollection dc = item.GetDetailCollection(Name, false);
+			var dc = item[Name] as IEnumerable;
 			if (dc != null)
 			{
 				foreach (object detail in dc)
@@ -80,6 +77,6 @@ namespace Zeus.Design.Editors
 			return new CheckBoxList();
 		}
 
-		protected abstract ListItem[] GetListItems(IEditableObject item);
+		protected abstract ListItem[] GetListItems(ContentItem item);
 	}
 }

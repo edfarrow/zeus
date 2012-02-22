@@ -6,10 +6,10 @@ using Zeus.ContentTypes;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ItemView : WebControl, INamingContainer, IEditableObjectEditor
+	public abstract class ItemView : WebControl, INamingContainer, ContentItemEditor
 	{
 		private ITypeDefinition _currentTypeDefinition;
-		private IEditableObject _currentItem;
+		private ContentItem _currentItem;
 
 		public event EventHandler<ItemViewEditableObjectEventArgs> ItemCreating;
 		public event EventHandler<ItemViewTypeDefinitionEventArgs> DefinitionCreating;
@@ -23,7 +23,7 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		/// <summary>Gets or sets the item to edit with this form.</summary>
-		public virtual IEditableObject CurrentItem
+		public virtual ContentItem CurrentItem
 		{
 			get
 			{

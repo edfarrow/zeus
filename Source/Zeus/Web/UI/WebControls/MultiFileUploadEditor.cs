@@ -1,5 +1,4 @@
 ﻿using System.Web.UI;
-using Zeus.ContentProperties;
 using Zeus.FileSystem;
 
 namespace Zeus.Web.UI.WebControls
@@ -15,15 +14,13 @@ namespace Zeus.Web.UI.WebControls
 
 		#endregion
 
-		protected override Control CreateDetailEditor(int id, PropertyData detail)
+		protected override Control CreateDetailEditor(int id, object detail)
 		{
-			LinkProperty linkDetail = detail as LinkProperty;
-
 			FancyFileUpload fileUpload = CreateEditor();
 			fileUpload.ID = ID + "_upl_" + id;
 
-			if (linkDetail != null)
-				fileUpload.CurrentFileName = ((File) linkDetail.LinkedItem).FileName;
+			if (detail != null)
+				fileUpload.CurrentFileName = ((File) detail).FileName;
 
 			return fileUpload;
 		}

@@ -22,13 +22,13 @@ namespace Zeus.Design.Editors
 			return range;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			TimePicker range = (TimePicker) editor;
 			range.Text = (string) item[Name];
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			TimePicker range = (TimePicker) editor;
 			if ((string) item[Name] != range.Text)

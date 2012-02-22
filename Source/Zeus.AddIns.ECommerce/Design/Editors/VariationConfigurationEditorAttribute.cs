@@ -33,7 +33,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 			return checkBoxList;
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			CheckBoxList checkBoxList = (CheckBoxList)editor;
 			Product product = (Product)item;
@@ -47,7 +47,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 				VariationPermutation variationPermutation = new VariationPermutation();
 				ObjectId[] variationIDs = listItem.Value.Split(',').Select(s => ObjectId.Parse(s)).ToArray();
 				foreach (ObjectId variationID in variationIDs)
-					variationPermutation.Variations.Add(Context.Persister.Get(variationID));
+					variationPermutation.Variations.Add((Variation) Context.Persister.Get(variationID));
 
 				VariationConfiguration variationConfiguration = new VariationConfiguration
 				{
@@ -60,7 +60,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 			return true;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			// Create editors for each of the possible permutations of variations.
 			CheckBoxList checkBoxList = (CheckBoxList) editor;

@@ -17,13 +17,8 @@ namespace Zeus.Web
 			set { base.Title = value; }
 		}
 
-		[ContentProperty("Page Title", 11, Description = "Used in the &lt;h1&gt; element on the page", EditorContainerName = "Titles")]
-		[PageTitleEditor]
-		public virtual string PageTitle
-		{
-			get { return GetDetail("PageTitle", Title); }
-			set { SetDetail("PageTitle", value); }
-		}
+		[PageTitleEditor("Page Title", 11, Description = "Used in the &lt;h1&gt; element on the page", ContainerName = "Titles")]
+		public virtual string PageTitle { get; set; }
 
 		[NameEditor("URL", 20, Required = true, Shared = false, ContainerName = "Titles")]
 		public override string Name
@@ -32,7 +27,7 @@ namespace Zeus.Web
 			set { base.Name = value; }
 		}
 
-		[ContentProperty("Visible in Menu", 25)]
+		[CheckBoxEditor("Visible in Menu", "", 25)]
 		public override bool Visible
 		{
 			get { return base.Visible; }

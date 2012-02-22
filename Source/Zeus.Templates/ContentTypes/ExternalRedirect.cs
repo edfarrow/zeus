@@ -22,12 +22,8 @@ namespace Zeus.Templates.ContentTypes
 			return RedirectAddress;
 		}
 
-		[TextBoxEditor("Redirect to", 31, Required = true, ContainerName = "Content", Description="Please make sure you enter the complete address including the http prefix", Shared=true)]
-		public virtual string RedirectAddress
-		{
-			get { return GetDetail("RedirectAddress", string.Empty); }
-			set { SetDetail("RedirectAddress", value); }
-		}
+		[TextBoxEditor("Redirect to", 31, Required = true, ContainerName = "Content", Description = "Please make sure you enter the complete address including the http prefix", Shared = true)]
+		public virtual string RedirectAddress { get; set; }
 
 		public override string IconUrl
 		{

@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Ext.Net;
 using Ext.Net.Utilities;
-using Zeus.ContentProperties;
 using System.Web.UI;
 using Button = Ext.Net.Button;
 using Panel = Ext.Net.Panel;
@@ -27,7 +27,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private readonly List<Panel> _panels = new List<Panel>();
 		private readonly List<Control> _editors = new List<Control>();
-		private IEnumerable<PropertyData> _initialValues = new List<PropertyData>();
+		private IEnumerable _initialValues = new List<object>();
 		private int _editorIndex;
 		private Hidden _hiddenAddedEditors;
 		private Container _container;
@@ -98,7 +98,7 @@ namespace Zeus.Web.UI.WebControls
 
 		#endregion
 
-		public void Initialize(IEnumerable<PropertyData> linkedItemDetails)
+		public void Initialize(IEnumerable linkedItemDetails)
 		{
 			_initialValues = linkedItemDetails;
 		}
@@ -116,7 +116,7 @@ namespace Zeus.Web.UI.WebControls
 			_container = new CustomContainer { ID = ID + "_container" };
 			Controls.Add(_container);
 
-			foreach (PropertyData linkDetail in _initialValues)
+			foreach (var linkDetail in _initialValues)
 				CreateLinkedItemEditor(linkDetail);
 			for (int i = 0; i < AddedEditorCount; ++i)
 				CreateLinkedItemEditor(null);
@@ -149,7 +149,7 @@ namespace Zeus.Web.UI.WebControls
 			panel.Render(_container);
 		}
 
-		private Panel CreateLinkedItemEditor(PropertyData detail)
+		private Panel CreateLinkedItemEditor(object detail)
 		{
 			Control editor = CreateDetailEditor(_editorIndex, detail);
 			Panel panel = CreatePanel(editor, _editorIndex);
@@ -161,7 +161,7 @@ namespace Zeus.Web.UI.WebControls
 			return panel;
 		}
 
-		protected abstract Control CreateDetailEditor(int id, PropertyData detail);
+		protected abstract Control CreateDetailEditor(int id, object detail);
 
 		private Panel CreatePanel(Control itemEditor, int id)
 		{

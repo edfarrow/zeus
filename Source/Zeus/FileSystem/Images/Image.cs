@@ -1,4 +1,5 @@
 using System.IO;
+using Ormongo;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Layers;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
@@ -18,7 +19,7 @@ namespace Zeus.FileSystem.Images
 		}
 		
 		[ImageUploadEditor("Image", 100)]
-		public override byte[] Data
+		public override Ormongo.Attachment Data
 		{
 			get { return base.Data; }
 			set { base.Data = value; }
@@ -29,8 +30,7 @@ namespace Zeus.FileSystem.Images
 			byte[] fileBytes = stream.ReadAllBytes();
 			return new Image
 			{
-				ContentType = MimeUtility.GetMimeType(fileBytes),
-				Data = fileBytes,
+				Data = Attachment.Create(stream, filename, MimeUtility.GetMimeType(fileBytes)),
 				Name = filename,
 				Size = stream.Length
 			};
@@ -42,10 +42,7 @@ namespace Zeus.FileSystem.Images
             image.ImageFormat = format;
             ImageLayer imageLayer = new ImageLayer();
 
-            ZeusImageSource source = new ZeusImageSource();
-            source.ContentID = ID;
-
-            imageLayer.Source = source;
+            imageLayer.Source = new OrmongoImageSource(Data);
 
             ResizeFilter resizeFilter = new ResizeFilter();
 		    resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;

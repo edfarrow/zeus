@@ -1,5 +1,4 @@
 using System.Web.Mvc;
-using Zeus.Templates.ContentTypes;
 using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Html
@@ -26,10 +25,7 @@ namespace Zeus.Templates.Mvc.Html
 			if (contentItem == null)
 				return string.Empty;
 
-			if (!contentItem.Details.ContainsKey(propertyName))
-				return contentItem[fallbackPropertyName].ToString();
-
-			return contentItem[propertyName].ToString();
+			return (contentItem[propertyName] ?? contentItem[fallbackPropertyName]).ToString();
 		}
 
 		public static string HtmlTitle(this HtmlHelper html, ContentItem contentItem)

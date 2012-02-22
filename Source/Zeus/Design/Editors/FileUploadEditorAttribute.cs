@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Web;
 using System.Web.UI;
+using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
-using Zeus.ContentTypes;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
 using File = Zeus.FileSystem.File;
@@ -37,7 +37,7 @@ namespace Zeus.Design.Editors
 			return Path.Combine(uploadFolder, HttpUtility.UrlDecode(fileUpload.FileName));
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
+		public override bool UpdateItem(ContentItem item, Control editor)
 		{
             FancyFileUpload fileUpload = (FancyFileUpload) editor;
 			File file = (File) item;
@@ -55,8 +55,9 @@ namespace Zeus.Design.Editors
 				string uploadedFile = GetUploadedFilePath(fileUpload);
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
-					file.Data = fs.ReadAllBytes();
-					file.ContentType = MimeUtility.GetMimeType(file.Data);
+					var bytes = fs.ReadAllBytes();
+					fs.Position = 0;
+					file.Data = Attachment.Create(fs, file.FileName, MimeUtility.GetMimeType(bytes));
 					file.Size = fs.Length;                    
 				}
 
@@ -92,7 +93,7 @@ namespace Zeus.Design.Editors
 			return fileUpload;
 		}
 
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
+		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;
 			File file = (File)item;

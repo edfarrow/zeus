@@ -38,7 +38,7 @@ namespace Zeus.Design.Editors
 			return ddl.Items.Cast<ListItem>().Where(li => li.Selected).Select(li => li.Value).ToArray();
 		}
 
-		protected override object GetValue(IEditableObject item)
+		protected override object GetValue(ContentItem item)
 		{
 			return item[Name] as string[];
 		}
@@ -54,7 +54,7 @@ namespace Zeus.Design.Editors
 			}
 		}
 
-        public override bool UpdateItem(IEditableObject item, Control editor)
+        public override bool UpdateItem(ContentItem item, Control editor)
         {
             //check if there's a value yet...
             if (item[Name] == null)
