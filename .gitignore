@@ -11,6 +11,8 @@ bin
 *.csproj.user
 *ReSharper*
 *resharper*
+*.dotCover
+DynamicImageCache.xml
 *.suo
 *.cache
 Thumbs.db
