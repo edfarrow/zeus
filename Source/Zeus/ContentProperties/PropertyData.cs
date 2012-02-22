@@ -9,6 +9,9 @@ using Zeus.FileSystem.Images;
 
 namespace Zeus.ContentProperties
 {
+	[BsonKnownTypes(typeof(BooleanProperty), typeof(DateTimeProperty), typeof(DoubleProperty), typeof(IntegerProperty), 
+	typeof(LinkProperty), typeof(ObjectProperty), typeof(StringProperty), typeof(TimeSpanProperty),
+	typeof(XhtmlStringProperty))]
 	public abstract class PropertyData : EmbeddedDocument<ContentItem>, ICloneable, IUniquelyNamed
 	{
 		#region Private fields
