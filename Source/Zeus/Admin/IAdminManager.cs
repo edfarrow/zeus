@@ -27,11 +27,6 @@ namespace Zeus.Admin
 		/// <returns>The url to the edit page.</returns>
 		string GetEditNewPageUrl(ContentItem selected, ContentType contentType);
 
-		/// <summary>Gets the url to the select type of item to create.</summary>
-		/// <param name="selectedItem">The currently selected item.</param>
-		/// <returns>The url to the select new item to create page.</returns>
-		string GetSelectNewItemUrl(ContentItem selectedItem);
-
 		/// <summary>Gets the filter to be applied to items displayed in edit mode.</summary>
 		/// <param name="user">The user for whom to apply the filter.</param>
 		/// <returns>A filter.</returns>

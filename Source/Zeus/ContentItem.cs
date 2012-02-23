@@ -331,17 +331,14 @@ namespace Zeus
         	if (slashIndex > 0) // contains a slash further down
         	{
         		string nameSegment = childName.Substring(0, slashIndex);
-        		foreach (ContentItem child in Children)
-        			if (child.Equals(nameSegment))
-        				return child.GetChild(childName.Substring(slashIndex));
+        		ContentItem child = Children.SingleOrDefault(c => c.Name == nameSegment);
+        		if (child != null)
+        			return child.GetChild(childName.Substring(slashIndex));
         		return null;
         	}
 
         	// no slash, only a name
-			foreach (ContentItem child in Children)
-        		if (child.Equals(childName))
-					return child;
-        	return null;
+        	return Children.SingleOrDefault(c => c.Name == childName);
         }
 
         protected virtual bool Equals(string name)

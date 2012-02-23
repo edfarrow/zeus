@@ -67,30 +67,6 @@ namespace Zeus.Admin
 
 		#region Methods
 
-		/// <summary>Gets the url to the delete item page.</summary>
-		/// <param name="selectedItem">The currently selected item.</param>
-		/// <returns>The url to the delete page.</returns>
-		public string GetDeleteUrl(ContentItem selectedItem)
-		{
-			return FormatSelectedUrl(selectedItem, DeleteItemUrl);
-		}
-
-		/// <summary>Gets the url to the select type of item to create.</summary>
-		/// <param name="selectedItem">The currently selected item.</param>
-		/// <returns>The url to the select new item to create page.</returns>
-		public string GetSelectNewItemUrl(ContentItem selectedItem)
-		{
-			return FormatSelectedUrl(selectedItem, NewItemUrl);
-		}
-
-		private static string FormatSelectedUrl(ContentItem selectedItem, string path)
-		{
-			Url url = new Url(path);
-			if (selectedItem != null)
-				url = url.AppendQuery("selected=" + selectedItem.Path);
-			return url.ToString();
-		}
-
 		/// <summary>Gets the url to edit page creating new items.</summary>
 		/// <param name="selected">The selected item.</param>
 		/// <param name="definition">The type of item to edit.</param>
