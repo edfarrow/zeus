@@ -176,7 +176,6 @@
     <Compile Include="Admin\Plugins\MenuPluginBase.cs" />
     <Compile Include="Admin\AdminFrame.cs" />
     <Compile Include="Admin\AdminManager.cs" />
-    <Compile Include="Admin\AdminTargetFrame.cs" />
     <Compile Include="Admin\ActionPluginGroupAttribute.cs" />
     <Compile Include="Admin\GridToolbarPluginBase.cs" />
     <Compile Include="Admin\Plugins\IContextMenuPlugin.cs" />
@@ -190,7 +189,6 @@
     <Compile Include="Admin\Plugins\IToolbarPlugin.cs" />
     <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
     <Compile Include="Admin\SecurityInitializer.cs" />
-    <Compile Include="Admin\Targets.cs" />
     <Compile Include="CancelDestinationEventArgs.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
     <Compile Include="Collections\ItemComparer.cs" />
