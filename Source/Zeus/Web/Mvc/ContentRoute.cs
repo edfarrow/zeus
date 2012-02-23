@@ -100,7 +100,7 @@ namespace Zeus.Web.Mvc
             {
                 ObjectId itemId;
                 if (ObjectId.TryParse(td.QueryParameters["preview"], out itemId))
-                    item = engine.Persister.Get(itemId);
+                    item = ContentItem.FindOneByID(itemId);
             }
             var controllerName = controllerMapper.GetControllerName(item.GetType());
 

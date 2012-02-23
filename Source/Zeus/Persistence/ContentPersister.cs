@@ -46,17 +46,6 @@ namespace Zeus.Persistence
 			});
 		}
 
-		public ContentItem Get(ObjectId id)
-		{
-			return ContentItem.FindOneByID(id);
-		}
-
-		public T Get<T>(ObjectId id)
-			where T : ContentItem
-		{
-			return (T) ContentItem.FindOneByID(id);
-		}
-
 		protected virtual T Invoke<T>(EventHandler<T> handler, T args)
 						where T : ItemEventArgs
 		{

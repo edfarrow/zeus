@@ -140,7 +140,7 @@ jQuery(document).ready(function() {{
 		private ContentItem GetFromViewState()
 		{
 			if (SelectedItemID != ObjectId.Empty)
-				return Zeus.Context.Persister.Get(SelectedItemID);
+				return ContentItem.FindOneByID(SelectedItemID);
 			return null;
 		}
 
@@ -156,7 +156,7 @@ jQuery(document).ready(function() {{
 
 			string itemId = Request[PathData.ItemQueryKey];
 			if (!string.IsNullOrEmpty(itemId))
-				return Engine.Persister.Get(ObjectId.Parse(itemId));
+				return ContentItem.FindOneByID(ObjectId.Parse(itemId));
 
 			return null;
 		}

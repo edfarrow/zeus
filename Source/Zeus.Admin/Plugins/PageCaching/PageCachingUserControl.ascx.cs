@@ -11,7 +11,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 		[DirectMethod]
 		public void ShowDialog(ObjectId id)
 		{
-			ContentItem contentItem = Engine.Persister.Get(id);
+			ContentItem contentItem = ContentItem.FindOneByID(id);
 
 			var window = new Window
 			{
@@ -64,7 +64,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 		{
 			TimeSpan durationTime = TimeSpan.Parse(duration);
 
-			ContentItem contentItem = Engine.Persister.Get(id);
+			ContentItem contentItem = ContentItem.FindOneByID(id);
 			contentItem.SetPageCachingEnabled(enabled);
 			contentItem.SetPageCachingDuration(durationTime);
 			contentItem.Save();
@@ -76,7 +76,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 			if (string.IsNullOrEmpty(id))
 				return;
 
-			ContentItem contentItem = Engine.Persister.Get(ObjectId.Parse(id));
+			ContentItem contentItem = ContentItem.FindOneByID(ObjectId.Parse(id));
 			Engine.Resolve<ICachingService>().DeleteCachedPage(contentItem);
 		}
 	}

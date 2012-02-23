@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 using MongoDB.Bson;
 
@@ -11,7 +10,6 @@ namespace Zeus.Web
 			const string pattern = @"href=""/?~/link/([\d]+?)""";
 			Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
 			return regex.Replace(value, OnPatternMatched);
-			
 		}
 
 		private string OnPatternMatched(Match match)
@@ -20,7 +18,7 @@ namespace Zeus.Web
 			ObjectId contentID = ObjectId.Parse(match.Groups[1].Value);
 
 			// Load content item and get URL.
-			ContentItem contentItem = Context.Persister.Get(contentID);
+			ContentItem contentItem = ContentItem.FindOneByID(contentID);
 			return string.Format(@"href=""{0}""", (contentItem != null) ? contentItem.Url : "#");
 		}
 	}

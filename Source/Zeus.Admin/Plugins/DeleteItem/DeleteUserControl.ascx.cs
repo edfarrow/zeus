@@ -142,10 +142,10 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			if (!nodeIDs.Any())
 				return;
 
-			ContentItem parent = Engine.Persister.Get(nodeIDs.First()).Parent;
+			ContentItem parent = ContentItem.FindOneByID(nodeIDs.First()).Parent;
 			foreach (ObjectId id in nodeIDs)
 			{
-				ContentItem item = Engine.Persister.Get(id);
+				ContentItem item = ContentItem.FindOneByID(id);
 				item.Destroy();
 			}
 

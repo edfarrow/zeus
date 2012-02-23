@@ -25,7 +25,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 
 				foreach (ObjectId nodeID in nodeIDs)
 				{
-					ContentItem selectedItem = Context.Persister.Get(nodeID);
+					ContentItem selectedItem = ContentItem.FindOneByID(nodeID);
 
 					List<ContentItem> referrers = new List<ContentItem>();
 					AddReferencesRecursive(selectedItem, referrers);

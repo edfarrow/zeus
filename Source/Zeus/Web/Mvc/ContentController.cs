@@ -64,7 +64,7 @@ namespace Zeus.Web.Mvc
 		{
 			ObjectId itemId;
 			if (ObjectId.TryParse(ControllerContext.RouteData.Values[ContentRoute.ContentItemIdKey] as string, out itemId))
-				return Engine.Persister.Get(itemId) as T;
+				return ContentItem.FindOneByID<T>(itemId);
 
 			return null;
 		}

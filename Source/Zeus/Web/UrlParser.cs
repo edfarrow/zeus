@@ -14,7 +14,6 @@ namespace Zeus.Web
     {
         #region Fields
 
-        private readonly IPersister _persister;
         private readonly IHost _host;
         protected readonly IWebContext _webContext;
         private readonly bool _ignoreExistingFiles;
@@ -24,9 +23,8 @@ namespace Zeus.Web
 
         #region Constructors
 
-        public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, CustomUrlsSection urls)
+        public UrlParser(IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, CustomUrlsSection urls)
         {
-            _persister = persister;
             _host = host;
             _webContext = webContext;
 
@@ -52,11 +50,6 @@ namespace Zeus.Web
         protected IHost Host
         {
             get { return _host; }
-        }
-
-        protected IPersister Persister
-        {
-            get { return _persister; }
         }
 
         /// <summary>Gets or sets the default content document name. This is usually "/default.aspx".</summary>
@@ -181,7 +174,7 @@ namespace Zeus.Web
         {
             ObjectId? itemID = FindQueryStringReference(url, parameters);
             if (itemID.HasValue)
-                return _persister.Get<ContentItem>(itemID.Value);
+				return ContentItem.FindOneByID(itemID.Value);
             return null;
         }
 
@@ -336,7 +329,7 @@ namespace Zeus.Web
                         foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                         {
                             // First check that the page referenced in web.config actually exists.
-                            ContentItem customUrlPage = Persister.Get(id.ID);
+							ContentItem customUrlPage = ContentItem.FindOneByID(id.ID);
                             if (customUrlPage == null)
                                 continue;
 
@@ -424,7 +417,7 @@ namespace Zeus.Web
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] != null)
                                     {
                                         //we now have a match without any more calls to the database
-                                        ContentItem ci = _persister.Get((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+										ContentItem ci = ContentItem.FindOneByID((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
                                         System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
@@ -438,7 +431,7 @@ namespace Zeus.Web
                             foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                             {
                                 // First check that the page referenced in web.config actually exists.
-                                ContentItem customUrlPage = Persister.Get(id.ID);
+								ContentItem customUrlPage = ContentItem.FindOneByID(id.ID);
                                 if (customUrlPage == null)
                                     continue;
 
@@ -462,7 +455,7 @@ namespace Zeus.Web
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
                                     {
                                         ContentItem tryMatchAgain =
-                                            Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
+											Find.EnumerateAccessibleChildren(ContentItem.FindOneByID(id.ID), id.Depth).SingleOrDefault(
                                                 ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
 
                                         if (tryMatchAgain != null)
@@ -475,7 +468,7 @@ namespace Zeus.Web
                                     }
                                     else
                                     {
-                                        ContentItem ci = _persister.Get((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                        ContentItem ci = ContentItem.FindOneByID((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
                                         System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
@@ -486,7 +479,7 @@ namespace Zeus.Web
                         }
                         else
                         {
-							ContentItem ci = _persister.Get((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
+							ContentItem ci = ContentItem.FindOneByID((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
                             string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
                             if (string.IsNullOrEmpty(act))
                                 return ci.FindPath(PathData.DefaultAction);

@@ -86,7 +86,7 @@ namespace Zeus.Admin.Plugins.FileManager
 		{
 			ObjectId nodeID = ObjectId.Parse(e.Parameters["node"]);
 			FileType type = e.Parameters.Any(p => p.Name == "type") ? (FileType) Enum.Parse(typeof(FileType), e.Parameters["type"], true) : FileType.Both;
-			ContentItem contentItem = Engine.Persister.Get(nodeID);
+			ContentItem contentItem = ContentItem.FindOneByID(nodeID);
 			filesStore.DataSource = GetFiles(contentItem, type);
 			filesStore.DataBind();
 		}

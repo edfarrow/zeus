@@ -50,7 +50,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get
 			{
-				return _parentItem ?? (_parentItem = Zeus.Context.Persister.Get(ParentItemID));
+				return _parentItem ?? (_parentItem = ContentItem.FindOneByID(ParentItemID));
 			}
 			set
 			{

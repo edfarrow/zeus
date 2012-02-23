@@ -19,7 +19,7 @@ namespace Zeus.Admin.Plugins.FileManager
 
 			if (nodeId != null)
 			{
-				ContentItem selectedItem = Context.Persister.Get(nodeId.Value);
+				ContentItem selectedItem = ContentItem.FindOneByID(nodeId.Value);
 
 				SiteTree tree = SiteTree.From(selectedItem, 2);
 

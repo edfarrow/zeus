@@ -24,7 +24,6 @@ namespace Zeus.Installation
 
 		private readonly IContentTypeManager _contentTypeManager;
 		//private readonly Importer _importer;
-		private readonly IPersister _persister;
 		private readonly IFinder _finder;
 		private readonly ICredentialService _credentialService;
 		private readonly IHost _host;
@@ -34,13 +33,12 @@ namespace Zeus.Installation
 
 		#region Constructor
 
-		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, /*Importer importer,*/ IPersister persister,
+		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, /*Importer importer,*/ 
 			IFinder finder, ICredentialService credentialService, AdminSection adminConfig)
 		{
 			_host = host;
 			_contentTypeManager = contentTypeManager;
 			//_importer = importer;
-			_persister = persister;
 			_finder = finder;
 			_credentialService = credentialService;
 			_adminConfig = adminConfig;
@@ -85,8 +83,8 @@ namespace Zeus.Installation
 			{
 				status.StartPageID = _host.CurrentSite.StartPageID;
 				status.RootItemID = _host.CurrentSite.RootItemID;
-				status.StartPage = _persister.Get(status.StartPageID);
-				status.RootItem = _persister.Get(status.RootItemID);
+				status.StartPage = ContentItem.FindOneByID(status.StartPageID);
+				status.RootItem = ContentItem.FindOneByID(status.RootItemID);
 				status.IsInstalled = status.RootItem != null && status.StartPage != null;
 
 				status.HasUsers = _credentialService.GetUser("administrator") != null;
@@ -156,7 +154,7 @@ namespace Zeus.Installation
 		public string CheckRootItem()
 		{
 			ObjectId rootID = _host.CurrentSite.RootItemID;
-			ContentItem rootItem = _persister.Get(rootID);
+			ContentItem rootItem = ContentItem.FindOneByID(rootID);
 			if (rootItem != null)
 				return string.Format("Root node OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					rootItem.ID, rootItem.Name, rootItem.GetType(),
@@ -169,7 +167,7 @@ namespace Zeus.Installation
 		public string CheckStartPage()
 		{
 			ObjectId startID = _host.CurrentSite.StartPageID;
-			ContentItem startPage = _persister.Get(startID);
+			ContentItem startPage = ContentItem.FindOneByID(startID);
 			if (startPage != null)
 				return string.Format("Start page OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					startPage.ID, startPage.Name, startPage.GetType(),

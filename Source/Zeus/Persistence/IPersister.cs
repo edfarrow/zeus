@@ -1,5 +1,4 @@
 ﻿using System;
-using MongoDB.Bson;
 
 namespace Zeus.Persistence
 {
@@ -12,7 +11,5 @@ namespace Zeus.Persistence
 
 		ContentItem Copy(ContentItem source, ContentItem destination);
 		ContentItem Copy(ContentItem source, ContentItem destination, bool includeChildren);
-		ContentItem Get(ObjectId id);
-		T Get<T>(ObjectId id) where T : ContentItem;
 	}
 }

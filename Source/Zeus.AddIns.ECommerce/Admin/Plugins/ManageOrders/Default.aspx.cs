@@ -38,7 +38,7 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 		{
 			ObjectId orderID = ObjectId.Parse(e.CommandArgument.ToString());
 
-			Order order = Engine.Persister.Get<Order>(orderID);
+			Order order = ContentItem.FindOneByID<Order>(orderID);
 			order.Status = OrderStatus.Processed;
 			order.Save();
 

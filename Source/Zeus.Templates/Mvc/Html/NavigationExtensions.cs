@@ -234,7 +234,7 @@ namespace Zeus.Templates.Mvc.Html
 
                 foreach (NavigationItem item in result)
                 {
-                    ContentItem theItem = Zeus.Context.Persister.Get(item.ID);
+					ContentItem theItem = ContentItem.FindOneByID(item.ID);
                     if (theItem != Zeus.Find.StartPage)
                     {
                         foreach (ContentItem subNavItem in html.NavigationPages(theItem))

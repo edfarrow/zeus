@@ -15,7 +15,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		public Pages.Product Product
 		{
-			get { return (Pages.Product) Context.Persister.Get(WeakProductLink); }
+			get { return (Pages.Product) FindOneByID(WeakProductLink); }
 		}
 
 		public string ProductTitle { get; set; }

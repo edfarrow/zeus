@@ -1,17 +1,14 @@
 ﻿using System;
-using Zeus.Persistence;
 using Zeus.Web;
 
 namespace Zeus.Admin
 {
 	public class Navigator
 	{
-		private readonly IPersister _persister;
 		private readonly IHost _host;
 
-		public Navigator(IPersister persister, IHost host)
+		public Navigator(IHost host)
 		{
-			_persister = persister;
 			_host = host;
 		}
 
@@ -26,11 +23,11 @@ namespace Zeus.Admin
 			if (!path.StartsWith("/"))
 			{
 				if (path.StartsWith("~"))
-					return Navigate(_persister.Get(_host.CurrentSite.StartPageID), path.Substring(1));
+					return Navigate(ContentItem.FindOneByID(_host.CurrentSite.StartPageID), path.Substring(1));
 				throw new ArgumentException("The path must start with a slash '/', was '" + path + "'", "path");
 			}
 
-			return Navigate(_persister.Get(_host.CurrentSite.RootItemID), path);
+			return Navigate(ContentItem.FindOneByID(_host.CurrentSite.RootItemID), path);
 		}
 	}
 }

@@ -11,8 +11,8 @@ namespace Zeus.Web
 	{
 		#region Constructors
 
-        public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, CustomUrlsSection urls)
-			: base(persister, host, webContext, notifier, config, urls)
+        public MultipleSitesUrlParser(IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, CustomUrlsSection urls)
+			: base(host, webContext, notifier, config, urls)
 		{
 
 		}
@@ -27,7 +27,7 @@ namespace Zeus.Web
 			Site site = Host.GetSite(url);
 			if (site != null)
 				return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey)
-					?? Parse(Persister.Get(site.StartPageID), Url.Parse(url).PathAndQuery);
+					?? Parse(ContentItem.FindOneByID(site.StartPageID), Url.Parse(url).PathAndQuery);
 
 			return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey);
 		}
@@ -42,7 +42,7 @@ namespace Zeus.Web
 			if (!url.IsAbsolute)
 				return StartPage;
 			Site site = Host.GetSite(url) ?? Host.CurrentSite;
-			return Persister.Get(site.StartPageID);
+			return ContentItem.FindOneByID(site.StartPageID);
 		}
 
 		public override string BuildUrl(ContentItem item)

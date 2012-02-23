@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
-using Zeus.ContentTypes;
 
 namespace Zeus.Web.UI
 {
@@ -93,7 +92,7 @@ namespace Zeus.Web.UI
 			// find starting point
 			if (path.StartsWith("/"))
 			{
-				startItem = Context.Current.Persister.Get(Context.Current.Host.CurrentSite.RootItemID);
+				startItem = ContentItem.FindOneByID(Context.Current.Host.CurrentSite.RootItemID);
 				path = path.Substring(1);
 			}
 			else if (path.StartsWith("~/"))

@@ -24,7 +24,7 @@ namespace Zeus.Admin
 				//    nodeID = -1 * (nodeID % 100000);
 
 				//ContentItem selectedItem = Context.Persister.Get(Math.Abs(Convert.ToInt32(nodeId)));
-				ContentItem selectedItem = Context.Persister.Get(ObjectId.Parse(nodeId));
+				ContentItem selectedItem = ContentItem.FindOneByID(ObjectId.Parse(nodeId));
 
 				//if (context.User.Identity.Name != "administrator")
 				//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);

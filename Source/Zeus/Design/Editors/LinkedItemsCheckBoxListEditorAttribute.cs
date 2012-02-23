@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
-using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors
 {
@@ -27,7 +26,7 @@ namespace Zeus.Design.Editors
 		{
 			List<ContentItem> result = new List<ContentItem>();
 			foreach (ListItem listItem in selectedListItems)
-				result.Add(Context.Persister.Get(ObjectId.Parse(listItem.Value)));
+				result.Add(ContentItem.FindOneByID(ObjectId.Parse(listItem.Value)));
 			return result;
 		}
 

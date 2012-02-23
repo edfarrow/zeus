@@ -35,7 +35,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				if (!string.IsNullOrEmpty(selectedValue.Trim()))
 				{
 					ObjectId variationID = ObjectId.Parse(selectedValue);
-					Variation variation = Engine.Persister.Get<Variation>(variationID);
+					Variation variation = ContentItem.FindOneByID<Variation>(variationID);
 					variations.Add(variation);
 				}
 			}
