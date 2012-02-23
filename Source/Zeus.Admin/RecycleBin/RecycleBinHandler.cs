@@ -77,7 +77,7 @@ namespace Zeus.Admin.RecycleBin
 				item = args.AffectedItem;
 
 				ExpireTrashedItem(item);
-				item.AddTo(GetTrashContainer(true));
+				item.Parent = GetTrashContainer(true);
 
 				try
 				{

@@ -85,35 +85,35 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 				Name = VariationContainerName,
 				Title = "VariationsSet"
 			};
-			variationsSet.AddTo(this);
+			variationsSet.Parent = this;
 
 			ShoppingBasketContainer shoppingBaskets = new ShoppingBasketContainer
 			{
 				Name = ShoppingBasketsName,
 				Title = "Shopping Baskets"
 			};
-			shoppingBaskets.AddTo(this);
+			shoppingBaskets.Parent = this;
 
 			OrderContainer orders = new OrderContainer
 			{
 				Name = OrdersName,
 				Title = "Orders"
 			};
-			orders.AddTo(this);
+			orders.Parent = this;
 
 			DeliveryMethodContainer deliveryMethods = new DeliveryMethodContainer
 			{
 				Name = DeliveryMethodsName,
 				Title = "Delivery Methods"
 			};
-			deliveryMethods.AddTo(this);
+			deliveryMethods.Parent = this;
 
 			CheckoutPage checkoutPage = new CheckoutPage
 			{
 				Name = CheckoutName,
 				Title = "Checkout"
 			};
-			checkoutPage.AddTo(this);
+			checkoutPage.Parent = this;
 		}
 	}
 }

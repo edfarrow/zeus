@@ -224,14 +224,6 @@ namespace Zeus
 
         #region Methods
 
-        /// <summary>Adds an item to the children of this item updating it's parent refernce.</summary>
-        /// <param name="newParent">The new parent of the item. If this parameter is null the item is detached from the hierarchical structure.</param>
-        public virtual void AddTo(ContentItem newParent)
-        {
-			// TODO: Can remove this method, use property directly.
-			Parent = newParent;
-        }
-
 		/// <summary>Creats a copy of this item including details, authorization rules, while resetting ID.</summary>
 		/// <returns>The cloned item with or without cloned child items.</returns>
         public virtual ContentItem Clone()
@@ -241,7 +233,7 @@ namespace Zeus
 			foreach (ContentItem child in Children)
 			{
 				ContentItem clonedChild = child.Clone();
-				clonedChild.AddTo(cloned);
+				clonedChild.Parent = cloned;
 			}
 			cloned.ID = ObjectId.Empty;
 			cloned._url = null;

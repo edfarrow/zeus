@@ -43,7 +43,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 				Name = OrdersName,
 				Title = "Orders"
 			};
-			orders.AddTo(this);
+			orders.Parent = this;
 		}
 	}
 }

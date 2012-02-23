@@ -36,7 +36,7 @@ namespace Zeus.FileSystem
 
 				Folder newFolder = _contentTypeManager.CreateInstance<Folder>(currentFolder);
 				newFolder.Name = folderNamePart;
-				newFolder.AddTo(currentFolder);
+				newFolder.Parent = currentFolder;
 
 				currentFolder = newFolder;
 			}

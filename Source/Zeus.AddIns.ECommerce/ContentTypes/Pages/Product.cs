@@ -45,7 +45,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 				if (value != null)
 				{
 					value.Name = "MainImage";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}

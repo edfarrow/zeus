@@ -37,7 +37,7 @@ namespace Zeus.Web.Security.Items
 				return;
 
 			Role role = new Role { Name = roleName };
-			role.AddTo(this);
+			role.Parent = this;
 			role.Save();
 		}
 

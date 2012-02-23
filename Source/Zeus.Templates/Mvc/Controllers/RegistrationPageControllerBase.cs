@@ -87,7 +87,7 @@ namespace Zeus.Templates.Mvc.Controllers
                     System.Web.HttpContext.Current.Response.End();
                 }
 
-                membershipDetails.AddTo(NewUser);
+                membershipDetails.Parent = NewUser;
                 membershipDetails.Save();
             }
 

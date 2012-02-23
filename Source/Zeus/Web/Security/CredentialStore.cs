@@ -67,7 +67,7 @@ namespace Zeus.Web.Security
 			};
 			foreach (string role in roles)
 				user.RolesInternal.Add(roleContainer.GetRole(role));
-			user.AddTo(userContainer);
+			user.Parent = userContainer;
 
 			user.Save();
 		}
@@ -183,14 +183,14 @@ namespace Zeus.Web.Security
 			security.Save();
 
 			RoleContainer roles = Context.ContentTypes.CreateInstance<RoleContainer>(security);
-			roles.AddTo(security);
+			roles.Parent = security;
 			roles.Save();
 
 			foreach (string role in DefaultRoles)
 				roles.AddRole(role);
 
 			UserContainer users = Context.ContentTypes.CreateInstance<UserContainer>(security);
-			users.AddTo(security);
+			users.Parent = security;
 			users.Save();
 
 			security.Save();

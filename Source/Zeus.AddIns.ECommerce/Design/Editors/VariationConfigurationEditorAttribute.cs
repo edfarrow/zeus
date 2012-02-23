@@ -54,7 +54,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 					Permutation = variationPermutation,
 					Available = true
 				};
-				variationConfiguration.AddTo(product);
+				variationConfiguration.Parent = product;
 			}
 
 			return true;

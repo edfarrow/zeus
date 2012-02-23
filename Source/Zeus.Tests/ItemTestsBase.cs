@@ -39,7 +39,7 @@ namespace Zeus.Tests
 			T item = (T)Activator.CreateInstance(typeof(T), true);
 			item.Name = name;
 			item.Title = name;
-			item.AddTo(parent);
+			item.Parent = parent;
 			item.Save();
 			return item;
 		}

@@ -45,7 +45,7 @@ namespace Zeus.AddIns.ECommerce.Services
 						variationPermutation.Variations.Add(variation);
 				}
 				item = new ShoppingBasketItem { Product = product, VariationPermutation = variationPermutation, Quantity = 1 };
-				item.AddTo(shoppingBasket);
+				item.Parent = shoppingBasket;
 			}
 			else
 			{
@@ -179,7 +179,7 @@ namespace Zeus.AddIns.ECommerce.Services
                 // this will only happen when we add items to it
                 if (createBasket)
                 {
-                    shoppingBasket.AddTo(shop.ShoppingBaskets);
+                    shoppingBasket.Parent = shop.ShoppingBaskets;
                     shoppingBasket.Save();
 
                     HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name);

@@ -26,7 +26,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 				if (value != null)
 				{
 					value.Name = "shipping-address";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}
@@ -39,7 +39,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 				if (value != null)
 				{
 					value.Name = "billing-address";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}
@@ -52,7 +52,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 				if (value != null)
 				{
 					value.Name = "payment-card";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}

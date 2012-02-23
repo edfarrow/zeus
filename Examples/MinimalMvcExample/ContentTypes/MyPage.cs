@@ -25,7 +25,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 				if (value != null)
 				{
 					value.Name = "Image";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}
@@ -39,7 +39,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 				if (value != null)
 				{
 					value.Name = "AnotherImage";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}

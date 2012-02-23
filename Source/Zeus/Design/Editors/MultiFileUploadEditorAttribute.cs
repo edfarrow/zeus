@@ -4,7 +4,6 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
-using Zeus.FileSystem;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
 using File=Zeus.FileSystem.File;
@@ -30,7 +29,7 @@ namespace Zeus.Design.Editors
 				{
 					newFile = CreateNewItem();
 					newFile.Name = Name + Guid.NewGuid();
-					newFile.AddTo(contentItem);
+					newFile.Parent = contentItem;
 				}
 
 				// Populate FileData object.

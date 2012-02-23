@@ -27,7 +27,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 				if (value != null)
 				{
 					value.Name = "variation-permutation";
-					value.AddTo(this);
+					value.Parent = this;
 				}
 			}
 		}

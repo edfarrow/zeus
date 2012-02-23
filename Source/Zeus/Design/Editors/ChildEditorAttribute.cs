@@ -160,7 +160,7 @@ namespace Zeus.Design.Editors
 					ex);
 			}
 			child.Name = Name;
-			child.AddTo(item);
+			child.Parent = item;
 			return child;
 		}
 

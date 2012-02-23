@@ -65,8 +65,8 @@ namespace Zeus.AddIns.ECommerce.Services
                 TotalPrice = totalPrice
 			};
 			foreach (OrderItem orderItem in items)
-				orderItem.AddTo(order);
-			order.AddTo(configuration.Orders);
+				orderItem.Parent = order;
+			order.Parent = configuration.Orders;
 			order.Save();
 
             order.Title = "Order #" + order.ID;
@@ -108,7 +108,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			{
 
 				// Convert shopping basket into order, with unpaid status.
-				Order order = new Order
+				Order order = Order.Create(new Order
 				{
 					User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal)_webContext.User).MembershipUser : null,
 					DeliveryMethod = deliveryMethod,
@@ -121,17 +121,16 @@ namespace Zeus.AddIns.ECommerce.Services
 					Status = OrderStatus.Unpaid,
                     TotalDeliveryPrice = deliveryPrice,
                     TotalVatPrice = totalVatPrice,
-                    TotalPrice = totalPrice
-				};
+                    TotalPrice = totalPrice,
+					Parent = configuration.Orders
+				});
 				foreach (OrderItem orderItem in items)
-					orderItem.AddTo(order);
+				{
+					orderItem.Parent = order;
+					orderItem.Save();
+				}
 
-				order.AddTo(configuration.Orders);
-
-                order.Status = OrderStatus.Unpaid;
-				order.Save();
-
-                if (_webContext.User != null && !string.IsNullOrEmpty(_webContext.User.Identity.Name))
+				if (_webContext.User != null && !string.IsNullOrEmpty(_webContext.User.Identity.Name))
                 {
                     order.Title = _webContext.User.Identity.Name + " for " + items.First().Title;
                 }

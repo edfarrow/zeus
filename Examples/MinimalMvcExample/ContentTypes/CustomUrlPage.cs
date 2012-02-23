@@ -41,7 +41,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
                 if (value != null)
                 {
                     value.Name = "Banner";
-                    value.AddTo(this);
+                    value.Parent = this;
                 }
             }
         }
