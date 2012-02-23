@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using Ormongo.Ancestry;
 using Zeus.Persistence;
 
 namespace Zeus.Integrity
@@ -21,9 +22,9 @@ namespace Zeus.Integrity
 			OnItemSaving(e.AffectedItem);
 		}
 
-		private void ItemMovingEventHandler(object sender, CancelDestinationEventArgs e)
+		private void ItemMovingEventHandler(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
 		{
-			OnItemMoving(e.AffectedItem, e.Destination);
+			OnItemMoving(e.Document, e.NewParent);
 		}
 
 		private void ItemDeletingEventHandler(object sender, CancelItemEventArgs e)
@@ -76,7 +77,7 @@ namespace Zeus.Integrity
 		{
 			_persister.ItemCopying += ItemCopyingEventHandler;
 			_persister.ItemDeleting += ItemDeletingEventHandler;
-			_persister.ItemMoving += ItemMovingEventHandler;
+			ContentItem.BeforeMove += ItemMovingEventHandler;
 			_persister.ItemSaving += ItemSavingEventHandler;
 		}
 
@@ -84,7 +85,7 @@ namespace Zeus.Integrity
 		{
 			_persister.ItemCopying -= ItemCopyingEventHandler;
 			_persister.ItemDeleting -= ItemDeletingEventHandler;
-			_persister.ItemMoving -= ItemMovingEventHandler;
+			ContentItem.BeforeMove -= ItemMovingEventHandler;
 			_persister.ItemSaving -= ItemSavingEventHandler;
 		}
 

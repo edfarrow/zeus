@@ -1,4 +1,5 @@
 using Ninject;
+using Ormongo.Ancestry;
 using Zeus.Persistence;
 
 namespace Zeus.Admin.RecycleBin
@@ -20,31 +21,31 @@ namespace Zeus.Admin.RecycleBin
 		public void Start()
 		{
 			_persister.ItemDeleting += OnItemDeleting;
-			_persister.ItemMoving += OnItemMoved;
+			ContentItem.BeforeMove += OnItemMoving;
 			_persister.ItemCopied += OnItemCopied;
 		}
 
 		public void Stop()
 		{
 			_persister.ItemDeleting -= OnItemDeleting;
-			_persister.ItemMoving -= OnItemMoved;
+			ContentItem.BeforeMove -= OnItemMoving;
 			_persister.ItemCopied -= OnItemCopied;
 		}
 
 		private void OnItemCopied(object sender, DestinationEventArgs e)
 		{
-			if (LeavingTrash(e))
+			if (LeavingTrash(e.AffectedItem, e.Destination))
 				_recycleBinHandler.RestoreValues(e.AffectedItem);
 			else if (_recycleBinHandler.IsInTrash(e.Destination))
 				_recycleBinHandler.ExpireTrashedItem(e.AffectedItem);
 		}
 
-		private void OnItemMoved(object sender, CancelDestinationEventArgs e)
+		private void OnItemMoving(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
 		{
-			if (LeavingTrash(e))
-				_recycleBinHandler.RestoreValues(e.AffectedItem);
-			else if (_recycleBinHandler.IsInTrash(e.Destination))
-				_recycleBinHandler.ExpireTrashedItem(e.AffectedItem);
+			if (LeavingTrash(e.Document, e.NewParent))
+				_recycleBinHandler.RestoreValues(e.Document);
+			else if (_recycleBinHandler.IsInTrash(e.NewParent))
+				_recycleBinHandler.ExpireTrashedItem(e.Document);
 		}
 
 		private void OnItemDeleting(object sender, CancelItemEventArgs e)
@@ -53,9 +54,9 @@ namespace Zeus.Admin.RecycleBin
 				e.FinalAction = _recycleBinHandler.Throw;
 		}
 
-		private bool LeavingTrash(DestinationEventArgs e)
+		private bool LeavingTrash(ContentItem item, ContentItem newParent)
 		{
-			return e.AffectedItem["DeletedDate"] != null && !_recycleBinHandler.IsInTrash(e.Destination);
+			return item["DeletedDate"] != null && !_recycleBinHandler.IsInTrash(newParent);
 		}
 	}
 }

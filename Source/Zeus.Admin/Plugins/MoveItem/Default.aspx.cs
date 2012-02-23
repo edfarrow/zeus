@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Zeus.BaseLibrary.ExtensionMethods.Web;
 using Zeus.Security;
 
@@ -23,7 +21,10 @@ namespace Zeus.Admin.Plugins.MoveItem
 
 			// Change parent if necessary.
 			if (sourceContentItem.ParentID != destinationContentItem.ID)
-				Zeus.Context.Persister.Move(sourceContentItem, destinationContentItem);
+			{
+				sourceContentItem.Parent = destinationContentItem;
+				sourceContentItem.Save();
+			}
 
 			// Update sort order based on new pos.
 			int pos = Request.GetRequiredInt("pos");

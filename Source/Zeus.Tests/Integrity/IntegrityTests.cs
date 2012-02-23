@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Ormongo.Ancestry;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 using Zeus.BaseLibrary.Reflection;
@@ -76,7 +77,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Record();
 			persister = mocks.DynamicMock<IPersister>();
 
-			persister.ItemMoving += null;
+			ContentItem.BeforeMove += null;
 			moving = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
 
 			persister.ItemCopying += null;
@@ -125,7 +126,7 @@ namespace Zeus.Tests.Integrity
 		public void CannotMoveItemOntoItselfEvent()
 		{
 			Page page = new Page();
-			moving.Raise(persister, new CancelDestinationEventArgs(page, page));
+			moving.Raise(page, new CancelMoveDocumentEventArgs<ContentItem>(page, page));
 		}
 
 		[Test]

@@ -13,10 +13,6 @@ namespace Zeus.Persistence
 		event EventHandler<CancelItemEventArgs> ItemDeleting;
 		/// <summary>Occurs when an item has been deleted</summary>
 		event EventHandler<ItemEventArgs> ItemDeleted;
-		/// <summary>Occurs before an item is moved</summary>
-		event EventHandler<CancelDestinationEventArgs> ItemMoving;
-		/// <summary>Occurs when an item has been moved</summary>
-		event EventHandler<DestinationEventArgs> ItemMoved;
 		/// <summary>Occurs before an item is copied</summary>
 		event EventHandler<CancelDestinationEventArgs> ItemCopying;
 		/// <summary>Occurs when an item has been copied</summary>
@@ -30,7 +26,6 @@ namespace Zeus.Persistence
 		ContentItem Get(ObjectId id);
 		T Get<T>(ObjectId id) where T : ContentItem;
 		ContentItem Load(ObjectId id);
-		void Move(ContentItem toMove, ContentItem newParent);
 		void Save(ContentItem contentItem);
 	}
 }

@@ -20,12 +20,6 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been deleted</summary>
 		public event EventHandler<ItemEventArgs> ItemDeleted;
 
-		/// <summary>Occurs before an item is moved</summary>
-		public event EventHandler<CancelDestinationEventArgs> ItemMoving;
-
-		/// <summary>Occurs when an item has been moved</summary>
-		public event EventHandler<DestinationEventArgs> ItemMoved;
-
 		/// <summary>Occurs before an item is copied</summary>
 		public event EventHandler<CancelDestinationEventArgs> ItemCopying;
 
@@ -120,19 +114,6 @@ namespace Zeus.Persistence
 		public ContentItem Load(ObjectId id)
 		{
 			return ContentItem.FindOneByID(id);
-		}
-
-		public void Move(ContentItem toMove, ContentItem newParent)
-		{
-			Utility.InvokeEvent(ItemMoving, this, toMove, newParent, MoveAction);
-		}
-
-		private ContentItem MoveAction(ContentItem toMove, ContentItem newParent)
-		{
-			toMove.AddTo(newParent);
-			toMove.Save();
-			Invoke(ItemMoved, new DestinationEventArgs(toMove, newParent));
-			return null;
 		}
 
 		public void Save(ContentItem unsavedItem)

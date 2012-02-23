@@ -116,8 +116,8 @@ namespace Zeus.Admin.RecycleBin
 		{
 			ContentItem parent = (ContentItem) item["FormerParent"];
 			RestoreValues(item);
-			_persister.Save(item);
-			_persister.Move(item, parent);
+			item.Parent = parent;
+			item.Save();
 		}
 
 		/// <summary>Removes expiry date and metadata set during throwing.</summary>
