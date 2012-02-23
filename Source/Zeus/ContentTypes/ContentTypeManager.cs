@@ -47,13 +47,6 @@ namespace Zeus.ContentTypes
 
 		#endregion
 
-		#region Events
-
-		/// <summary>Notifies subscriber that an item was created through a <see cref="CreateInstance"/> method.</summary>
-		public event EventHandler<ItemEventArgs> ItemCreated;
-
-		#endregion
-
 		#region Methods
 
 		public T CreateInstance<T>(ContentItem parentItem)
@@ -87,9 +80,6 @@ namespace Zeus.ContentTypes
 				foreach (AuthorizationRule rule in parentItem.AuthorizationRules)
 					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User, rule.Allowed));
 			}
-
-			if (ItemCreated != null)
-				ItemCreated.Invoke(this, new ItemEventArgs(item));
 		}
 
 		public ICollection<ContentType> GetContentTypes()
