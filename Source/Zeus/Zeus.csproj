@@ -550,8 +550,6 @@
     <Compile Include="Web\UI\ItemUtility.cs" />
     <Compile Include="Web\UI\WebControls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
-    <Compile Include="Persistence\IItemNotifier.cs" />
-    <Compile Include="Persistence\ItemNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationRule.cs" />
     <Compile Include="Security\ISecurityManager.cs" />

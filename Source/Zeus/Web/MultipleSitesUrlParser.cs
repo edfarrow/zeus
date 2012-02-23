@@ -1,6 +1,5 @@
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
-using Zeus.Persistence;
 
 namespace Zeus.Web
 {
@@ -11,8 +10,8 @@ namespace Zeus.Web
 	{
 		#region Constructors
 
-        public MultipleSitesUrlParser(IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, CustomUrlsSection urls)
-			: base(host, webContext, notifier, config, urls)
+        public MultipleSitesUrlParser(IWebContext webContext, IHost host, HostSection config, CustomUrlsSection urls)
+			: base(host, webContext, config, urls)
 		{
 
 		}

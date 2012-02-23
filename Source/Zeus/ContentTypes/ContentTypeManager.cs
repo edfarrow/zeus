@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using Ormongo.Internal.Proxying;
-using Zeus.Persistence;
 using Zeus.Security;
 
 namespace Zeus.ContentTypes
@@ -13,7 +12,6 @@ namespace Zeus.ContentTypes
 		#region Fields
 
 		private readonly IDictionary<Type, ContentType> _definitions;
-		private readonly IItemNotifier _notifier;
 
 		#endregion
 
@@ -33,7 +31,7 @@ namespace Zeus.ContentTypes
 
 		#region Constructor
 
-		public ContentTypeManager(IContentTypeBuilder contentTypeBuilder, IItemNotifier notifier)
+		public ContentTypeManager(IContentTypeBuilder contentTypeBuilder)
 		{
 			_definitions = contentTypeBuilder.GetDefinitions();
 
@@ -45,8 +43,6 @@ namespace Zeus.ContentTypes
 					throw new ZeusException("Duplicate content type discriminator. The discriminator '{0}' is already in use.", contentType.Discriminator);
 				discriminators.Add(contentType.Discriminator);
 			}
-
-			_notifier = notifier;
 		}
 
 		#endregion
@@ -91,8 +87,6 @@ namespace Zeus.ContentTypes
 				foreach (AuthorizationRule rule in parentItem.AuthorizationRules)
 					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User, rule.Allowed));
 			}
-
-			_notifier.Notify(item);
 
 			if (ItemCreated != null)
 				ItemCreated.Invoke(this, new ItemEventArgs(item));

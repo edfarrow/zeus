@@ -55,7 +55,6 @@ namespace Zeus.Engine
 			Bind<IHttpClient>().To<HttpClient>().InSingletonScope();
 
 			// Persistence
-			Bind<IItemNotifier>().To<ItemNotifier>().InSingletonScope();
 			Bind<MappingInitializer>().ToSelf().InSingletonScope();
 
 			// Plugin

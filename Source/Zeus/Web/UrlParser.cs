@@ -2,15 +2,16 @@
 using System.IO;
 using System.Web;
 using MongoDB.Bson;
+using Ninject;
+using Ormongo;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
-using Zeus.Persistence;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace Zeus.Web
 {
-    public class UrlParser : IUrlParser
+    public class UrlParser : Observer<ContentItem>, IUrlParser, IStartable
     {
         #region Fields
 
@@ -23,14 +24,12 @@ namespace Zeus.Web
 
         #region Constructors
 
-        public UrlParser(IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, CustomUrlsSection urls)
+        public UrlParser(IHost host, IWebContext webContext, HostSection config, CustomUrlsSection urls)
         {
             _host = host;
             _webContext = webContext;
 
             _ignoreExistingFiles = config.Web.IgnoreExistingFiles;
-
-            notifier.ItemCreated += OnItemCreated;
 
             DefaultDocument = "default";
 
@@ -136,13 +135,10 @@ namespace Zeus.Web
             return item.ID == _host.CurrentSite.RootItemID || IsStartPage(item);
         }
 
-        /// <summary>Invoked when an item is created or loaded from persistence medium.</summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected virtual void OnItemCreated(object sender, ItemEventArgs e)
-        {
-            ((IUrlParserDependency)e.AffectedItem).SetUrlParser(this);
-        }
+		public override void AfterCreate(ContentItem document)
+		{
+			((IUrlParserDependency) document).SetUrlParser(this);
+		}
 
         private ObjectId? FindQueryStringReference(string url, params string[] parameters)
         {
@@ -516,5 +512,15 @@ namespace Zeus.Web
         }
 
         #endregion
+
+		void IStartable.Start()
+		{
+			ContentItem.Observers.Add(this);
+		}
+
+		void IStartable.Stop()
+		{
+			ContentItem.Observers.Remove(this);
+		}
     }
 }

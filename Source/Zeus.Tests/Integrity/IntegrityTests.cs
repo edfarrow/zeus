@@ -34,9 +34,7 @@ namespace Zeus.Tests.Integrity
 			ContentTypeBuilder builder = new ContentTypeBuilder(typeFinder, 
 				new EditableHierarchyBuilder<IEditor>(), new AttributeExplorer<IEditor>(),
 				new AttributeExplorer<IEditorContainer>());
-			IItemNotifier notifier = mocks.DynamicMock<IItemNotifier>();
-			mocks.Replay(notifier);
-			definitions = new ContentTypeManager(builder, notifier);
+			definitions = new ContentTypeManager(builder);
 			integrityManger = new IntegrityManager(definitions, parser);
 			_integrityEnforcer = new IntegrityEnforcer(integrityManger);
 			_integrityEnforcer.Start();
