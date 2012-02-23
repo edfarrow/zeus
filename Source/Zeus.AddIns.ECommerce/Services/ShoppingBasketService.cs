@@ -7,22 +7,17 @@ using Ormongo;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.BaseLibrary.Collections.Generic;
-using Zeus.Persistence;
 using Zeus.Web;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
 	public class ShoppingBasketService : IShoppingBasketService, IStartable
 	{
-		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
-		private readonly IFinder _finder;
 
-		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder finder)
+		public ShoppingBasketService(IWebContext webContext)
 		{
-			_persister = persister;
 			_webContext = webContext;
-			_finder = finder;
 		}
 
         public virtual bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
@@ -153,7 +148,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				return null;
 
 			string shopperID = cookie.Value;
-			return _finder.QueryItems<ShoppingBasket>().SingleOrDefault(sb => sb.Name == shopperID);
+			return ContentItem.Find<ShoppingBasket>(sb => sb.Name == shopperID);
 		}
 
 		private ShoppingBasket GetCurrentShoppingBasketInternal(Shop shop, bool createBasket)

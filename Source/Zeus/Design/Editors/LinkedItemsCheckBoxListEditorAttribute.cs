@@ -37,7 +37,7 @@ namespace Zeus.Design.Editors
 
 		protected override ListItem[] GetListItems(ContentItem item)
 		{
-			IQueryable<ContentItem> contentItems = Context.Current.Finder.QueryItems();
+			IQueryable<ContentItem> contentItems = ContentItem.All();
 			var tempContentItems = ((IQueryable) contentItems).OfType(TypeFilter).OfType<object>();
 			return tempContentItems.ToArray().Cast<ContentItem>()
 				.Select(p => new ListItem(p.Title, p.ID.ToString()))

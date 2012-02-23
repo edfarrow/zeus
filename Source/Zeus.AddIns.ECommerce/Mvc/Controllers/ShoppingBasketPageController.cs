@@ -5,7 +5,6 @@ using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
 using Zeus.AddIns.ECommerce.Services;
-using Zeus.Persistence;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;
@@ -17,12 +16,10 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 	public class ShoppingBasketPageController : ZeusController<ShoppingBasketPage>
 	{
 		private readonly IShoppingBasketService _shoppingBasketService;
-		private readonly IFinder _finder;
 
-		public ShoppingBasketPageController(IShoppingBasketService shoppingBasketService, IFinder finder)
+		public ShoppingBasketPageController(IShoppingBasketService shoppingBasketService)
 		{
 			_shoppingBasketService = shoppingBasketService;
-			_finder = finder;
 		}
 
 		protected Shop CurrentShop
@@ -94,7 +91,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		private void UpdateDeliveryMethodInternal(ObjectId deliveryMethodID)
 		{
 			IShoppingBasket shoppingBasket = GetShoppingBasket();
-			shoppingBasket.DeliveryMethod = _finder.QueryItems<DeliveryMethod>().Single(dm => dm.ID == deliveryMethodID);
+			shoppingBasket.DeliveryMethod = ContentItem.Find<DeliveryMethod>(deliveryMethodID);
 			_shoppingBasketService.SaveBasket(CurrentShop);
 		}
 	}

@@ -248,9 +248,7 @@
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
     <Compile Include="FileSystem\Images\CroppedImage.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
-    <Compile Include="Persistence\Finder.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
-    <Compile Include="Persistence\IFinder.cs" />
     <Compile Include="Persistence\MappingInitializer.cs" />
     <Compile Include="ContentTypes\IPropertyAwareAttribute.cs" />
     <Compile Include="ContentTypes\ISortableRefiner.cs" />

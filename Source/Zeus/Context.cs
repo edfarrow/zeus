@@ -38,11 +38,6 @@ namespace Zeus
 			get { return Current.UrlParser.CurrentPage; }
 		}
 
-		public static IFinder Finder
-		{
-			get { return Current.Finder; }
-		}
-
 		/// <summary>
 		/// Gets Zeus persistence manager used for database persistence of content.
 		/// </summary>

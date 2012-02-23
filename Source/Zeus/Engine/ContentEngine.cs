@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
-using MongoDB.Bson.Serialization;
 using Ormongo;
 using Zeus.Admin;
 using Zeus.BaseLibrary.DependencyInjection;
@@ -29,11 +28,6 @@ namespace Zeus.Engine
 		public IAdminManager AdminManager
 		{
 			get { return Resolve<IAdminManager>(); }
-		}
-
-		public IFinder Finder
-		{
-			get { return Resolve<IFinder>(); }
 		}
 
 		public IContentTypeManager ContentTypes

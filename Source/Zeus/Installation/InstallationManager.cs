@@ -8,7 +8,6 @@ using Microsoft.SqlServer.Management.Smo;
 using MongoDB.Bson;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.Persistence;
 using Zeus.Web;
 using Zeus.Web.Security;
 
@@ -24,7 +23,6 @@ namespace Zeus.Installation
 
 		private readonly IContentTypeManager _contentTypeManager;
 		//private readonly Importer _importer;
-		private readonly IFinder _finder;
 		private readonly ICredentialService _credentialService;
 		private readonly IHost _host;
 		private readonly AdminSection _adminConfig;
@@ -34,12 +32,11 @@ namespace Zeus.Installation
 		#region Constructor
 
 		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, /*Importer importer,*/ 
-			IFinder finder, ICredentialService credentialService, AdminSection adminConfig)
+			ICredentialService credentialService, AdminSection adminConfig)
 		{
 			_host = host;
 			_contentTypeManager = contentTypeManager;
 			//_importer = importer;
-			_finder = finder;
 			_credentialService = credentialService;
 			_adminConfig = adminConfig;
 		}
@@ -100,7 +97,7 @@ namespace Zeus.Installation
 		{
 			try
 			{
-				status.Items = _finder.QueryItems().Count();
+				status.Items = ContentItem.All().Count();
 				//status.Details = _finder.QueryDetails().Count();
 				//status.DetailCollections = _finder.QueryDetailCollections().Count();
 				//status.AuthorizedRoles = _finder.Query<AuthorizationRule>().Count();
@@ -139,7 +136,7 @@ namespace Zeus.Installation
 		/// <returns>A string with diagnostic information about the database.</returns>
 		public string CheckDatabase()
 		{
-			int itemCount = _finder.QueryItems().Count();
+			int itemCount = ContentItem.All().Count();
 			//int detailCount = _finder.QueryDetails().Count();
 			//int detailCollectionCount = _finder.QueryDetailCollections().Count();
 			//int authorizationRuleCount = _finder.Query<AuthorizationRule>().Count();

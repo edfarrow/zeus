@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
@@ -79,13 +78,12 @@ namespace Zeus.Design.Editors
 
 		protected override ListItem[] GetListItems(ContentItem item)
 		{
-			IQueryable<ContentItem> items = Context.Current.Finder.QueryItems();
+			IQueryable<ContentItem> items = ContentItem.All();
 			if (TypeFilter != null)
-				items = ((IQueryable) items).OfType(TypeFilter).OfType<ContentItem>();
-			IEnumerable<ContentItem> itemList = items.ToList();
+				items = items.OfType(TypeFilter);
 			if (ExcludeSelf)
-				itemList = itemList.Where(i => i != item);
-			return itemList
+				items = items.Where(i => i != item);
+			return items
 				.OrderBy(i => i.HierarchicalTitle)
                 .Select(i => new ListItem { Value = i.ID.ToString(), Text = UseNonHiearchicalTitle ? i.Title : i.HierarchicalTitle })
 				.ToArray();
