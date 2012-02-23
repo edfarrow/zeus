@@ -64,9 +64,21 @@ namespace Zeus.Admin.Plugins.EditItem
 		{
 			ContentItem currentItem = (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem);
 
-			Refresh(currentItem, AdminFrame.Both, false);
-			Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
-			zeusItemEditView.Visible = false;
+			if (currentItem.IsPage)
+			{
+				Refresh(currentItem, AdminFrame.Both, false);
+				Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
+				zeusItemEditView.Visible = false;
+			}
+			else
+			{
+				ExtNet.MessageBox.Show(new MessageBoxConfig
+				{
+					Icon = MessageBox.Icon.INFO,
+					Buttons = MessageBox.Button.OK,
+					Message = "Item saved"
+				});
+			}
 		}
 
 		/// <summary>Gets the type defined by <see cref="TypeDefinition"/>.</summary>

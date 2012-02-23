@@ -111,7 +111,9 @@ namespace Zeus.Admin.Plugins.Tree
 						IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
 						Cls = "zeus-tree-node",
 						Expanded = false,
-                        NodeID = (-1 * (Int32.Parse(node.NodeID) + uniqueCount)).ToString()
+						// TODO: Check why this was necessary
+                        //NodeID = (-1 * (Int32.Parse(node.NodeID) + uniqueCount)).ToString()
+						NodeID = node.NodeID + uniqueCount
 					};
 
 					((TreeNode) node).Nodes.Add(folderNode);
