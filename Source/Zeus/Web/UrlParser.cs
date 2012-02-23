@@ -65,7 +65,7 @@ namespace Zeus.Web
         /// <summary>Gets the current start page.</summary>
         public virtual ContentItem StartPage
         {
-            get { return _persister.Load(_host.CurrentSite.StartPageID); }
+            get { return ContentItem.FindOneByID(_host.CurrentSite.StartPageID); }
         }
 
         public ContentItem CurrentPage

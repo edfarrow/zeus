@@ -13,9 +13,6 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been copied</summary>
 		public event EventHandler<DestinationEventArgs> ItemCopied;
 
-		/// <summary>Occurs when an item is loaded</summary>
-		public event EventHandler<ItemEventArgs> ItemLoaded;
-
 		#endregion
 
 		#region Methods
@@ -58,11 +55,6 @@ namespace Zeus.Persistence
 			where T : ContentItem
 		{
 			return (T) ContentItem.FindOneByID(id);
-		}
-
-		public ContentItem Load(ObjectId id)
-		{
-			return ContentItem.FindOneByID(id);
 		}
 
 		protected virtual T Invoke<T>(EventHandler<T> handler, T args)
