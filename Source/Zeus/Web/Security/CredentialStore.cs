@@ -172,28 +172,19 @@ namespace Zeus.Web.Security
 
 		private SystemNode CreateSystemNode(ContentItem parent)
 		{
-			SystemNode systemNode = Context.ContentTypes.CreateInstance<SystemNode>(parent);
-			systemNode.Save();
-			return systemNode;
+			return SystemNode.Create(new SystemNode { Parent = parent });
 		}
 
 		private SecurityContainer CreateSecurityContainer(ContentItem parent)
 		{
-			SecurityContainer security = Context.ContentTypes.CreateInstance<SecurityContainer>(parent);
-			security.Save();
-
-			RoleContainer roles = Context.ContentTypes.CreateInstance<RoleContainer>(security);
-			roles.Parent = security;
-			roles.Save();
+			SecurityContainer security = SecurityContainer.Create(new SecurityContainer { Parent = parent });
+			RoleContainer roles = RoleContainer.Create(new RoleContainer { Parent = security });
 
 			foreach (string role in DefaultRoles)
 				roles.AddRole(role);
 
-			UserContainer users = Context.ContentTypes.CreateInstance<UserContainer>(security);
-			users.Parent = security;
-			users.Save();
+			UserContainer.Create(new UserContainer { Parent = security });
 
-			security.Save();
 			return security;
 		}
 

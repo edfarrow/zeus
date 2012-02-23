@@ -49,37 +49,13 @@ namespace Zeus.ContentTypes
 
 		#region Methods
 
-		public T CreateInstance<T>(ContentItem parentItem)
-			where T : ContentItem
-		{
-			T item = Activator.CreateInstance<T>();
-			OnItemCreating(item, parentItem);
-			return item;
-		}
-
 		/// <summary>Creates an instance of a certain type of item. It's good practice to create new items through this method so the item's dependencies can be injected by the engine.</summary>
 		/// <returns>A new instance of an item.</returns>
 		public ContentItem CreateInstance(Type itemType, ContentItem parentItem)
 		{
-			ContentItem item = Activator.CreateInstance(itemType) as ContentItem;
-			OnItemCreating(item, parentItem);
+			ContentItem item = (ContentItem) Activator.CreateInstance(itemType);
+			item.Parent = parentItem;
 			return item;
-		}
-
-		protected virtual void OnItemCreating(ContentItem item, ContentItem parentItem)
-		{
-			if (parentItem != null)
-			{
-				ContentType parentDefinition = GetContentType(parentItem.GetType());
-				ContentType itemDefinition = GetContentType(item.GetType());
-
-				if (!parentDefinition.IsChildAllowed(itemDefinition))
-					throw new NotAllowedParentException(itemDefinition, parentItem.GetType());
-
-				item.Parent = parentItem;
-				foreach (AuthorizationRule rule in parentItem.AuthorizationRules)
-					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User, rule.Allowed));
-			}
 		}
 
 		public ICollection<ContentType> GetContentTypes()

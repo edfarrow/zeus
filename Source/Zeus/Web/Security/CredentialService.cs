@@ -180,9 +180,11 @@ namespace Zeus.Web.Security
 			string passwordResetLink = linkRoot + HttpUtility.UrlEncode(nonce);
 
 			// Create a password reset request.
-			PasswordResetRequest resetRequest = _contentTypeManager.CreateInstance<PasswordResetRequest>(user);
-			resetRequest.Nonce = nonce;
-			resetRequest.Save();
+			PasswordResetRequest.Create(new PasswordResetRequest
+			{
+				Parent = user,
+				Nonce = nonce
+			});
 
 			// Construct email.
 			emailBody = emailBody.Replace(PasswordResetLinkName, passwordResetLink);

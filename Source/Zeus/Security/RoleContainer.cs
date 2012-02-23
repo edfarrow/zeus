@@ -36,9 +36,7 @@ namespace Zeus.Web.Security.Items
 			if (existingRole != null)
 				return;
 
-			Role role = new Role { Name = roleName };
-			role.Parent = this;
-			role.Save();
+			Role.Create(new Role { Name = roleName, Parent = this });
 		}
 
 		/// <summary>Removes a role if existing.</summary>

@@ -474,6 +474,13 @@ namespace Zeus
 			return base.OnBeforeSave();
 		}
 
+		protected override void OnAfterMove(ContentItem newParent)
+		{
+			foreach (AuthorizationRule rule in newParent.AuthorizationRules)
+				AuthorizationRules.Add(new AuthorizationRule(newParent, rule.Operation, rule.Role, rule.User, rule.Allowed));
+			base.OnAfterMove(newParent);
+		}
+
 		protected virtual bool OnBeforeCopy(ContentItem newParent)
 		{
 			return ExecuteCancellableObservers<IContentItemObserver>(o => o.BeforeCopy(this, newParent));

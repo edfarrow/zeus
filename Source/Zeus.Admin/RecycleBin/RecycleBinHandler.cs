@@ -42,7 +42,7 @@ namespace Zeus.Admin.RecycleBin
 			RecycleBinContainer trashContainer = rootItem.GetChild("RecycleBin") as RecycleBinContainer;
 			if (create && trashContainer == null)
 			{
-				trashContainer = _contentTypeManager.CreateInstance<RecycleBinContainer>(rootItem);
+				trashContainer = new RecycleBinContainer { Parent = rootItem };
 				trashContainer.Name = "RecycleBin";
 				trashContainer.Title = "Recycle Bin";
 				trashContainer.Visible = false;

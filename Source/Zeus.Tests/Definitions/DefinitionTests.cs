@@ -19,12 +19,5 @@ namespace Zeus.Tests.Definitions
 			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, null, null, null);
 			_definitionManager = new ContentTypeManager(contentTypeBuilder);
 		}
-
-		[Test]
-		public void CanCreateNewItemInstance()
-		{
-			TestTextPage item = _definitionManager.CreateInstance<TestTextPage>(null);
-			Assert.IsNotNull(item, "Couldn't create item");
-		}
 	}
 }

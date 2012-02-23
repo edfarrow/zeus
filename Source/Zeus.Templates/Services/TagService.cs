@@ -1,27 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Zeus.ContentTypes;
 using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Templates.Services
 {
 	public class TagService : ITagService
 	{
-		private readonly IContentTypeManager _contentTypeManager;
-
-		public TagService(IContentTypeManager contentTypeManager)
-		{
-			_contentTypeManager = contentTypeManager;
-		}
-
 		public Tag EnsureTag(TagGroup tagGroup, string tagName)
 		{
 			foreach (Tag childTag in tagGroup.GetChildren<Tag>())
 				if (childTag.Title == tagName)
 					return childTag;
 
-			Tag tag = _contentTypeManager.CreateInstance<Tag>(tagGroup);
+			Tag tag = new Tag { Parent = tagGroup };
 			tag.Name = Utility.GetSafeName(tagName);
 			tag.Title = tagName;
 			tag.Save();
