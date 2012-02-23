@@ -24,6 +24,7 @@ namespace Zeus.Design.Editors
 
 		public TextEditorAttributeBase()
 		{
+			
 		}
 
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>

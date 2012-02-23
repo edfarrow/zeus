@@ -50,7 +50,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get
 			{
-				return _parentItem ?? (_parentItem = ContentItem.FindOneByID(ParentItemID));
+				return _parentItem ?? (_parentItem = ContentItem.Find(ParentItemID));
 			}
 			set
 			{

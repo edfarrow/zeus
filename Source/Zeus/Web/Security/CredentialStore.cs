@@ -161,7 +161,7 @@ namespace Zeus.Web.Security
 
 		private SecurityContainer GetSecurityContainer(bool create)
 		{
-			ContentItem root = ContentItem.FindOneByID(RootItemID);
+			ContentItem root = ContentItem.Find(RootItemID);
 			SystemNode systemNode = root.GetChildren<SystemNode>().FirstOrDefault();
 			if (systemNode == null && create)
 				systemNode = CreateSystemNode(root);

@@ -43,7 +43,7 @@ namespace Zeus.Admin.RecycleBin
 		protected void grvRecycleBinItems_RowCommand(object sender, GridViewCommandEventArgs e)
 		{
 			ObjectId itemID = ObjectId.Parse(e.CommandArgument.ToString());
-			ContentItem item = ContentItem.FindOneByID(itemID);
+			ContentItem item = ContentItem.Find(itemID);
 
 			switch (e.CommandName)
 			{

@@ -23,11 +23,11 @@ namespace Zeus.Admin
 			if (!path.StartsWith("/"))
 			{
 				if (path.StartsWith("~"))
-					return Navigate(ContentItem.FindOneByID(_host.CurrentSite.StartPageID), path.Substring(1));
+					return Navigate(ContentItem.Find(_host.CurrentSite.StartPageID), path.Substring(1));
 				throw new ArgumentException("The path must start with a slash '/', was '" + path + "'", "path");
 			}
 
-			return Navigate(ContentItem.FindOneByID(_host.CurrentSite.RootItemID), path);
+			return Navigate(ContentItem.Find(_host.CurrentSite.RootItemID), path);
 		}
 	}
 }

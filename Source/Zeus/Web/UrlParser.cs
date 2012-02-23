@@ -58,7 +58,7 @@ namespace Zeus.Web
         /// <summary>Gets the current start page.</summary>
         public virtual ContentItem StartPage
         {
-            get { return ContentItem.FindOneByID(_host.CurrentSite.StartPageID); }
+            get { return ContentItem.Find(_host.CurrentSite.StartPageID); }
         }
 
         public ContentItem CurrentPage
@@ -174,7 +174,7 @@ namespace Zeus.Web
         {
             ObjectId? itemID = FindQueryStringReference(url, parameters);
             if (itemID.HasValue)
-				return ContentItem.FindOneByID(itemID.Value);
+				return ContentItem.Find(itemID.Value);
             return null;
         }
 
@@ -329,7 +329,7 @@ namespace Zeus.Web
                         foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                         {
                             // First check that the page referenced in web.config actually exists.
-							ContentItem customUrlPage = ContentItem.FindOneByID(id.ID);
+							ContentItem customUrlPage = ContentItem.Find(id.ID);
                             if (customUrlPage == null)
                                 continue;
 
@@ -417,7 +417,7 @@ namespace Zeus.Web
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] != null)
                                     {
                                         //we now have a match without any more calls to the database
-										ContentItem ci = ContentItem.FindOneByID((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+										ContentItem ci = ContentItem.Find((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
                                         System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
@@ -431,7 +431,7 @@ namespace Zeus.Web
                             foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                             {
                                 // First check that the page referenced in web.config actually exists.
-								ContentItem customUrlPage = ContentItem.FindOneByID(id.ID);
+								ContentItem customUrlPage = ContentItem.Find(id.ID);
                                 if (customUrlPage == null)
                                     continue;
 
@@ -455,7 +455,7 @@ namespace Zeus.Web
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
                                     {
                                         ContentItem tryMatchAgain =
-											Find.EnumerateAccessibleChildren(ContentItem.FindOneByID(id.ID), id.Depth).SingleOrDefault(
+											Find.EnumerateAccessibleChildren(ContentItem.Find(id.ID), id.Depth).SingleOrDefault(
                                                 ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
 
                                         if (tryMatchAgain != null)
@@ -468,7 +468,7 @@ namespace Zeus.Web
                                     }
                                     else
                                     {
-                                        ContentItem ci = ContentItem.FindOneByID((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                        ContentItem ci = ContentItem.Find((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
                                         System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
@@ -479,7 +479,7 @@ namespace Zeus.Web
                         }
                         else
                         {
-							ContentItem ci = ContentItem.FindOneByID((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
+							ContentItem ci = ContentItem.Find((ObjectId)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
                             string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
                             if (string.IsNullOrEmpty(act))
                                 return ci.FindPath(PathData.DefaultAction);

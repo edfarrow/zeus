@@ -23,13 +23,13 @@ namespace Zeus.Admin
             if (Request.Form["id"] == null)
             {
                 ObjectId id = ObjectId.Parse(Request.QueryString["id"]);
-				ImageToEdit = ContentItem.FindOneByID<CroppedImage>(id);
+				ImageToEdit = ContentItem.Find<CroppedImage>(id);
                 bFixedAspectRatio = ImageToEdit.FixedWidthValue > 0 && ImageToEdit.FixedHeightValue > 0;
                 if (bFixedAspectRatio)
                     aspectRatio = (double)ImageToEdit.FixedWidthValue / (double)ImageToEdit.FixedHeightValue;
                 
                 //need to set the min and max sizes...this will stop people upscaling their images
-				CroppedImage imageToEdit = ContentItem.FindOneByID<CroppedImage>(id);
+				CroppedImage imageToEdit = ContentItem.Find<CroppedImage>(id);
 
                 System.Drawing.Image image = System.Drawing.Image.FromStream(imageToEdit.Data.Content);
                 int ActualWidth = image.Width;
@@ -62,7 +62,7 @@ namespace Zeus.Admin
                 int h = Convert.ToInt32(Request.Form["h"]);
                 string selected = Request.Form["selected"];
 
-				CroppedImage imageToEdit = ContentItem.FindOneByID<CroppedImage>(id);
+				CroppedImage imageToEdit = ContentItem.Find<CroppedImage>(id);
 
                 System.Drawing.Image image = System.Drawing.Image.FromStream(imageToEdit.Data.Content);
                 int ActualWidth = image.Width;
@@ -94,7 +94,7 @@ namespace Zeus.Admin
                     h = Convert.ToInt32(Math.Round(percChange * h, 0));
                 }
 
-				ImageToEdit = ContentItem.FindOneByID<CroppedImage>(id);
+				ImageToEdit = ContentItem.Find<CroppedImage>(id);
                 ImageToEdit.TopLeftXVal = x1;
                 ImageToEdit.TopLeftYVal = y1;
                 ImageToEdit.CropWidth = w;

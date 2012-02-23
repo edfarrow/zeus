@@ -33,7 +33,7 @@ namespace Zeus.Design.Editors
 		protected override object GetValue(ListControl ddl)
 		{
 			if (!string.IsNullOrEmpty(ddl.SelectedValue))
-				return ContentItem.FindOneByID(ObjectId.Parse(ddl.SelectedValue));
+				return ContentItem.Find(ObjectId.Parse(ddl.SelectedValue));
 			return null;
 		}
 

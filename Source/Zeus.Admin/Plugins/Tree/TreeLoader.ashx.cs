@@ -25,7 +25,7 @@ namespace Zeus.Admin.Plugins.Tree
 			nodeId = overrideNodeId ?? nodeId;
 			if (nodeId != null)
 			{
-				ContentItem selectedItem = ContentItem.FindOneByID(nodeId.Value);
+				ContentItem selectedItem = ContentItem.Find(nodeId.Value);
 
 				SiteTree tree;
 				if (sync)

@@ -50,8 +50,8 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			[Bind(Prefix = "varid")] ObjectId? variationPermutationID,
 			[Bind(Prefix = "qty")] int quantity)
 		{
-			Product product = ContentItem.FindOneByID<Product>(productID);
-			VariationPermutation variationPermutation = (variationPermutationID != null) ? ContentItem.FindOneByID<VariationPermutation>(variationPermutationID.Value) : null;
+			Product product = ContentItem.Find<Product>(productID);
+			VariationPermutation variationPermutation = (variationPermutationID != null) ? ContentItem.Find<VariationPermutation>(variationPermutationID.Value) : null;
 			_shoppingBasketService.UpdateQuantity(CurrentShop, product, variationPermutation, quantity);
 			
 			return Redirect(CurrentItem.Url);

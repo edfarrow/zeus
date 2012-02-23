@@ -26,7 +26,7 @@ namespace Zeus.Design.Editors
 		{
 			List<ContentItem> result = new List<ContentItem>();
 			foreach (ListItem listItem in selectedListItems)
-				result.Add(ContentItem.FindOneByID(ObjectId.Parse(listItem.Value)));
+				result.Add(ContentItem.Find(ObjectId.Parse(listItem.Value)));
 			return result;
 		}
 

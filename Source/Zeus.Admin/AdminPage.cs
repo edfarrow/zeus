@@ -140,7 +140,7 @@ jQuery(document).ready(function() {{
 		private ContentItem GetFromViewState()
 		{
 			if (SelectedItemID != ObjectId.Empty)
-				return ContentItem.FindOneByID(SelectedItemID);
+				return ContentItem.Find(SelectedItemID);
 			return null;
 		}
 
@@ -156,7 +156,7 @@ jQuery(document).ready(function() {{
 
 			string itemId = Request[PathData.ItemQueryKey];
 			if (!string.IsNullOrEmpty(itemId))
-				return ContentItem.FindOneByID(ObjectId.Parse(itemId));
+				return ContentItem.Find(ObjectId.Parse(itemId));
 
 			return null;
 		}

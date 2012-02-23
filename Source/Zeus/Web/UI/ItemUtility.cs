@@ -92,7 +92,7 @@ namespace Zeus.Web.UI
 			// find starting point
 			if (path.StartsWith("/"))
 			{
-				startItem = ContentItem.FindOneByID(Context.Current.Host.CurrentSite.RootItemID);
+				startItem = ContentItem.Find(Context.Current.Host.CurrentSite.RootItemID);
 				path = path.Substring(1);
 			}
 			else if (path.StartsWith("~/"))

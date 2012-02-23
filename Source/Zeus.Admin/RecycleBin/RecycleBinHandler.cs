@@ -41,7 +41,7 @@ namespace Zeus.Admin.RecycleBin
 
 		public RecycleBinContainer GetTrashContainer(bool create)
 		{
-			ContentItem rootItem = ContentItem.FindOneByID(_host.CurrentSite.RootItemID);
+			ContentItem rootItem = ContentItem.Find(_host.CurrentSite.RootItemID);
 			RecycleBinContainer trashContainer = rootItem.GetChild("RecycleBin") as RecycleBinContainer;
 			if (create && trashContainer == null)
 			{

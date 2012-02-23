@@ -18,7 +18,7 @@ namespace Zeus.Web
 			ObjectId contentID = ObjectId.Parse(match.Groups[1].Value);
 
 			// Load content item and get URL.
-			ContentItem contentItem = ContentItem.FindOneByID(contentID);
+			ContentItem contentItem = ContentItem.Find(contentID);
 			return string.Format(@"href=""{0}""", (contentItem != null) ? contentItem.Url : "#");
 		}
 	}

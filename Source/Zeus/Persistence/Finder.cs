@@ -8,17 +8,17 @@ namespace Zeus.Persistence
 	{
 		public IQueryable<T> QueryItems<T>() where T : ContentItem
 		{
-			return ContentItem.FindAll().OfType<T>();
+			return ContentItem.All().OfType<T>();
 		}
 
 		public IQueryable<ContentItem> QueryItems()
 		{
-			return ContentItem.FindAll();
+			return ContentItem.All();
 		}
 
 		public IQueryable Query(Type resultType)
 		{
-			return ContentItem.FindAll().OfType(resultType);
+			return ContentItem.All().OfType(resultType);
 		}
 	}
 }

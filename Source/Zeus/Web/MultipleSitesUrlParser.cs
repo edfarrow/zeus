@@ -27,7 +27,7 @@ namespace Zeus.Web
 			Site site = Host.GetSite(url);
 			if (site != null)
 				return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey)
-					?? Parse(ContentItem.FindOneByID(site.StartPageID), Url.Parse(url).PathAndQuery);
+					?? Parse(ContentItem.Find(site.StartPageID), Url.Parse(url).PathAndQuery);
 
 			return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey);
 		}
@@ -42,7 +42,7 @@ namespace Zeus.Web
 			if (!url.IsAbsolute)
 				return StartPage;
 			Site site = Host.GetSite(url) ?? Host.CurrentSite;
-			return ContentItem.FindOneByID(site.StartPageID);
+			return ContentItem.Find(site.StartPageID);
 		}
 
 		public override string BuildUrl(ContentItem item)

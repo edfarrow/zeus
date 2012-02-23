@@ -24,7 +24,7 @@ namespace Zeus.Design.Editors
 		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, object existingDetail, Control editor, out object newDetail)
 		{
 			DropDownList ddl = (DropDownList) editor;
-			newDetail = ContentItem.FindOneByID(ObjectId.Parse(ddl.SelectedValue));
+			newDetail = ContentItem.Find(ObjectId.Parse(ddl.SelectedValue));
 		}
 	}
 }

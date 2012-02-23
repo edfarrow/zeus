@@ -83,8 +83,8 @@ namespace Zeus.Installation
 			{
 				status.StartPageID = _host.CurrentSite.StartPageID;
 				status.RootItemID = _host.CurrentSite.RootItemID;
-				status.StartPage = ContentItem.FindOneByID(status.StartPageID);
-				status.RootItem = ContentItem.FindOneByID(status.RootItemID);
+				status.StartPage = ContentItem.Find(status.StartPageID);
+				status.RootItem = ContentItem.Find(status.RootItemID);
 				status.IsInstalled = status.RootItem != null && status.StartPage != null;
 
 				status.HasUsers = _credentialService.GetUser("administrator") != null;
@@ -154,7 +154,7 @@ namespace Zeus.Installation
 		public string CheckRootItem()
 		{
 			ObjectId rootID = _host.CurrentSite.RootItemID;
-			ContentItem rootItem = ContentItem.FindOneByID(rootID);
+			ContentItem rootItem = ContentItem.Find(rootID);
 			if (rootItem != null)
 				return string.Format("Root node OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					rootItem.ID, rootItem.Name, rootItem.GetType(),
@@ -167,7 +167,7 @@ namespace Zeus.Installation
 		public string CheckStartPage()
 		{
 			ObjectId startID = _host.CurrentSite.StartPageID;
-			ContentItem startPage = ContentItem.FindOneByID(startID);
+			ContentItem startPage = ContentItem.Find(startID);
 			if (startPage != null)
 				return string.Format("Start page OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					startPage.ID, startPage.Name, startPage.GetType(),

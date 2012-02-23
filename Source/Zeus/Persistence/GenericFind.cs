@@ -31,7 +31,7 @@ namespace Zeus.Persistence
 		public static TRoot RootItem
 		{
 			//get { return (TStart) Context.Current.UrlParser.RootItem; }
-			get { return (TRoot) ContentItem.FindOneByID(Context.Current.Host.CurrentSite.RootItemID); }
+			get { return (TRoot) ContentItem.Find(Context.Current.Host.CurrentSite.RootItemID); }
 		}
 
 		/// <summary>Gets the current start page (this may vary depending on host url).</summary>

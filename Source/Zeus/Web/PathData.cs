@@ -134,7 +134,7 @@ namespace Zeus.Web
 
 		public virtual PathData Attach(Persistence.IPersister persister)
 		{
-			ContentItem item = ContentItem.FindOneByID(ID);
+			ContentItem item = ContentItem.Find(ID);
 			PathData data = new PathData(item, TemplateUrl, Action, Argument)
     	{
     		QueryParameters = new Dictionary<string, string>(QueryParameters)

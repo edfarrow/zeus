@@ -17,9 +17,9 @@ namespace Zeus.Admin.Plugins.MoveItem
 			//if (destinationID < 0)
 			//    destinationID = -1 * (destinationID % 100000);
 
-			ContentItem sourceContentItem = ContentItem.FindOneByID(source);
+			ContentItem sourceContentItem = ContentItem.Find(source);
             //get abs value of destination - this sorts out placement folders, which have to have the a negative value of their parent node so that sorting, moving etc can work
-			ContentItem destinationContentItem = ContentItem.FindOneByID(destination);
+			ContentItem destinationContentItem = ContentItem.Find(destination);
 
 			// Check user has permission to create items under the SelectedItem
 			if (!Engine.SecurityManager.IsAuthorized(destinationContentItem, Page.User, Operations.Create))

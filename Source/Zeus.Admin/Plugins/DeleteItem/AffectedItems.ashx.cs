@@ -27,7 +27,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 
 				foreach (ObjectId nodeID in nodeIDs)
 				{
-					ContentItem selectedItem = ContentItem.FindOneByID(nodeID);
+					ContentItem selectedItem = ContentItem.Find(nodeID);
 
 					SiteTree tree = SiteTree.From(selectedItem, int.MaxValue);
 

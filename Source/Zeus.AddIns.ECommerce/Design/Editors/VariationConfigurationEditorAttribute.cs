@@ -47,7 +47,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 				VariationPermutation variationPermutation = new VariationPermutation();
 				ObjectId[] variationIDs = listItem.Value.Split(',').Select(s => ObjectId.Parse(s)).ToArray();
 				foreach (ObjectId variationID in variationIDs)
-					variationPermutation.Variations.Add(ContentItem.FindOneByID<Variation>(variationID));
+					variationPermutation.Variations.Add(ContentItem.Find<Variation>(variationID));
 
 				VariationConfiguration variationConfiguration = new VariationConfiguration
 				{
