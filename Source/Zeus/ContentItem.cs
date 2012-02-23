@@ -76,9 +76,6 @@ namespace Zeus
             set { _expires = value != DateTime.MinValue ? value : null; }
         }
 
-        /// <summary>Gets or sets the sort order of this item.</summary>
-        public virtual int SortOrder { get; set; }
-
         /// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
 		public virtual bool Visible { get; set; }
 

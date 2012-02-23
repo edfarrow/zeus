@@ -1,5 +1,4 @@
 ﻿using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -11,7 +10,7 @@ namespace Zeus.FileSystem
 	{
 		public Folder()
 		{
-			SortOrder = int.MaxValue;
+			Position = int.MaxValue;
 			Visible = false;
 		}
 
@@ -26,12 +25,11 @@ namespace Zeus.FileSystem
 			get { return base.Name; }
 			set { base.Name = value; }
 		}
-        
-        public override string Title
-        {        
+
+		public override string Title
+		{
 			get { return base.Name; }
 			set { base.Title = value; }
 		}
-         
 	}
 }

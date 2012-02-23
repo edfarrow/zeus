@@ -1,18 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Web;
 using Ext.Net;
-using Ext.Net.Utilities;
 using Zeus.BaseLibrary.ExtensionMethods;
-using Zeus.BaseLibrary.Web.UI;
-using Zeus.Integrity;
 using Zeus.Web.Hosting;
-using System.Globalization;
 
 namespace Zeus
 {
@@ -126,26 +119,6 @@ namespace Zeus
 		{
 			siblings.Remove(itemToMove);
 			siblings.Insert(newIndex, itemToMove);
-		}
-
-		/// <summary>Iterates items and ensures that the item's sort order is ascending.</summary>
-		/// <param name="siblings">The items to iterate.</param>
-		/// <returns>A list of items whose sort order was changed.</returns>
-		public static IEnumerable<ContentItem> UpdateSortOrder(IEnumerable siblings)
-		{
-			List<ContentItem> updatedItems = new List<ContentItem>();
-			int lastSortOrder = int.MinValue;
-			foreach (ContentItem sibling in siblings)
-			{
-				if (sibling.SortOrder <= lastSortOrder)
-				{
-					sibling.SortOrder = ++lastSortOrder;
-					updatedItems.Add(sibling);
-				}
-				else
-					lastSortOrder = sibling.SortOrder;
-			}
-			return updatedItems;
 		}
 
 		/// <summary>Invokes an event and and executes an action unless the event is cancelled.</summary>

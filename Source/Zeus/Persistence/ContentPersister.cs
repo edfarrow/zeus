@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using MongoDB.Bson;
 
 namespace Zeus.Persistence
@@ -136,23 +135,6 @@ namespace Zeus.Persistence
 			return null;
 		}
 
-		public void UpdateSortOrder(ContentItem contentItem, int newPos)
-		{
-			IEnumerable<ContentItem> siblings = contentItem.Parent.Children.Where(c => c != contentItem).OrderBy(c => c.SortOrder);
-			IEnumerable<ContentItem> previousSiblings = siblings.Where(c => c.SortOrder <= newPos).OrderBy(c => c.SortOrder);
-			IEnumerable<ContentItem> nextSiblings = siblings.Where(c => c.SortOrder >= newPos).OrderBy(c => c.SortOrder);
-
-			int currentSortOrder = 0;
-			foreach (ContentItem sibling in previousSiblings)
-				sibling.SortOrder = currentSortOrder++;
-			contentItem.SortOrder = currentSortOrder++;
-			foreach (ContentItem sibling in nextSiblings)
-				sibling.SortOrder = currentSortOrder++;
-
-			foreach (ContentItem item in siblings)
-				Save(item);
-		}
-
 		public void Save(ContentItem unsavedItem)
 		{
 			Utility.InvokeEvent(ItemSaving, unsavedItem, this, SaveAction);
@@ -163,19 +145,8 @@ namespace Zeus.Persistence
 			contentItem.Updated = DateTime.Now;
 			contentItem.Save();
 			contentItem.AddTo(contentItem.Parent);
-			EnsureSortOrder(contentItem);
 
 			Invoke(ItemSaved, new ItemEventArgs(contentItem));
-		}
-
-		private void EnsureSortOrder(ContentItem unsavedItem)
-		{
-			if (unsavedItem.Parent != null)
-			{
-				IEnumerable<ContentItem> updatedItems = Utility.UpdateSortOrder(unsavedItem.Parent.Children);
-				foreach (ContentItem updatedItem in updatedItems)
-					updatedItem.Save();
-			}
 		}
 
 		protected virtual T Invoke<T>(EventHandler<T> handler, T args)

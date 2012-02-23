@@ -32,6 +32,5 @@ namespace Zeus.Persistence
 		ContentItem Load(ObjectId id);
 		void Move(ContentItem toMove, ContentItem newParent);
 		void Save(ContentItem contentItem);
-		void UpdateSortOrder(ContentItem contentItem, int newPos);
 	}
 }

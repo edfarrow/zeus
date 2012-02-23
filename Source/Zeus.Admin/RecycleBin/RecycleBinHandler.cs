@@ -52,7 +52,7 @@ namespace Zeus.Admin.RecycleBin
 				//trashContainer.AuthorizationRules.Add(new AuthorizationRule(trashContainer, "admin"));
 				//trashContainer.AuthorizationRules.Add(new AuthorizationRule(trashContainer, "Editors"));
 				//trashContainer.AuthorizationRules.Add(new AuthorizationRule(trashContainer, "Administrators"));
-				trashContainer.SortOrder = int.MaxValue - 1000000;
+				trashContainer.Position = int.MaxValue - 1000000;
 				_persister.Save(trashContainer);
 			}
 			return trashContainer;
