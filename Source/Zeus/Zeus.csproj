@@ -355,9 +355,6 @@
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
     <Compile Include="Web\Security\WebSecurityService.cs" />
-    <Compile Include="Web\TextTemplating\DefaultMessageBuilder.cs" />
-    <Compile Include="Web\TextTemplating\IMessageBuilder.cs" />
-    <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
     <Compile Include="Web\UI\PanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ChildrenEditor.cs" />
     <Compile Include="Web\UI\WebControls\ChildrenEditorGridPanel.cs" />

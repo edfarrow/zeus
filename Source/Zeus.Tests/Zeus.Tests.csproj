@@ -137,7 +137,6 @@
     <Compile Include="Web\Security\AuthenticatedUser.cs" />
     <Compile Include="Web\Security\AuthenticationServiceTests.cs" />
     <Compile Include="Web\Security\MembershipServiceTests.cs" />
-    <Compile Include="Web\TextTemplating\DefaultMessageBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
@@ -151,9 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\TextTemplating\Templates\TestTransform.spark" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

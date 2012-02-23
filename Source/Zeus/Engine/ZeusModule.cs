@@ -17,7 +17,6 @@ using Zeus.Web.Hosting;
 using Zeus.Web.Mvc;
 using Zeus.Web.Mvc.Html;
 using Zeus.Web.Security;
-using Zeus.Web.TextTemplating;
 using IWebContext=Zeus.Web.IWebContext;
 
 namespace Zeus.Engine
@@ -87,9 +86,6 @@ namespace Zeus.Engine
 
 			// Web / Caching
 			Bind<ICachingService>().To<CachingService>().InSingletonScope();
-
-			// Web / Text Templating
-			Bind<IMessageBuilder>().To<DefaultMessageBuilder>().InSingletonScope();
 
 			// Web / MVC
 			Bind<ITemplateRenderer>().To<TemplateRenderer>().InSingletonScope();
