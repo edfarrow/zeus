@@ -1,12 +1,11 @@
 ﻿using Ext.Net;
-using Zeus.ContentTypes;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes.ReferenceData
 {
 	[ContentType("Country List", Description = "Container for countries")]
 	[RestrictParents(typeof(ReferenceDataNode))]
-	public class CountryList : BaseContentItem, ISelfPopulator
+	public class CountryList : BaseContentItem
 	{
 		public CountryList()
 		{
@@ -19,13 +18,11 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			get { return Utility.GetCooliteIconUrl(Icon.World); }
 		}
 
-		#region ISelfPopulator Members
-
-		public virtual void Populate()
+		protected override void OnAfterCreate()
 		{
 			Children.Create(new Country("AF", "AFGHANISTAN", "Afghanistan", "AFG", "004"));
-            Children.Create(new Country("AX", "ALAND ISLANDS", "Aland Islands", "ALA", "000"));
-            Children.Create(new Country("AL", "ALBANIA", "Albania", "ALB", "008"));
+			Children.Create(new Country("AX", "ALAND ISLANDS", "Aland Islands", "ALA", "000"));
+			Children.Create(new Country("AL", "ALBANIA", "Albania", "ALB", "008"));
 			Children.Create(new Country("DZ", "ALGERIA", "Algeria", "DZA", "012"));
 			Children.Create(new Country("AS", "AMERICAN SAMOA", "American Samoa", "ASM", "016"));
 			Children.Create(new Country("AD", "ANDORRA", "Andorra", "AND", "020"));
@@ -51,7 +48,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("BM", "BERMUDA", "Bermuda", "BMU", "060"));
 			Children.Create(new Country("BT", "BHUTAN", "Bhutan", "BTN", "064"));
 			Children.Create(new Country("BO", "BOLIVIA", "Bolivia", "BOL", "068"));
-            Children.Create(new Country("BQ", "BONAIRE, SAINT EUSTATIUS AND SABA", "Bonaire, Saint Eustatius And Saba", "BES", "000"));
+			Children.Create(new Country("BQ", "BONAIRE, SAINT EUSTATIUS AND SABA", "Bonaire, Saint Eustatius And Saba", "BES", "000"));
 			Children.Create(new Country("BA", "BOSNIA AND HERZEGOVINA", "Bosnia and Herzegovina", "BIH", "070"));
 			Children.Create(new Country("BW", "BOTSWANA", "Botswana", "BWA", "072"));
 			Children.Create(new Country("BV", "BOUVET ISLAND", "Bouvet Island", "BVT", "074"));
@@ -82,16 +79,16 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("CI", "COTE D'IVOIRE", "Cote D'Ivoire", "CIV", "384"));
 			Children.Create(new Country("HR", "CROATIA", "Croatia", "HRV", "191"));
 			Children.Create(new Country("CU", "CUBA", "Cuba", "CUB", "192"));
-            Children.Create(new Country("CW", "CURACAO", "Curacao", "CUW", "000"));
-            Children.Create(new Country("CY", "CYPRUS", "Cyprus", "CYP", "196"));
+			Children.Create(new Country("CW", "CURACAO", "Curacao", "CUW", "000"));
+			Children.Create(new Country("CY", "CYPRUS", "Cyprus", "CYP", "196"));
 			Children.Create(new Country("CZ", "CZECH REPUBLIC", "Czech Republic", "CZE", "203"));
-			
-            Children.Create(new Country("DK", "DENMARK", "Denmark", "DNK", "208"));
+
+			Children.Create(new Country("DK", "DENMARK", "Denmark", "DNK", "208"));
 			Children.Create(new Country("DJ", "DJIBOUTI", "Djibouti", "DJI", "262"));
 			Children.Create(new Country("DM", "DOMINICA", "Dominica", "DMA", "212"));
 			Children.Create(new Country("DO", "DOMINICAN REPUBLIC", "Dominican Republic", "DOM", "214"));
-			
-            Children.Create(new Country("EC", "ECUADOR", "Ecuador", "ECU", "218"));
+
+			Children.Create(new Country("EC", "ECUADOR", "Ecuador", "ECU", "218"));
 			Children.Create(new Country("EG", "EGYPT", "Egypt", "EGY", "818"));
 			Children.Create(new Country("SV", "EL SALVADOR", "El Salvador", "SLV", "222"));
 			Children.Create(new Country("GQ", "EQUATORIAL GUINEA", "Equatorial Guinea", "GNQ", "226"));
@@ -107,8 +104,8 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("GF", "FRENCH GUIANA", "French Guiana", "GUF", "254"));
 			Children.Create(new Country("PF", "FRENCH POLYNESIA", "French Polynesia", "PYF", "258"));
 			Children.Create(new Country("TF", "FRENCH SOUTHERN TERRITORIES", "French Southern Territories", "ATF", "260"));
-			
-            Children.Create(new Country("GA", "GABON", "Gabon", "GAB", "266"));
+
+			Children.Create(new Country("GA", "GABON", "Gabon", "GAB", "266"));
 			Children.Create(new Country("GM", "GAMBIA", "Gambia", "GMB", "270"));
 			Children.Create(new Country("GE", "GEORGIA", "Georgia", "GEO", "268"));
 			Children.Create(new Country("DE", "GERMANY", "Germany", "DEU", "276"));
@@ -120,7 +117,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("GP", "GUADELOUPE", "Guadeloupe", "GLP", "312"));
 			Children.Create(new Country("GU", "GUAM", "Guam", "GUM", "316"));
 			Children.Create(new Country("GT", "GUATEMALA", "Guatemala", "GTM", "320"));
-            Children.Create(new Country("GG", "GUERNSEY", "Guernsey", "GGY", "000"));
+			Children.Create(new Country("GG", "GUERNSEY", "Guernsey", "GGY", "000"));
 			Children.Create(new Country("GN", "GUINEA", "Guinea", "GIN", "324"));
 			Children.Create(new Country("GW", "GUINEA-BISSAU", "Guinea-Bissau", "GNB", "624"));
 			Children.Create(new Country("GY", "GUYANA", "Guyana", "GUY", "328"));
@@ -138,14 +135,14 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("IR", "IRAN, ISLAMIC REPUBLIC OF", "Iran, Islamic Republic of", "IRN", "364"));
 			Children.Create(new Country("IQ", "IRAQ", "Iraq", "IRQ", "368"));
 			Children.Create(new Country("IE", "IRELAND", "Ireland", "IRL", "372"));
-            Children.Create(new Country("IM", "ISLE OF MAN", "Isle Of Man", "IMN", "000"));
-            Children.Create(new Country("IL", "ISRAEL", "Israel", "ISR", "376"));
+			Children.Create(new Country("IM", "ISLE OF MAN", "Isle Of Man", "IMN", "000"));
+			Children.Create(new Country("IL", "ISRAEL", "Israel", "ISR", "376"));
 			Children.Create(new Country("IT", "ITALY", "Italy", "ITA", "380"));
 
 			Children.Create(new Country("JM", "JAMAICA", "Jamaica", "JAM", "388"));
 			Children.Create(new Country("JP", "JAPAN", "Japan", "JPN", "392"));
-            Children.Create(new Country("JE", "JERSEY", "Jersey", "JEY", "000"));
-            Children.Create(new Country("JO", "JORDAN", "Jordan", "JOR", "400"));
+			Children.Create(new Country("JE", "JERSEY", "Jersey", "JEY", "000"));
+			Children.Create(new Country("JO", "JORDAN", "Jordan", "JOR", "400"));
 
 			Children.Create(new Country("KZ", "KAZAKHSTAN", "Kazakhstan", "KAZ", "398"));
 			Children.Create(new Country("KE", "KENYA", "Kenya", "KEN", "404"));
@@ -188,7 +185,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("MA", "MOROCCO", "Morocco", "MAR", "504"));
 			Children.Create(new Country("MZ", "MOZAMBIQUE", "Mozambique", "MOZ", "508"));
 			Children.Create(new Country("MM", "MYANMAR", "Myanmar", "MMR", "104"));
-                
+
 			Children.Create(new Country("NA", "NAMIBIA", "Namibia", "NAM", "516"));
 			Children.Create(new Country("NR", "NAURU", "Nauru", "NRU", "520"));
 			Children.Create(new Country("NP", "NEPAL", "Nepal", "NPL", "524"));
@@ -217,19 +214,19 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("PL", "POLAND", "Poland", "POL", "616"));
 			Children.Create(new Country("PT", "PORTUGAL", "Portugal", "PRT", "620"));
 			Children.Create(new Country("PR", "PUERTO RICO", "Puerto Rico", "PRI", "630"));
-			
-            Children.Create(new Country("QA", "QATAR", "Qatar", "QAT", "634"));
-			
-            Children.Create(new Country("RE", "REUNION", "Reunion", "REU", "638"));
+
+			Children.Create(new Country("QA", "QATAR", "Qatar", "QAT", "634"));
+
+			Children.Create(new Country("RE", "REUNION", "Reunion", "REU", "638"));
 			Children.Create(new Country("RO", "ROMANIA", "Romania", "ROM", "642"));
 			Children.Create(new Country("RU", "RUSSIAN FEDERATION", "Russian Federation", "RUS", "643"));
 			Children.Create(new Country("RW", "RWANDA", "Rwanda", "RWA", "646"));
 
-            Children.Create(new Country("BL", "SAINT BARTHELEMY", "Saint Barthelemy", "BLM", "000"));
-            Children.Create(new Country("SH", "SAINT HELENA", "Saint Helena", "SHN", "654"));
-            Children.Create(new Country("KN", "SAINT KITTS AND NEVIS", "Saint Kitts and Nevis", "KNA", "659"));
+			Children.Create(new Country("BL", "SAINT BARTHELEMY", "Saint Barthelemy", "BLM", "000"));
+			Children.Create(new Country("SH", "SAINT HELENA", "Saint Helena", "SHN", "654"));
+			Children.Create(new Country("KN", "SAINT KITTS AND NEVIS", "Saint Kitts and Nevis", "KNA", "659"));
 			Children.Create(new Country("LC", "SAINT LUCIA", "Saint Lucia", "LCA", "662"));
-            Children.Create(new Country("MF", "SAINT MARTIN (FRENCH PART)", "Saint Martin (French Part)", "MAF", "663"));
+			Children.Create(new Country("MF", "SAINT MARTIN (FRENCH PART)", "Saint Martin (French Part)", "MAF", "663"));
 			Children.Create(new Country("PM", "SAINT PIERRE AND MIQUELON", "Saint Pierre and Miquelon", "SPM", "666"));
 			Children.Create(new Country("VC", "SAINT VINCENT AND THE GRENADINES", "Saint Vincent and the Grenadines", "VCT", "670"));
 			Children.Create(new Country("WS", "SAMOA", "Samoa", "WSM", "882"));
@@ -241,8 +238,8 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("SC", "SEYCHELLES", "Seychelles", "SYC", "690"));
 			Children.Create(new Country("SL", "SIERRA LEONE", "Sierra Leone", "SLE", "694"));
 			Children.Create(new Country("SG", "SINGAPORE", "Singapore", "SGP", "702"));
-            Children.Create(new Country("SX", "SINT MAARTEN (DUTCH PART)", "Sint Martin (Dutch Part)", "SXM", "703"));
-            Children.Create(new Country("SK", "SLOVAKIA", "Slovakia", "SVK", "703"));  
+			Children.Create(new Country("SX", "SINT MAARTEN (DUTCH PART)", "Sint Martin (Dutch Part)", "SXM", "703"));
+			Children.Create(new Country("SK", "SLOVAKIA", "Slovakia", "SVK", "703"));
 			Children.Create(new Country("SI", "SLOVENIA", "Slovenia", "SVN", "705"));
 			Children.Create(new Country("SB", "SOLOMON ISLANDS", "Solomon Islands", "SLB", "090"));
 			Children.Create(new Country("SO", "SOMALIA", "Somalia", "SOM", "706"));
@@ -257,8 +254,8 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("SE", "SWEDEN", "Sweden", "SWE", "752"));
 			Children.Create(new Country("CH", "SWITZERLAND", "Switzerland", "CHE", "756"));
 			Children.Create(new Country("SY", "SYRIAN ARAB REPUBLIC", "Syrian Arab Republic", "SYR", "760"));
-			
-            Children.Create(new Country("TW", "TAIWAN, PROVINCE OF CHINA", "Taiwan, Province of China", "TWN", "158"));
+
+			Children.Create(new Country("TW", "TAIWAN, PROVINCE OF CHINA", "Taiwan, Province of China", "TWN", "158"));
 			Children.Create(new Country("TJ", "TAJIKISTAN", "Tajikistan", "TJK", "762"));
 			Children.Create(new Country("TZ", "TANZANIA, UNITED REPUBLIC OF", "Tanzania, United Republic of", "TZA", "834"));
 			Children.Create(new Country("TH", "THAILAND", "Thailand", "THA", "764"));
@@ -272,8 +269,8 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("TM", "TURKMENISTAN", "Turkmenistan", "TKM", "795"));
 			Children.Create(new Country("TC", "TURKS AND CAICOS ISLANDS", "Turks and Caicos Islands", "TCA", "796"));
 			Children.Create(new Country("TV", "TUVALU", "Tuvalu", "TUV", "798"));
-			
-            Children.Create(new Country("UG", "UGANDA", "Uganda", "UGA", "800"));
+
+			Children.Create(new Country("UG", "UGANDA", "Uganda", "UGA", "800"));
 			Children.Create(new Country("UA", "UKRAINE", "Ukraine", "UKR", "804"));
 			Children.Create(new Country("AE", "UNITED ARAB EMIRATES", "United Arab Emirates", "ARE", "784"));
 			Children.Create(new Country("GB", "UNITED KINGDOM", "United Kingdom", "GBR", "826"));
@@ -281,22 +278,22 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Create(new Country("UM", "UNITED STATES MINOR OUTLYING ISLANDS", "United States Minor Outlying Islands", "UMI", "581"));
 			Children.Create(new Country("UY", "URUGUAY", "Uruguay", "URY", "858"));
 			Children.Create(new Country("UZ", "UZBEKISTAN", "Uzbekistan", "UZB", "860"));
-			
-            Children.Create(new Country("VU", "VANUATU", "Vanuatu", "VUT", "548"));
+
+			Children.Create(new Country("VU", "VANUATU", "Vanuatu", "VUT", "548"));
 			Children.Create(new Country("VE", "VENEZUELA", "Venezuela", "VEN", "862"));
 			Children.Create(new Country("VN", "VIET NAM", "Viet Nam", "VNM", "704"));
 			Children.Create(new Country("VG", "VIRGIN ISLANDS, BRITISH", "Virgin Islands, British", "VGB", "092"));
 			Children.Create(new Country("VI", "VIRGIN ISLANDS, U.S.", "Virgin Islands, U.s.", "VIR", "850"));
-			
-            Children.Create(new Country("WF", "WALLIS AND FUTUNA", "Wallis and Futuna", "WLF", "876"));
-			Children.Create(new Country("EH", "WESTERN SAHARA", "Western Sahara", "ESH", "732"));
-			
-            Children.Create(new Country("YE", "YEMEN", "Yemen", "YEM", "887"));
-			
-            Children.Create(new Country("ZM", "ZAMBIA", "Zambia", "ZMB", "894"));
-			Children.Create(new Country("ZW", "ZIMBABWE", "Zimbabwe", "ZWE", "716"));
-		}
 
-		#endregion
+			Children.Create(new Country("WF", "WALLIS AND FUTUNA", "Wallis and Futuna", "WLF", "876"));
+			Children.Create(new Country("EH", "WESTERN SAHARA", "Western Sahara", "ESH", "732"));
+
+			Children.Create(new Country("YE", "YEMEN", "Yemen", "YEM", "887"));
+
+			Children.Create(new Country("ZM", "ZAMBIA", "Zambia", "ZMB", "894"));
+			Children.Create(new Country("ZW", "ZIMBABWE", "Zimbabwe", "ZWE", "716"));
+
+			base.OnAfterCreate();
+		}
 	}
 }

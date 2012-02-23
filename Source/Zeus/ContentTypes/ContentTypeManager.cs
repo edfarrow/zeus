@@ -92,9 +92,6 @@ namespace Zeus.ContentTypes
 					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User, rule.Allowed));
 			}
 
-			if (item is ISelfPopulator)
-				((ISelfPopulator) item).Populate();
-
 			_notifier.Notify(item);
 
 			if (ItemCreated != null)

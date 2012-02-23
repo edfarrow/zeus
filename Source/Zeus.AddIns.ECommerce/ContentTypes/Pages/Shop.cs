@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
-using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -14,7 +13,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[ContentType(Name = "BaseShop")]
 	[TabPanel("ECommerce", "E-Commerce", 100)]
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
-	public class Shop : BasePage, ISelfPopulator, IECommerceConfiguration
+	public class Shop : BasePage, IECommerceConfiguration
 	{
 		private const string VariationContainerName = "variations";
 		private const string ShoppingBasketsName = "shopping-baskets";
@@ -78,42 +77,44 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		[CheckBoxEditor("Persistent Shopping Baskets", "", 222, ContainerName = "ECommerce", Description = "Check this box if you want shopping baskets to persist, even after the customer closes their browser.")]
 		public bool PersistentShoppingBaskets { get; set; }
 
-		void ISelfPopulator.Populate()
+		protected override void OnAfterCreate()
 		{
-			VariationSetContainer variationsSet = new VariationSetContainer
+			Create(new VariationSetContainer
 			{
 				Name = VariationContainerName,
-				Title = "VariationsSet"
-			};
-			variationsSet.Parent = this;
+				Title = "VariationsSet",
+				Parent = this
+			});
 
-			ShoppingBasketContainer shoppingBaskets = new ShoppingBasketContainer
+			Create(new ShoppingBasketContainer
 			{
 				Name = ShoppingBasketsName,
-				Title = "Shopping Baskets"
-			};
-			shoppingBaskets.Parent = this;
+				Title = "Shopping Baskets",
+				Parent = this
+			});
 
-			OrderContainer orders = new OrderContainer
+			Create(new OrderContainer
 			{
 				Name = OrdersName,
-				Title = "Orders"
-			};
-			orders.Parent = this;
+				Title = "Orders",
+				Parent = this
+			});
 
-			DeliveryMethodContainer deliveryMethods = new DeliveryMethodContainer
+			Create(new DeliveryMethodContainer
 			{
 				Name = DeliveryMethodsName,
-				Title = "Delivery Methods"
-			};
-			deliveryMethods.Parent = this;
+				Title = "Delivery Methods",
+				Parent = this
+			});
 
-			CheckoutPage checkoutPage = new CheckoutPage
+			Create(new CheckoutPage
 			{
 				Name = CheckoutName,
-				Title = "Checkout"
-			};
-			checkoutPage.Parent = this;
+				Title = "Checkout",
+				Parent = this
+			});
+
+			base.OnAfterCreate();
 		}
 	}
 }

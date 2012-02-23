@@ -7,7 +7,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
 	[ContentType("ECommerce AddIn")]
 	[RestrictParents(typeof(AddInContainer))]
-	public class ECommerceAddIn : DataContentItem, IECommerceConfiguration, ISelfPopulator
+	public class ECommerceAddIn : DataContentItem, IECommerceConfiguration
 	{
 		private const string OrdersName = "orders";
 
@@ -36,14 +36,16 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return GetChild(OrdersName) as OrderContainer; }
 		}
 
-		void ISelfPopulator.Populate()
+		protected override void OnAfterCreate()
 		{
-			OrderContainer orders = new OrderContainer
+			Create(new OrderContainer
 			{
 				Name = OrdersName,
-				Title = "Orders"
-			};
-			orders.Parent = this;
+				Title = "Orders",
+				Parent = this
+			});
+
+			base.OnAfterCreate();
 		}
 	}
 }

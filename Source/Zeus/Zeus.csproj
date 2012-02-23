@@ -459,7 +459,6 @@
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\IEditorContainer.cs" />
     <Compile Include="ContentTypes\IRootItem.cs" />
-    <Compile Include="ContentTypes\ISelfPopulator.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\NotAllowedParentException.cs" />
     <Compile Include="ContentTypes\Property.cs" />
