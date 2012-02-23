@@ -51,8 +51,12 @@ namespace Zeus.Admin.Plugins.EditItem
 			catch (Exception ex)
 			{
 				Engine.Resolve<IErrorHandler>().Notify(ex);
-				csvException.IsValid = false;
-				csvException.ErrorMessage = ex.ToString();
+				ExtNet.MessageBox.Show(new MessageBoxConfig
+				{
+					Icon = MessageBox.Icon.ERROR,
+					Buttons = MessageBox.Button.OK,
+					Message = "Unexpected error: " + ex
+				});
 			}
 		}
 

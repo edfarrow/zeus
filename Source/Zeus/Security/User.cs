@@ -43,8 +43,14 @@ namespace Zeus.Security
 		[TextBoxEditor("Email", 40)]
 		public virtual string Email { get; set; }
 
+		private List<Role> _rolesInternal;
+
 		[RolesEditor(Title = "Roles", SortOrder = 50)]
-		public virtual List<Role> RolesInternal { get; set; }
+		public virtual List<Role> RolesInternal
+		{
+			get { return _rolesInternal; }
+			set { _rolesInternal = value; }
+		}
 
 		public string[] Roles
 		{
@@ -105,6 +111,7 @@ namespace Zeus.Security
 
 		public User()
 		{
+			_rolesInternal = new List<Role>();
 			Verified = true;
 		}
 	}

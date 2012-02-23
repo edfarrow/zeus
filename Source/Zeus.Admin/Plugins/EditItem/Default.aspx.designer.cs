@@ -31,15 +31,6 @@ namespace Zeus.Admin.Plugins.EditItem {
         protected global::Ext.Net.Button btnCancel;
         
         /// <summary>
-        /// csvException control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator csvException;
-        
-        /// <summary>
         /// zeusItemEditView control.
         /// </summary>
         /// <remarks>

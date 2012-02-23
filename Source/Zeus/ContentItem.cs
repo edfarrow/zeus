@@ -209,16 +209,12 @@ namespace Zeus
 				// If we have a class property matching this name, set the property value.
 				// TODO: Cache this reflection
 				var propertyInfo = GetType().GetProperty(detailName);
-				if (propertyInfo != null && propertyInfo.CanWrite)
-				{
-					if (value != null && propertyInfo.PropertyType != value.GetType())
-						value = Utility.Convert(value, propertyInfo.PropertyType);
-					propertyInfo.SetValue(this, value, null);
-				}
-				else
-					ExtraData[detailName] = value;
+            	if (propertyInfo != null && propertyInfo.CanWrite)
+            		propertyInfo.SetValue(this, value, null);
+            	else
+            		ExtraData[detailName] = value;
 
-                if (string.IsNullOrEmpty(detailName))
+            	if (string.IsNullOrEmpty(detailName))
                     throw new ArgumentNullException("detailName", "Parameter 'detailName' cannot be null or empty.");
             }
         }
@@ -227,6 +223,7 @@ namespace Zeus
 
         protected ContentItem()
         {
+        	ExtraData = new Dictionary<string, object>();
             Created = DateTime.Now;
             Updated = DateTime.Now;
             Published = DateTime.Now;

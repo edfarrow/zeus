@@ -35,7 +35,6 @@
 						</TopBar>
 						<Content>
 							<asp:ValidationSummary runat="server" CssClass="info validator" />
-							<asp:CustomValidator ID="csvException" runat="server" Display="None" />
 							
 							<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
 								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" />
