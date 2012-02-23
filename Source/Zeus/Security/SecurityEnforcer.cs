@@ -74,9 +74,12 @@ namespace Zeus.Security
 
 		public override bool BeforeMove(ContentItem document, ContentItem newParent)
 		{
-			if (!_security.IsAuthorized(document, _webContext.User, Operations.Read) 
-				|| !_security.IsAuthorized(newParent, _webContext.User, Operations.Create))
+			if (!_security.IsAuthorized(document, _webContext.User, Operations.Read))
 				throw new PermissionDeniedException(document, _webContext.User, Operations.Create);
+
+			if (newParent != null && !_security.IsAuthorized(newParent, _webContext.User, Operations.Create))
+				throw new PermissionDeniedException(document, _webContext.User, Operations.Create);
+
 			return base.BeforeMove(document, newParent);
 		}
 

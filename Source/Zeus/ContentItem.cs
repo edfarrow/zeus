@@ -473,8 +473,9 @@ namespace Zeus
 
 		protected override void OnAfterMove(ContentItem newParent)
 		{
-			foreach (AuthorizationRule rule in newParent.AuthorizationRules)
-				AuthorizationRules.Add(new AuthorizationRule(newParent, rule.Operation, rule.Role, rule.User, rule.Allowed));
+			if (newParent != null)
+				foreach (AuthorizationRule rule in newParent.AuthorizationRules)
+					AuthorizationRules.Add(new AuthorizationRule(newParent, rule.Operation, rule.Role, rule.User, rule.Allowed));
 			base.OnAfterMove(newParent);
 		}
 
