@@ -109,7 +109,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			else
 			{
 				if (shoppingBasket.ShippingAddress != null)
-					Engine.Persister.Delete(shoppingBasket.ShippingAddress);
+					shoppingBasket.ShippingAddress.Destroy();
 			}
 			PaymentCard paymentCard = shoppingBasket.PaymentCard;
 			if (paymentCard == null)

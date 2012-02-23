@@ -1,4 +1,5 @@
 using Ninject;
+using Ormongo;
 using SoundInTheory.DynamicImage.Caching;
 using Zeus.Persistence;
 
@@ -15,13 +16,13 @@ namespace Zeus.FileSystem.Images
 
 		public void Start()
 		{
-			_persister.ItemDeleted += OnPersisterItemDeleted;
+			ContentItem.AfterDestroy += OnPersisterItemDeleted;
 			_persister.ItemSaved += OnPersisterItemSaved;
 		}
 
-		private void OnPersisterItemDeleted(object sender, ItemEventArgs e)
+		private void OnPersisterItemDeleted(object sender, DocumentEventArgs<ContentItem> e)
 		{
-			DeleteCachedImages(e.AffectedItem);
+			DeleteCachedImages(e.Document);
 		}
 
 		private void OnPersisterItemSaved(object sender, ItemEventArgs e)
@@ -40,7 +41,7 @@ namespace Zeus.FileSystem.Images
 
 		public void Stop()
 		{
-			_persister.ItemDeleted -= OnPersisterItemDeleted;
+			ContentItem.AfterDestroy -= OnPersisterItemDeleted;
 			_persister.ItemSaved -= OnPersisterItemSaved;
 		}
 	}

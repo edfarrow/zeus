@@ -1,4 +1,5 @@
 using Ninject;
+using Ormongo;
 using Zeus.Persistence;
 
 namespace Zeus.Admin.NavigationFlag
@@ -14,21 +15,21 @@ namespace Zeus.Admin.NavigationFlag
 
 		public void Start()
 		{
-			_persister.ItemDeleted += OnPersisterItemDeleted;
+			ContentItem.AfterDestroy += OnPersisterItemDeleted;
 			_persister.ItemSaved += OnPersisterItemSaved;
 		}
 
-		private void OnPersisterItemDeleted(object sender, ItemEventArgs e)
+		private void OnPersisterItemDeleted(object sender, DocumentEventArgs<ContentItem> e)
 		{
-			DeleteCachedImages(e.AffectedItem);
+			DeleteCachedNav(e.Document);
 		}
 
 		private void OnPersisterItemSaved(object sender, ItemEventArgs e)
 		{
-			DeleteCachedImages(e.AffectedItem);
+			DeleteCachedNav(e.AffectedItem);
 		}
 
-		public void DeleteCachedImages(ContentItem contentItem)
+		public void DeleteCachedNav(ContentItem contentItem)
 		{
             //any time anything is saved or changed, delete all the primary nav app cache data
             if (contentItem.IsPage)
@@ -45,7 +46,7 @@ namespace Zeus.Admin.NavigationFlag
 
 		public void Stop()
 		{
-			_persister.ItemDeleted -= OnPersisterItemDeleted;
+			ContentItem.AfterDestroy -= OnPersisterItemDeleted;
 			_persister.ItemSaved -= OnPersisterItemSaved;
 		}
 	}

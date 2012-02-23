@@ -1,4 +1,5 @@
 using Ninject;
+using Ormongo;
 using Ormongo.Ancestry;
 using Zeus.Persistence;
 
@@ -20,14 +21,14 @@ namespace Zeus.Admin.RecycleBin
 
 		public void Start()
 		{
-			_persister.ItemDeleting += OnItemDeleting;
+			ContentItem.BeforeDestroy += OnItemDeleting;
 			ContentItem.BeforeMove += OnItemMoving;
 			_persister.ItemCopied += OnItemCopied;
 		}
 
 		public void Stop()
 		{
-			_persister.ItemDeleting -= OnItemDeleting;
+			ContentItem.BeforeDestroy -= OnItemDeleting;
 			ContentItem.BeforeMove -= OnItemMoving;
 			_persister.ItemCopied -= OnItemCopied;
 		}
@@ -48,10 +49,13 @@ namespace Zeus.Admin.RecycleBin
 				_recycleBinHandler.ExpireTrashedItem(e.Document);
 		}
 
-		private void OnItemDeleting(object sender, CancelItemEventArgs e)
+		private void OnItemDeleting(object sender, CancelDocumentEventArgs<ContentItem> e)
 		{
-			if (_recycleBinHandler.CanThrow(e.AffectedItem))
-				e.FinalAction = _recycleBinHandler.Throw;
+			if (_recycleBinHandler.CanThrow(e.Document))
+			{
+				_recycleBinHandler.Throw(e.Document);
+				e.Cancel = true;
+			}
 		}
 
 		private bool LeavingTrash(ContentItem item, ContentItem newParent)

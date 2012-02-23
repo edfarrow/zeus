@@ -14,12 +14,6 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been saved</summary>
 		public event EventHandler<ItemEventArgs> ItemSaved;
 
-		/// <summary>Occurs before an item is deleted</summary>
-		public event EventHandler<CancelItemEventArgs> ItemDeleting;
-
-		/// <summary>Occurs when an item has been deleted</summary>
-		public event EventHandler<ItemEventArgs> ItemDeleted;
-
 		/// <summary>Occurs before an item is copied</summary>
 		public event EventHandler<CancelDestinationEventArgs> ItemCopying;
 
@@ -60,44 +54,6 @@ namespace Zeus.Persistence
 
 				return cloned;
 			});
-		}
-
-		public void Delete(ContentItem itemNoMore)
-		{
-			Utility.InvokeEvent(ItemDeleting, itemNoMore, this, DeleteAction);
-		}
-
-		private void DeleteAction(ContentItem itemNoMore)
-		{
-			DeleteRecursive(itemNoMore);
-			Invoke(ItemDeleted, new ItemEventArgs(itemNoMore));
-		}
-
-		private void DeleteRecursive(ContentItem contentItem)
-		{
-			List<ContentItem> children = new List<ContentItem>(contentItem.Children);
-			foreach (ContentItem child in children)
-				DeleteRecursive(child);
-
-			contentItem.AddTo(null);
-
-			DeleteInboundLinks(contentItem);
-
-			contentItem.Destroy();
-		}
-
-		private void DeleteInboundLinks(ContentItem itemNoMore)
-		{
-			// TODO: Reimplement for Mongo
-			//foreach (LinkProperty detail in _linkFinder.QueryDetails<LinkProperty>().Where(ld => ld.LinkedItem == itemNoMore))
-			//{
-			//    if (detail.EnclosingCollection != null)
-			//        detail.EnclosingCollection.Remove(detail);
-			//    IDictionary<string, PropertyData> test = detail.EnclosingItem.Details; // TODO: Investigate why this is necessary, on a PersistentGenericMap
-			//    int count = test.Count;
-			//    detail.EnclosingItem.Details.Remove(detail.Name);
-			//    _linkRepository.Delete(detail);
-			//}
 		}
 
 		public ContentItem Get(ObjectId id)

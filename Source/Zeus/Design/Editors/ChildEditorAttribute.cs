@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web.UI;
-using Ext.Net;
 using Zeus.ContentTypes;
 using Zeus.Web.UI;
 using Zeus.Web.UI.WebControls;
@@ -67,14 +66,14 @@ namespace Zeus.Design.Editors
 			itemEditor.Saving += ((sender, args) =>
 			{
 				// Reset the name here - it might have been changed, for example by FileUploadEditorAttribute.
-				((ContentItem) args.AffectedItem).Name = Name;
+				args.AffectedItem.Name = Name;
 			});
 
 			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) =>
 			{
 				ContentItem child;
-				if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
-					Context.Persister.Delete(child);
+				if ((child = itemEditor.Save()).IsEmpty())
+					child.Destroy();
 			});
 
 			return true;

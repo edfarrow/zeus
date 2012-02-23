@@ -146,7 +146,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			foreach (ObjectId id in nodeIDs)
 			{
 				ContentItem item = Engine.Persister.Get(id);
-				Zeus.Context.Persister.Delete(item);
+				item.Destroy();
 			}
 
             //set the updated value on the parent of the item that has been moved (for caching purposes)

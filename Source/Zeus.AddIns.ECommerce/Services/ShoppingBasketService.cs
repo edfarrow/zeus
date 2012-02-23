@@ -76,7 +76,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				return;
 
         	if (newQuantity == 0)
-        		_persister.Delete(item);
+        		item.Destroy();
         	else
         		item.Quantity = newQuantity;
 
@@ -93,7 +93,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop, false);
 			if (shoppingBasket != null && !shoppingBasket.IsNewRecord)
 			{
-				_persister.Delete(shoppingBasket);
+				shoppingBasket.Destroy();
 				_webContext.Response.Cookies.Remove(GetCookieKey(shop));
 			}
 		}

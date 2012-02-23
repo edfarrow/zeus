@@ -34,7 +34,7 @@ namespace Zeus.Admin.RecycleBin
 		protected void btnEmpty_Click(object sender, EventArgs e)
 		{
 			foreach (ContentItem child in SelectedItem.GetChildren())
-				Zeus.Context.Persister.Delete(child);
+				child.Destroy();
 			ReBind();
 
 			Refresh(SelectedItem, AdminFrame.Navigation, false);
@@ -60,7 +60,7 @@ namespace Zeus.Admin.RecycleBin
 					Refresh(item, AdminFrame.Navigation, false);
 					break;
 				case "Delete" :
-					Zeus.Context.Persister.Delete(item);
+					item.Destroy();
 					ReBind();
 					Refresh(SelectedItem, AdminFrame.Navigation, false);
 					break;

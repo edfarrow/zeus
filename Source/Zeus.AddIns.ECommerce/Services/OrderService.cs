@@ -189,7 +189,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				items, shoppingBasket.TotalDeliveryPrice, shoppingBasket.TotalPrice);
 
 			// Clear shopping basket.
-			_persister.Delete(shoppingBasket);
+			shoppingBasket.Destroy();
 
 			return order;
 		}

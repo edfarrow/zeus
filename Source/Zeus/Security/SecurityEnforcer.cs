@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using Ninject;
+using Ormongo;
 using Ormongo.Ancestry;
 using Zeus.Persistence;
 
@@ -55,9 +56,9 @@ namespace Zeus.Security
 			OnItemMoving(e.Document, e.NewParent);
 		}
 
-		private void ItemDeletingEvenHandler(object sender, CancelItemEventArgs e)
+		private void ItemDeletingEvenHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
 		{
-			OnItemDeleting(e.AffectedItem);
+			OnItemDeleting(e.Document);
 		}
 
 		private void ItemCopyingEvenHandler(object sender, CancelDestinationEventArgs e)
@@ -135,7 +136,7 @@ namespace Zeus.Security
 		{
 			_persister.ItemSaving += ItemSavingEventHandler;
 			_persister.ItemCopying += ItemCopyingEvenHandler;
-			_persister.ItemDeleting += ItemDeletingEvenHandler;
+			ContentItem.BeforeDestroy += ItemDeletingEvenHandler;
 			ContentItem.BeforeMove += ItemMovingEvenHandler;
 		}
 
@@ -143,7 +144,7 @@ namespace Zeus.Security
 		{
 			_persister.ItemSaving -= ItemSavingEventHandler;
 			_persister.ItemCopying -= ItemCopyingEvenHandler;
-			_persister.ItemDeleting -= ItemDeletingEvenHandler;
+			ContentItem.BeforeDestroy -= ItemDeletingEvenHandler;
 			ContentItem.BeforeMove -= ItemMovingEvenHandler;
 		}
 

@@ -1,4 +1,6 @@
-﻿using Ninject;
+﻿using System;
+using Ninject;
+using Ormongo;
 using Ormongo.Ancestry;
 using Zeus.Persistence;
 
@@ -11,6 +13,7 @@ namespace Zeus.Integrity
 
 		public IntegrityEnforcer(IPersister persister, IIntegrityManager integrityManager)
 		{
+			ContentItem.OrphanStrategy = OrphanStrategy.Destroy;
 			_persister = persister;
 			_integrityManager = integrityManager;
 		}
@@ -27,9 +30,14 @@ namespace Zeus.Integrity
 			OnItemMoving(e.Document, e.NewParent);
 		}
 
-		private void ItemDeletingEventHandler(object sender, CancelItemEventArgs e)
+		private void ItemDeletingEventHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
 		{
-			OnItemDeleting(e.AffectedItem);
+			OnItemDeleting(e.Document);
+		}
+
+		private void ItemDestroyedEventHandler(object sender, DocumentEventArgs<ContentItem> e)
+		{
+			OnItemDestroyed(e.Document);
 		}
 
 		private void ItemCopyingEventHandler(object sender, CancelDestinationEventArgs e)
@@ -55,6 +63,12 @@ namespace Zeus.Integrity
 				throw ex;
 		}
 
+		protected virtual void OnItemDestroyed(ContentItem item)
+		{
+			// TODO: Delete inbound links
+			throw new NotImplementedException();
+		}
+
 		protected virtual void OnItemMoving(ContentItem source, ContentItem destination)
 		{
 			ZeusException ex = _integrityManager.GetMoveException(source, destination);
@@ -75,16 +89,18 @@ namespace Zeus.Integrity
 
 		public virtual void Start()
 		{
+			ContentItem.BeforeDestroy += ItemDeletingEventHandler;
+			ContentItem.AfterDestroy += ItemDestroyedEventHandler;
 			_persister.ItemCopying += ItemCopyingEventHandler;
-			_persister.ItemDeleting += ItemDeletingEventHandler;
 			ContentItem.BeforeMove += ItemMovingEventHandler;
 			_persister.ItemSaving += ItemSavingEventHandler;
 		}
 
 		public virtual void Stop()
 		{
+			ContentItem.BeforeDestroy -= ItemDeletingEventHandler;
+			ContentItem.AfterDestroy -= ItemDestroyedEventHandler;
 			_persister.ItemCopying -= ItemCopyingEventHandler;
-			_persister.ItemDeleting -= ItemDeletingEventHandler;
 			ContentItem.BeforeMove -= ItemMovingEventHandler;
 			_persister.ItemSaving -= ItemSavingEventHandler;
 		}

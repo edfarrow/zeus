@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Ormongo;
 using Ormongo.Ancestry;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
@@ -83,7 +84,7 @@ namespace Zeus.Tests.Integrity
 			persister.ItemCopying += null;
 			copying = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
 
-			persister.ItemDeleting += null;
+			ContentItem.BeforeDestroy += null;
 			deleting = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
 
 			persister.ItemSaving += null;
@@ -278,7 +279,7 @@ namespace Zeus.Tests.Integrity
 			Expect.On(parser).Call(parser.IsRootOrStartPage(page)).Return(false);
 			mocks.Replay(parser);
 
-			deleting.Raise(persister, new CancelItemEventArgs(page));
+			deleting.Raise(page, new CancelDocumentEventArgs<ContentItem>(page));
 
 			mocks.Verify(parser);
 		}
