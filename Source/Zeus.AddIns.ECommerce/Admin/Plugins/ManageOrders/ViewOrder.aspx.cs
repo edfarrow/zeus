@@ -35,7 +35,7 @@ namespace Zeus.AddIns.ECommerce.Plugins
 		{
 			Order order = SelectedOrder;
 			order.Status = OrderStatus.Processed;
-			Engine.Persister.Save(order);
+			order.Save();
 
             Response.Redirect("admin.plugins.manage-orders.view-order.aspx?selected=" + order.Path);
 		}
@@ -51,7 +51,7 @@ namespace Zeus.AddIns.ECommerce.Plugins
 		{
 			Order order = SelectedOrder;
 			order.Status = OrderStatus.Cancelled;
-			Engine.Persister.Save(order);
+			order.Save();
 
             Response.Redirect("admin.plugins.manage-orders.view-order.aspx?selected=" + order.Path);
 		}

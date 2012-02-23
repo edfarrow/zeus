@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ormongo;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 
@@ -14,7 +15,5 @@ namespace Zeus.AddIns.ECommerce.Services
 		void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation);
 		void UpdateQuantity(Shop shop, Product product, VariationPermutation variationPermutation, int newQuantity);
 		void SaveBasket(Shop shop);
-
-        void CalculateBasketTotal(object sender, Zeus.CancelItemEventArgs e);
 	}
 }

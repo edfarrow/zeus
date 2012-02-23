@@ -67,7 +67,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 			ContentItem contentItem = Engine.Persister.Get(id);
 			contentItem.SetPageCachingEnabled(enabled);
 			contentItem.SetPageCachingDuration(durationTime);
-			Engine.Persister.Save(contentItem);
+			contentItem.Save();
 		}
 
 		[DirectMethod]

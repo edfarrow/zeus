@@ -120,7 +120,7 @@ namespace Zeus.Design.Editors
                     //the content item needs to understand the crop it's being asked to perform
                     ((AcceptArgsFromChildEditor)childItem).arg1 = this.arg1;
                     ((AcceptArgsFromChildEditor)childItem).arg2 = this.arg2;
-                    Zeus.Context.Persister.Save(childItem);
+                    childItem.Save();
                 }
             }
 

@@ -464,5 +464,15 @@ namespace Zeus
         }
 
         #endregion
-    }
+
+		#region Callbacks
+
+		protected override void OnBeforeSave(CancelDocumentEventArgs<ContentItem> args)
+		{
+			Updated = DateTime.Now;
+			base.OnBeforeSave(args);
+		}
+
+		#endregion
+	}
 }

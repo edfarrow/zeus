@@ -196,7 +196,7 @@ namespace Zeus.Admin.Plugins.Permissions
 			}
 
 			// Save item, with associated authorization rules.
-			Engine.Persister.Save(item);
+			item.Save();
 		}
 
 		protected void btnSave_Click(object sender, EventArgs e)

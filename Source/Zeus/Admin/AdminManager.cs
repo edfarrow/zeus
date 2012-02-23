@@ -165,14 +165,13 @@ namespace Zeus.Admin
 			if (wasUpdated || item.IsNewRecord)
 			{
 				onSavingCallback(item);
-				_persister.Save(item);
+				item.Save();
 
 				ContentItem theParent = item.Parent;
-				while (theParent.Parent != null)
+				while (theParent.Parent != null) // TODO: Shouldn't this be theParent != null ?
 				{
 					//go up the tree updating - if a child has been changed, so effectively has the parent
-					theParent.Updated = DateTime.Now;
-					_persister.Save(theParent);
+					theParent.Save();
 					theParent = theParent.Parent;
 				}
 			}

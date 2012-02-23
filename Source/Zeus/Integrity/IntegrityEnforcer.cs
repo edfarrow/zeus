@@ -20,9 +20,9 @@ namespace Zeus.Integrity
 
 		#region Event Dispatchers
 
-		private void ItemSavingEventHandler(object sender, CancelItemEventArgs e)
+		private void ItemSavingEventHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
 		{
-			OnItemSaving(e.AffectedItem);
+			OnItemSaving(e.Document);
 		}
 
 		private void ItemMovingEventHandler(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
@@ -93,7 +93,7 @@ namespace Zeus.Integrity
 			ContentItem.AfterDestroy += ItemDestroyedEventHandler;
 			_persister.ItemCopying += ItemCopyingEventHandler;
 			ContentItem.BeforeMove += ItemMovingEventHandler;
-			_persister.ItemSaving += ItemSavingEventHandler;
+			ContentItem.BeforeSave += ItemSavingEventHandler;
 		}
 
 		public virtual void Stop()
@@ -102,7 +102,7 @@ namespace Zeus.Integrity
 			ContentItem.AfterDestroy -= ItemDestroyedEventHandler;
 			_persister.ItemCopying -= ItemCopyingEventHandler;
 			ContentItem.BeforeMove -= ItemMovingEventHandler;
-			_persister.ItemSaving -= ItemSavingEventHandler;
+			ContentItem.BeforeSave -= ItemSavingEventHandler;
 		}
 
 		#endregion

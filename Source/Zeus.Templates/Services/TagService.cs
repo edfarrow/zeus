@@ -29,7 +29,7 @@ namespace Zeus.Templates.Services
 			Tag tag = _contentTypeManager.CreateInstance<Tag>(tagGroup);
 			tag.Name = Utility.GetSafeName(tagName);
 			tag.Title = tagName;
-			_persister.Save(tag);
+			tag.Save();
 
 			return tag;
 		}

@@ -46,9 +46,9 @@ namespace Zeus.Security
 
 		#region Event Handlers
 
-		private void ItemSavingEventHandler(object sender, CancelItemEventArgs e)
+		private void ItemSavingEventHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
 		{
-			OnItemSaving(e.AffectedItem);
+			OnItemSaving(e.Document);
 		}
 
 		private void ItemMovingEvenHandler(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
@@ -134,7 +134,7 @@ namespace Zeus.Security
 
 		public virtual void Start()
 		{
-			_persister.ItemSaving += ItemSavingEventHandler;
+			ContentItem.BeforeSave += ItemSavingEventHandler;
 			_persister.ItemCopying += ItemCopyingEvenHandler;
 			ContentItem.BeforeDestroy += ItemDeletingEvenHandler;
 			ContentItem.BeforeMove += ItemMovingEvenHandler;
@@ -142,7 +142,7 @@ namespace Zeus.Security
 
 		public virtual void Stop()
 		{
-			_persister.ItemSaving -= ItemSavingEventHandler;
+			ContentItem.BeforeSave -= ItemSavingEventHandler;
 			_persister.ItemCopying -= ItemCopyingEvenHandler;
 			ContentItem.BeforeDestroy -= ItemDeletingEvenHandler;
 			ContentItem.BeforeMove -= ItemMovingEvenHandler;

@@ -186,7 +186,7 @@ namespace Zeus.Web.Security
 			// Create a password reset request.
 			PasswordResetRequest resetRequest = _contentTypeManager.CreateInstance<PasswordResetRequest>(user);
 			resetRequest.Nonce = nonce;
-			_persister.Save(resetRequest);
+			resetRequest.Save();
 
 			// Construct email.
 			emailBody = emailBody.Replace(PasswordResetLinkName, passwordResetLink);
@@ -232,7 +232,7 @@ namespace Zeus.Web.Security
 			user.Password = EncryptPassword(newPassword);
 
 			resetRequest.Used = true;
-			_persister.Save(resetRequest);
+			resetRequest.Save();
 
 			return PasswordResetResult.Succeeded;
 

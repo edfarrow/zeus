@@ -1,22 +1,14 @@
 using Ninject;
 using Ormongo;
-using Zeus.Persistence;
 
 namespace Zeus.Admin.NavigationFlag
 {
 	public class NavigationCachingService : IStartable
 	{
-		private readonly IPersister _persister;
-
-        public NavigationCachingService(IPersister persister)
-		{
-			_persister = persister;
-		}
-
 		public void Start()
 		{
 			ContentItem.AfterDestroy += OnPersisterItemDeleted;
-			_persister.ItemSaved += OnPersisterItemSaved;
+			ContentItem.AfterSave += OnPersisterItemSaved;
 		}
 
 		private void OnPersisterItemDeleted(object sender, DocumentEventArgs<ContentItem> e)
@@ -24,9 +16,9 @@ namespace Zeus.Admin.NavigationFlag
 			DeleteCachedNav(e.Document);
 		}
 
-		private void OnPersisterItemSaved(object sender, ItemEventArgs e)
+		private void OnPersisterItemSaved(object sender, DocumentEventArgs<ContentItem> e)
 		{
-			DeleteCachedNav(e.AffectedItem);
+			DeleteCachedNav(e.Document);
 		}
 
 		public void DeleteCachedNav(ContentItem contentItem)
@@ -47,7 +39,7 @@ namespace Zeus.Admin.NavigationFlag
 		public void Stop()
 		{
 			ContentItem.AfterDestroy -= OnPersisterItemDeleted;
-			_persister.ItemSaved -= OnPersisterItemSaved;
+			ContentItem.AfterSave -= OnPersisterItemSaved;
 		}
 	}
 }

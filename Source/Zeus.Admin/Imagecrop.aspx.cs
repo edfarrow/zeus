@@ -99,7 +99,7 @@ namespace Zeus.Admin
                 ImageToEdit.TopLeftYVal = y1;
                 ImageToEdit.CropWidth = w;
                 ImageToEdit.CropHeight = h;
-                Zeus.Context.Persister.Save(ImageToEdit);
+                ImageToEdit.Save();
 
                 Response.Redirect("/admin/plugins.edit-item.default.aspx?selected=" + selected);
             }

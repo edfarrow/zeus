@@ -88,7 +88,7 @@ namespace Zeus.Templates.Mvc.Controllers
                 }
 
                 membershipDetails.AddTo(NewUser);
-                Engine.Persister.Save(membershipDetails);
+                membershipDetails.Save();
             }
 
 			return View("RegisterConfirmation", new RegistrationPageConfirmationViewModel(

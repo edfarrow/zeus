@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Ninject;
+using Ormongo;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.BaseLibrary.Collections.Generic;
@@ -56,7 +57,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				item.Quantity += 1;
 			}
 
-			_persister.Save(shoppingBasket);
+			shoppingBasket.Save();
 		}
 
         public virtual void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation)
@@ -80,7 +81,7 @@ namespace Zeus.AddIns.ECommerce.Services
         	else
         		item.Quantity = newQuantity;
 
-        	_persister.Save(shoppingBasket);
+        	shoppingBasket.Save();
 		}
 
         public virtual ShoppingBasket GetBasket(Shop shop)
@@ -100,19 +101,19 @@ namespace Zeus.AddIns.ECommerce.Services
 
         public virtual void SaveBasket(Shop shop)
         {
-            _persister.Save(GetCurrentShoppingBasketInternal(shop, true));
+            GetCurrentShoppingBasketInternal(shop, true).Save();
         }
 
         #region IStartable Members
 
         public void Start()
         {
-            _persister.ItemSaving += CalculateBasketTotal;
+            ContentItem.BeforeSave += CalculateBasketTotal;
         }
 
         public void Stop()
         {
-            _persister.ItemSaving -= CalculateBasketTotal;
+			ContentItem.BeforeSave -= CalculateBasketTotal;
         }
 
         #endregion
@@ -122,11 +123,11 @@ namespace Zeus.AddIns.ECommerce.Services
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public virtual void CalculateBasketTotal(object sender, Zeus.CancelItemEventArgs e)
+        protected virtual void CalculateBasketTotal(object sender, CancelDocumentEventArgs<ContentItem> e)
         {
-            if (e.AffectedItem is IShoppingBasket)
+            if (e.Document is IShoppingBasket)
             {
-                var basket = e.AffectedItem as IShoppingBasket;
+				var basket = e.Document as IShoppingBasket;
 
                 // set delivery price
                 if (basket.DeliveryMethod != null)
@@ -180,7 +181,7 @@ namespace Zeus.AddIns.ECommerce.Services
                 if (createBasket)
                 {
                     shoppingBasket.AddTo(shop.ShoppingBaskets);
-                    _persister.Save(shoppingBasket);
+                    shoppingBasket.Save();
 
                     HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name);
                     if (shop.PersistentShoppingBaskets)

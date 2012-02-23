@@ -72,7 +72,7 @@ namespace Zeus.Web.Security
 				user.RolesInternal.Add(roleContainer.GetRole(role));
 			user.AddTo(userContainer);
 
-			Context.Persister.Save(user);
+			user.Save();
 		}
 
 		User ICredentialStore.GetUser(string username)
@@ -109,18 +109,18 @@ namespace Zeus.Web.Security
 
 		public void SaveNonce(User user, string nonce)
 		{
-			User typedUser = (User) user;
+			User typedUser = user;
 			typedUser.Nonce = nonce;
 			typedUser.Verified = false;
-			_persister.Save(typedUser);
+			typedUser.Save();
 		}
 
 		public void VerifyUser(User user)
 		{
-			User typedUser = (User) user;
+			User typedUser = user;
 			typedUser.Nonce = null;
 			typedUser.Verified = true;
-			_persister.Save(typedUser);
+			typedUser.Save();
 		}
 
 		IEnumerable<string> ICredentialStore.GetAllRoles()
@@ -176,7 +176,7 @@ namespace Zeus.Web.Security
 		private SystemNode CreateSystemNode(ContentItem parent)
 		{
 			SystemNode systemNode = Context.ContentTypes.CreateInstance<SystemNode>(parent);
-			_persister.Save(systemNode);
+			systemNode.Save();
 			return systemNode;
 		}
 
@@ -196,7 +196,7 @@ namespace Zeus.Web.Security
 			users.AddTo(security);
 			users.Save();
 
-			_persister.Save(security);
+			security.Save();
 			return security;
 		}
 

@@ -182,7 +182,7 @@ namespace Zeus.Installation
 			ContentItem item = _contentTypeManager.CreateInstance(type, null);
 			item.Name = name;
 			item.Title = title;
-			_persister.Save(item);
+			item.Save();
 			return item;
 		}
 
@@ -191,7 +191,7 @@ namespace Zeus.Installation
 			ContentItem item = _contentTypeManager.CreateInstance(type, root);
 			item.Name = name;
 			item.Title = title;
-			_persister.Save(item);
+			item.Save();
 			return item;
 		}
 

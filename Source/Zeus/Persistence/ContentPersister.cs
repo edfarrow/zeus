@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using MongoDB.Bson;
 
 namespace Zeus.Persistence
@@ -7,12 +6,6 @@ namespace Zeus.Persistence
 	public class ContentPersister : IPersister
 	{
 		#region Events
-
-		/// <summary>Occurs before an item is saved</summary>
-		public event EventHandler<CancelItemEventArgs> ItemSaving;
-
-		/// <summary>Occurs when an item has been saved</summary>
-		public event EventHandler<ItemEventArgs> ItemSaved;
 
 		/// <summary>Occurs before an item is copied</summary>
 		public event EventHandler<CancelDestinationEventArgs> ItemCopying;
@@ -48,7 +41,7 @@ namespace Zeus.Persistence
 				ContentItem cloned = source.Clone();
 
 				cloned.Parent = destination;
-				Save(cloned);
+				cloned.Save();
 
 				Invoke(ItemCopied, new DestinationEventArgs(cloned, destinationItem));
 
@@ -70,20 +63,6 @@ namespace Zeus.Persistence
 		public ContentItem Load(ObjectId id)
 		{
 			return ContentItem.FindOneByID(id);
-		}
-
-		public void Save(ContentItem unsavedItem)
-		{
-			Utility.InvokeEvent(ItemSaving, unsavedItem, this, SaveAction);
-		}
-
-		private void SaveAction(ContentItem contentItem)
-		{
-			contentItem.Updated = DateTime.Now;
-			contentItem.Save();
-			contentItem.AddTo(contentItem.Parent);
-
-			Invoke(ItemSaved, new ItemEventArgs(contentItem));
 		}
 
 		protected virtual T Invoke<T>(EventHandler<T> handler, T args)

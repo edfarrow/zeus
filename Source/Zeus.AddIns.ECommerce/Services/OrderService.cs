@@ -73,10 +73,10 @@ namespace Zeus.AddIns.ECommerce.Services
 			foreach (OrderItem orderItem in items)
 				orderItem.AddTo(order);
 			order.AddTo(configuration.Orders);
-			_persister.Save(order);
+			order.Save();
 
             order.Title = "Order #" + order.ID;
-            _persister.Save(order);
+            order.Save();
 
             // Process payment.
             PaymentRequest paymentRequest = new PaymentRequest(
@@ -91,7 +91,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			{
 				// Update order status to Paid.
 				order.Status = OrderStatus.Paid;
-				_persister.Save(order);
+				order.Save();
 
 				// Send email to customer and vendor.
 
@@ -140,7 +140,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				order.AddTo(configuration.Orders);
 
                 order.Status = OrderStatus.Unpaid;
-				_persister.Save(order);
+				order.Save();
 
                 if (_webContext.User != null && !string.IsNullOrEmpty(_webContext.User.Identity.Name))
                 {
@@ -151,7 +151,7 @@ namespace Zeus.AddIns.ECommerce.Services
                     order.Title = "Order #" + order.ID;
                 }
 
-                _persister.Save(order);
+                order.Save();
 
 				return order;
 			}

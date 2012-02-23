@@ -40,7 +40,7 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 
 			Order order = Engine.Persister.Get<Order>(orderID);
 			order.Status = OrderStatus.Processed;
-			Engine.Persister.Save(order);
+			order.Save();
 
 			ReBind();
 		}

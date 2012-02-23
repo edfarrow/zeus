@@ -87,7 +87,7 @@ namespace Zeus.Tests.Integrity
 			ContentItem.BeforeDestroy += null;
 			deleting = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
 
-			persister.ItemSaving += null;
+			ContentItem.BeforeSave += null;
 			saving = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
 
 			mocks.Replay(persister);
