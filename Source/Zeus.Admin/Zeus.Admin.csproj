@@ -264,13 +264,6 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\MoveItem\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\MoveItem\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -349,9 +342,6 @@
     <EmbeddedResource Include="Assets\Images\Theme\logOut.gif" />
     <EmbeddedResource Include="Assets\JS\zeus.js" />
     <EmbeddedResource Include="Install\Default.aspx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Plugins\MoveItem\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Css\permissions.css" />

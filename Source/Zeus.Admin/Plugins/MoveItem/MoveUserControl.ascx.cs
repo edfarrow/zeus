@@ -28,8 +28,7 @@ namespace Zeus.Admin.Plugins.MoveItem
 				return;
 			}
 
-			// TODO: Uncomment this!
-			//sourceContentItem.MoveToIndex(pos);
+			sourceContentItem.MoveToPosition(pos);
 
             //set the updated value on the parent of the item that has been moved (for caching purposes)
             sourceContentItem.Parent.Updated = Utility.CurrentTime();
