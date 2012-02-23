@@ -1,29 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
 using System.Text;
+using System.Web;
 using Ext.Net;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using Ormongo;
 using Ormongo.Ancestry;
-using Zeus.Admin;
-using Zeus.ContentTypes;
 using Zeus.Integrity;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Web;
-using System.Linq;
 using Zeus.Linq;
-using Zeus.Web;
+using Zeus.Persistence;
 using Zeus.Security;
-using System.Security.Principal;
-using Zeus.Web.Hosting;
-using System.Threading;
+using Zeus.Web;
 
 namespace Zeus
 {
     [RestrictParents(typeof(ContentItem))]
-    [System.Serializable]
+    [Serializable]
 	[BsonDiscriminator(RootClass = true)]
     public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode
 	{
@@ -465,12 +460,36 @@ namespace Zeus
 
         #endregion
 
+		public ContentItem CopyTo(ContentItem destination)
+		{
+			if (!OnBeforeCopy(destination))
+				throw new ZeusException("Could not copy item");
+
+			ContentItem cloned = Clone();
+			cloned.Parent = destination;
+			cloned.Save();
+
+			OnAfterCopy(destination);
+
+			return cloned;
+		}
+
 		#region Callbacks
 
-		protected override void OnBeforeSave(CancelDocumentEventArgs<ContentItem> args)
+		protected override bool OnBeforeSave()
 		{
 			Updated = DateTime.Now;
-			base.OnBeforeSave(args);
+			return base.OnBeforeSave();
+		}
+
+		protected virtual bool OnBeforeCopy(ContentItem newParent)
+		{
+			return ExecuteCancellableObservers<IContentItemObserver>(o => o.BeforeCopy(this, newParent));
+		}
+
+		protected virtual void OnAfterCopy(ContentItem newParent)
+		{
+			ExecuteObservers<IContentItemObserver>(o => o.AfterCopy(this, newParent));
 		}
 
 		#endregion

@@ -132,13 +132,13 @@ namespace Zeus.Web
 			return data;
 		}
 
-		public virtual PathData Attach(Persistence.IPersister persister)
+		public virtual PathData Attach()
 		{
 			ContentItem item = ContentItem.Find(ID);
 			PathData data = new PathData(item, TemplateUrl, Action, Argument)
-    	{
-    		QueryParameters = new Dictionary<string, string>(QueryParameters)
-    	};
+			{
+				QueryParameters = new Dictionary<string, string>(QueryParameters)
+			};
 			return data;
 		}
 

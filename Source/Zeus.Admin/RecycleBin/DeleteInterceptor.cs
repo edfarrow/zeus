@@ -1,6 +1,4 @@
 using Ninject;
-using Ormongo;
-using Ormongo.Ancestry;
 using Zeus.Persistence;
 
 namespace Zeus.Admin.RecycleBin
@@ -8,54 +6,52 @@ namespace Zeus.Admin.RecycleBin
 	/// <summary>
 	/// Intercepts delete operations.
 	/// </summary>
-	public class DeleteInterceptor : IStartable
+	public class DeleteInterceptor : ContentItemObserver, IStartable
 	{
-		private readonly IPersister _persister;
 		private readonly IRecycleBinHandler _recycleBinHandler;
 
-		public DeleteInterceptor(IPersister persister, IRecycleBinHandler recycleBinHandler)
+		public DeleteInterceptor(IRecycleBinHandler recycleBinHandler)
 		{
-			_persister = persister;
 			_recycleBinHandler = recycleBinHandler;
 		}
 
 		public void Start()
 		{
-			ContentItem.BeforeDestroy += OnItemDeleting;
-			ContentItem.BeforeMove += OnItemMoving;
-			_persister.ItemCopied += OnItemCopied;
+			ContentItem.Observers.Add(this);
 		}
 
 		public void Stop()
 		{
-			ContentItem.BeforeDestroy -= OnItemDeleting;
-			ContentItem.BeforeMove -= OnItemMoving;
-			_persister.ItemCopied -= OnItemCopied;
+			ContentItem.Observers.Remove(this);
 		}
 
-		private void OnItemCopied(object sender, DestinationEventArgs e)
+		public override void AfterCopy(ContentItem document, ContentItem newParent)
 		{
-			if (LeavingTrash(e.AffectedItem, e.Destination))
-				_recycleBinHandler.RestoreValues(e.AffectedItem);
-			else if (_recycleBinHandler.IsInTrash(e.Destination))
-				_recycleBinHandler.ExpireTrashedItem(e.AffectedItem);
+			if (LeavingTrash(document, newParent))
+				_recycleBinHandler.RestoreValues(document);
+			else if (_recycleBinHandler.IsInTrash(newParent))
+				_recycleBinHandler.ExpireTrashedItem(document);
+			base.AfterCopy(document, newParent);
 		}
 
-		private void OnItemMoving(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
+
+		public override bool BeforeMove(ContentItem document, ContentItem newParent)
 		{
-			if (LeavingTrash(e.Document, e.NewParent))
-				_recycleBinHandler.RestoreValues(e.Document);
-			else if (_recycleBinHandler.IsInTrash(e.NewParent))
-				_recycleBinHandler.ExpireTrashedItem(e.Document);
+			if (LeavingTrash(document, newParent))
+				_recycleBinHandler.RestoreValues(document);
+			else if (_recycleBinHandler.IsInTrash(newParent))
+				_recycleBinHandler.ExpireTrashedItem(document);
+			return base.BeforeMove(document, newParent);
 		}
 
-		private void OnItemDeleting(object sender, CancelDocumentEventArgs<ContentItem> e)
+		public override bool BeforeDestroy(ContentItem document)
 		{
-			if (_recycleBinHandler.CanThrow(e.Document))
+			if (_recycleBinHandler.CanThrow(document))
 			{
-				_recycleBinHandler.Throw(e.Document);
-				e.Cancel = true;
+				_recycleBinHandler.Throw(document);
+				return false;
 			}
+			return base.BeforeDestroy(document);
 		}
 
 		private bool LeavingTrash(ContentItem item, ContentItem newParent)

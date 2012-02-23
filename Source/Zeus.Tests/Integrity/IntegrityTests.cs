@@ -16,15 +16,10 @@ namespace Zeus.Tests.Integrity
 	[TestFixture]
 	public class IntegrityTests : ItemTestsBase
 	{
-		private IPersister persister;
 		private IContentTypeManager definitions;
 		private IUrlParser parser;
 		private IntegrityManager integrityManger;
-
-		private IEventRaiser moving;
-		private IEventRaiser copying;
-		private IEventRaiser deleting;
-		private IEventRaiser saving;
+		private IntegrityEnforcer _integrityEnforcer;
 
 		#region SetUp
 
@@ -32,8 +27,6 @@ namespace Zeus.Tests.Integrity
 		public override void SetUp()
 		{
 			base.SetUp();
-
-			CreatePersister();
 
 			parser = mocks.StrictMock<IUrlParser>();
 
@@ -45,8 +38,8 @@ namespace Zeus.Tests.Integrity
 			mocks.Replay(notifier);
 			definitions = new ContentTypeManager(builder, notifier);
 			integrityManger = new IntegrityManager(definitions, parser);
-			IntegrityEnforcer enforcer = new IntegrityEnforcer(persister, integrityManger);
-			enforcer.Start();
+			_integrityEnforcer = new IntegrityEnforcer(integrityManger);
+			_integrityEnforcer.Start();
 		}
 
 		private ITypeFinder CreateTypeFinder()
@@ -73,26 +66,6 @@ namespace Zeus.Tests.Integrity
 			return typeFinder;
 		}
 
-		private void CreatePersister()
-		{
-			mocks.Record();
-			persister = mocks.DynamicMock<IPersister>();
-
-			ContentItem.BeforeMove += null;
-			moving = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
-
-			persister.ItemCopying += null;
-			copying = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
-
-			ContentItem.BeforeDestroy += null;
-			deleting = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
-
-			ContentItem.BeforeSave += null;
-			saving = LastCall.IgnoreArguments().Repeat.Any().GetEventRaiser();
-
-			mocks.Replay(persister);
-		}
-
 		#endregion
 
 		#region Move
@@ -112,7 +85,7 @@ namespace Zeus.Tests.Integrity
 			StartPage startPage = new StartPage();
 			Page page = new Page();
 
-			moving.Raise(persister, new CancelDestinationEventArgs(page, startPage));
+			_integrityEnforcer.BeforeMove(page, startPage);
 		}
 
 		[Test]
@@ -127,7 +100,7 @@ namespace Zeus.Tests.Integrity
 		public void CannotMoveItemOntoItselfEvent()
 		{
 			Page page = new Page();
-			moving.Raise(page, new CancelMoveDocumentEventArgs<ContentItem>(page, page));
+			_integrityEnforcer.BeforeMove(page, page);
 		}
 
 		[Test]
@@ -146,7 +119,7 @@ namespace Zeus.Tests.Integrity
 			var page = ContentItem.Create(new Page());
 			Page page2 = CreateOneItem<Page>("Rutger", page);
 
-			moving.Raise(persister, new CancelDestinationEventArgs(page, page2));
+			_integrityEnforcer.BeforeMove(page, page2);
 		}
 
 		[Test]
@@ -167,7 +140,7 @@ namespace Zeus.Tests.Integrity
 			Page page2 = CreateOneItem<Page>("Sasha", startPage);
 			Page page3 = CreateOneItem<Page>("Sasha", null);
 
-			moving.Raise(persister, new CancelDestinationEventArgs(page3, startPage));
+			_integrityEnforcer.BeforeMove(page3, startPage);
 		}
 
 		[Test]
@@ -186,7 +159,7 @@ namespace Zeus.Tests.Integrity
 			StartPage startPage = new StartPage();
 			Page page = new Page();
 
-			moving.Raise(persister, new CancelDestinationEventArgs(startPage, page));
+			_integrityEnforcer.BeforeMove(startPage, page);
 		}
 
 		#endregion
@@ -208,7 +181,7 @@ namespace Zeus.Tests.Integrity
 			StartPage startPage = new StartPage();
 			Page page = new Page();
 
-			copying.Raise(persister, new CancelDestinationEventArgs(page, startPage));
+			_integrityEnforcer.BeforeCopy(page, startPage);
 		}
 
 		[Test]
@@ -229,7 +202,7 @@ namespace Zeus.Tests.Integrity
 			Page page2 = CreateOneItem<Page>("Sasha", startPage);
 			Page page3 = CreateOneItem<Page>("Sasha", null);
 
-			copying.Raise(persister, new CancelDestinationEventArgs(page3, startPage));
+			_integrityEnforcer.BeforeCopy(page3, startPage);
 		}
 
 		[Test]
@@ -248,7 +221,7 @@ namespace Zeus.Tests.Integrity
 			StartPage startPage = new StartPage();
 			Page page = new Page();
 
-			copying.Raise(persister, new CancelDestinationEventArgs(startPage, page));
+			_integrityEnforcer.BeforeCopy(startPage, page);
 		}
 
 		#endregion
@@ -279,7 +252,7 @@ namespace Zeus.Tests.Integrity
 			Expect.On(parser).Call(parser.IsRootOrStartPage(page)).Return(false);
 			mocks.Replay(parser);
 
-			deleting.Raise(page, new CancelDocumentEventArgs<ContentItem>(page));
+			_integrityEnforcer.BeforeDestroy(page);
 
 			mocks.Verify(parser);
 		}
@@ -308,7 +281,7 @@ namespace Zeus.Tests.Integrity
 			Expect.On(parser).Call(parser.IsRootOrStartPage(startPage)).Return(true);
 			mocks.Replay(parser);
 
-			deleting.Raise(persister, new CancelItemEventArgs(startPage));
+			_integrityEnforcer.BeforeDestroy(startPage);
 			mocks.Verify(parser);
 		}
 
@@ -330,7 +303,7 @@ namespace Zeus.Tests.Integrity
 		{
 			StartPage startPage = new StartPage();
 
-			saving.Raise(persister, new CancelItemEventArgs(startPage));
+			_integrityEnforcer.BeforeSave(startPage);
 		}
 
 		[Test]
@@ -369,7 +342,7 @@ namespace Zeus.Tests.Integrity
 			Page page2 = CreateOneItem<Page>("Sasha", startPage);
 			Page page3 = CreateOneItem<Page>("Sasha", startPage);
 
-			saving.Raise(persister, new CancelItemEventArgs(page3));
+			_integrityEnforcer.BeforeSave(page3);
 		}
 
 		[Test]
@@ -388,7 +361,7 @@ namespace Zeus.Tests.Integrity
 			Page page = CreateOneItem<Page>("John", null);
 			StartPage startPage = CreateOneItem<StartPage>("Leonidas", page);
 
-			saving.Raise(persister, new CancelItemEventArgs(startPage));
+			_integrityEnforcer.BeforeSave(startPage);
 		}
 
 		#endregion

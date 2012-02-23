@@ -2,11 +2,10 @@
 using System.Web.Caching;
 using Ninject;
 using Ormongo;
-using Zeus.Persistence;
 
 namespace Zeus.Web.Caching
 {
-	public class CachingService : ICachingService, IStartable
+	public class CachingService : Observer<ContentItem>, ICachingService, IStartable
 	{
 		private readonly IWebContext _webContext;
 
@@ -55,18 +54,19 @@ namespace Zeus.Web.Caching
 
 		public void Start()
 		{
-			ContentItem.BeforeSave += OnPersisterItemSaving;
+			ContentItem.Observers.Add(this);
 		}
 
-		private void OnPersisterItemSaving(object sender, CancelDocumentEventArgs<ContentItem> e)
+		public override bool BeforeSave(ContentItem document)
 		{
-			if (IsPageCached(e.Document))
-				DeleteCachedPage(e.Document);
+			if (IsPageCached(document))
+				DeleteCachedPage(document);
+			return base.BeforeSave(document);
 		}
 
 		public void Stop()
 		{
-			ContentItem.BeforeSave -= OnPersisterItemSaving;
+			ContentItem.Observers.Remove(this);
 		}
 
 		#endregion

@@ -10,14 +10,13 @@ using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Engine;
 using Zeus.Linq;
-using Zeus.Persistence;
 using Zeus.Security;
 using Zeus.Web.Hosting;
 
 namespace Zeus.Admin
 {
 	/// <summary>
-	/// Class responsible for plugins in edit mode, knowling links to edit 
+	/// Class responsible for plugins in edit mode, knowing links to edit 
 	/// pages and saving interaction.
 	/// </summary>
 	public class AdminManager : IAdminManager
@@ -27,7 +26,6 @@ namespace Zeus.Admin
 		private readonly AdminSection _configSection;
 		private readonly ISecurityManager _securityManager;
 		private readonly IAdminAssemblyManager _adminAssembly;
-		private readonly IPersister _persister;
 		private readonly IContentTypeManager _contentTypeManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
@@ -37,7 +35,7 @@ namespace Zeus.Admin
 		#region Constructor
 
 		public AdminManager(AdminSection configSection, ISecurityManager securityManager, IAdminAssemblyManager adminAssembly,
-			IPersister persister, IContentTypeManager contentTypeManager,
+			IContentTypeManager contentTypeManager,
 			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder,
 			IEmbeddedResourceManager embeddedResourceManager)
 		{
@@ -47,7 +45,6 @@ namespace Zeus.Admin
 			DeleteItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
 			EditItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Plugins.EditItem.Default.aspx");
 			NewItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
-			_persister = persister;
 			_contentTypeManager = contentTypeManager;
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);

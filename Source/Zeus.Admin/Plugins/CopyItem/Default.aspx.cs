@@ -1,6 +1,5 @@
 ﻿using System;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
-using Zeus.Security;
 
 namespace Zeus.Admin.Plugins.CopyItem
 {
@@ -9,31 +8,7 @@ namespace Zeus.Admin.Plugins.CopyItem
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
-			{
-				try
-				{
-					// Check user has permission to create items under the SelectedItem
-					if (!Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Create))
-						throw new ZeusException("You are not authorised to copy an item to this location");
-
-					ContentItem newItem = Engine.Persister.Copy(MemorizedItem, SelectedItem);
-					Refresh(newItem, AdminFrame.Both, false);
-				}
-				catch (Integrity.NameOccupiedException ex)
-				{
-					pnlNewName.Visible = true;
-					SetErrorMessage(cvCopy, ex);
-				}
-				catch (ContentTypes.NotAllowedParentException ex)
-				{
-					SetErrorMessage(cvCopy, ex);
-				}
-				catch (ZeusException ex)
-				{
-					SetErrorMessage(cvCopy, ex);
-				}
 				LoadDefaultsAndInfo();
-			}
 		}
 
 		private void LoadDefaultsAndInfo()
@@ -61,10 +36,11 @@ namespace Zeus.Admin.Plugins.CopyItem
 		{
 			try
 			{
+				// Check user has permission to create items under the SelectedItem
 				pnlNewName.Visible = false;
 				ContentItem newItem = MemorizedItem.Clone();
 				newItem.Name = txtNewName.Text;
-				newItem = Engine.Persister.Copy(newItem, SelectedItem);
+				newItem = newItem.CopyTo(SelectedItem);
 				Refresh(newItem, AdminFrame.Both, false);
 			}
 			catch (Integrity.NameOccupiedException ex)

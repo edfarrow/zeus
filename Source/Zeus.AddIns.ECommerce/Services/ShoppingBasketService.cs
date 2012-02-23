@@ -11,7 +11,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
-	public class ShoppingBasketService : IShoppingBasketService, IStartable
+	public class ShoppingBasketService : Observer<ContentItem>, IShoppingBasketService, IStartable
 	{
 		private readonly IWebContext _webContext;
 
@@ -103,26 +103,30 @@ namespace Zeus.AddIns.ECommerce.Services
 
         public void Start()
         {
-            ContentItem.BeforeSave += CalculateBasketTotal;
+			ContentItem.Observers.Add(this);
         }
 
         public void Stop()
         {
-			ContentItem.BeforeSave -= CalculateBasketTotal;
+        	ContentItem.Observers.Remove(this);
         }
+
+		public override bool BeforeSave(ContentItem document)
+		{
+			CalculateBasketTotal(document);
+			return base.BeforeSave(document);
+		}
 
         #endregion
 
         /// <summary>
         /// Calculate basket total - default behaviour
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected virtual void CalculateBasketTotal(object sender, CancelDocumentEventArgs<ContentItem> e)
+        protected virtual void CalculateBasketTotal(ContentItem document)
         {
-            if (e.Document is IShoppingBasket)
+			if (document is IShoppingBasket)
             {
-				var basket = e.Document as IShoppingBasket;
+				var basket = document as IShoppingBasket;
 
                 // set delivery price
                 if (basket.DeliveryMethod != null)

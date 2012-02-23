@@ -1,25 +1,26 @@
 using Ninject;
-using Ormongo;
 using SoundInTheory.DynamicImage.Caching;
+using Zeus.Persistence;
 
 namespace Zeus.FileSystem.Images
 {
-	public class ImageCachingService : IStartable
+	public class ImageCachingService : ContentItemObserver, IInitializable
 	{
-		public void Start()
+		public void Initialize()
 		{
-			ContentItem.AfterDestroy += OnPersisterItemDeleted;
-			ContentItem.AfterSave += OnPersisterItemSaved;
+			ContentItem.Observers.Add(this);
 		}
 
-		private void OnPersisterItemDeleted(object sender, DocumentEventArgs<ContentItem> e)
+		public override void AfterDestroy(ContentItem document)
 		{
-			DeleteCachedImages(e.Document);
+			DeleteCachedImages(document);
+			base.AfterDestroy(document);
 		}
 
-		private void OnPersisterItemSaved(object sender, DocumentEventArgs<ContentItem> e)
+		public override void AfterSave(ContentItem document)
 		{
-			DeleteCachedImages(e.Document);
+			DeleteCachedImages(document);
+			base.AfterSave(document);
 		}
 
 		public void DeleteCachedImages(ContentItem contentItem)
@@ -29,12 +30,6 @@ namespace Zeus.FileSystem.Images
 				var source = new OrmongoImageSource(((Image) contentItem).Data);
 				DynamicImageCacheManager.Remove(source);
 			}
-		}
-
-		public void Stop()
-		{
-			ContentItem.AfterDestroy -= OnPersisterItemDeleted;
-			ContentItem.AfterSave -= OnPersisterItemSaved;
 		}
 	}
 }

@@ -8,7 +8,6 @@ using System.Web.Security;
 using Zeus.BaseLibrary.Security;
 using Zeus.ContentTypes;
 using Zeus.Net.Mail;
-using Zeus.Persistence;
 using Zeus.Security;
 
 namespace Zeus.Web.Security
@@ -23,16 +22,13 @@ namespace Zeus.Web.Security
 		private readonly ICredentialStore _store;
 		private readonly IMailSender _mailSender;
 		private readonly IContentTypeManager _contentTypeManager;
-		private readonly IPersister _persister;
 
 		public CredentialService(ICredentialStore store, IMailSender mailSender,
-			IContentTypeManager contentTypeManager,
-			IPersister persister)
+			IContentTypeManager contentTypeManager)
 		{
 			_store = store;
 			_mailSender = mailSender;
 			_contentTypeManager = contentTypeManager;
-			_persister = persister;
 		}
 
 		public User CreateUser(string username, string password, string email, string[] roles,

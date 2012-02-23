@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Security.Principal;
 using Ninject;
-using Ormongo;
-using Ormongo.Ancestry;
 using Zeus.Persistence;
 
 namespace Zeus.Security
@@ -10,23 +8,21 @@ namespace Zeus.Security
 	/// <summary>
 	/// Checks against unauthorized requests, and updates of content items.
 	/// </summary>
-	public class SecurityEnforcer : ISecurityEnforcer, IStartable
+	public class SecurityEnforcer : ContentItemObserver, ISecurityEnforcer, IStartable
 	{
 		#region Fields
 
 		private readonly ISecurityManager _security;
 		private readonly Web.IWebContext _webContext;
-		private readonly IPersister _persister;
 
 		#endregion
 
 		#region Constructor
 
-		public SecurityEnforcer(ISecurityManager security, Web.IWebContext webContext, IPersister persister)
+		public SecurityEnforcer(ISecurityManager security, Web.IWebContext webContext)
 		{
 			_webContext = webContext;
 			_security = security;
-			_persister = persister;
 		}
 
 		#endregion
@@ -43,30 +39,6 @@ namespace Zeus.Security
 		#endregion
 
 		#region Methods
-
-		#region Event Handlers
-
-		private void ItemSavingEventHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
-		{
-			OnItemSaving(e.Document);
-		}
-
-		private void ItemMovingEvenHandler(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
-		{
-			OnItemMoving(e.Document, e.NewParent);
-		}
-
-		private void ItemDeletingEvenHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
-		{
-			OnItemDeleting(e.Document);
-		}
-
-		private void ItemCopyingEvenHandler(object sender, CancelDestinationEventArgs e)
-		{
-			OnItemCopying(e.AffectedItem, e.Destination);
-		}
-
-		#endregion
 
 		/// <summary>Checks that the current user is authorized to access the current item.</summary>
 		public virtual void AuthoriseRequest()
@@ -86,66 +58,56 @@ namespace Zeus.Security
 			if (!args.Cancel)
 				//throw new PermissionDeniedException(item, webContext.User);
 				throw new UnauthorizedAccessException();
-
 		}
 
-		/// <summary>Is invoked when an item is saved.</summary>
-		/// <param name="item">The item that is to be saved.</param>
-		protected virtual void OnItemSaving(ContentItem item)
+		public override bool BeforeSave(ContentItem document)
 		{
-			if (!_security.IsAuthorized(item, _webContext.User, Operations.Change))
-				throw new PermissionDeniedException(item, _webContext.User, Operations.Change);
+			if (!_security.IsAuthorized(document, _webContext.User, Operations.Change))
+				throw new PermissionDeniedException(document, _webContext.User, Operations.Change);
 			IPrincipal user = _webContext.User;
 			if (user != null)
-				item.SavedBy = user.Identity.Name;
+				document.SavedBy = user.Identity.Name;
 			else
-				item.SavedBy = null;
+				document.SavedBy = null;
+			return base.BeforeSave(document);
 		}
 
-		/// <summary>Is Invoked when an item is moved.</summary>
-		/// <param name="source">The item that is to be moved.</param>
-		/// <param name="destination">The destination for the item.</param>
-		protected virtual void OnItemMoving(ContentItem source, ContentItem destination)
+		public override bool BeforeMove(ContentItem document, ContentItem newParent)
 		{
-			if (!_security.IsAuthorized(source, _webContext.User, Operations.Read) || !_security.IsAuthorized(destination, _webContext.User, Operations.Create))
-				throw new PermissionDeniedException(source, _webContext.User, Operations.Create);
+			if (!_security.IsAuthorized(document, _webContext.User, Operations.Read) 
+				|| !_security.IsAuthorized(newParent, _webContext.User, Operations.Create))
+				throw new PermissionDeniedException(document, _webContext.User, Operations.Create);
+			return base.BeforeMove(document, newParent);
 		}
 
-		/// <summary>Is invoked when an item is to be deleted.</summary>
-		/// <param name="item">The item to delete.</param>
-		protected virtual void OnItemDeleting(ContentItem item)
+		public override bool BeforeDestroy(ContentItem document)
 		{
 			IPrincipal user = _webContext.User;
-			if (!_security.IsAuthorized(item, user, Operations.Delete))
-				throw new PermissionDeniedException(item, user, Operations.Delete);
+			if (!_security.IsAuthorized(document, user, Operations.Delete))
+				throw new PermissionDeniedException(document, user, Operations.Delete);
+			return base.BeforeDestroy(document);
 		}
 
-		/// <summary>Is invoked when an item is to be copied.</summary>
-		/// <param name="source">The item that is to be copied.</param>
-		/// <param name="destination">The destination for the copied item.</param>
-		protected virtual void OnItemCopying(ContentItem source, ContentItem destination)
+		public override bool BeforeCopy(ContentItem document, ContentItem newParent)
 		{
-			if (!_security.IsAuthorized(source, _webContext.User, Operations.Read) || !_security.IsAuthorized(destination, _webContext.User, Operations.Create))
-				throw new PermissionDeniedException(source, _webContext.User, Operations.Create);
+			if (!_security.IsAuthorized(document, _webContext.User, Operations.Read)
+				|| !_security.IsAuthorized(document, _webContext.User, Operations.Create))
+				throw new PermissionDeniedException(document, _webContext.User, Operations.Create);
+			return base.BeforeCopy(document, newParent);
 		}
+
 		#endregion
 
 		#region IStartable Members
 
 		public virtual void Start()
 		{
-			ContentItem.BeforeSave += ItemSavingEventHandler;
-			_persister.ItemCopying += ItemCopyingEvenHandler;
-			ContentItem.BeforeDestroy += ItemDeletingEvenHandler;
-			ContentItem.BeforeMove += ItemMovingEvenHandler;
+			ContentItem.Observers.Add(this);
 		}
 
 		public virtual void Stop()
 		{
-			ContentItem.BeforeSave -= ItemSavingEventHandler;
-			_persister.ItemCopying -= ItemCopyingEvenHandler;
-			ContentItem.BeforeDestroy -= ItemDeletingEvenHandler;
-			ContentItem.BeforeMove -= ItemMovingEvenHandler;
+			ContentItem.Observers.Remove(this);
 		}
 
 		#endregion

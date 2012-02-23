@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Zeus.BaseLibrary.Collections;
-using Zeus.Persistence;
 using Zeus.Engine;
 using Zeus.Web;
 
@@ -36,14 +35,6 @@ namespace Zeus
 		public static ContentItem CurrentPage
 		{
 			get { return Current.UrlParser.CurrentPage; }
-		}
-
-		/// <summary>
-		/// Gets Zeus persistence manager used for database persistence of content.
-		/// </summary>
-		public static IPersister Persister
-		{
-			get { return Current.Persister; }
 		}
 
 		public static Security.ISecurityManager SecurityManager

@@ -1,110 +1,67 @@
 ﻿using System;
 using Ninject;
-using Ormongo;
 using Ormongo.Ancestry;
 using Zeus.Persistence;
 
 namespace Zeus.Integrity
 {
-	public class IntegrityEnforcer : IIntegrityEnforcer, IStartable
+	public class IntegrityEnforcer : ContentItemObserver, IIntegrityEnforcer, IStartable
 	{
-		private readonly IPersister _persister;
 		private readonly IIntegrityManager _integrityManager;
 
-		public IntegrityEnforcer(IPersister persister, IIntegrityManager integrityManager)
+		public IntegrityEnforcer(IIntegrityManager integrityManager)
 		{
-			ContentItem.OrphanStrategy = OrphanStrategy.Destroy;
-			_persister = persister;
 			_integrityManager = integrityManager;
 		}
 
-		#region Event Dispatchers
-
-		private void ItemSavingEventHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
+		public override bool BeforeCopy(ContentItem document, ContentItem newParent)
 		{
-			OnItemSaving(e.Document);
-		}
-
-		private void ItemMovingEventHandler(object sender, CancelMoveDocumentEventArgs<ContentItem> e)
-		{
-			OnItemMoving(e.Document, e.NewParent);
-		}
-
-		private void ItemDeletingEventHandler(object sender, CancelDocumentEventArgs<ContentItem> e)
-		{
-			OnItemDeleting(e.Document);
-		}
-
-		private void ItemDestroyedEventHandler(object sender, DocumentEventArgs<ContentItem> e)
-		{
-			OnItemDestroyed(e.Document);
-		}
-
-		private void ItemCopyingEventHandler(object sender, CancelDestinationEventArgs e)
-		{
-			OnItemCopying(e.AffectedItem, e.Destination);
-		}
-
-		#endregion
-
-		#region Event Handlers
-
-		protected virtual void OnItemCopying(ContentItem source, ContentItem destination)
-		{
-			ZeusException ex = _integrityManager.GetCopyException(source, destination);
+			ZeusException ex = _integrityManager.GetCopyException(document, newParent);
 			if (ex != null)
 				throw ex;
+			return base.BeforeCopy(document, newParent);
 		}
 
-		protected virtual void OnItemDeleting(ContentItem item)
+		public override bool BeforeDestroy(ContentItem document)
 		{
-			ZeusException ex = _integrityManager.GetDeleteException(item);
+			ZeusException ex = _integrityManager.GetDeleteException(document);
 			if (ex != null)
 				throw ex;
+			return base.BeforeDestroy(document);
 		}
 
-		protected virtual void OnItemDestroyed(ContentItem item)
+		public override void AfterDestroy(ContentItem document)
 		{
 			// TODO: Delete inbound links
 			throw new NotImplementedException();
+			base.AfterDestroy(document);
 		}
 
-		protected virtual void OnItemMoving(ContentItem source, ContentItem destination)
+		public override bool BeforeMove(ContentItem document, ContentItem newParent)
 		{
-			ZeusException ex = _integrityManager.GetMoveException(source, destination);
+			ZeusException ex = _integrityManager.GetMoveException(document, newParent);
 			if (ex != null)
 				throw ex;
+			return base.BeforeMove(document, newParent);
 		}
 
-		protected virtual void OnItemSaving(ContentItem item)
+		public override bool BeforeSave(ContentItem document)
 		{
-			ZeusException ex = _integrityManager.GetSaveException(item);
+			ZeusException ex = _integrityManager.GetSaveException(document);
 			if (ex != null)
 				throw ex;
+			return base.BeforeSave(document);
 		}
 
-		#endregion
-
-		#region IStartable Members
-
-		public virtual void Start()
+		public void Start()
 		{
-			ContentItem.BeforeDestroy += ItemDeletingEventHandler;
-			ContentItem.AfterDestroy += ItemDestroyedEventHandler;
-			_persister.ItemCopying += ItemCopyingEventHandler;
-			ContentItem.BeforeMove += ItemMovingEventHandler;
-			ContentItem.BeforeSave += ItemSavingEventHandler;
+			ContentItem.OrphanStrategy = OrphanStrategy.Destroy;
+			ContentItem.Observers.Add(this);
 		}
 
-		public virtual void Stop()
+		public void Stop()
 		{
-			ContentItem.BeforeDestroy -= ItemDeletingEventHandler;
-			ContentItem.AfterDestroy -= ItemDestroyedEventHandler;
-			_persister.ItemCopying -= ItemCopyingEventHandler;
-			ContentItem.BeforeMove -= ItemMovingEventHandler;
-			ContentItem.BeforeSave -= ItemSavingEventHandler;
+			ContentItem.Observers.Remove(this);
 		}
-
-		#endregion
 	}
 }

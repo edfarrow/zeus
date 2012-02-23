@@ -1,6 +1,5 @@
 using System;
 using Zeus.ContentTypes;
-using Zeus.Persistence;
 using Zeus.Security;
 using Zeus.Web;
 
@@ -16,13 +15,11 @@ namespace Zeus.Admin.RecycleBin
 		public const string FormerParent = "FormerParent";
 		public const string FormerExpires = "FormerExpires";
 		public const string DeletedDate = "DeletedDate";
-		private readonly IPersister _persister;
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IHost _host;
 
-		public RecycleBinHandler(IPersister persister, IContentTypeManager definitions, IHost host)
+		public RecycleBinHandler(IContentTypeManager definitions, IHost host)
 		{
-			_persister = persister;
 			_contentTypeManager = definitions;
 			_host = host;
 		}

@@ -5,7 +5,6 @@ using Zeus.AddIns.ECommerce.ContentTypes;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.PaymentGateways;
-using Zeus.Persistence;
 using Zeus.Web;
 using Zeus.Web.Security;
 
@@ -13,15 +12,13 @@ namespace Zeus.AddIns.ECommerce.Services
 {
 	public class OrderService : IOrderService
 	{
-		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
 		private readonly IPaymentGateway _paymentGateway;
 		private readonly IOrderMailService _orderMailService;
 
-		public OrderService(IPersister persister, IWebContext webContext,
+		public OrderService(IWebContext webContext,
 			IPaymentGateway paymentGateway, IOrderMailService orderMailService)
 		{
-			_persister = persister;
 			_webContext = webContext;
 			_paymentGateway = paymentGateway;
 			_orderMailService = orderMailService;

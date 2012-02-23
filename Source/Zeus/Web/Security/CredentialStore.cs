@@ -3,7 +3,6 @@ using System.Linq;
 using System.Security.Principal;
 using MongoDB.Bson;
 using Zeus.Linq;
-using Zeus.Persistence;
 using Zeus.Security;
 using Zeus.Security.ContentTypes;
 using Zeus.Web.Security.Items;
@@ -15,15 +14,13 @@ namespace Zeus.Web.Security
 		#region Fields
 
 		private readonly IHost _host;
-		private readonly IPersister _persister;
 
 		#endregion
 
 		#region Constructor
 
-		public CredentialStore(IPersister persister, IHost host)
+		public CredentialStore(IHost host)
 		{
-			_persister = persister;
 			_host = host;
 
 			DefaultRoles = new[] {"Everyone", "Members", "Editors", "Administrators"};

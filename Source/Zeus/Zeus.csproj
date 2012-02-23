@@ -248,7 +248,9 @@
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
     <Compile Include="FileSystem\Images\CroppedImage.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
+    <Compile Include="Persistence\ContentItemObserver.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
+    <Compile Include="Persistence\IContentItemObserver.cs" />
     <Compile Include="Persistence\MappingInitializer.cs" />
     <Compile Include="ContentTypes\IPropertyAwareAttribute.cs" />
     <Compile Include="ContentTypes\ISortableRefiner.cs" />
@@ -549,12 +551,10 @@
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
-    <Compile Include="Persistence\ContentPersister.cs" />
     <Compile Include="Web\UI\ItemUtility.cs" />
     <Compile Include="Web\UI\WebControls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
     <Compile Include="Persistence\IItemNotifier.cs" />
-    <Compile Include="Persistence\IPersister.cs" />
     <Compile Include="Persistence\ItemNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationRule.cs" />

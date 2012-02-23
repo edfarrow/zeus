@@ -9,7 +9,6 @@ using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Web;
@@ -33,11 +32,6 @@ namespace Zeus.Engine
 		public IContentTypeManager ContentTypes
 		{
 			get { return Resolve<IContentTypeManager>(); }
-		}
-
-		public IPersister Persister
-		{
-			get { return Resolve<IPersister>(); }
 		}
 
 		public ISecurityManager SecurityManager
