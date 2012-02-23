@@ -14,14 +14,11 @@ namespace Zeus.AddIns.ECommerce.Services
 	{
 		private readonly IWebContext _webContext;
 		private readonly IPaymentGateway _paymentGateway;
-		private readonly IOrderMailService _orderMailService;
 
-		public OrderService(IWebContext webContext,
-			IPaymentGateway paymentGateway, IOrderMailService orderMailService)
+		public OrderService(IWebContext webContext, IPaymentGateway paymentGateway)
 		{
 			_webContext = webContext;
 			_paymentGateway = paymentGateway;
-			_orderMailService = orderMailService;
 		}
 
 		/// <summary>
@@ -90,12 +87,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				order.Status = OrderStatus.Paid;
 				order.Save();
 
-				// Send email to customer and vendor.
-
-                //commented out by Dave - why would this be a centralised library - like we don't need to change this for project to project?
-
-				//_orderMailService.SendOrderConfirmationToCustomer(configuration, order);
-				//_orderMailService.SendOrderConfirmationToVendor(configuration, order);
+				// Could send email to customer and vendor at this point.
 			}
 			else
 			{
