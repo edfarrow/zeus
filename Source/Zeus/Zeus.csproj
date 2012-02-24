@@ -243,6 +243,8 @@
     <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />
     <Compile Include="ContentTypes\IEditableHierarchyBuilder.cs" />
     <Compile Include="Design\Editors\CroppedImageUploadEditorAttribute.cs" />
+    <Compile Include="Design\Editors\FileAttachmentEditorAttribute.cs" />
+    <Compile Include="Design\Editors\ImageAttachmentEditorAttribute.cs" />
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
     <Compile Include="FileSystem\Images\CroppedImage.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
@@ -530,7 +532,6 @@
     <Compile Include="Design\Editors\TextBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\IEditor.cs" />
     <Compile Include="Engine\ContentEngine.cs" />
-    <Compile Include="FileSystem\Details\UploadEditorAttribute.cs" />
     <Compile Include="FileSystem\File.cs" />
     <Compile Include="FileSystem\FileSystemNode.cs" />
     <Compile Include="FileSystem\Folder.cs" />

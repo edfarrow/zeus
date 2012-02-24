@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using Ormongo;
 using SoundInTheory.DynamicImage.Fluent;
 using Zeus.FileSystem.Images;
 using SoundInTheory.DynamicImage;
@@ -11,7 +12,17 @@ namespace Zeus.Templates.Mvc.Html
         /// Image methods
         /// </summary>
 
-        public static string Image(this HtmlHelper helper, Image image)
+		public static string ImageUrl(this HtmlHelper helper, Attachment image)
+		{
+			if (image == null)
+				return string.Empty;
+
+        	return new CompositionBuilder()
+        		.WithLayer(LayerBuilder.Image.SourceImage(image))
+        		.Url;
+		}
+		
+		public static string Image(this HtmlHelper helper, Image image)
         {
             return Image(helper, image, 0, 0);
         }
