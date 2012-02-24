@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Web.UI;
 using Ext.Net;
@@ -57,13 +58,7 @@ namespace Zeus.Admin.Plugins.NewItem
 
 		string IContextMenuPlugin.GetJavascriptHandler(ContentItem contentItem)
 		{
-			return GetJavascriptHandler(contentItem, "Ext.ux.zeus.NewItemContextMenuPlugin");
-		}
-
-		private string GetJavascriptHandler(ContentItem contentItem, string clientPluginClass)
-		{
-			return string.Format("function() {{ new top.{0}('New', '{1}').execute(); }}", clientPluginClass,
-				GetPageUrl(GetType(), "Zeus.Admin.Plugins.NewItem.Default.aspx") + "?selected=" + contentItem.Path);
+			throw new NotSupportedException();
 		}
 
 		private MenuItem GetMenuItem(ContentItem contentItem, string clientPluginClass)
@@ -71,8 +66,7 @@ namespace Zeus.Admin.Plugins.NewItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "New",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PageAdd),
-				Handler = GetJavascriptHandler(contentItem, clientPluginClass)
+				IconUrl = Utility.GetCooliteIconUrl(Icon.PageAdd)
 			};
 
 			// Add child menu items for types that can be created under the current item.
@@ -89,8 +83,8 @@ namespace Zeus.Admin.Plugins.NewItem
 					{
 						Text = child.Title,
 						IconUrl = child.IconUrl,
-						Handler = string.Format("function() {{ new top.{0}('New {1}', '{2}').execute(); }}", clientPluginClass,
-							child.Title, Context.AdminManager.GetEditNewPageUrl(contentItem, child))
+						Handler = string.Format("function() {{ new top.{0}('New {1}', '{2}').execute(); }}", clientPluginClass, child.Title, 
+							GetPageUrl(GetType(), "Zeus.Admin.Plugins.EditItem.Default.aspx") + "?selected=" + contentItem.Path + "&discriminator=" + child.Discriminator)
 					};
 					childMenu.Items.Add(childMenuItem);
 				}

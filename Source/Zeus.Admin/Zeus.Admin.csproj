@@ -99,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Default.aspx" />
-    <EmbeddedResource Include="Plugins\NewItem\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
@@ -283,13 +282,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Install\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\NewItem\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\NewItem\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup.master.cs">

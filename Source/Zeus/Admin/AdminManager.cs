@@ -67,27 +67,6 @@ namespace Zeus.Admin
 
 		#region Methods
 
-		/// <summary>Gets the url to edit page creating new items.</summary>
-		/// <param name="selected">The selected item.</param>
-		/// <param name="definition">The type of item to edit.</param>
-		/// <returns>The url to the edit page.</returns>
-		public string GetEditNewPageUrl(ContentItem selected, ContentType definition)
-		{
-			if (selected == null) throw new ArgumentNullException("selected");
-			if (definition == null) throw new ArgumentNullException("definition");
-
-			ContentItem parent = selected;
-
-			if (selected == null)
-				throw new ZeusException("Cannot insert item before or after the root page.");
-
-			Url url = new Url(EditItemUrl);
-			url = url.AppendQuery("selected", parent.Path);
-			url = url.AppendQuery("discriminator", definition.Discriminator);
-
-			return url.ToString();
-		}
-
 		public IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups()
 		{
 			return _cachedActionPluginGroups;
@@ -96,17 +75,6 @@ namespace Zeus.Admin
 		public string GetAdminDefaultUrl()
 		{
 			return Context.Current.GetServerResourceUrl(_adminAssembly.Assembly, "Zeus.Admin.Default.aspx");
-		}
-
-		/// <summary>Gets the url to the edit page where to edit an existing item.</summary>
-		/// <param name="item">The item to edit.</param>
-		/// <returns>The url to the edit page</returns>
-		public string GetEditExistingItemUrl(ContentItem item)
-		{
-			if (item == null)
-				return null;
-
-			return string.Format("{0}?selected={1}", EditItemUrl, item.Path);
 		}
 
 		public Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user)
