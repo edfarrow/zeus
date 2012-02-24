@@ -9,6 +9,8 @@ using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin.Plugins.EditItem
 {
+	[ActionPluginGroup("NewEditDelete", 10)]
+	[AvailableOperation(Operations.Create, "Create", 20)]
 	[AvailableOperation(Operations.Change, "Change", 30)]
 	public partial class Default : PreviewFrameAdminPage
 	{

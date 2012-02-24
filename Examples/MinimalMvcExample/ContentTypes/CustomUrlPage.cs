@@ -13,7 +13,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
     [ContentType("Custom Url Page")]
     [RestrictParents(typeof(CustomUrlContainer))]
     [Panel("Images", "Images", 340)]
-    [AllowedChildren(Types = new[] { typeof(Page), typeof(CroppedImage) })]
+    [AllowedChildren(typeof(Page))]
 	public class CustomUrlPage : BasePage
 	{
         public override string Url
@@ -32,19 +32,8 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         /// <summary>
         /// Banner image
         /// </summary>
-        [ChildEditor("Banner", 200, arg1="400", arg2="200")]
-        public CroppedImage Banner
-        {
-            get { return GetChild("Banner") as CroppedImage; }
-            set
-            {
-                if (value != null)
-                {
-                    value.Name = "Banner";
-                    value.Parent = this;
-                }
-            }
-        }
+		[EmbeddedCroppedImageEditor("Banner", 200, FixedWidthValue = 400, FixedHeightValue = 200)]
+		public virtual EmbeddedCroppedImage Banner { get; set; }
 
 		[ChildEditor("MyPage", 200)]
 		public virtual MyLittleType MyPage { get; set; }

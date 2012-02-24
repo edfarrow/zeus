@@ -7,7 +7,7 @@ namespace Zeus.FileSystem.Images
 	{
 		public static ImageLayerBuilder SourceImage(this ImageLayerBuilder builder, Image image)
 		{
-			builder.Source = new OrmongoImageSource(image.Data);
+			builder.Source = new OrmongoImageSource(image.Data.Data);
 			return builder;
 		}
 

@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using Ormongo;
 using Zeus.Design.Editors;
-using Zeus.Integrity;
+using Zeus.FileSystem;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web.UI;
 
@@ -14,11 +12,11 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		[LinkedItemDropDownListEditor("Product", 99)]
 		public virtual ContentItem Product { get; set; }
 
-		[ImageAttachmentEditor("Image", 100)]
-		public virtual Attachment Image { get; set; }
+		[EmbeddedImageEditor("Image", 100)]
+		public virtual EmbeddedFile Image { get; set; }
 
-		[ImageAttachmentEditor("Another Image", 110)]
-		public virtual Attachment AnotherImage { get; set; }
+		[EmbeddedImageEditor("Another Image", 110)]
+		public virtual EmbeddedFile AnotherImage { get; set; }
 
         /*
         [ContentProperty("Other Images", 200, EditorContainerName = "Content")]

@@ -38,11 +38,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		protected override void OnAfterCreate()
 		{
-			Create(new OrderContainer
+			Children.Create(new OrderContainer
 			{
 				Name = OrdersName,
-				Title = "Orders",
-				Parent = this
+				Title = "Orders"
 			});
 
 			base.OnAfterCreate();

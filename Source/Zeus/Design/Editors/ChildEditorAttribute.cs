@@ -37,7 +37,7 @@ namespace Zeus.Design.Editors
 		public ChildEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
-			
+
 		}
 
 		#endregion
@@ -55,9 +55,6 @@ namespace Zeus.Design.Editors
 		#endregion
 
 		#region Methods
-
-        public string arg1 { get; set; }
-        public string arg2 { get; set; }
 
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
@@ -94,7 +91,7 @@ namespace Zeus.Design.Editors
 		{
 			ItemEditView editor = new ItemEditView();
 			editor.ID = Name;
-            editor.Init += OnChildEditorInit;
+			editor.Init += OnChildEditorInit;
 
 			panel.Controls.Add(editor);
 
@@ -104,26 +101,13 @@ namespace Zeus.Design.Editors
 		protected virtual void OnChildEditorInit(object sender, EventArgs e)
 		{
 			ItemEditView itemEditor = sender as ItemEditView;
-            ItemEditView parentEditor = ItemUtility.FindInParents<ItemEditView>(itemEditor.Parent);
-			itemEditor.CurrentItem = GetChild((ContentItem) parentEditor.CurrentItem);
+			ItemEditView parentEditor = ItemUtility.FindInParents<ItemEditView>(itemEditor.Parent);
+			itemEditor.CurrentItem = GetChild(parentEditor.CurrentItem);
 		}
 
 		protected virtual ContentItem GetChild(ContentItem item)
 		{
 			ContentItem childItem = Utility.GetProperty(item, Name) as ContentItem;
-
-            if (childItem as AcceptArgsFromChildEditor != null)
-            {
-                if (((AcceptArgsFromChildEditor)childItem).arg1 != this.arg1 || ((AcceptArgsFromChildEditor)childItem).arg2 != this.arg2)
-                {
-                    //different values so save these to the object - not perfect, but without this mechanism the values would need to be edited manually...
-                    //the content item needs to understand the crop it's being asked to perform
-                    ((AcceptArgsFromChildEditor)childItem).arg1 = this.arg1;
-                    ((AcceptArgsFromChildEditor)childItem).arg2 = this.arg2;
-                    childItem.Save();
-                }
-            }
-
 			if (childItem == null)
 			{
 				PropertyInfo pi = item.GetType().GetProperty(Name);
@@ -143,11 +127,6 @@ namespace Zeus.Design.Editors
 			try
 			{
 				child = Definitions.CreateInstance(childItemType, item);
-                if (child as AcceptArgsFromChildEditor != null)
-                {
-                    ((AcceptArgsFromChildEditor)child).arg1 = this.arg1;
-                    ((AcceptArgsFromChildEditor)child).arg2 = this.arg2;
-                }
 			}
 			catch (KeyNotFoundException ex)
 			{
@@ -166,10 +145,4 @@ namespace Zeus.Design.Editors
 
 		#endregion
 	}
-
-    public interface AcceptArgsFromChildEditor
-    {
-        string arg1 { get; set; }
-        string arg2 { get; set; }
-    }
 }

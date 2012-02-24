@@ -1,12 +1,8 @@
-using System.IO;
-using Ormongo;
-using SoundInTheory.DynamicImage.Caching;
-using SoundInTheory.DynamicImage.Layers;
-using Zeus.BaseLibrary.ExtensionMethods.IO;
-using Zeus.BaseLibrary.Web;
-using Zeus.Design.Editors;
 using SoundInTheory.DynamicImage;
+using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Filters;
+using SoundInTheory.DynamicImage.Layers;
+using Zeus.Design.Editors;
 
 namespace Zeus.FileSystem.Images
 {
@@ -18,22 +14,11 @@ namespace Zeus.FileSystem.Images
 			base.Visible = false;
 		}
 
-		[FileAttachmentEditor("Image", 100)]
-		public override Ormongo.Attachment Data
+		[EmbeddedImageEditor("Image", 100)]
+		public override EmbeddedFile Data
 		{
 			get { return base.Data; }
 			set { base.Data = value; }
-		}
-
-		public static Image FromStream(Stream stream, string filename)
-		{
-			byte[] fileBytes = stream.ReadAllBytes();
-			return new Image
-			{
-				Data = Attachment.Create(stream, filename, MimeUtility.GetMimeType(fileBytes)),
-				Name = filename,
-				Size = stream.Length
-			};
 		}
 
 		public virtual string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
@@ -42,7 +27,7 @@ namespace Zeus.FileSystem.Images
             image.ImageFormat = format;
             ImageLayer imageLayer = new ImageLayer();
 
-            imageLayer.Source = new OrmongoImageSource(Data);
+            imageLayer.Source = new OrmongoImageSource(Data.Data);
 
             ResizeFilter resizeFilter = new ResizeFilter();
 		    resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;

@@ -51,8 +51,8 @@ namespace Zeus.FileSystem
 			get { return true; }
 		}
 
-		[FileAttachmentEditor("File", 100)]
-		public virtual Attachment Data { get; set; }
+		[EmbeddedFileEditor("File", 100)]
+		public virtual EmbeddedFile Data { get; set; }
 
 		public long? Size { get; set; }
 

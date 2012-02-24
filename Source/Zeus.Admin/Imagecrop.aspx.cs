@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using MongoDB.Bson;
+using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.FileSystem.Images;
 using Zeus.Web.UI;
@@ -9,7 +10,7 @@ namespace Zeus.Admin
 {
     public partial class Imagecrop : System.Web.UI.Page
 	{
-        public CroppedImage ImageToEdit;
+        public EmbeddedCroppedImage ImageToEdit;
         public string selectedForForm;
         public double aspectRatio;
         public int minWidth;
@@ -18,20 +19,23 @@ namespace Zeus.Admin
 		protected void Page_Load(object sender, EventArgs e)
 		{
             selectedForForm = Request.QueryString["selected"];
+			int fixedWidthValue = Convert.ToInt32(Request.QueryString["w"]);
+			int fixedHeightValue = Convert.ToInt32(Request.QueryString["h"]);
 
 			//ltlAdminName.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
             if (Request.Form["id"] == null)
             {
                 ObjectId id = ObjectId.Parse(Request.QueryString["id"]);
-				ImageToEdit = ContentItem.Find<CroppedImage>(id);
-                bFixedAspectRatio = ImageToEdit.FixedWidthValue > 0 && ImageToEdit.FixedHeightValue > 0;
+            	string name = Request.QueryString["name"];
+            	ContentItem item = ContentItem.Find(id);
+				ImageToEdit = (EmbeddedCroppedImage) item[name];
+                bFixedAspectRatio = fixedWidthValue > 0 && fixedHeightValue > 0;
                 if (bFixedAspectRatio)
-                    aspectRatio = (double)ImageToEdit.FixedWidthValue / (double)ImageToEdit.FixedHeightValue;
+                    aspectRatio = (double)fixedWidthValue / (double)fixedHeightValue;
                 
                 //need to set the min and max sizes...this will stop people upscaling their images
-				CroppedImage imageToEdit = ContentItem.Find<CroppedImage>(id);
 
-                System.Drawing.Image image = System.Drawing.Image.FromStream(imageToEdit.Data.Content);
+				System.Drawing.Image image = System.Drawing.Image.FromStream(ImageToEdit.Data.Content);
                 int ActualWidth = image.Width;
                 int ActualHeight = image.Height;
                 image.Dispose();
@@ -40,15 +44,15 @@ namespace Zeus.Admin
                 {
                     //resized, leaving width @ 800
                     double percChange = (double)800 / (double)ActualWidth;
-                    minWidth = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedWidthValue, 0));
-                    minHeight = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedHeightValue, 0));
+                    minWidth = Convert.ToInt32(Math.Round(percChange * fixedWidthValue, 0));
+                    minHeight = Convert.ToInt32(Math.Round(percChange * fixedHeightValue, 0));
                 }
                 else
                 {
                     //resized, leaving height @ 600
                     double percChange = (double)600 / (double)ActualHeight;
-                    minWidth = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedWidthValue, 0));
-                    minHeight = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedHeightValue, 0));
+                    minWidth = Convert.ToInt32(Math.Round(percChange * fixedWidthValue, 0));
+                    minHeight = Convert.ToInt32(Math.Round(percChange * fixedHeightValue, 0));
                 }
 
                 //ImageToEdit.GetUrl(800, 600, true, DynamicImageFormat.Jpeg, true);
@@ -56,15 +60,17 @@ namespace Zeus.Admin
             else
             {
                 ObjectId id = ObjectId.Parse(Request.Form["id"]);
-                int x1 = Convert.ToInt32(Request.Form["x1"]);
+				string name = Request.QueryString["name"];
+				int x1 = Convert.ToInt32(Request.Form["x1"]);
                 int y1 = Convert.ToInt32(Request.Form["y1"]);
                 int w = Convert.ToInt32(Request.Form["w"]);
                 int h = Convert.ToInt32(Request.Form["h"]);
                 string selected = Request.Form["selected"];
 
-				CroppedImage imageToEdit = ContentItem.Find<CroppedImage>(id);
+				ContentItem item = ContentItem.Find(id);
+				ImageToEdit = (EmbeddedCroppedImage)item[name];
 
-                System.Drawing.Image image = System.Drawing.Image.FromStream(imageToEdit.Data.Content);
+                System.Drawing.Image image = System.Drawing.Image.FromStream(ImageToEdit.Data.Content);
                 int ActualWidth = image.Width;
                 int ActualHeight = image.Height;
                 image.Dispose();
@@ -94,12 +100,11 @@ namespace Zeus.Admin
                     h = Convert.ToInt32(Math.Round(percChange * h, 0));
                 }
 
-				ImageToEdit = ContentItem.Find<CroppedImage>(id);
                 ImageToEdit.TopLeftXVal = x1;
                 ImageToEdit.TopLeftYVal = y1;
                 ImageToEdit.CropWidth = w;
                 ImageToEdit.CropHeight = h;
-                ImageToEdit.Save();
+            	item.Save();
 
                 Response.Redirect("/admin/plugins.edit-item.default.aspx?selected=" + selected);
             }

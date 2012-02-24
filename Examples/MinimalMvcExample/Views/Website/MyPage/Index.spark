@@ -1,4 +1,4 @@
 <viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.MyPageViewModel" />
 Param = ${Model.ParamPassed}
 
-<img src="${Html.ImageUrl(Model.CurrentItem.Image)}" />
+<img src="${Html.ImageUrl(Model.CurrentItem.Image, 400, 300, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg)}" />

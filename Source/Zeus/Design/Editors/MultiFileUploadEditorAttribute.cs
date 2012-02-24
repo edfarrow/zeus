@@ -4,6 +4,7 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
+using Zeus.FileSystem;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
 using File=Zeus.FileSystem.File;
@@ -40,7 +41,10 @@ namespace Zeus.Design.Editors
 				{
 					byte[] data = fs.ReadAllBytes();
 					fs.Position = 0;
-					newFile.Data = Attachment.Create(fs, fileEditor.FileName, MimeUtility.GetMimeType(data));
+					newFile.Data = new EmbeddedFile
+					{
+						Data = Attachment.Create(new Attachment { Content = fs, FileName = fileEditor.FileName, ContentType = MimeUtility.GetMimeType(data) })
+					};
 					newFile.Size = fs.Length;
 				}
 

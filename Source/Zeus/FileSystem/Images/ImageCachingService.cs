@@ -27,7 +27,7 @@ namespace Zeus.FileSystem.Images
 		{
 			if (contentItem is Image)
 			{
-				var source = new OrmongoImageSource(((Image) contentItem).Data);
+				var source = new OrmongoImageSource(((Image) contentItem).Data.Data);
 				DynamicImageCacheManager.Remove(source);
 			}
 		}

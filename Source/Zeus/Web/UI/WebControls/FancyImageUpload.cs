@@ -64,7 +64,7 @@ namespace Zeus.Web.UI.WebControls
 			if (MinimumWidth == null && MinimumHeight == null)
 				return;
 
-			using (Bitmap bitmap = new Bitmap(FileAttachmentEditorAttribute.GetUploadedFilePath(this)))
+			using (Bitmap bitmap = new Bitmap(EmbeddedFileEditorAttribute.GetUploadedFilePath(this)))
 			{
 				if (MinimumWidth != null && bitmap.Width < MinimumWidth)
 				{

@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using Ormongo;
 using SoundInTheory.DynamicImage.Fluent;
+using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
 using SoundInTheory.DynamicImage;
 
@@ -12,13 +13,17 @@ namespace Zeus.Templates.Mvc.Html
         /// Image methods
         /// </summary>
 
-		public static string ImageUrl(this HtmlHelper helper, Attachment image)
+		public static string ImageUrl(this HtmlHelper helper, EmbeddedFile image, int width, int height, DynamicImageFormat format)
 		{
 			if (image == null)
 				return string.Empty;
 
-        	return new CompositionBuilder()
-        		.WithLayer(LayerBuilder.Image.SourceImage(image))
+        	if (image is EmbeddedCroppedImage)
+				return ((EmbeddedCroppedImage)image).GetUrl(width, height, format);
+
+        	return new CompositionBuilder().ImageFormat(format)
+        		.WithLayer(LayerBuilder.Image.SourceImage(image.Data)
+					.WithFilter(FilterBuilder.Resize.To(width, height)))
         		.Url;
 		}
 		
@@ -99,15 +104,7 @@ namespace Zeus.Templates.Mvc.Html
                 // generate resized image url
                 else
                 {
-                    if (image is CroppedImage)
-                    {
-                        CroppedImage cImage = (CroppedImage)image;
-                        result = cImage.GetUrl(width, height, fill, format);
-                    }
-                    else
-                    {
-                        result = image.GetUrl(width, height, fill, format);
-                    }
+					result = image.GetUrl(width, height, fill, format);
                 }
             }
 

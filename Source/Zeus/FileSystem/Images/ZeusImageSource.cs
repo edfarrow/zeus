@@ -27,7 +27,7 @@ namespace Zeus.FileSystem.Images
 
 		public override FastBitmap GetBitmap()
 		{
-			Attachment attachment = Attachment.FindOneByID(AttachmentID);
+			Attachment attachment = Attachment.Find(AttachmentID);
 			var bytes = new byte[attachment.Content.Length];
 			attachment.Content.Read(bytes, 0, bytes.Length);
 

@@ -5,18 +5,20 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
+using Zeus.FileSystem;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
+using File = System.IO.File;
 
 namespace Zeus.Design.Editors
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class FileAttachmentEditorAttribute : AbstractEditorAttribute
+	public class EmbeddedFileEditorAttribute : AbstractEditorAttribute
 	{
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		public FileAttachmentEditorAttribute(string title, int sortOrder)
+		public EmbeddedFileEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
 
@@ -39,12 +41,12 @@ namespace Zeus.Design.Editors
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;
-			Attachment file = (Attachment)item[Name];
+			EmbeddedFile file = (EmbeddedFile)item[Name];
 
 			bool result = false;
 			if (fileUpload.HasDeletedFile)
 			{
-				Attachment.Delete(file.ID);
+				Attachment.Delete(file.Data.ID);
 				item[Name] = null;
 				result = true;
 			}
@@ -56,8 +58,15 @@ namespace Zeus.Design.Editors
 				{
 					var bytes = fs.ReadAllBytes();
 					fs.Position = 0;
-					file = Attachment.Create(fs, fileUpload.FileName, MimeUtility.GetMimeType(bytes));
-					item[Name] = file;
+					item[Name] = new EmbeddedFile
+					{
+						Data = Attachment.Create(new Attachment
+						{
+							Content = fs,
+							FileName = fileUpload.FileName,
+							ContentType = MimeUtility.GetMimeType(bytes)
+						})
+					};
 				}
 
 				// Delete temp folder.
@@ -91,12 +100,9 @@ namespace Zeus.Design.Editors
 		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;
-			Attachment file = (Attachment) item[Name];
+			EmbeddedFile file = (EmbeddedFile)item[Name];
 			if (file != null)
-			{
-				CurrentID = file.ID;
-				fileUpload.CurrentFileName = file.FileName;
-			}
+				fileUpload.CurrentFileName = file.Data.FileName;
 		}
 
 		protected virtual FancyFileUpload CreateEditor()

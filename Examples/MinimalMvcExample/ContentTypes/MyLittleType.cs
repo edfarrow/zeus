@@ -1,10 +1,11 @@
+using Ormongo;
 using Zeus.Design.Editors;
 using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
 	[ContentType("My Little Type")]
-	public class MyLittleType : BaseContentItem
+	public class MyLittleType : EmbeddedDocument<ContentItem>
 	{
 		[TextBoxEditor("Test String", 10)]
 		public virtual string TestString { get; set; }

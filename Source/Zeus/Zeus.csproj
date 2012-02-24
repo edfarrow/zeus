@@ -242,11 +242,12 @@
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />
     <Compile Include="ContentTypes\IEditableHierarchyBuilder.cs" />
-    <Compile Include="Design\Editors\CroppedImageUploadEditorAttribute.cs" />
-    <Compile Include="Design\Editors\FileAttachmentEditorAttribute.cs" />
-    <Compile Include="Design\Editors\ImageAttachmentEditorAttribute.cs" />
+    <Compile Include="Design\Editors\EmbeddedCroppedImageEditorAttribute.cs" />
+    <Compile Include="Design\Editors\EmbeddedFileEditorAttribute.cs" />
+    <Compile Include="Design\Editors\EmbeddedImageEditorAttribute.cs" />
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
-    <Compile Include="FileSystem\Images\CroppedImage.cs" />
+    <Compile Include="FileSystem\Images\EmbeddedCroppedImage.cs" />
+    <Compile Include="FileSystem\EmbeddedFile.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
     <Compile Include="Persistence\ContentItemObserver.cs" />
     <Compile Include="Persistence\GenericFind.cs" />

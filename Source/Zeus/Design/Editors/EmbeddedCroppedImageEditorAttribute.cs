@@ -1,16 +1,20 @@
 using System;
 using System.Web.UI;
+using SoundInTheory.DynamicImage;
 using Zeus.FileSystem.Images;
 
 namespace Zeus.Design.Editors
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class CroppedImageAttachmentEditorAttribute : ImageAttachmentEditorAttribute
+	public class EmbeddedCroppedImageEditorAttribute : EmbeddedImageEditorAttribute
 	{
+		public int FixedWidthValue { get; set; }
+		public int FixedHeightValue { get; set; }
+
 		/// <summary>Initializes a new instance of the ImageUploadEditorAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		public CroppedImageAttachmentEditorAttribute(string title, int sortOrder)
+		public EmbeddedCroppedImageEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
 
@@ -19,22 +23,21 @@ namespace Zeus.Design.Editors
         protected override void UpdateEditorInternal(ContentItem item, Control editor)
         {
             base.UpdateEditorInternal(item, editor);
+			var embeddedFile = (EmbeddedCroppedImage)item[Name];
 
-            if (((CroppedImage)item).Data != null)
+			if (embeddedFile != null)
             {
                 //check to see if the image is large enough...
-                CroppedImage image = (CroppedImage)item;
-
-                System.Drawing.Image imageForSize = System.Drawing.Image.FromStream(image.Data.Content);
+				System.Drawing.Image imageForSize = System.Drawing.Image.FromStream(embeddedFile.Data.Content);
                 int actualWidth = imageForSize.Width;
                 int actualHeight = imageForSize.Height;
                 imageForSize.Dispose();
 
-                if (actualWidth > image.FixedWidthValue && actualHeight > image.FixedHeightValue)
+                if (actualWidth > FixedWidthValue && actualHeight > FixedHeightValue)
                 {
                     string selected = System.Web.HttpContext.Current.Request.QueryString["selected"];
-                    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Preview of how the image will look on the page</p><br/><p><a href=\"/admin/ImageCrop.aspx?id=" + image.ID + "&selected=" + selected + "\">Edit Crop</a></p><br/>"));
-                    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<img src=\"" + ((CroppedImage)image).GetUrl(image.FixedWidthValue, image.FixedHeightValue, true, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg, false) + "?rand=" + new System.Random().Next(1000) + "\" /></div><br/><br/>"));
+					editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Preview of how the image will look on the page</p><br/><p><a href=\"/admin/ImageCrop.aspx?id=" + item.ID + "&name=" + Name + "&selected=" + selected + "&w=" + FixedWidthValue + "&h=" + FixedHeightValue + "\">Edit Crop</a></p><br/>"));
+                    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<img src=\"" + embeddedFile.GetUrl(FixedWidthValue, FixedHeightValue, DynamicImageFormat.Jpeg, false) + "?rand=" + new Random().Next(1000) + "\" /></div><br/><br/>"));
                 }
                 else
                 {
