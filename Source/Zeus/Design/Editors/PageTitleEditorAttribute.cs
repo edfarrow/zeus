@@ -16,7 +16,7 @@ namespace Zeus.Design.Editors
 
 		protected override void UpdateEditorInternal(ContentItem item, System.Web.UI.Control editor)
 		{
-			if (!Context.ContentTypes.GetContentType(item.GetType()).IsPage)
+			if (!Context.ContentTypes.GetContentType(item).IsPage)
 				editor.Parent.Visible = false;
 
 			base.UpdateEditorInternal(item, editor);

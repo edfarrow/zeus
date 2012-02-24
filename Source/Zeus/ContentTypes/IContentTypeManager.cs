@@ -6,13 +6,11 @@ namespace Zeus.ContentTypes
 {
 	public interface IContentTypeManager
 	{
-		ContentType this[Type type] { get; }
-
-		ContentType this[string discriminator] { get; }
-
 		ContentItem CreateInstance(Type itemType, ContentItem parentItem);
 
 		ICollection<ContentType> GetContentTypes();
+		ContentType GetContentType(string discriminator);
+		ContentType GetContentType(ContentItem item);
 		ContentType GetContentType(Type type);
 		IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user);
 	}

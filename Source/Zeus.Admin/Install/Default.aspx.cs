@@ -362,7 +362,7 @@ namespace Zeus.Admin.Install
 			// try to find a suitable start page
 			foreach (ContentItem item in root.Children)
 			{
-				ContentType id = Zeus.Context.ContentTypes.GetContentType(item.GetType());
+				ContentType id = Zeus.Context.ContentTypes.GetContentType(item);
 				if (Is(id.ContentTypeAttribute.Installer, InstallerHints.PreferredStartPage))
 				{
 					if (item.ID == Status.StartPageID && root.ID == Status.RootItemID)

@@ -17,7 +17,7 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 
 		public static IQueryable<TSource> OfType<TSource>(this IQueryable<TSource> source, Type type)
 		{
-			return ((IQueryable) source).OfType(type).OfType<TSource>();
+			return ((IQueryable) source).OfType(type).Cast<TSource>();
 		}
 	}
 }

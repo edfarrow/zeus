@@ -1,5 +1,4 @@
 ﻿using System;
-using Ormongo.Ancestry;
 using Zeus.ContentTypes;
 using Zeus.Web;
 
@@ -43,7 +42,7 @@ namespace Zeus.Integrity
 				return new NameOccupiedException(source, destination);
 
 			if (!IsTypeAllowedBelowDestination(source, destination))
-				return new NotAllowedParentException(_contentTypeManager.GetContentType(source.GetType()), destination.GetType());
+				return new NotAllowedParentException(_contentTypeManager.GetContentType(source), destination.GetUnderlyingType());
 
 			return null;
 		}
@@ -61,7 +60,7 @@ namespace Zeus.Integrity
 				return new NameOccupiedException(source, destination);
 
 			if (!IsTypeAllowedBelowDestination(source, destination))
-				return new NotAllowedParentException(_contentTypeManager.GetContentType(source.GetType()), destination.GetType());
+				return new NotAllowedParentException(_contentTypeManager.GetContentType(source), destination.GetUnderlyingType());
 
 			return null;
 		}
@@ -75,7 +74,7 @@ namespace Zeus.Integrity
 				return new NameOccupiedException(item, item.Parent);
 
 			if (!IsTypeAllowedBelowDestination(item, item.Parent))
-				return new NotAllowedParentException(_contentTypeManager.GetContentType(item.GetType()), item.Parent.GetType());
+				return new NotAllowedParentException(_contentTypeManager.GetContentType(item), item.Parent.GetUnderlyingType());
 
 			return null;
 		}
@@ -181,8 +180,8 @@ namespace Zeus.Integrity
 		{
 			if (destination != null)
 			{
-				ContentType sourceDefinition = _contentTypeManager.GetContentType(source.GetType());
-				ContentType destinationDefinition = _contentTypeManager.GetContentType(destination.GetType());
+				ContentType sourceDefinition = _contentTypeManager.GetContentType(source);
+				ContentType destinationDefinition = _contentTypeManager.GetContentType(destination);
 
 				return destinationDefinition.IsChildAllowed(sourceDefinition);
 			}

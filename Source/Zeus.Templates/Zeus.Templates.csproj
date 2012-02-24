@@ -246,7 +246,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Views\Page\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Page\Index.spark">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mvc\Views\Sitemap\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\WebsiteNode\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\TagGroup\Index.spark" />

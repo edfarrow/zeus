@@ -65,7 +65,7 @@ namespace Zeus.Web.UI.WebControls
 
 		public ContentType CurrentItemDefinition
 		{
-			get { return Zeus.Context.ContentTypes[Type.GetType(ParentItemType)]; }
+			get { return Zeus.Context.ContentTypes.GetContentType(Type.GetType(ParentItemType)); }
 		}
 
 		public List<ItemEditView> ItemEditors

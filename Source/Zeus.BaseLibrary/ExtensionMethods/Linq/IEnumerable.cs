@@ -175,12 +175,12 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 			return sb.ToString();
 		}
 
-		public static IEnumerable<T> OfType<T>(this IEnumerable<T> source, Type type)
-		{
-			foreach (T element in source)
-				if (element != null && type.IsAssignableFrom(element.GetType()))
-					yield return element;
-		}
+		//public static IEnumerable<T> OfType<T>(this IEnumerable<T> source, Type type)
+		//{
+		//    foreach (T element in source)
+		//        if (element != null && type.IsAssignableFrom(element.GetType()))
+		//            yield return element;
+		//}
 
 		public static IEnumerable<TSource> Alternate<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
 		{

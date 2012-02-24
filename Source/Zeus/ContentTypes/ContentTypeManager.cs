@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using Ormongo.Internal.Proxying;
-using Zeus.Security;
 
 namespace Zeus.ContentTypes
 {
@@ -12,20 +10,6 @@ namespace Zeus.ContentTypes
 		#region Fields
 
 		private readonly IDictionary<Type, ContentType> _definitions;
-
-		#endregion
-
-		#region Properties
-
-		public ContentType this[Type type]
-		{
-			get { return GetContentType(type); }
-		}
-
-		public ContentType this[string discriminator]
-		{
-			get { return GetContentType(discriminator); }
-		}
 
 		#endregion
 
@@ -63,9 +47,13 @@ namespace Zeus.ContentTypes
 			return _definitions.Values;
 		}
 
+		public ContentType GetContentType(ContentItem item)
+		{
+			return GetContentType(item.GetUnderlyingType());
+		}
+
 		public ContentType GetContentType(Type type)
 		{
-			type = ProxyManager.GetUnderlyingType(type);
 			if (_definitions.ContainsKey(type))
 				return _definitions[type];
 			return null;

@@ -26,7 +26,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private ContentType ContentType
 		{
-			get { return Zeus.Context.Current.ContentTypes[TypeFilterInternal]; }
+			get { return Zeus.Context.Current.ContentTypes.GetContentType(TypeFilterInternal); }
 		}
 
 		protected override string ItemTitle

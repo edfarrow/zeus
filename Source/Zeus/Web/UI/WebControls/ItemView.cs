@@ -72,7 +72,7 @@ namespace Zeus.Web.UI.WebControls
 				{
 					if (CurrentItem != null && CurrentItem is ContentItem)
 					{
-						_currentTypeDefinition = Zeus.Context.ContentTypes.GetContentType(CurrentItem.GetType());
+						_currentTypeDefinition = Zeus.Context.ContentTypes.GetContentType(CurrentItem);
 					}
 					else
 					{

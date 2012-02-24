@@ -135,7 +135,7 @@ namespace Zeus.Web
             return item.ID == _host.CurrentSite.RootItemID || IsStartPage(item);
         }
 
-		public override void AfterCreate(ContentItem document)
+		public override void AfterInitialize(ContentItem document)
 		{
 			((IUrlParserDependency) document).SetUrlParser(this);
 		}

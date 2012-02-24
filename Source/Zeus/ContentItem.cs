@@ -285,7 +285,7 @@ namespace Zeus
 
         private PathData GetTemplate(string remainingUrl)
         {
-            IPathFinder[] finders = PathDictionary.GetFinders(GetType());
+            IPathFinder[] finders = PathDictionary.GetFinders(GetUnderlyingType());
 
             foreach (IPathFinder finder in finders)
             {

@@ -83,8 +83,7 @@ namespace Zeus.Design.Editors
 				items = items.OfType(TypeFilter);
 			if (ExcludeSelf)
 				items = items.Where(i => i.ID != item.ID);
-			return items
-				.OrderBy(i => i.HierarchicalTitle)
+			return items.ToList().OrderBy(i => i.HierarchicalTitle)
                 .Select(i => new ListItem { Value = i.ID.ToString(), Text = UseNonHiearchicalTitle ? i.Title : i.HierarchicalTitle })
 				.ToArray();
 		}

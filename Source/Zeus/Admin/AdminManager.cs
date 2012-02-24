@@ -163,7 +163,7 @@ namespace Zeus.Admin
 			if (addedEditors == null) throw new ArgumentNullException("addedEditors");
 
 			bool updated = false;
-			ContentType contentType = _contentTypeManager.GetContentType(item.GetType());
+			ContentType contentType = _contentTypeManager.GetContentType(item);
 			foreach (IEditor e in contentType.GetEditors(user))
             {
 				if (addedEditors.ContainsKey(e.Name))

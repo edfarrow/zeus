@@ -28,14 +28,14 @@ namespace Zeus.Admin.Plugins.NewItem
 		{
 			base.OnLoad(e);
 
-			ParentItemDefinition = Engine.ContentTypes.GetContentType(ActualItem.GetType());
+			ParentItemDefinition = Engine.ContentTypes.GetContentType(ActualItem);
 		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			ContentItem parentItem = SelectedItem;
 			IContentTypeManager manager = Zeus.Context.Current.Resolve<IContentTypeManager>();
-			ContentType contentType = manager.GetContentType(parentItem.GetType());
+			ContentType contentType = manager.GetContentType(parentItem);
 			lsvChildTypes.DataSource = manager.GetAllowedChildren(contentType, User);
 			lsvChildTypes.DataBind();
 		}

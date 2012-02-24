@@ -155,7 +155,7 @@ namespace Zeus.Installation
 			if (rootItem != null)
 				return string.Format("Root node OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					rootItem.ID, rootItem.Name, rootItem.GetType(),
-					_contentTypeManager.GetContentType(rootItem.GetType()), rootItem.Published, rootItem.Expires);
+					_contentTypeManager.GetContentType(rootItem), rootItem.Published, rootItem.Expires);
 			return "No root item found with the id: " + rootID;
 		}
 
@@ -168,7 +168,7 @@ namespace Zeus.Installation
 			if (startPage != null)
 				return string.Format("Start page OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					startPage.ID, startPage.Name, startPage.GetType(),
-					_contentTypeManager.GetContentType(startPage.GetType()), startPage.Published, startPage.Expires);
+					_contentTypeManager.GetContentType(startPage), startPage.Published, startPage.Expires);
 			return "No start page found with the id: " + startID;
 		}
 

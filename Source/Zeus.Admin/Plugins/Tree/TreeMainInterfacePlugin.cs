@@ -138,8 +138,8 @@ namespace Zeus.Admin.Plugins.Tree
 
 		public static bool IsVisibleInTree(ContentItem contentItem)
 		{
-			return ((Context.ContentTypes[contentItem.GetType()].Visibility & AdminSiteTreeVisibility.Visible) == AdminSiteTreeVisibility.Visible)
-					&& (contentItem.Parent == null || (Context.ContentTypes[contentItem.Parent.GetType()].Visibility & AdminSiteTreeVisibility.ChildrenHidden) != AdminSiteTreeVisibility.ChildrenHidden);
+			return ((Context.ContentTypes.GetContentType(contentItem).Visibility & AdminSiteTreeVisibility.Visible) == AdminSiteTreeVisibility.Visible)
+					&& (contentItem.Parent == null || (Context.ContentTypes.GetContentType(contentItem.Parent).Visibility & AdminSiteTreeVisibility.ChildrenHidden) != AdminSiteTreeVisibility.ChildrenHidden);
 		}
 	}
 }

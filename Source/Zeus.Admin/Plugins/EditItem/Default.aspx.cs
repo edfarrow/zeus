@@ -109,9 +109,9 @@ namespace Zeus.Admin.Plugins.EditItem
 			get
 			{
 				if (!string.IsNullOrEmpty(Discriminator))
-					return Zeus.Context.Current.ContentTypes[Discriminator];
+					return Zeus.Context.Current.ContentTypes.GetContentType(Discriminator);
 				if (SelectedItem != null)
-					return Zeus.Context.Current.ContentTypes[SelectedItem.GetType()];
+					return Zeus.Context.Current.ContentTypes.GetContentType(SelectedItem);
 				return null;
 			}
 		}

@@ -48,7 +48,7 @@ namespace Zeus.Admin.Plugins.NewItem
 
 			// Check that this content item has allowed children
 			IContentTypeManager contentTypeManager = Context.ContentTypes;
-			ContentType contentType = contentTypeManager.GetContentType(contentItem.GetType());
+			ContentType contentType = contentTypeManager.GetContentType(contentItem);
 			if (!contentTypeManager.GetAllowedChildren(contentType, Context.Current.WebContext.User).Any())
 				return false;
 
@@ -77,7 +77,7 @@ namespace Zeus.Admin.Plugins.NewItem
 
 			// Add child menu items for types that can be created under the current item.
 			IContentTypeManager manager = Context.Current.Resolve<IContentTypeManager>();
-			var childTypes = manager.GetAllowedChildren(manager.GetContentType(contentItem.GetType()), Context.Current.WebContext.User);
+			var childTypes = manager.GetAllowedChildren(manager.GetContentType(contentItem), Context.Current.WebContext.User);
 
             if (childTypes.Any())
 			{

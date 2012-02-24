@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MongoDB.Bson;
-using Ormongo.Internal.Proxying;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
@@ -103,7 +102,7 @@ namespace Zeus.Web.Mvc
                 if (ObjectId.TryParse(td.QueryParameters["preview"], out itemId))
                     item = ContentItem.Find(itemId);
             }
-            var controllerName = controllerMapper.GetControllerName(ProxyManager.GetUnderlyingType(item.GetType()));
+            var controllerName = controllerMapper.GetControllerName(item.GetUnderlyingType());
 
             if (controllerName == null)
                 return null;
@@ -113,7 +112,7 @@ namespace Zeus.Web.Mvc
             data.Values[ContentEngineKey] = engine;
             data.Values[ControllerKey] = controllerName;
             data.Values[ActionKey] = action;
-            data.Values[AreaKey] = controllerMapper.GetAreaName(ProxyManager.GetUnderlyingType(item.GetType()));
+            data.Values[AreaKey] = controllerMapper.GetAreaName(item.GetUnderlyingType());
             if (!string.IsNullOrEmpty(extraParam))
                 data.Values["param"] = extraParam;
             return data;
