@@ -13,7 +13,7 @@ namespace Zeus.FileSystem.Images
     [ContentTypeAuthorizedRoles("Administrators")]
     public class CroppedImage : Image, AcceptArgsFromChildEditor
     {
-        [CroppedImageUploadEditor("CroppedImage", 100)]
+        [CroppedImageAttachmentEditor("CroppedImage", 100)]
 		public override Ormongo.Attachment Data
 		{
 			get { return base.Data; }
@@ -43,7 +43,7 @@ namespace Zeus.FileSystem.Images
 		public int CropWidth { get; set; }
 		public int CropHeight { get; set; }
 
-        public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
+        public override string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
         {
             return GetUrl(width, height, fill, format, false);
         }

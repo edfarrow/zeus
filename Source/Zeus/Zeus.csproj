@@ -264,10 +264,8 @@
     <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
     <Compile Include="Design\Editors\PasswordEditorAttribute.cs" />
     <Compile Include="Design\Editors\RangeEditorAttribute.cs" />
-    <Compile Include="Design\Editors\FileUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\StringCollectionEditorAttribute.cs" />
-    <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
     <Compile Include="Net\Mail\FakeMailSender.cs" />
     <Compile Include="Net\Mail\MailSender.cs" />

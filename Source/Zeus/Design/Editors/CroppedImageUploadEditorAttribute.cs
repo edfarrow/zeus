@@ -1,33 +1,19 @@
 using System;
 using System.Web.UI;
 using Zeus.FileSystem.Images;
-using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class CroppedImageUploadEditorAttribute : FileUploadEditorAttribute
+	public class CroppedImageAttachmentEditorAttribute : ImageAttachmentEditorAttribute
 	{
-		public int? MinimumWidth { get; set; }
-		public int? MinimumHeight { get; set; }
-
 		/// <summary>Initializes a new instance of the ImageUploadEditorAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-        public CroppedImageUploadEditorAttribute(string title, int sortOrder)
+		public CroppedImageAttachmentEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
 
-		}
-
-		protected override FancyFileUpload CreateEditor()
-		{            
-			FancyImageUpload uploader = new FancyImageUpload { MinimumWidth = MinimumWidth, MinimumHeight = MinimumHeight };
-            //add crop tool if item is already saved
-            
-            //CroppedImage image = (CroppedImage)this.UnderlyingProperty.GetValue(;
-            return uploader;
-            
 		}
 
         protected override void UpdateEditorInternal(ContentItem item, Control editor)
@@ -40,11 +26,11 @@ namespace Zeus.Design.Editors
                 CroppedImage image = (CroppedImage)item;
 
                 System.Drawing.Image imageForSize = System.Drawing.Image.FromStream(image.Data.Content);
-                int ActualWidth = imageForSize.Width;
-                int ActualHeight = imageForSize.Height;
+                int actualWidth = imageForSize.Width;
+                int actualHeight = imageForSize.Height;
                 imageForSize.Dispose();
 
-                if (ActualWidth > image.FixedWidthValue && ActualHeight > image.FixedHeightValue)
+                if (actualWidth > image.FixedWidthValue && actualHeight > image.FixedHeightValue)
                 {
                     string selected = System.Web.HttpContext.Current.Request.QueryString["selected"];
                     editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Preview of how the image will look on the page</p><br/><p><a href=\"/admin/ImageCrop.aspx?id=" + image.ID + "&selected=" + selected + "\">Edit Crop</a></p><br/>"));
@@ -56,8 +42,5 @@ namespace Zeus.Design.Editors
                 }
             }
         }
-
-
-        
 	}
 }

@@ -17,8 +17,8 @@ namespace Zeus.FileSystem.Images
 		{
 			base.Visible = false;
 		}
-		
-		[ImageUploadEditor("Image", 100)]
+
+		[FileAttachmentEditor("Image", 100)]
 		public override Ormongo.Attachment Data
 		{
 			get { return base.Data; }
@@ -36,7 +36,7 @@ namespace Zeus.FileSystem.Images
 			};
 		}
 
-		public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
+		public virtual string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
 		{
 			Composition image = new Composition();
             image.ImageFormat = format;
@@ -64,12 +64,12 @@ namespace Zeus.FileSystem.Images
              */
 		}
 
-        public string GetUrl(int width, int height, bool fill)
+        public virtual string GetUrl(int width, int height, bool fill)
 		{
             return GetUrl(width, height, fill, DynamicImageFormat.Jpeg);
 		}
 
-		public string GetUrl(int width, int height)
+		public virtual string GetUrl(int width, int height)
 		{
             return GetUrl(width, height, true, DynamicImageFormat.Jpeg);
 		}
