@@ -9,9 +9,9 @@ namespace Zeus.Admin.Plugins.PageCaching
 	public partial class PageCachingUserControl : PluginUserControlBase
 	{
 		[DirectMethod]
-		public void ShowDialog(ObjectId id)
+		public void ShowDialog(string id)
 		{
-			ContentItem contentItem = ContentItem.Find(id);
+			ContentItem contentItem = ContentItem.Find(ObjectId.Parse(id));
 
 			var window = new Window
 			{
@@ -60,11 +60,11 @@ namespace Zeus.Admin.Plugins.PageCaching
 		}
 
 		[DirectMethod]
-		public void SavePageCachingSettings(ObjectId id, bool enabled, string duration)
+		public void SavePageCachingSettings(string id, bool enabled, string duration)
 		{
 			TimeSpan durationTime = TimeSpan.Parse(duration);
 
-			ContentItem contentItem = ContentItem.Find(id);
+			ContentItem contentItem = ContentItem.Find(ObjectId.Parse(id));
 			contentItem.SetPageCachingEnabled(enabled);
 			contentItem.SetPageCachingDuration(durationTime);
 			contentItem.Save();

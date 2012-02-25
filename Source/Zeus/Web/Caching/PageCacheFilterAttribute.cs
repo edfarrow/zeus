@@ -9,8 +9,6 @@ namespace Zeus.Web.Caching
 	public class PageCacheFilterAttribute : ActionFilterAttribute
 	{
 		private readonly ICachingService _cachingService;
-		private ContentItem _currentItem;
-		private Stream _originalOutputStream;
 
 		public PageCacheFilterAttribute()
 		{
@@ -18,20 +16,24 @@ namespace Zeus.Web.Caching
 			Order = 0;
 		}
 
+		private static ContentItem GetCurrentItem(ControllerContext filterContext)
+		{
+			return filterContext.Controller.ControllerContext.RouteData.Values[ContentRoute.ContentItemKey] as ContentItem;
+		}
+
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
-			_currentItem =
-				filterContext.Controller.ControllerContext.RouteData.Values[ContentRoute.ContentItemKey] as ContentItem;
-			if (_currentItem != null && _cachingService.IsPageCached(_currentItem))
+			ContentItem currentItem = GetCurrentItem(filterContext);
+			if (currentItem != null && _cachingService.IsPageCached(currentItem))
 			{
-				string cachedHtml = _cachingService.GetCachedPage(_currentItem);
+				string cachedHtml = _cachingService.GetCachedPage(currentItem);
 				filterContext.Result = new ContentResult { Content = cachedHtml };
 				return;
 			}
 
-			if (_currentItem != null && _currentItem.GetPageCachingEnabled())
+			if (currentItem != null && currentItem.GetPageCachingEnabled())
 			{
-				_originalOutputStream = filterContext.HttpContext.Response.Filter;
+				filterContext.HttpContext.Items["PageCaching_OriginalOutputStream"] = filterContext.HttpContext.Response.Filter;
 				HttpResponseBase response = filterContext.HttpContext.Response;
 				response.Flush();
 				response.Filter = new CapturingResponseFilter(response.Filter);
@@ -40,16 +42,17 @@ namespace Zeus.Web.Caching
 
 		public override void OnResultExecuted(ResultExecutedContext filterContext)
 		{
-			if (_originalOutputStream != null)
+			var originalOutputStream = filterContext.HttpContext.Items["PageCaching_OriginalOutputStream"] as Stream;
+			if (originalOutputStream != null)
 			{
 				HttpResponseBase response = filterContext.HttpContext.Response;
 				response.Flush();
 				CapturingResponseFilter capturingResponseFilter = (CapturingResponseFilter) filterContext.HttpContext.Response.Filter;
-				response.Filter = _originalOutputStream;
+				response.Filter = originalOutputStream;
 				string html = capturingResponseFilter.GetContents(filterContext.HttpContext.Response.ContentEncoding);
 				response.Write(html);
 
-				_cachingService.InsertCachedPage(_currentItem, html);
+				_cachingService.InsertCachedPage(GetCurrentItem(filterContext), html);
 			}
 		}
 

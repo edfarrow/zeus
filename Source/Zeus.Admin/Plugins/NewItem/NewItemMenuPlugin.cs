@@ -66,7 +66,8 @@ namespace Zeus.Admin.Plugins.NewItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "New",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PageAdd)
+				IconUrl = Utility.GetCooliteIconUrl(Icon.PageAdd),
+				Handler = "function() { return false; }"
 			};
 
 			// Add child menu items for types that can be created under the current item.

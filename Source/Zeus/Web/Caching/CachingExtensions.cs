@@ -9,7 +9,10 @@ namespace Zeus.Web.Caching
 
 		public static bool GetPageCachingEnabled(this ContentItem contentItem)
 		{
-			return contentItem.IsPage && (bool) (contentItem[PageCacheEnabledKey] ?? false);
+			if (!contentItem.IsPage)
+				return false;
+
+			return (bool)(contentItem[PageCacheEnabledKey] ?? false);
 		}
 
 		public static void SetPageCachingEnabled(this ContentItem contentItem, bool enabled)
@@ -19,7 +22,10 @@ namespace Zeus.Web.Caching
 
 		public static TimeSpan GetPageCachingDuration(this ContentItem contentItem)
 		{
-			return (TimeSpan) (contentItem[PageCacheDurationKey] ?? TimeSpan.FromHours(1));
+			// Workaround for MongoDB not supporting TimeSpan natively
+			return (contentItem[PageCacheDurationKey] != null) 
+				? TimeSpan.Parse(contentItem[PageCacheDurationKey].ToString())
+				: TimeSpan.FromHours(1);
 		}
 
 		public static void SetPageCachingDuration(this ContentItem contentItem, TimeSpan duration)
