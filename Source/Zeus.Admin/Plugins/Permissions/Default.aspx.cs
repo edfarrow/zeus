@@ -191,7 +191,7 @@ namespace Zeus.Admin.Plugins.Permissions
 				foreach (string operation in allowedOperations)
 				{
 					CheckBox checkBox = (CheckBox) row.FindControl("chk" + i + operation);
-					item.AuthorizationRules.Add(new Zeus.Security.AuthorizationRule(item, operation, roleOrUser, type, checkBox.Checked));
+					item.AuthorizationRules.Add(new Zeus.Security.AuthorizationRule(operation, roleOrUser, type, checkBox.Checked));
 				}
 			}
 

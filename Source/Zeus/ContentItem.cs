@@ -475,7 +475,7 @@ namespace Zeus
 		{
 			if (newParent != null)
 				foreach (AuthorizationRule rule in newParent.AuthorizationRules)
-					AuthorizationRules.Add(new AuthorizationRule(newParent, rule.Operation, rule.Role, rule.User, rule.Allowed));
+					AuthorizationRules.Add(new AuthorizationRule(rule.Operation, rule.Role, rule.User, rule.Allowed));
 			base.OnAfterMove(newParent);
 		}
 

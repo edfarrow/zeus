@@ -17,8 +17,8 @@ namespace Zeus.Security
 		/// <param name="operation"></param>
 		/// <param name="roleOrUser">The role or user name.</param>
 		/// <param name="type"></param>
-		public AuthorizationRule(ContentItem item, string operation, string roleOrUser, AuthorizationType type, bool allowed)
-			: this(item, operation, (type == AuthorizationType.Role) ? roleOrUser : null, (type == AuthorizationType.User) ? roleOrUser : null, allowed)
+		public AuthorizationRule(string operation, string roleOrUser, AuthorizationType type, bool allowed)
+			: this(operation, (type == AuthorizationType.Role) ? roleOrUser : null, (type == AuthorizationType.User) ? roleOrUser : null, allowed)
 		{
 			
 		}
@@ -29,9 +29,8 @@ namespace Zeus.Security
 		/// <param name="role">The role or user name.</param>
 		/// <param name="user"></param>
 		/// <param name="allowed"></param>
-		public AuthorizationRule(ContentItem item, string operation, string role, string user, bool allowed)
+		public AuthorizationRule(string operation, string role, string user, bool allowed)
 		{
-			EnclosingItem = item;
 			Operation = operation;
 			Role = role;
 			User = user;
@@ -44,9 +43,6 @@ namespace Zeus.Security
 
 		/// <summary>Gets or sets the database identifier of this class.</summary>
 		public virtual int ID { get; set; }
-
-		/// <summary>Gets or sets the item this AuthorizedRole referrs to.</summary>
-		public virtual ContentItem EnclosingItem { get; set; }
 
 		/// <summary>Gets the operation (i.e. Read, Edit, Publish) this class referrs to.</summary>
 		public virtual string Operation { get; set; }
@@ -110,7 +106,6 @@ namespace Zeus.Security
 		{
 			AuthorizationRule cloned = (AuthorizationRule) MemberwiseClone();
 			cloned.ID = 0;
-			cloned.EnclosingItem = null;
 			return cloned;
 		}
 	}
