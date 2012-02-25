@@ -363,17 +363,10 @@
     <Compile Include="Web\UI\WebControls\LoginName.cs" />
     <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
     <Compile Include="Web\UI\WebControls\TemplateField.cs" />
-    <Compile Include="Web\UI\WebControls\TypedGridView.cs" />
-    <Compile Include="Web\UI\WebControls\TypedGridViewControlBuilder.cs" />
-    <Compile Include="Web\UI\WebControls\TypedGridViewFakeType.cs" />
-    <Compile Include="Web\UI\WebControls\TypedGridViewRow.cs" />
     <Compile Include="Web\UI\WebControls\TypedListView.cs" />
     <Compile Include="Web\UI\WebControls\TypedListViewControlBuilder.cs" />
     <Compile Include="Web\UI\WebControls\TypedListViewDataItem.cs" />
     <Compile Include="Web\UI\WebControls\TypedListViewFakeType.cs" />
-    <Compile Include="Web\UI\WebControls\TypedTemplateField.cs" />
-    <Compile Include="Web\UI\WebControls\TypedTemplateFieldControlBuilder.cs" />
-    <Compile Include="Web\UI\WebControls\TypedTemplateFieldFakeType.cs" />
     <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
