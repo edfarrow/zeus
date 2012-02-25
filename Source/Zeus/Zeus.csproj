@@ -355,8 +355,6 @@
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
     <Compile Include="Web\Security\WebSecurityService.cs" />
     <Compile Include="Web\UI\PanelAttribute.cs" />
-    <Compile Include="Web\UI\WebControls\ChildrenEditor.cs" />
-    <Compile Include="Web\UI\WebControls\ChildrenEditorGridPanel.cs" />
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
@@ -461,7 +459,6 @@
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\NotAllowedParentException.cs" />
     <Compile Include="ContentTypes\Property.cs" />
-    <Compile Include="Design\Editors\ChildrenEditorAttribute.cs" />
     <Compile Include="Design\Editors\ColourEditorAttribute.cs" />
     <Compile Include="Design\Editors\CheckBoxListEditorAttribute.cs" />
     <Compile Include="Design\Editors\BaseDetailCollectionEditorAttribute.cs" />
