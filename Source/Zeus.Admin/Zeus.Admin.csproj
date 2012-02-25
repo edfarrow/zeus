@@ -205,6 +205,7 @@
     <Compile Include="Plugins\MoveItem\MoveItemTreePlugin.cs" />
     <Compile Include="MainInterfacePluginInitializer.cs" />
     <Compile Include="Plugins\ContextMenu\ContextMenuMainInterfacePlugin.cs" />
+    <Compile Include="Plugins\RecycleBin\RecycleBinMenuPlugin.cs" />
     <Compile Include="Plugins\Tree\TreeMainInterfacePlugin.cs" />
     <Compile Include="Plugins\Tree\TreePluginInitializer.cs" />
     <Compile Include="Plugins\ContextMenu\ContextMenuLoader.ashx.cs">
@@ -217,19 +218,19 @@
       <DependentUpon>TreeLoader.ashx</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Tree\SiteTree.cs" />
-    <Compile Include="RecycleBin\Default.aspx.cs">
+    <Compile Include="Plugins\RecycleBin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RecycleBin\Default.aspx.designer.cs">
+    <Compile Include="Plugins\RecycleBin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RecycleBin\DeleteInterceptor.cs" />
-    <Compile Include="RecycleBin\IRecycleBin.cs" />
-    <Compile Include="RecycleBin\IRecycleBinHandler.cs" />
-    <Compile Include="RecycleBin\RecycleBinContainer.cs" />
-    <Compile Include="RecycleBin\RecycleBinHandler.cs" />
-    <Compile Include="RecycleBin\RecycleBinInitializer.cs" />
+    <Compile Include="Plugins\RecycleBin\DeleteInterceptor.cs" />
+    <Compile Include="Plugins\RecycleBin\IRecycleBin.cs" />
+    <Compile Include="Plugins\RecycleBin\IRecycleBinHandler.cs" />
+    <Compile Include="Plugins\RecycleBin\RecycleBinContainer.cs" />
+    <Compile Include="Plugins\RecycleBin\RecycleBinHandler.cs" />
+    <Compile Include="Plugins\RecycleBin\RecycleBinInitializer.cs" />
     <Compile Include="Plugins\Permissions\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -361,7 +362,7 @@
     <EmbeddedResource Include="Assets\JS\jcrop\jquery.min.js" />
     <EmbeddedResource Include="Assets\Css\jcrop_demos.css" />
     <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
-    <EmbeddedResource Include="RecycleBin\Default.aspx" />
+    <EmbeddedResource Include="Plugins\RecycleBin\Default.aspx" />
     <EmbeddedResource Include="Plugins\ImportExport\Default.aspx" />
     <EmbeddedResource Include="Plugins\CopyItem\Default.aspx" />
     <EmbeddedResource Include="Plugins\PasteItem\Default.aspx" />
