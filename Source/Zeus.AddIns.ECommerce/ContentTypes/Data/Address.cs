@@ -1,19 +1,12 @@
-using Ext.Net;
+using Ormongo;
 using Zeus.Design.Editors;
-using Zeus.Integrity;
-using Zeus.Templates.ContentTypes;
 using Zeus.Templates.ContentTypes.ReferenceData;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
-	[ContentType]
-	[RestrictParents(typeof(ShoppingBasket))]
-	public class Address : BaseContentItem
+	public class Address : EmbeddedDocument<ContentItem>
 	{
-		protected override Icon Icon
-		{
-			get { return Icon.EmailEdit; }
-		}
+		public string Title { get; set; }
 
 		[TextBoxEditor("Title", 200)]
 		public string PersonTitle { get; set; }
@@ -53,6 +46,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 					Postcode + "<br/>" +
 					Country.Title;
 			}
+		}
+
+		public Address Clone()
+		{
+			return (Address) MemberwiseClone();
 		}
 	}
 }

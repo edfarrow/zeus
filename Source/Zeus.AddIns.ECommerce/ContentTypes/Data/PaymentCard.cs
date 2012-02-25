@@ -1,20 +1,12 @@
 using System;
+using Ormongo;
 using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.Design.Editors;
-using Zeus.Integrity;
-using Zeus.Templates.ContentTypes;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
-	[ContentType]
-	[RestrictParents(typeof(ShoppingBasket))]
-	public class PaymentCard : BaseContentItem
+	public class PaymentCard : EmbeddedDocument<ContentItem>
 	{
-		public override string IconUrl
-		{
-			get { return GetIconUrl(typeof(PaymentCard), "Zeus.AddIns.ECommerce.Icons.visa.png"); }
-		}
-
 		[TextBoxEditor("CardType", 200)]
 		public PaymentCardType CardType { get; set; }
 
@@ -58,5 +50,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		[TextBoxEditor("Issue Number", 270)]
 		public string IssueNumber { get; set; }
+
+		public PaymentCard Clone()
+		{
+			return (PaymentCard) MemberwiseClone();
+		}
 	}
 }

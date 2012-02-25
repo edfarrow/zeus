@@ -60,7 +60,7 @@ namespace Zeus.Admin
             else
             {
                 ObjectId id = ObjectId.Parse(Request.Form["id"]);
-				string name = Request.QueryString["name"];
+				string name = Request.Form["name"];
 				int x1 = Convert.ToInt32(Request.Form["x1"]);
                 int y1 = Convert.ToInt32(Request.Form["y1"]);
                 int w = Convert.ToInt32(Request.Form["w"]);

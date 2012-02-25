@@ -108,8 +108,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			}
 			else
 			{
-				if (shoppingBasket.ShippingAddress != null)
-					shoppingBasket.ShippingAddress.Destroy();
+				shoppingBasket.ShippingAddress = null;
 			}
 			PaymentCard paymentCard = shoppingBasket.PaymentCard;
 			if (paymentCard == null)
@@ -153,7 +152,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 
 		private IEnumerable<SelectListItem> GetTitles(string selectedTitle)
 		{
-			return CurrentShop.Titles.Cast<string>().Select(t => new SelectListItem
+			return CurrentShop.Titles.Select(t => new SelectListItem
 			{
 				Text = t,
 				Value = t,

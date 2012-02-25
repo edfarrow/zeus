@@ -1,6 +1,7 @@
 using System;
 using System.Web.UI;
 using SoundInTheory.DynamicImage;
+using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
 
 namespace Zeus.Design.Editors
@@ -45,5 +46,10 @@ namespace Zeus.Design.Editors
                 }
             }
         }
+
+		protected override EmbeddedFile CreateEmbeddedFile()
+		{
+			return new EmbeddedCroppedImage();
+		}
 	}
 }

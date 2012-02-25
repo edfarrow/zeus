@@ -5,10 +5,10 @@ using Ormongo;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.Design.Editors;
 using Zeus.Design.Editors;
+using Zeus.FileSystem;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web.UI;
-using Image = Zeus.FileSystem.Images.Image;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {
@@ -36,22 +36,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return SalePrice ?? RegularPrice; }
 		}
 
-		[ChildEditor("Main Image", 230)]
-		public Image MainImage
-		{
-			get { return GetChild("MainImage") as Image; }
-			set
-			{
-				if (value != null)
-				{
-					value.Name = "MainImage";
-					value.Parent = this;
-				}
-			}
-		}
+		[EmbeddedImageEditor("Main Image", 230)]
+		public virtual EmbeddedFile Image { get; set; }
 
 		[MultiImageUploadEditor("Extra Images", 250, ContainerName = "Images")]
-		public List<Attachment> ExtraImages { get; set; }
+		public List<EmbeddedFile> ExtraImages { get; set; }
 
 		[VariationConfigurationEditor("Variations", 260)]
 		public IEnumerable<VariationConfiguration> VariationConfigurations

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Imagecrop.aspx.cs" Inherits="Zeus.Admin.Imagecrop" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Imagecrop.aspx.cs" Inherits="Zeus.Admin.Imagecrop" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -79,11 +79,12 @@
 	</div></noscript>
 	
 		<!-- This is the image we're attaching Jcrop to -->
-		<img src="<%= ImageToEdit.GetUrl(800, 600, true, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg, true) %>?rand=<%= new System.Random().Next(1000) %>" id="target" alt="Image to Edit" />
+		<img src="<%= ImageToEdit.GetUrl(800, 600, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg, true) %>?rand=<%= new System.Random().Next(1000) %>" id="target" alt="Image to Edit" />
 
 		<!-- This is the form that our event handler fills -->
 		<form id="coords" class="coords" action="/admin/Imagecrop.aspx" method="post">
-			<input type="hidden" name="id" value="<%= ImageToEdit.ID %>" />		  
+			<input type="hidden" name="id" value="<%= Request.QueryString["id"] %>" />
+			<input type="hidden" name="name" value="<%= Request.QueryString["name"] %>" />
 			<input type="hidden" name="selected" value="<%= selectedForForm %>" />		  
 			<div>
 				<label>X1 <input type="text" size="4" id="x1" name="x1" /></label>

@@ -58,15 +58,14 @@ namespace Zeus.Design.Editors
 				{
 					var bytes = fs.ReadAllBytes();
 					fs.Position = 0;
-					item[Name] = new EmbeddedFile
+					var embeddedFile = CreateEmbeddedFile();
+					embeddedFile.Data = Attachment.Create(new Attachment
 					{
-						Data = Attachment.Create(new Attachment
-						{
-							Content = fs,
-							FileName = fileUpload.FileName,
-							ContentType = MimeUtility.GetMimeType(bytes)
-						})
-					};
+						Content = fs,
+						FileName = fileUpload.FileName,
+						ContentType = MimeUtility.GetMimeType(bytes)
+					});
+					item[Name] = embeddedFile;
 				}
 
 				// Delete temp folder.
@@ -77,6 +76,11 @@ namespace Zeus.Design.Editors
 			}
 
 			return result;
+		}
+
+		protected virtual EmbeddedFile CreateEmbeddedFile()
+		{
+			return new EmbeddedFile();
 		}
 
 		/// <summary>Creates a text box editor.</summary>

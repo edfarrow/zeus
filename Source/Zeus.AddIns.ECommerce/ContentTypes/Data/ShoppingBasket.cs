@@ -16,44 +16,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.BasketPut; }
 		}
 
-		public virtual Address ShippingAddress
-		{
-			get { return GetChild("shipping-address") as Address; }
-			set
-			{
-				if (value != null)
-				{
-					value.Name = "shipping-address";
-					value.Parent = this;
-				}
-			}
-		}
-
-        public virtual Address BillingAddress
-		{
-			get { return GetChild("billing-address") as Address; }
-			set
-			{
-				if (value != null)
-				{
-					value.Name = "billing-address";
-					value.Parent = this;
-				}
-			}
-		}
-
-        public virtual PaymentCard PaymentCard
-		{
-			get { return GetChild("payment-card") as PaymentCard; }
-			set
-			{
-				if (value != null)
-				{
-					value.Name = "payment-card";
-					value.Parent = this;
-				}
-			}
-		}
+		public virtual Address ShippingAddress { get; set; }
+		public virtual Address BillingAddress { get; set; }
+		public virtual PaymentCard PaymentCard { get; set; }
 
 		public virtual DeliveryMethod DeliveryMethod { get; set; }
 		public virtual string EmailAddress { get; set; }
