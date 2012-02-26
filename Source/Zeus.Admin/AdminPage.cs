@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Web.UI.WebControls;
+﻿using System.Linq;
 using Ext.Net;
 using MongoDB.Bson;
 using Zeus.Admin.Plugins.Tree;
@@ -87,12 +85,12 @@ jQuery(document).ready(function() {{
 			return Request["returnUrl"] ?? SelectedNode.PreviewUrl;
 		}
 
-		public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel)
+		public void Refresh(ContentItem contentItem, AdminFrame frame)
 		{
-			Refresh(contentItem, frame, insideUpdatePanel, GetPreviewUrl(contentItem));
+			Refresh(contentItem, frame, GetPreviewUrl(contentItem));
 		}
 
-		public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel, string url)
+		public void Refresh(ContentItem contentItem, AdminFrame frame, string url)
 		{
 			string script = null;
 			switch (frame)
@@ -120,11 +118,6 @@ jQuery(document).ready(function() {{
 
 			if (ExtNet.IsAjaxRequest)
 				ExtNet.ResourceManager.RegisterOnReadyScript(script);
-			else if (insideUpdatePanel)
-				System.Web.UI.ScriptManager.RegisterStartupScript(
-					this, typeof(AdminPage),
-					"AddRefreshEditScript",
-					script, true);
 			else
 				ClientScript.RegisterStartupScript(
 					typeof(AdminPage),
@@ -167,48 +160,6 @@ jQuery(document).ready(function() {{
 		}
 
 		#region Error Handling
-
-		protected void SetErrorMessage(BaseValidator validator, Integrity.NameOccupiedException ex)
-		{
-			Trace.Write(ex.ToString());
-
-			string message = string.Format("An item named '{0}' already exists below '{1}'",
-				ex.SourceItem.Name,
-				ex.DestinationItem.Name);
-			SetErrorMessage(validator, message);
-		}
-
-		protected void SetErrorMessage(BaseValidator validator, Integrity.DestinationOnOrBelowItselfException ex)
-		{
-			Trace.Write(ex.ToString());
-
-			string message = string.Format("Cannot move an item to a destination onto or below itself",
-				ex.SourceItem.Name,
-				ex.DestinationItem.Name);
-			SetErrorMessage(validator, message);
-		}
-
-		protected void SetErrorMessage(BaseValidator validator, ContentTypes.NotAllowedParentException ex)
-		{
-			//Trace.Write(ex.ToString());
-
-			string message = string.Format("The item of type '{0}' isn't allowed below a destination of type '{1}'",
-				ex.ContentType.Title,
-				Engine.ContentTypes.GetContentType(ex.ParentType).Title);
-			SetErrorMessage(validator, message);
-		}
-
-		protected static void SetErrorMessage(BaseValidator validator, Exception exception)
-		{
-			//Engine.Resolve<IErrorHandler>().Notify(exception);
-			SetErrorMessage(validator, exception.Message);
-		}
-
-		protected static void SetErrorMessage(BaseValidator validator, string message)
-		{
-			validator.IsValid = false;
-			validator.ErrorMessage = message;
-		}
 
 		protected static string GetBreadcrumbPath(ContentItem item)
 		{

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI.WebControls;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.Admin.Plugins.CopyItem
@@ -41,7 +42,7 @@ namespace Zeus.Admin.Plugins.CopyItem
 				ContentItem newItem = MemorizedItem.Clone();
 				newItem.Name = txtNewName.Text;
 				newItem = newItem.CopyTo(SelectedItem);
-				Refresh(newItem, AdminFrame.Both, false);
+				Refresh(newItem, AdminFrame.Both);
 			}
 			catch (Integrity.NameOccupiedException ex)
 			{
@@ -62,6 +63,38 @@ namespace Zeus.Admin.Plugins.CopyItem
 		{
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			base.OnPreRender(e);
+		}
+
+		private void SetErrorMessage(BaseValidator validator, Integrity.NameOccupiedException ex)
+		{
+			Trace.Write(ex.ToString());
+
+			string message = string.Format("An item named '{0}' already exists below '{1}'",
+				ex.SourceItem.Name,
+				ex.DestinationItem.Name);
+			SetErrorMessage(validator, message);
+		}
+
+		private void SetErrorMessage(BaseValidator validator, ContentTypes.NotAllowedParentException ex)
+		{
+			//Trace.Write(ex.ToString());
+
+			string message = string.Format("The item of type '{0}' isn't allowed below a destination of type '{1}'",
+				ex.ContentType.Title,
+				Engine.ContentTypes.GetContentType(ex.ParentType).Title);
+			SetErrorMessage(validator, message);
+		}
+
+		private static void SetErrorMessage(BaseValidator validator, Exception exception)
+		{
+			//Engine.Resolve<IErrorHandler>().Notify(exception);
+			SetErrorMessage(validator, exception.Message);
+		}
+
+		private static void SetErrorMessage(BaseValidator validator, string message)
+		{
+			validator.IsValid = false;
+			validator.ErrorMessage = message;
 		}
 	}
 }

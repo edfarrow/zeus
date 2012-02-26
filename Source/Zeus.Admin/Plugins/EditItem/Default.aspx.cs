@@ -68,7 +68,7 @@ namespace Zeus.Admin.Plugins.EditItem
 
 			if (currentItem.IsPage)
 			{
-				Refresh(currentItem, AdminFrame.Both, false);
+				Refresh(currentItem, AdminFrame.Both);
 				Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
 				zeusItemEditView.Visible = false;
 			}

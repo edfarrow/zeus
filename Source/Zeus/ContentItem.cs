@@ -23,6 +23,11 @@ namespace Zeus
 	[BsonDiscriminator(RootClass = true)]
     public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode
 	{
+		static ContentItem()
+		{
+			CacheDepth = true;
+		}
+
 		#region Private Fields
 
 		private List<AuthorizationRule> _authorizationRules;

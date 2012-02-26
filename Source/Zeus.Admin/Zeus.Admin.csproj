@@ -285,13 +285,6 @@
     <Compile Include="Install\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Popup.master.cs">
-      <DependentUpon>Popup.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Popup.master.designer.cs">
-      <DependentUpon>Popup.master</DependentUpon>
-    </Compile>
     <Compile Include="PreviewFrame.master.cs">
       <DependentUpon>PreviewFrame.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -398,7 +391,6 @@
     <EmbeddedResource Include="Assets\Images\View\trashOpen.gif" />
     <EmbeddedResource Include="Assets\JS\view.js" />
     <EmbeddedResource Include="Login.aspx" />
-    <EmbeddedResource Include="Popup.master" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Plugins\Tree\TreeLoader.ashx" />

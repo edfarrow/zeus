@@ -203,13 +203,13 @@ namespace Zeus.Admin.Plugins.Permissions
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
 			ApplyRules(SelectedItem, GetAllowedOperations());
-			Refresh(SelectedItem, AdminFrame.Navigation, false);
+			Refresh(SelectedItem, AdminFrame.Navigation);
 		}
 
 		protected void btnSaveRecursive_Click(object sender, EventArgs e)
 		{
 			ApplyRulesRecursive(SelectedItem, GetAllowedOperations());
-			Refresh(SelectedItem, AdminFrame.Navigation, false);
+			Refresh(SelectedItem, AdminFrame.Navigation);
 		}
 
 		protected void btnAddRole_Click(object sender, EventArgs e)
