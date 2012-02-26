@@ -118,7 +118,6 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ArrayHelper.cs" />
     <Compile Include="Collections\Generic\CartesianProductUtility.cs" />
     <Compile Include="Collections\Generic\EnumerableUtility.cs" />
     <Compile Include="Collections\Generic\IPageable.cs" />
@@ -135,8 +134,6 @@
     <Compile Include="Collections\SingletonList.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionManager.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionUtility.cs" />
-    <Compile Include="Navigation\NavigationItem.cs" />
-    <Compile Include="Net\WebClientUtility.cs" />
     <Compile Include="Reflection\AssemblyFinder.cs" />
     <Compile Include="Reflection\IAssemblyFinder.cs" />
     <Compile Include="Reflection\ITypeFinder.cs" />
@@ -145,27 +142,16 @@
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ExtensionMethods\Collections\Generic\IDictionary.cs" />
     <Compile Include="ExtensionMethods\IO\Stream.cs" />
-    <Compile Include="ExtensionMethods\IServiceProvider.cs" />
     <Compile Include="ExtensionMethods\Text\StringBuilder.cs" />
-    <Compile Include="IContextAwareAttribute.cs" />
     <Compile Include="ExtensionMethods\Byte.cs" />
     <Compile Include="ExtensionMethods\Collections\Generic\IList.cs" />
     <Compile Include="ExtensionMethods\Collections\ICollection.cs" />
     <Compile Include="ExtensionMethods\Configuration\NameValueConfigurationCollection.cs" />
-    <Compile Include="ExtensionMethods\Data\Common\DbCommand.cs" />
-    <Compile Include="ExtensionMethods\Data\Linq\Table.cs" />
     <Compile Include="ExtensionMethods\Drawing\PointF.cs" />
     <Compile Include="ExtensionMethods\Enum.cs" />
     <Compile Include="ExtensionMethods\Int32.cs" />
     <Compile Include="ExtensionMethods\Linq\IEnumerable.cs" />
     <Compile Include="ExtensionMethods\Linq\IQueryable.cs" />
-    <Compile Include="IO\FileHelper.cs" />
-    <Compile Include="IO\ProgressEventArgs.cs" />
-    <Compile Include="IO\StreamWithProgress.cs" />
-    <Compile Include="Linq\Dynamic\Dynamic.cs" />
-    <Compile Include="Linq\ExpressionVisitor.cs" />
-    <Compile Include="Linq\ExtendedEnumerable.cs" />
-    <Compile Include="Linq\PredicateBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,20 +162,12 @@
     <Compile Include="Reflection\PropertyInfoDelegator.cs" />
     <Compile Include="ExtensionMethods\Object.cs" />
     <Compile Include="Reflection\StaticReflection.cs" />
-    <Compile Include="Security\Impersonation.cs" />
     <Compile Include="ExtensionMethods\String.cs" />
     <Compile Include="ExtensionMethods\Type.cs" />
     <Compile Include="Security\NonceUtility.cs" />
-    <Compile Include="Web\Handlers\FlashVideoStreamingHandler.cs" />
     <Compile Include="ExtensionMethods\Web\HttpRequest.cs" />
-    <Compile Include="Web\InvalidQueryStringException.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\MimeUtility.cs" />
-    <Compile Include="Web\Routing\DebugHttpHandler.cs" />
-    <Compile Include="Web\Routing\DebugRoute.cs" />
-    <Compile Include="Web\Routing\DebugRouteHandler.cs" />
-    <Compile Include="Web\Routing\RouteDebugger.cs" />
-    <Compile Include="Web\SecureQueryString.cs" />
     <Compile Include="ExtensionMethods\Web\SessionState\HttpSessionState.cs" />
     <Compile Include="ExtensionMethods\Web\HttpResponse.cs" />
     <Compile Include="ExtensionMethods\Web\UI\ClientScriptManager.cs" />
@@ -197,7 +175,6 @@
     <Compile Include="Web\UI\WebResourceUtility.cs" />
     <Compile Include="Web\Url.cs" />
     <Compile Include="Web\WebContext.cs" />
-    <Compile Include="Xml\CachedXmlDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

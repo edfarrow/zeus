@@ -171,6 +171,7 @@
     <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
     <Compile Include="Mvc\Html\GravatarExtensions.cs" />
     <Compile Include="Mvc\Html\MarkItUpExtensions.cs" />
+    <Compile Include="Mvc\Html\NavigationItem.cs" />
     <Compile Include="Mvc\Html\TaggingExtensions.cs" />
     <Compile Include="Mvc\SyndicationResultBase.cs" />
     <Compile Include="Mvc\ViewModels\BaseLoginFormViewModel.cs" />

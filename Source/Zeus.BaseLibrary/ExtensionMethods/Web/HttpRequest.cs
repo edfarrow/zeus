@@ -108,10 +108,5 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Web
 			else
 				return value.Value;
 		}
-
-		public static SecureQueryString GetSecureQueryString(this HttpRequest request)
-		{
-			return new SecureQueryString(request.QueryString["x"]);
-		}
 	}
 }

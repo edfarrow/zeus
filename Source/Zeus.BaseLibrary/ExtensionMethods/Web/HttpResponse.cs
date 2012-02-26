@@ -24,10 +24,5 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Web
 		{
 			response.Write(name + " = " + (value ?? "null") + "<br />");
 		}
-
-		public static void Redirect(this HttpResponse response, string url, SecureQueryString qs)
-		{
-			response.Redirect(url + "?x=" + qs.ToString());
-		}
 	}
 }

@@ -246,6 +246,7 @@
     <Compile Include="Design\Editors\EmbeddedFileEditorAttribute.cs" />
     <Compile Include="Design\Editors\EmbeddedImageEditorAttribute.cs" />
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
+    <Compile Include="Engine\IContextAwareAttribute.cs" />
     <Compile Include="FileSystem\Images\EmbeddedCroppedImage.cs" />
     <Compile Include="FileSystem\EmbeddedFile.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
