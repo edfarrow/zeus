@@ -140,16 +140,8 @@
     <Compile Include="Reflection\TypeFinder.cs" />
     <Compile Include="ConvertUtility.cs" />
     <Compile Include="EnumHelper.cs" />
-    <Compile Include="ExtensionMethods\Collections\Generic\IDictionary.cs" />
     <Compile Include="ExtensionMethods\IO\Stream.cs" />
-    <Compile Include="ExtensionMethods\Text\StringBuilder.cs" />
-    <Compile Include="ExtensionMethods\Byte.cs" />
-    <Compile Include="ExtensionMethods\Collections\Generic\IList.cs" />
-    <Compile Include="ExtensionMethods\Collections\ICollection.cs" />
-    <Compile Include="ExtensionMethods\Configuration\NameValueConfigurationCollection.cs" />
-    <Compile Include="ExtensionMethods\Drawing\PointF.cs" />
     <Compile Include="ExtensionMethods\Enum.cs" />
-    <Compile Include="ExtensionMethods\Int32.cs" />
     <Compile Include="ExtensionMethods\Linq\IEnumerable.cs" />
     <Compile Include="ExtensionMethods\Linq\IQueryable.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -157,19 +149,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ExtensionMethods\Reflection\Assembly.cs" />
-    <Compile Include="ExtensionMethods\Reflection\MemberInfo.cs" />
     <Compile Include="Reflection\PropertyInfoDelegator.cs" />
-    <Compile Include="ExtensionMethods\Object.cs" />
     <Compile Include="Reflection\StaticReflection.cs" />
     <Compile Include="ExtensionMethods\String.cs" />
     <Compile Include="ExtensionMethods\Type.cs" />
     <Compile Include="Security\NonceUtility.cs" />
-    <Compile Include="ExtensionMethods\Web\HttpRequest.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\MimeUtility.cs" />
-    <Compile Include="ExtensionMethods\Web\SessionState\HttpSessionState.cs" />
-    <Compile Include="ExtensionMethods\Web\HttpResponse.cs" />
     <Compile Include="ExtensionMethods\Web\UI\ClientScriptManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\UI\WebResourceUtility.cs" />

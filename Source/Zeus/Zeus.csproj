@@ -309,7 +309,6 @@
     <Compile Include="Web\Mvc\Html\ITemplateRenderer.cs" />
     <Compile Include="Web\Mvc\Html\MembershipExtensions.cs" />
     <Compile Include="Web\Mvc\Html\PaginationExtensions.cs" />
-    <Compile Include="Web\Mvc\Html\StringExtensions.cs" />
     <Compile Include="Web\Mvc\Html\TemplateRenderer.cs" />
     <Compile Include="Web\Mvc\Html\ValidationExtensions.cs" />
     <Compile Include="Web\Mvc\IContentItemContainer.generic.cs" />
@@ -499,7 +498,6 @@
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />
     <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
-    <Compile Include="Web\UI\WebControls\TimePicker.cs" />
     <Compile Include="Web\UI\WebControls\HtmlTextBox.cs" />
     <Compile Include="Design\Editors\LinkedItemDropDownListEditorAttribute.cs" />
     <Compile Include="Design\Editors\LinkedItemsCheckBoxListEditorAttribute.cs" />
@@ -575,15 +573,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.timePicker.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.timePicker.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\TimePicker.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\ui.core.js" />

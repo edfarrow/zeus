@@ -111,9 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Generic\CartesianProductUtilityTests.cs" />
-    <Compile Include="ExtensionMethods\Linq\EnumerableTests.cs" />
     <Compile Include="EnumTests.cs" />
-    <Compile Include="ExtensionMethods\Int32Tests.cs" />
     <Compile Include="ExtensionMethods\Linq\QueryableTests.cs" />
     <Compile Include="ExtensionMethods\StringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

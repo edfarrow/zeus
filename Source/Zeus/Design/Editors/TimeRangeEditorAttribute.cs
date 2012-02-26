@@ -1,5 +1,5 @@
 ﻿using System.Web.UI;
-using Zeus.ContentTypes;
+using Ext.Net;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
@@ -28,22 +28,27 @@ namespace Zeus.Design.Editors
 
 		protected override Control AddEditor(Control container)
 		{
-			TimeRange range = new TimeRange {ID = Name + NameEndRange, StartTitle = StartTitle, StartRequired = StartRequired};
+			var range = new TimeRange
+			{
+				ID = Name + NameEndRange,
+				StartTitle = StartTitle,
+				StartRequired = StartRequired,
+				BetweenText = BetweenText
+			};
 			container.Controls.Add(range);
-			range.BetweenText = BetweenText;
 			return range;
 		}
 
 		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
-			TimeRange range = (TimeRange) editor;
+			TimeRange range = (TimeRange)editor;
 			range.From = (string) item[Name];
-			range.To = (string) item[NameEndRange];
+			range.To = (string)item[NameEndRange];
 		}
 
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
-			TimeRange range = editor as TimeRange;
+			TimeRange range = (TimeRange) editor;
 			if ((string) item[Name] != range.From || (string) item[NameEndRange] != range.To)
 			{
 				item[Name] = range.From;

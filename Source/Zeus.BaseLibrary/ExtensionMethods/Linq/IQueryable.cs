@@ -6,18 +6,15 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 {
 	public static class IQueryableExtensionMethods
 	{
-		public static IQueryable OfType(this IQueryable source, Type resultType)
+		public static IQueryable<TSource> OfType<TSource>(this IQueryable<TSource> source, Type type)
 		{
 			if (source == null)
 				throw new ArgumentNullException("source");
 
-			return source.Provider.CreateQuery(
-				Expression.Call(null, (typeof(Queryable).GetMethod("OfType")).MakeGenericMethod(resultType), source.Expression));
-		}
-
-		public static IQueryable<TSource> OfType<TSource>(this IQueryable<TSource> source, Type type)
-		{
-			return ((IQueryable) source).OfType(type).Cast<TSource>();
+			return source.Provider.CreateQuery(Expression.Call(null,
+					(typeof(Queryable).GetMethod("OfType")).MakeGenericMethod(type), 
+					source.Expression))
+				.Cast<TSource>();
 		}
 	}
 }

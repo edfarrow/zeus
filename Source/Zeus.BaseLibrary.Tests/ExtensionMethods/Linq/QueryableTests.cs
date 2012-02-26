@@ -10,7 +10,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 		[Test]
 		public void CanFilterByType()
 		{
-			IQueryable myArray = new object[]
+			IQueryable<object> myArray = new object[]
 			{
 				1,
 				"myString",

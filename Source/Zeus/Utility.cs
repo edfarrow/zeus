@@ -56,24 +56,6 @@ namespace Zeus
 
 		public static Func<DateTime> CurrentTime = () => DateTime.Now;
 
-		/// <summary>Tries to find a property matching the supplied expression, returns null if no property is found with the first part of the expression.</summary>
-		/// <param name="item">The object to query.</param>
-		/// <param name="expression">The expression to evaluate.</param>
-		public static object Evaluate(object item, string expression)
-		{
-			return item.GetValue(expression);
-		}
-
-		/// <summary>Evaluates an expression and applies a format string.</summary>
-		/// <param name="item">The object to query.</param>
-		/// <param name="expression">The expression to evaluate.</param>
-		/// <param name="format">The format string to apply.</param>
-		/// <returns>The formatted result ov the evaluation.</returns>
-		public static string Evaluate(object item, string expression, string format)
-		{
-			return string.Format(format, Evaluate(item, expression));
-		}
-
 		/// <summary>Gets a value from a property.</summary>
 		/// <param name="instance">The object whose property to get.</param>
 		/// <param name="propertyName">The name of the property to get.</param>

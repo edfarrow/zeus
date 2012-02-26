@@ -1,11 +1,8 @@
-﻿using System.Web;
-using System;
-using Zeus.BaseLibrary.ExtensionMethods;
-using Zeus.BaseLibrary.ExtensionMethods.Collections;
-using Zeus.BaseLibrary.Web;
-using Zeus.Configuration;
-using Zeus.Properties;
+﻿using System;
+using System.Web;
 using System.Web.Security;
+using Zeus.BaseLibrary.Web;
+using Zeus.Properties;
 
 namespace Zeus.Web.Security
 {

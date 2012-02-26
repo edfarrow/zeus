@@ -1,6 +1,5 @@
 ﻿using System.Web.UI;
-using Zeus.ContentTypes;
-using Zeus.Web.UI.WebControls;
+using Ext.Net;
 
 namespace Zeus.Design.Editors
 {
@@ -17,20 +16,20 @@ namespace Zeus.Design.Editors
 
 		protected override Control AddEditor(Control container)
 		{
-			TimePicker range = new TimePicker { ID = Name };
+			TimeField range = new TimeField { ID = Name };
 			container.Controls.Add(range);
 			return range;
 		}
 
 		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
-			TimePicker range = (TimePicker) editor;
+			TimeField range = (TimeField)editor;
 			range.Text = (string) item[Name];
 		}
 
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
-			TimePicker range = (TimePicker) editor;
+			TimeField range = (TimeField) editor;
 			if ((string) item[Name] != range.Text)
 			{
 				item[Name] = range.Text;
