@@ -1,4 +1,5 @@
-﻿using Ormongo.Ancestry;
+﻿using System.Linq;
+using Ormongo.Ancestry;
 
 namespace Zeus.Collections
 {
@@ -32,7 +33,9 @@ namespace Zeus.Collections
 				return new HierarchyNode<ContentItem>(_initialItem);
 
 			HierarchyNode<ContentItem> previousNode = null;
-			foreach (ContentItem currentItem in (_appendAdditionalLevel ? _initialItem.AncestorsAndSelf : _initialItem.Ancestors).FromDepth(_lastAncestor.Depth))
+			foreach (ContentItem currentItem in (_appendAdditionalLevel ? _initialItem.AncestorsAndSelf : _initialItem.Ancestors)
+				.FromDepth(_lastAncestor.Depth)
+				.OrderByDescending(ci => ci.AncestryDepth))
 			{
 				HierarchyNode<ContentItem> currentNode = new HierarchyNode<ContentItem>(currentItem);
 				if (previousNode != null)

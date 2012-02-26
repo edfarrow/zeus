@@ -105,7 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\Plugins\ManageOrdersActionPlugin.cs" />
-    <Compile Include="Admin\EmbeddedResourcePackage.cs" />
+    <Compile Include="Admin\AdminInitializer.cs" />
     <Compile Include="Admin\Plugins\ManageOrders\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
