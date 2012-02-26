@@ -10,7 +10,7 @@ namespace Zeus.Templates.Mvc.Controllers
 	{
 		public override ActionResult Index()
 		{
-			return View(new SitemapViewModel(CurrentItem, Find.StartPage));
+			return View(new SitemapViewModel(CurrentItem, Context.StartPage));
 		}
 	}
 }

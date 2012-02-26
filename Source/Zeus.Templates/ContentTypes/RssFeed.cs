@@ -43,7 +43,7 @@ namespace Zeus.Templates.ContentTypes
 
 		public virtual IEnumerable<ISyndicatable> GetItems()
 		{
-			return (FeedRoot ?? Zeus.Find.StartPage).AccessibleDescendants
+			return (FeedRoot ?? Context.StartPage).AccessibleDescendants
 				.OfType<ISyndicatable>()
 				.OfType<ContentItem>()
 				.NavigablePages()

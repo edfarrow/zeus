@@ -251,7 +251,6 @@
     <Compile Include="FileSystem\EmbeddedFile.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
     <Compile Include="Persistence\ContentItemObserver.cs" />
-    <Compile Include="Persistence\GenericFind.cs" />
     <Compile Include="Persistence\IContentItemObserver.cs" />
     <Compile Include="Persistence\MappingInitializer.cs" />
     <Compile Include="ContentTypes\IPropertyAwareAttribute.cs" />
@@ -523,7 +522,6 @@
     <Compile Include="FileSystem\FileSystemNode.cs" />
     <Compile Include="FileSystem\Folder.cs" />
     <Compile Include="FileSystem\IFileSystemContainer.cs" />
-    <Compile Include="Find.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />

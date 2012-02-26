@@ -37,7 +37,7 @@ namespace Zeus.Admin.Plugins.FileManager
 			if (ExtNet.IsAjaxRequest)
 				return;
 
-			ContentItem fileManagerRootFolder = Find.StartPage;
+			ContentItem fileManagerRootFolder = Zeus.Context.StartPage;
 			if (fileManagerRootFolder == null)
 				return;
 

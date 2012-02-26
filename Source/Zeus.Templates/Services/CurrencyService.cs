@@ -7,7 +7,7 @@ namespace Zeus.Templates.Services
 	{
 		public decimal Convert(string toIsoCode, decimal amount)
 		{
-			CurrencyList currencyList = (CurrencyList) Find.RootItem.GetChild("system").GetChild("reference-data").GetChild("currencies");
+			CurrencyList currencyList = (CurrencyList) Context.RootItem.GetChild("system").GetChild("reference-data").GetChild("currencies");
 
 			Currency baseCurrency = currencyList.BaseCurrency;
 			Currency toCurrency = currencyList.GetChildren<Currency>().Single(c => c.IsoCode == toIsoCode);

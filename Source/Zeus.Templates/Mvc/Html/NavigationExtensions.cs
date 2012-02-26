@@ -17,7 +17,7 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static IEnumerable<ContentItem> NavigationPages(this HtmlHelper html)
 		{
-			return NavigationPages(html, Find.StartPage);
+			return NavigationPages(html, Context.StartPage);
 		}
 
 		public static IEnumerable<ContentItem> NavigationPages(this HtmlHelper html, ContentItem startPage)
@@ -43,7 +43,7 @@ namespace Zeus.Templates.Mvc.Html
 		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
 		{
 			return NavigationLinks(html,
-				Find.StartPage,
+				Context.StartPage,
 				nl => "<ul>" + nl + "</ul>",
 				(ci, isFirst, isLast) =>
 				{
@@ -111,7 +111,7 @@ namespace Zeus.Templates.Mvc.Html
 			string result = postfix;
 
 			int added = 0;
-			var parents = currentPage.AncestorsAndSelf.FromDepth(Find.StartPage.Depth);
+			var parents = currentPage.AncestorsAndSelf.FromDepth(Context.StartPage.Depth);
 			if (startLevel != 1 && parents.Count() >= startLevel)
 				parents = parents.Take(parents.Count() - startLevel);
 			foreach (ContentItem page in parents)
@@ -151,7 +151,7 @@ namespace Zeus.Templates.Mvc.Html
 		public static string Sitemap(this HtmlHelper html)
 		{
 			StringBuilder sb = new StringBuilder();
-			foreach (ContentItem contentItem in Find.StartPage.Children.Accessible().Pages().Visible())
+			foreach (ContentItem contentItem in Context.StartPage.Children.Accessible().Pages().Visible())
 			{
 				sb.AppendFormat("<h4><a href=\"{0}\">{1}</a></h4>", contentItem.Url, contentItem.Title);
 				SitemapRecursive(contentItem, sb);
@@ -222,7 +222,7 @@ namespace Zeus.Templates.Mvc.Html
             {
                 var result = new List<NavigationItem>();
 
-                foreach (ContentItem item in html.NavigationPages(Find.RootItem))
+                foreach (ContentItem item in html.NavigationPages(Context.RootItem))
                 {
                     result.Add(new NavigationItem { Title = item.Title, Url = item.Url, ID = item.ID });
                 }
@@ -235,7 +235,7 @@ namespace Zeus.Templates.Mvc.Html
                 foreach (NavigationItem item in result)
                 {
 					ContentItem theItem = ContentItem.Find(item.ID);
-                    if (theItem != Zeus.Find.StartPage)
+                    if (theItem != Zeus.Context.StartPage)
                     {
                         foreach (ContentItem subNavItem in html.NavigationPages(theItem))
                         {

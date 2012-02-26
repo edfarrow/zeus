@@ -50,7 +50,7 @@ namespace Zeus.Web.Handlers
 
 			string domain = "http://" + context.Request.Url.Authority;
 			IList<ContentItem> list = new List<ContentItem>();
-			ContentItem rootItem = Find.RootItem;
+			ContentItem rootItem = Context.RootItem;
 			RecurseTree(list, rootItem);
 
 			StringBuilder builder = new StringBuilder();

@@ -19,6 +19,16 @@ namespace Zeus
 			}
 		}
 
+		public static ContentItem RootItem
+		{
+			get { return ContentItem.Find(Current.Host.CurrentSite.RootItemID); }
+		}
+
+		public static ContentItem StartPage
+		{
+			get { return Current.UrlParser.StartPage; }
+		}
+
 		public static Admin.IAdminManager AdminManager
 		{
 			get { return Current.AdminManager; }

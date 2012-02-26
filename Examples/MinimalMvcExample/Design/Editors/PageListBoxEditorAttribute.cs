@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Zeus.Design.Editors;
-using System.Web.UI.WebControls;
-using Zeus.Linq;
 using System.Web.UI;
-using Zeus.ContentTypes;
+using System.Web.UI.WebControls;
+using Zeus.Design.Editors;
+using Zeus.Linq;
 
 namespace Zeus.Examples.MinimalMvcExample.Design.Editors
 {
@@ -66,7 +63,7 @@ namespace Zeus.Examples.MinimalMvcExample.Design.Editors
 
         protected override ListItem[] GetListItems(ContentItem item)
         {
-            return Find.StartPage.AccessibleDescendants.NavigablePages()
+            return Context.StartPage.AccessibleDescendants.NavigablePages()
                 .ToList()
                 .OrderBy(i => i.HierarchicalTitle)
                 .Select(i => new ListItem { Value = i.ID.ToString(), Text = i.Parent.Title + " - " + i.Title })

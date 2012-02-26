@@ -31,7 +31,7 @@ namespace Zeus.Admin.Plugins.Tree
 				if (sync)
 					tree = SiteTree.From(selectedItem, int.MaxValue);
 				else if (fromRoot)
-					tree = SiteTree.Between(selectedItem, Find.RootItem, true)
+					tree = SiteTree.Between(selectedItem, Context.RootItem, true)
 						.OpenTo(selectedItem);
 				else
 					tree = SiteTree.From(selectedItem, 2);

@@ -75,19 +75,15 @@ namespace Zeus.Templates.Mvc.Controllers
             //add the profile info
             if (membershipDetails != null)
             {
-                User NewUser = null;
-                try
+                User newUser = ContentItem.Find<User>(ci => ci.Username == registrationForm.Username.ToLower());
+				if (newUser == null)
                 {
-                    NewUser = Find.UserContainer().GetChildren<User>().Where(u => u.Username == registrationForm.Username.ToLower()).Single();
-                }
-                catch
-                {
-                    System.Web.HttpContext.Current.Response.Write("User Count = " + Find.UserContainer().GetChildren<User>().Count());
+                    System.Web.HttpContext.Current.Response.Write("User Count = " + ContentItem.All().OfType<User>().Count());
                     System.Web.HttpContext.Current.Response.Write("Error: user not found = " + registrationForm.Username);
                     System.Web.HttpContext.Current.Response.End();
                 }
 
-                membershipDetails.Parent = NewUser;
+				membershipDetails.Parent = newUser;
                 membershipDetails.Save();
             }
 
