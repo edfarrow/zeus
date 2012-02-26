@@ -423,7 +423,6 @@
     <Compile Include="Web\UI\WebControls\MultiImageUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
     <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
-    <Compile Include="Web\UI\WebControls\TabControl.cs" />
     <Compile Include="Web\UI\WebControls\IEditableObjectEditor.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewTypeDefinitionEventArgs.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewEditableObjectEventArgs.cs" />
@@ -559,7 +558,6 @@
     </Compile>
     <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
-    <Compile Include="Web\UI\WebControls\TabItem.cs" />
     <Compile Include="Web\UrlParser.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
     <Compile Include="ZeusException.cs" />
