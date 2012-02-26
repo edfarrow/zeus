@@ -8,7 +8,7 @@ namespace Zeus.AddIns.ECommerce.Admin
 	{
 		public override void Register(RouteCollection routes, ResourceSettings resourceSettings)
 		{
-			RegisterStandardArea(routes, resourceSettings, "ecommerceadmin", "Assets");
+			RegisterStandardArea(routes, resourceSettings, "admin/ecommerceadmin", "Assets");
 			routes.IgnoreRoute("ecommerceadmin/{*pathInfo}");
 		}
 	}

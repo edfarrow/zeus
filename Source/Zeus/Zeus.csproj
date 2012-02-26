@@ -408,7 +408,6 @@
     <Compile Include="Web\Hosting\EmbeddedResourceManager.cs" />
     <Compile Include="Web\Hosting\EmbeddedResourcePackageBase.cs" />
     <Compile Include="Web\Hosting\EmbeddedResourcePathProvider.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceType.cs" />
     <Compile Include="Web\Hosting\EmbeddedResourceVirtualFile.cs" />
     <Compile Include="Web\Hosting\IEmbeddedResourceBuilder.cs" />
     <Compile Include="Web\Hosting\IEmbeddedResourceManager.cs" />

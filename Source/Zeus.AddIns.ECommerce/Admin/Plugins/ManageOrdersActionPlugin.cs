@@ -3,10 +3,10 @@ using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
 using Zeus.Admin.Plugins;
 
-namespace Zeus.AddIns.ECommerce.ActionPlugins
+namespace Zeus.AddIns.ECommerce.Admin.Plugins
 {
 	[ActionPluginGroup("ECommerce", 100)]
-	public class ManageOrdersActionPlugin : MenuPluginBase, IContextMenuPlugin
+	public class ManageOrdersMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
@@ -25,6 +25,11 @@ namespace Zeus.AddIns.ECommerce.ActionPlugins
 				return false;
 
 			return base.IsApplicable(contentItem);
+		}
+
+		public override bool IsDefault(ContentItem contentItem)
+		{
+			return true;
 		}
 
 		public string GetJavascriptHandler(ContentItem contentItem)
