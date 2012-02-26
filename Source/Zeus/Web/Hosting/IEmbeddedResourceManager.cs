@@ -1,13 +1,12 @@
 using System.Reflection;
+using System.Web.Hosting;
 
 namespace Zeus.Web.Hosting
 {
 	public interface IEmbeddedResourceManager
 	{
-		EmbeddedResourceVirtualFile GetFile(string path);
-		bool FileExists(string path);
-
-		string GetClientResourceUrl(Assembly resourceAssembly, string relativePath);
-		string GetServerResourceUrl(Assembly resourceAssembly, string relativePath);
+		VirtualPathProvider VirtualPathProvider { get; }
+		void AddAssembly(Assembly assembly, string prefix);
+		string GetUrl(Assembly resourceAssembly, string relativePath);
 	}
 }

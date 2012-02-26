@@ -47,7 +47,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 				top.Ext.net.DirectMethods.Delete.ShowDialog('Delete Items',
 					'Are you sure you wish to delete these items?',
 					selectedIDs.join(','), {{ url : '{1}' }});",
-				gridPanel.ClientID, Context.AdminManager.GetAdminDefaultUrl());
+				gridPanel.ClientID, GetAdminDefaultUrl());
 
 			return toolbarButton;
 		}

@@ -11,7 +11,6 @@ using Zeus.Design.Editors;
 using Zeus.Engine;
 using Zeus.Linq;
 using Zeus.Security;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Admin
 {
@@ -25,26 +24,24 @@ namespace Zeus.Admin
 
 		private readonly AdminSection _configSection;
 		private readonly ISecurityManager _securityManager;
-		private readonly IAdminAssemblyManager _adminAssembly;
 		private readonly IContentTypeManager _contentTypeManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
 
 		#endregion
 
+		public string AdminPath
+		{
+			get { return _configSection.Path; }
+		}
+
 		#region Constructor
 
-		public AdminManager(AdminSection configSection, ISecurityManager securityManager, IAdminAssemblyManager adminAssembly,
-			IContentTypeManager contentTypeManager,
-			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder,
-			IEmbeddedResourceManager embeddedResourceManager)
+		public AdminManager(AdminSection configSection, ISecurityManager securityManager, 
+			IContentTypeManager contentTypeManager, IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder)
 		{
 			_configSection = configSection;
 			_securityManager = securityManager;
-			_adminAssembly = adminAssembly;
-			DeleteItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
-			EditItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Plugins.EditItem.Default.aspx");
-			NewItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
 			_contentTypeManager = contentTypeManager;
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
@@ -53,10 +50,6 @@ namespace Zeus.Admin
 		#endregion
 
 		#region Properties
-
-		public string DeleteItemUrl { get; set; }
-		public string EditItemUrl { get; set; }
-		public string NewItemUrl { get; set; }
 
 		public bool TreeTooltipsEnabled
 		{
@@ -70,11 +63,6 @@ namespace Zeus.Admin
 		public IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups()
 		{
 			return _cachedActionPluginGroups;
-		}
-
-		public string GetAdminDefaultUrl()
-		{
-			return Context.Current.GetServerResourceUrl(_adminAssembly.Assembly, "Zeus.Admin.Default.aspx");
 		}
 
 		public Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user)

@@ -18,7 +18,7 @@ namespace Zeus.Admin.Plugins.MoveItem
 					url: '{1}',
 					success: function() {{ {0}.setStatus({{ text: 'Moved item', iconCls: '', clear: true }}); }}
 				}})",
-				mainInterface.StatusBar.ClientID, Context.AdminManager.GetAdminDefaultUrl());
+				mainInterface.StatusBar.ClientID, GetAdminDefaultUrl());
 		}
 	}
 }

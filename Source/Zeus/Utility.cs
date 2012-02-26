@@ -93,7 +93,7 @@ namespace Zeus
 
 		public static string GetClientResourceUrl(Assembly assembly, string relativePath)
 		{
-			return Context.Current.Resolve<IEmbeddedResourceManager>().GetClientResourceUrl(assembly, relativePath);
+			throw new NotImplementedException();
 		}
 
 		public static string GetClientResourceUrl(Type type, string relativePath)

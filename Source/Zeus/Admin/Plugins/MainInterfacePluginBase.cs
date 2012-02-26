@@ -1,10 +1,8 @@
-using System;
 using Ext.Net;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins
 {
-	public abstract class MainInterfacePluginBase : IMainInterfacePlugin
+	public abstract class MainInterfacePluginBase : PluginBase, IMainInterfacePlugin
 	{
 		public virtual string[] RequiredScripts
 		{
@@ -40,11 +38,6 @@ namespace Zeus.Admin.Plugins
 			if (requiredStyles != null)
 				foreach (string requiredStyle in requiredStyles)
 					scriptManager.RegisterClientStyleInclude(GetType().FullName, requiredStyle);
-		}
-
-		protected string GetPageUrl(Type type, string resourcePath)
-		{
-			return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(type.Assembly, resourcePath);
 		}
 	}
 }

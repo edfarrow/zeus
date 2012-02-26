@@ -156,7 +156,6 @@
     <Compile Include="Plugins\DeleteItem\DeleteItemMenuPlugin.cs" />
     <Compile Include="Plugins\EditItem\EditItemMenuPlugin.cs" />
     <Compile Include="Plugins\NewItem\NewItemMenuPlugin.cs" />
-    <Compile Include="AdminAssemblyManager.cs" />
     <Compile Include="AdminModule.cs" />
     <Compile Include="AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -294,7 +293,7 @@
     </Compile>
     <Compile Include="Web\UI\WebControls\ToolbarHyperLink.cs" />
     <Compile Include="Web\UI\WebControls\ToolbarButton.cs" />
-    <Compile Include="EmbeddedResourcePackage.cs" />
+    <Compile Include="AdminInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

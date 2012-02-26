@@ -80,7 +80,6 @@ namespace Zeus.Engine
 			Bind<IRequestDispatcher>().To<RequestDispatcher>().InSingletonScope();
 			Bind<IRequestLifecycleHandler>().To<RequestLifecycleHandler>().InSingletonScope();
 			Bind<IWebContext>().To<WebRequestContext>().InSingletonScope();
-			Bind<IEmbeddedResourceBuilder>().To<EmbeddedResourceBuilder>().InSingletonScope();
 			Bind<IEmbeddedResourceManager>().To<EmbeddedResourceManager>().InSingletonScope();
 
 			// Web / Caching

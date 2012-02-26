@@ -5,10 +5,8 @@ using System.Linq;
 using Ext.Net;
 using MongoDB.Bson;
 using Zeus.Admin.Plugins.Tree;
-using Zeus.FileSystem;
 using Zeus.Linq;
 using Zeus.Security;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins.FileManager
 {
@@ -26,13 +24,13 @@ namespace Zeus.Admin.Plugins.FileManager
 			var treeloader = new Ext.Net.TreeLoader
 				{
 					DataUrl =
-						Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(typeof(FileManagerUserControl).Assembly,
+						Engine.GetServerResourceUrl(typeof(FileManagerUserControl).Assembly,
 							"Zeus.Admin.Plugins.FileManager.TreeLoader.ashx"),
 					PreloadChildren = true
 				};
 			treePanel.Loader.Add(treeloader);
 
-			filesStore.DirectEventConfig.Url = Engine.AdminManager.GetAdminDefaultUrl();
+			filesStore.DirectEventConfig.Url = PluginBase.GetAdminDefaultUrl();
 
 			if (ExtNet.IsAjaxRequest)
 				return;

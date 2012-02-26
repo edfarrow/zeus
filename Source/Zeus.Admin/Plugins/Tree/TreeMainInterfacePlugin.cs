@@ -93,11 +93,10 @@ namespace Zeus.Admin.Plugins.Tree
 
 			// Data loader.
 			var treeLoader = new Ext.Net.TreeLoader
-				{
-					DataUrl = Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(GetType().Assembly,
-						"Zeus.Admin.Plugins.Tree.TreeLoader.ashx"),
-					PreloadChildren = true
-				};
+			{
+				DataUrl = GetPageUrl(GetType(), "Zeus.Admin.Plugins.Tree.TreeLoader.ashx"),
+				PreloadChildren = true
+			};
 			treeLoader.Listeners.Load.Handler = "if (response.getResponseHeader['Content-Type'] == 'text/html; charset=utf-8') { Ext.Msg.alert('Timeout', 'Your session has timed out. Please refresh your browser to login again.'); }";
 			treePanel.Loader.Add(treeLoader);
 

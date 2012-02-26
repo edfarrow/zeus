@@ -71,6 +71,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Camino">
+      <HintPath>..\..\Libraries\Camino.dll</HintPath>
+    </Reference>
     <Reference Include="Ext.Net, Version=1.0.0.36291, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ext.Net\Ext.Net.dll</HintPath>
@@ -171,18 +174,18 @@
     <Compile Include="Admin\NavigationFlag\NavigationServiceInitializer.cs" />
     <Compile Include="Admin\Plugins\IMainInterfacePlugin.cs" />
     <Compile Include="Admin\Plugins\MainInterfacePluginBase.cs" />
+    <Compile Include="Admin\Plugins\PluginBase.cs" />
     <Compile Include="Admin\Plugins\TreePluginBase.cs" />
     <Compile Include="Admin\Plugins\ITreePlugin.cs" />
     <Compile Include="Admin\Plugins\MenuPluginBase.cs" />
     <Compile Include="Admin\AdminFrame.cs" />
     <Compile Include="Admin\AdminManager.cs" />
     <Compile Include="Admin\ActionPluginGroupAttribute.cs" />
-    <Compile Include="Admin\GridToolbarPluginBase.cs" />
+    <Compile Include="Admin\Plugins\GridToolbarPluginBase.cs" />
     <Compile Include="Admin\Plugins\IContextMenuPlugin.cs" />
     <Compile Include="Admin\Plugins\IGridMenuPlugin.cs" />
     <Compile Include="Admin\Plugins\IGridToolbarPlugin.cs" />
     <Compile Include="Admin\Plugins\IMainToolbarPlugin.cs" />
-    <Compile Include="Admin\IAdminAssemblyManager.cs" />
     <Compile Include="Admin\IAdminManager.cs" />
     <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Admin\NodePosition.cs" />
@@ -320,7 +323,6 @@
     <Compile Include="Web\Mvc\ViewModels\ViewModel.cs" />
     <Compile Include="Web\Mvc\ViewPageResult.cs" />
     <Compile Include="Web\PageContentItem.cs" />
-    <Compile Include="Web\Hosting\ResourceSettings.cs" />
     <Compile Include="Web\Security\IWebSecurityService.cs" />
     <Compile Include="Web\Security\PasswordResetRequestValidity.cs" />
     <Compile Include="Web\Security\PasswordResetRequest.cs" />
@@ -366,7 +368,6 @@
     <Compile Include="Web\UI\WebControls\TypedListViewControlBuilder.cs" />
     <Compile Include="Web\UI\WebControls\TypedListViewDataItem.cs" />
     <Compile Include="Web\UI\WebControls\TypedListViewFakeType.cs" />
-    <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
@@ -403,14 +404,8 @@
     <Compile Include="Web\Handlers\GoogleSiteMapHandler.cs" />
     <Compile Include="Web\Handlers\BaseFileUploadHandler.cs" />
     <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceBuilder.cs" />
     <Compile Include="Web\Hosting\EmbeddedResourceManager.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourcePackageBase.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourcePathProvider.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceVirtualFile.cs" />
-    <Compile Include="Web\Hosting\IEmbeddedResourceBuilder.cs" />
     <Compile Include="Web\Hosting\IEmbeddedResourceManager.cs" />
-    <Compile Include="Web\Hosting\IEmbeddedResourcePackage.cs" />
     <Compile Include="Web\HttpRequestSupport.cs" />
     <Compile Include="Web\IAdapterDescriptor.cs" />
     <Compile Include="Web\IHost.cs" />

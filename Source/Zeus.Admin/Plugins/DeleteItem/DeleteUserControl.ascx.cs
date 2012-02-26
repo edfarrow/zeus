@@ -68,7 +68,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 
 			TreeLoader treeLoader = new TreeLoader
 			{
-				DataUrl = Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(typeof(DeleteUserControl).Assembly,
+				DataUrl = Engine.GetServerResourceUrl(typeof(DeleteUserControl).Assembly,
 					"Zeus.Admin.Plugins.DeleteItem.AffectedItems.ashx")
 			};
 			affectedItemsTreePanel.Loader.Add(treeLoader);
@@ -93,7 +93,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 
 			TreeLoader referencingItemsTreeLoader = new TreeLoader
 			{
-				DataUrl = Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(typeof(DeleteUserControl).Assembly,
+				DataUrl = Engine.GetServerResourceUrl(typeof(DeleteUserControl).Assembly,
 					"Zeus.Admin.Plugins.DeleteItem.ReferencingItems.ashx")
 			};
 			referencingItemsTreePanel.Loader.Add(referencingItemsTreeLoader);
@@ -118,7 +118,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 					url : '{2}',
 					success: function() {{ stbStatusBar.setStatus({{ text: 'Deleted Item(s)', iconCls: '', clear: true }}); }}
 				}});",
-				window.ClientID, affectedItemIDs, Engine.AdminManager.GetAdminDefaultUrl());
+				window.ClientID, affectedItemIDs, PluginBase.GetAdminDefaultUrl());
 			window.Buttons.Add(yesButton);
 
 			window.Buttons.Add(new Button

@@ -43,7 +43,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 						'{2}', {{ url : '{3}' }});
 				}}",
 				contentItem.IconUrl, contentItem.Title.Replace("'", "\\'"), contentItem.ID,
-				Context.AdminManager.GetAdminDefaultUrl());
+				GetAdminDefaultUrl());
 		}
 
 		public MenuItem GetMenuItem(ContentItem contentItem)

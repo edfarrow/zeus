@@ -12,9 +12,8 @@ namespace Zeus.Admin
 	/// </summary>
 	public interface IAdminManager
 	{
+		string AdminPath { get; }
 		IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups();
-
-		string GetAdminDefaultUrl();
 
 		/// <summary>Gets the filter to be applied to items displayed in edit mode.</summary>
 		/// <param name="user">The user for whom to apply the filter.</param>

@@ -22,11 +22,11 @@ namespace Zeus.Admin.Plugins.CopyItem
 				SelectedItem.Title);
 
 			from.Text = string.Format("{0}<b>{1}</b>",
-				GetBreadcrumbPath(MemorizedItem.Parent),
+				MemorizedItem.Parent.Path,
 				MemorizedItem.Name);
 
 			to.Text = string.Format("{0}<b>{1}</b>",
-				GetBreadcrumbPath(SelectedItem),
+				SelectedItem.Path,
 				MemorizedItem.Name);
 
 			itemsToCopy.CurrentItem = MemorizedItem;

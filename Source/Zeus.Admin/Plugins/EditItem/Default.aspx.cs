@@ -36,8 +36,7 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		protected string GetSessionKeepAliveUrl()
 		{
-			return Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
-				typeof(KeepAlive).Assembly, "Zeus.Admin.Plugins.EditItem.KeepAlive.aspx");
+			return Engine.GetServerResourceUrl(typeof(KeepAlive).Assembly, "Zeus.Admin.Plugins.EditItem.KeepAlive.aspx");
 		}
 
 		protected void btnSave_Click(object sender, DirectEventArgs e)

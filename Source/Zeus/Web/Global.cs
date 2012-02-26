@@ -82,9 +82,8 @@ namespace Zeus.Web
 
 		protected virtual void OnApplicationStart(EventArgs e)
 		{
-			// TODO - add this as a plugin
-			HostingEnvironment.RegisterVirtualPathProvider(
-				new EmbeddedResourcePathProvider(Zeus.Context.Current.Resolve<IEmbeddedResourceManager>()));
+			var virtualPathProvider = Zeus.Context.Current.Resolve<IEmbeddedResourceManager>().VirtualPathProvider;
+			HostingEnvironment.RegisterVirtualPathProvider(virtualPathProvider);
 		}
 	}
 }

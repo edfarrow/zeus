@@ -141,7 +141,7 @@ namespace Zeus.Engine
 
 		public string GetServerResourceUrl(Assembly assembly, string resourcePath)
 		{
-			return Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(assembly, resourcePath);
+			return Resolve<IEmbeddedResourceManager>().GetUrl(assembly, resourcePath);
 		}
 
 		public string GetServerResourceUrl(Type type, string resourcePath)

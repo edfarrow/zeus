@@ -21,7 +21,7 @@ namespace Zeus.Admin.Plugins.ContextMenu
 					
 					contextMenu.showAt(e.getXY());
 				}}",
-				treePanel.ClientID, Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(GetType().Assembly, "Zeus.Admin.Plugins.ContextMenu.ContextMenuLoader.ashx"));
+				treePanel.ClientID, GetPageUrl(GetType(), "Zeus.Admin.Plugins.ContextMenu.ContextMenuLoader.ashx"));
 		}
 
 		public override void ModifyTreeNode(TreeNodeBase treeNode, ContentItem contentItem)

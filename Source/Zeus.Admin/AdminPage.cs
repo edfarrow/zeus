@@ -143,10 +143,6 @@ jQuery(document).ready(function() {{
 			if (!string.IsNullOrEmpty(selected))
 				return Engine.Resolve<Navigator>().Navigate(selected);
 
-			string selectedUrl = Request["selectedUrl"];
-			if (!string.IsNullOrEmpty(selectedUrl))
-				return Engine.UrlParser.Parse(selectedUrl);
-
 			string itemId = Request[PathData.ItemQueryKey];
 			if (!string.IsNullOrEmpty(itemId))
 				return ContentItem.Find(ObjectId.Parse(itemId));
@@ -158,19 +154,6 @@ jQuery(document).ready(function() {{
 		{
 			return Request["selected"];
 		}
-
-		#region Error Handling
-
-		protected static string GetBreadcrumbPath(ContentItem item)
-		{
-			return item.Path;
-			//string breadcrumb = "";
-			//for (; item != null; item = item.Parent)
-			//    breadcrumb = item.Name + "/" + breadcrumb;
-			//return breadcrumb;
-		}
-
-		#endregion
 
 		#endregion
 	}

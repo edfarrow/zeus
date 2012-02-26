@@ -1,11 +1,9 @@
-using System;
 using System.Linq;
 using Zeus.Configuration;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins
 {
-	public abstract class MenuPluginBase
+	public abstract class MenuPluginBase : PluginBase
 	{
 		public abstract string GroupName { get; }
 		public abstract int SortOrder { get; }
@@ -69,11 +67,6 @@ namespace Zeus.Admin.Plugins
 			}
 
 			return true;
-		}
-
-		protected string GetPageUrl(Type type, string resourcePath)
-		{
-			return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(type.Assembly, resourcePath);
 		}
 	}
 }

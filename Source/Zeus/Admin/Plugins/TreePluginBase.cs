@@ -4,7 +4,7 @@ using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins
 {
-	public abstract class TreePluginBase : ITreePlugin
+	public abstract class TreePluginBase : PluginBase, ITreePlugin
 	{
 		public virtual string[] RequiredScripts
 		{
@@ -21,11 +21,6 @@ namespace Zeus.Admin.Plugins
 		public virtual void ModifyTreeNode(TreeNodeBase treeNode, ContentItem contentItem)
 		{
 			
-		}
-
-		protected string GetPageUrl(Type type, string resourcePath)
-		{
-			return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(type.Assembly, resourcePath);
 		}
 	}
 }

@@ -63,8 +63,7 @@ namespace Zeus.Admin
 				plugin.RegisterStyles(ScriptManager);
 			}
 
-			rsmResourceManager.DirectEventUrl = Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
-				typeof(Default).Assembly, "Zeus.Admin.Default.aspx");
+			rsmResourceManager.DirectEventUrl = PluginBase.GetAdminDefaultUrl();
 
 			base.OnPreRender(e);
 		}

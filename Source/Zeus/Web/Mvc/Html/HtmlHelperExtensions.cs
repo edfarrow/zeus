@@ -30,11 +30,6 @@ namespace Zeus.Web.Mvc.Html
 			return html.Javascript(WebResourceUtility.GetUrl(type, resourceName));
 		}
 
-		public static string IncludeEmbeddedJavascriptResource(this HtmlHelper html, Assembly assembly, string relativePath)
-		{
-			return html.Javascript(Utility.GetClientResourceUrl(assembly, relativePath));
-		}
-
 		public static string Javascript(this HtmlHelper html, string url)
 		{
 			return string.Format(@"<script type=""text/javascript"" src=""{0}""></script>", url);
