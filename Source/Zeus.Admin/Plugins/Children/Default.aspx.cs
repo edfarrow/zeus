@@ -1,6 +1,7 @@
 ﻿using System;
 using Coolite.Ext.UX;
 using Ext.Net;
+using Zeus.Linq;
 
 namespace Zeus.Admin.Plugins.Children
 {
@@ -36,7 +37,7 @@ namespace Zeus.Admin.Plugins.Children
 
 		private void RefreshData()
 		{
-			exsDataStore.DataSource = SelectedItem.GetChildren();
+			exsDataStore.DataSource = SelectedItem.Children.Accessible();
 			exsDataStore.DataBind();
 		}
 

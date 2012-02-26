@@ -45,7 +45,7 @@ namespace Zeus.Templates.Services
 		{
 			// Look up in the tree from the current item until we find an item with a
 			// TagGroup child.
-			foreach (ContentItem ancestor in Find.EnumerateParents(currentItem, null, true))
+			foreach (ContentItem ancestor in currentItem.AncestorsAndSelf)
 			{
 				IEnumerable<TagGroup> tagGroups = ancestor.GetChildren<TagGroup>();
 				if (tagGroups.Any())

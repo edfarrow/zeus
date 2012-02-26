@@ -53,7 +53,7 @@ namespace Zeus.Admin.Plugins.FileManager
 
 		private static IEnumerable GetFiles(ContentItem contentItem, FileType fileType)
 		{
-			IEnumerable<ContentItem> files = contentItem.GetChildren().Pages().Published().Authorized(Operations.Read);
+			IEnumerable<ContentItem> files = contentItem.Children.Accessible().Pages().Published();
 			switch (fileType)
 			{
 				case FileType.Image :

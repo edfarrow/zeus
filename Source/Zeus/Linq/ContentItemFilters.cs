@@ -47,6 +47,18 @@ namespace Zeus.Linq
 			return source.Where(ci => ci.IsPage);
 		}
 
+		public static IEnumerable<T> Accessible<T>(this IEnumerable<T> source)
+			where T : ContentItem
+		{
+			return source.Accessible(HttpContext.Current != null ? HttpContext.Current.User : null);
+		}
+
+		public static IEnumerable<T> Accessible<T>(this IEnumerable<T> source, IPrincipal user)
+			where T : ContentItem
+		{
+			return source.Authorized(user, Context.SecurityManager, Operations.Read);
+		}
+
 		public static IEnumerable<T> Authorized<T>(this IEnumerable<T> source, string operation)
 			where T : ContentItem
 		{

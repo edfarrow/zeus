@@ -8,6 +8,7 @@ using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web.UI;
+using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web.Security;
 using LinkButton = System.Web.UI.WebControls.LinkButton;
@@ -166,7 +167,7 @@ namespace Zeus.Admin.Plugins.Permissions
 				ApplyRules(item, allowedOperations);
 
 			// Apply recursively.
-			ContentItem[] children = item.GetChildren().ToArray();
+			ContentItem[] children = item.Children.Accessible().ToArray();
 			foreach (ContentItem child in children)
 				ApplyRulesRecursive(child, allowedOperations);
 		}

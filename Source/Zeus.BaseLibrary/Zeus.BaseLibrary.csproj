@@ -150,7 +150,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Reflection\PropertyInfoDelegator.cs" />
-    <Compile Include="Reflection\StaticReflection.cs" />
     <Compile Include="ExtensionMethods\String.cs" />
     <Compile Include="ExtensionMethods\Type.cs" />
     <Compile Include="Security\NonceUtility.cs" />

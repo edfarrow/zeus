@@ -3,6 +3,7 @@ using System.Linq;
 using Ext.Net;
 using Zeus.Collections;
 using System.Collections.Generic;
+using Zeus.Linq;
 
 namespace Zeus.Admin.Plugins.Tree
 {
@@ -52,7 +53,7 @@ namespace Zeus.Admin.Plugins.Tree
 
 		public SiteTree OpenTo(ContentItem item)
 		{
-			IList<ContentItem> items = Find.ListParents(item);
+			var items = item.Ancestors;
 			//return ClassProvider(c => (items.Contains(c) || c == item) ? "open" : string.Empty);
 			return this;
 		}
@@ -75,7 +76,7 @@ namespace Zeus.Admin.Plugins.Tree
 		{
 			ContentItem item = navigator.Current;
 
-			var itemChildren = item.GetChildren();
+			var itemChildren = item.Children.Accessible();
 			if (filter != null)
 				itemChildren = filter(itemChildren);
 			bool hasAsyncChildren = ((!navigator.Children.Any() && itemChildren.Any()) || rootOnly);

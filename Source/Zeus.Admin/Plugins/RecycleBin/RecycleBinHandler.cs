@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using MongoDB.Bson;
 using Zeus.Admin.RecycleBin;
 using Zeus.Security;
@@ -141,7 +142,7 @@ namespace Zeus.Admin.Plugins.RecycleBin
 		public bool IsInTrash(ContentItem item)
 		{
 			RecycleBinContainer trash = GetTrashContainer(false);
-			return trash != null && Find.IsDescendantOrSelf(item, trash);
+			return trash != null && item.DescendantsAndSelf.Contains(trash);
 		}
 
 		protected virtual T Invoke<T>(EventHandler<T> handler, T args)

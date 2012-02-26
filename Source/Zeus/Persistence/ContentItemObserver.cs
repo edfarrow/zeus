@@ -2,7 +2,7 @@ using Ormongo.Ancestry;
 
 namespace Zeus.Persistence
 {
-	public class ContentItemObserver : AncestryObserver<ContentItem>, IContentItemObserver
+	public abstract class ContentItemObserver : AncestryObserver<ContentItem>, IContentItemObserver
 	{
 		public virtual bool BeforeCopy(ContentItem document, ContentItem newParent)
 		{

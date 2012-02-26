@@ -3,6 +3,7 @@ using System.Linq;
 using Ext.Net;
 using MongoDB.Bson;
 using Zeus.Integrity;
+using Zeus.Linq;
 
 namespace Zeus.Admin.Plugins.RecycleBin
 {
@@ -36,7 +37,7 @@ namespace Zeus.Admin.Plugins.RecycleBin
 
 		private void RefreshData()
 		{
-			exsDataStore.DataSource = SelectedItem.GetChildren().Select(c => new
+			exsDataStore.DataSource = SelectedItem.Children.Accessible().Select(c => new
 			{
 				ID = c.ID.ToString(),
 				c.Title,
@@ -46,12 +47,12 @@ namespace Zeus.Admin.Plugins.RecycleBin
 			}).ToArray();
 			exsDataStore.DataBind();
 
-			btnEmpty.Enabled = SelectedItem.GetChildren().Any();
+			btnEmpty.Enabled = SelectedItem.Children.Accessible().Any();
 		}
 
 		protected void btnEmpty_Click(object sender, DirectEventArgs e)
 		{
-			foreach (ContentItem child in SelectedItem.GetChildren())
+			foreach (ContentItem child in SelectedItem.Children.Accessible())
 				child.Destroy();
 			RefreshData();
 		}

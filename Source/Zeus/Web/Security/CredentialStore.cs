@@ -50,7 +50,7 @@ namespace Zeus.Web.Security
 		public IEnumerable<Role> GetRoles(IPrincipal user)
 		{
 			RoleContainer roleContainer = GetRoleContainer(true);
-			return roleContainer.GetChildren().Authorized(user, Context.SecurityManager, Operations.Read).Cast<Role>();
+			return roleContainer.Children.Accessible(user).Cast<Role>();
 		}
 
 		void ICredentialStore.CreateUser(string username, string password, string[] roles, string email, bool verified)
@@ -129,7 +129,7 @@ namespace Zeus.Web.Security
 		IEnumerable<User> ICredentialStore.GetAllUsers()
 		{
 			UserContainer users = GetUserContainer(false);
-			return users == null ? null : users.GetChildren().Cast<User>();
+			return users == null ? null : users.Children.Accessible().Cast<User>();
 		}
 
 		private User GetUser(string username)

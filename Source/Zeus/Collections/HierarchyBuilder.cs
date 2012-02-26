@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Zeus.Linq;
 
 namespace Zeus.Collections
 {
@@ -18,7 +18,7 @@ namespace Zeus.Collections
 
 		protected virtual IEnumerable<ContentItem> GetChildren(ContentItem currentItem)
 		{
-			IEnumerable<ContentItem> children = currentItem.GetChildren();
+			IEnumerable<ContentItem> children = currentItem.Children.Accessible();
 			if (Filter != null)
 				children = Filter(children);
 			return children;

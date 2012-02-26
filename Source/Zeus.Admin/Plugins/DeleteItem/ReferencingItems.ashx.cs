@@ -4,6 +4,7 @@ using System.Web;
 using Ext.Net;
 using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
+using Zeus.Linq;
 
 namespace Zeus.Admin.Plugins.DeleteItem
 {
@@ -52,7 +53,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 		{
 			// TODO: Figure out how to allow this.
 			//referrers.AddRange(Context.Finder.QueryItems().Where(ci => ci.Details.OfType<LinkProperty>().Any(ld => ld.LinkedItem == current)));
-			foreach (ContentItem child in current.GetChildren())
+			foreach (ContentItem child in current.Children.Accessible())
 				AddReferencesRecursive(child, referrers);
 		}
 

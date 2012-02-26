@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Ormongo.Ancestry;
 using Zeus.Linq;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
@@ -79,7 +80,7 @@ namespace Zeus.Templates.Mvc.Html
 		/// <returns></returns>
 		public static bool IsCurrentBranch(this HtmlHelper helper, ContentItem itemToCheck)
 		{
-			return IsCurrentBranch(helper, itemToCheck, Find.CurrentPage);
+			return IsCurrentBranch(helper, itemToCheck, Context.CurrentPage);
 		}
 
 		public static bool IsCurrentBranch(this HtmlHelper helper, ContentItem itemToCheck, ContentItem currentPage)
@@ -89,10 +90,10 @@ namespace Zeus.Templates.Mvc.Html
 				Redirect redirect = (Redirect) itemToCheck;
 				if (redirect.RedirectItem == currentPage)
 					return true;
-				if (redirect.CheckChildrenForNavigationState && Find.IsAccessibleChildOrSelf(((Redirect)itemToCheck).RedirectItem, currentPage))
+				if (redirect.CheckChildrenForNavigationState && ((Redirect)itemToCheck).RedirectItem.IsAccessibleDescendantOrSelf(currentPage))
 					return true;
 			}
-			if (Find.IsAccessibleChildOrSelf(itemToCheck, currentPage))
+			if (itemToCheck.IsAccessibleDescendantOrSelf(currentPage))
 				return true;
 			return false;
 		}
@@ -110,7 +111,7 @@ namespace Zeus.Templates.Mvc.Html
 			string result = postfix;
 
 			int added = 0;
-			var parents = Find.EnumerateParents(currentPage, Find.StartPage, true);
+			var parents = currentPage.AncestorsAndSelf.FromDepth(Find.StartPage.Depth);
 			if (startLevel != 1 && parents.Count() >= startLevel)
 				parents = parents.Take(parents.Count() - startLevel);
 			foreach (ContentItem page in parents)
@@ -150,7 +151,7 @@ namespace Zeus.Templates.Mvc.Html
 		public static string Sitemap(this HtmlHelper html)
 		{
 			StringBuilder sb = new StringBuilder();
-			foreach (ContentItem contentItem in Find.StartPage.GetChildren().Pages().Visible())
+			foreach (ContentItem contentItem in Find.StartPage.Children.Accessible().Pages().Visible())
 			{
 				sb.AppendFormat("<h4><a href=\"{0}\">{1}</a></h4>", contentItem.Url, contentItem.Title);
 				SitemapRecursive(contentItem, sb);
@@ -160,7 +161,7 @@ namespace Zeus.Templates.Mvc.Html
 
 		private static bool SitemapRecursive(ContentItem contentItem, StringBuilder sb)
 		{
-			var childItems = contentItem.GetChildren().Visible();
+			var childItems = contentItem.Children.Accessible().Visible();
 
 			bool foundSomething = false;
 

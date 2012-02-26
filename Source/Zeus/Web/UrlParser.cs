@@ -4,10 +4,12 @@ using System.Web;
 using MongoDB.Bson;
 using Ninject;
 using Ormongo;
+using Ormongo.Ancestry;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using System.Linq;
 using System.Collections.Generic;
+using Zeus.Linq;
 
 namespace Zeus.Web
 {
@@ -330,7 +332,7 @@ namespace Zeus.Web
                                 continue;
 
                             //need to check all children of these nodes to see if there's a match
-                            IEnumerable<ContentItem> AllContentItemsWithCustomUrls = Find.EnumerateAccessibleChildren(customUrlPage, id.Depth);
+                            IEnumerable<ContentItem> AllContentItemsWithCustomUrls = customUrlPage.Descendants.ToRelativeDepth(id.Depth).Accessible();
                             foreach (ContentItem ci in AllContentItemsWithCustomUrls)
                             {
                                 if (ci.HasCustomUrl)
@@ -433,7 +435,7 @@ namespace Zeus.Web
 
                                 //need to check all children of these nodes to see if there's a match
                                 ContentItem tryMatch =
-                                    Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
+                                   customUrlPage.Descendants.ToRelativeDepth(id.Depth).Accessible().SingleOrDefault(
                                         ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
 
                                 if (tryMatch != null)
@@ -451,7 +453,7 @@ namespace Zeus.Web
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
                                     {
                                         ContentItem tryMatchAgain =
-											Find.EnumerateAccessibleChildren(ContentItem.Find(id.ID), id.Depth).SingleOrDefault(
+											ContentItem.Find(id.ID).Descendants.ToRelativeDepth(id.Depth).Accessible().SingleOrDefault(
                                                 ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
 
                                         if (tryMatchAgain != null)

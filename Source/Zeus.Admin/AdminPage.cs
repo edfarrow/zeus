@@ -110,7 +110,7 @@ jQuery(document).ready(function() {{
 
 			// If content item is not visible in tree, then get the first parent item
 			// that is visible.
-			contentItem = Find.EnumerateParents(contentItem, null, true)
+			contentItem = contentItem.AncestorsAndSelf
 				.First(TreeMainInterfacePlugin.IsVisibleInTree);
 
 			script = string.Format(script,

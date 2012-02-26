@@ -76,7 +76,7 @@ namespace Zeus.Web.UI
 				if (stack == null)
 				{
 					HttpContextItems["ItemStack"] = stack = new Stack<ContentItem>();
-					stack.Push(Find.CurrentPage);
+					stack.Push(Context.CurrentPage);
 				}
 				return stack;
 			}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
@@ -160,6 +161,24 @@ namespace Zeus
             }
         }
 
+		// TODO: Make this work server-side.
+    	public IEnumerable<ContentItem> AccessibleDescendants
+    	{
+    		get
+    		{
+				// TODO: Remove the ToList() on this so it works server-side.
+    			return Descendants.ToList().Accessible();
+    		}
+    	}
+
+		public bool IsAccessibleDescendantOrSelf(ContentItem itemToCheck)
+		{
+			if (this == itemToCheck)
+				return true;
+
+			return AccessibleDescendants.Contains(itemToCheck);
+		}
+
         #endregion
 
         /// <summary>Gets an array of roles allowed to read this item. Null or empty list is interpreted as this item has no access restrictions (anyone may read).</summary>
@@ -238,17 +257,6 @@ namespace Zeus
 			cloned.ID = ObjectId.Empty;
 			cloned._url = null;
 			return cloned;
-        }
-
-        /// <summary>
-        /// Gets child items that the user is allowed to access.
-        /// It doesn't have to return the same collection as
-        /// the Children property.
-        /// </summary>
-        /// <returns></returns>
-        public virtual IEnumerable<ContentItem> GetChildren()
-        {
-            return Children.Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
         }
 
         public virtual IEnumerable<T> GetChildren<T>()

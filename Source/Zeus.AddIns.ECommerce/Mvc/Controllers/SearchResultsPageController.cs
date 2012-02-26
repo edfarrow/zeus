@@ -24,7 +24,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			if (keywords == null)
 				keywords = string.Empty;
 
-			var searchResults = Find.EnumerateAccessibleChildren(CurrentItem.Parent)
+			var searchResults = CurrentItem.Parent.AccessibleDescendants
 				.OfType<Product>()
 				.Where(product => product.Title.Contains(keywords, StringComparison.InvariantCultureIgnoreCase))
 				.AsPageable(!(viewAll ?? false), page ?? 1, 8);

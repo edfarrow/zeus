@@ -103,7 +103,7 @@ namespace Zeus.Web.Handlers
 		private static void RecurseTree(IList<ContentItem> list, ContentItem parent)
 		{
 			// TODO: add caching?
-			foreach (var item in parent.GetChildren().Visible().Pages())
+			foreach (var item in parent.Children.Accessible().Visible().Pages())
 			{
 				list.Add(item);
 				RecurseTree(list, item);

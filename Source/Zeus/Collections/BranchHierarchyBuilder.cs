@@ -1,4 +1,6 @@
-﻿namespace Zeus.Collections
+﻿using Ormongo.Ancestry;
+
+namespace Zeus.Collections
 {
 	/// <summary>
 	/// Builds a hierarchy of nodes between a certain item and one of it's 
@@ -30,7 +32,7 @@
 				return new HierarchyNode<ContentItem>(_initialItem);
 
 			HierarchyNode<ContentItem> previousNode = null;
-			foreach (ContentItem currentItem in Find.EnumerateParents(_initialItem, _lastAncestor, _appendAdditionalLevel))
+			foreach (ContentItem currentItem in (_appendAdditionalLevel ? _initialItem.AncestorsAndSelf : _initialItem.Ancestors).FromDepth(_lastAncestor.Depth))
 			{
 				HierarchyNode<ContentItem> currentNode = new HierarchyNode<ContentItem>(currentItem);
 				if (previousNode != null)
