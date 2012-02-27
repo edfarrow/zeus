@@ -25,6 +25,7 @@ namespace Zeus.Admin
 		private readonly AdminSection _configSection;
 		private readonly ISecurityManager _securityManager;
 		private readonly IContentTypeManager _contentTypeManager;
+		private readonly IEditableTypeManager _editableTypeManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
 
@@ -38,11 +39,13 @@ namespace Zeus.Admin
 		#region Constructor
 
 		public AdminManager(AdminSection configSection, ISecurityManager securityManager, 
-			IContentTypeManager contentTypeManager, IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder)
+			IContentTypeManager contentTypeManager, IEditableTypeManager editableTypeManager,
+			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder)
 		{
 			_configSection = configSection;
 			_securityManager = securityManager;
 			_contentTypeManager = contentTypeManager;
+			_editableTypeManager = editableTypeManager;
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
 		}
@@ -114,8 +117,8 @@ namespace Zeus.Admin
 			if (addedEditors == null) throw new ArgumentNullException("addedEditors");
 
 			bool updated = false;
-			ContentType contentType = _contentTypeManager.GetContentType(item);
-			foreach (IEditor e in contentType.GetEditors(user))
+			var editableType = _editableTypeManager.GetEditableType(item);
+			foreach (IEditor e in editableType.GetEditors(user))
 				if (addedEditors.ContainsKey(e.Name))
 					updated = e.UpdateItem(item, addedEditors[e.Name]) || updated;
 

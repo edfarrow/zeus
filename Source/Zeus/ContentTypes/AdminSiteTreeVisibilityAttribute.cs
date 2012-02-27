@@ -5,7 +5,7 @@ namespace Zeus.ContentTypes
 	/// <summary>
 	/// Controls whether a content type is displayed in the admin site tree.
 	/// </summary>
-	public class AdminSiteTreeVisibilityAttribute : AbstractContentTypeRefiner, IDefinitionRefiner
+	public class AdminSiteTreeVisibilityAttribute : ContentTypeRefinerAttributeBase, IContentTypeRefiner
 	{
 		public AdminSiteTreeVisibility Visibility { get; set; }
 

@@ -2,6 +2,7 @@ using System;
 using System.Web.UI;
 using SoundInTheory.DynamicImage;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
 

@@ -9,11 +9,15 @@ namespace Zeus.Templates.Services
 	public class TaggingDefinitionAppender : IInitializable
 	{
 		private readonly IContentTypeManager _contentTypeManager;
+		private readonly IEditableTypeManager _editableTypeManager;
 		private readonly TemplatesSection _templatesConfig;
 
-		public TaggingDefinitionAppender(IContentTypeManager contentTypeManager, TemplatesSection templatesConfig)
+		public TaggingDefinitionAppender(IContentTypeManager contentTypeManager, 
+			IEditableTypeManager editableTypeManager, 
+			TemplatesSection templatesConfig)
 		{
 			_contentTypeManager = contentTypeManager;
+			_editableTypeManager = editableTypeManager;
 			_templatesConfig = templatesConfig;
 		}
 
@@ -24,18 +28,19 @@ namespace Zeus.Templates.Services
 			if (_templatesConfig.Tagging == null || !_templatesConfig.Tagging.Enabled)
 				return;
 
-			foreach (ContentType contentType in _contentTypeManager.GetContentTypes())
+			foreach (var editableType in _editableTypeManager.GetEditableTypes())
 			{
+				ContentType contentType = _contentTypeManager.GetContentType(editableType.ItemType);
 				if (IsPage(contentType))
 				{
-					LinkedItemsCheckBoxListEditorAttribute tagEditable = new LinkedItemsCheckBoxListEditorAttribute();
+					var tagEditable = new LinkedItemsCheckBoxListEditorAttribute();
 					tagEditable.Name = "Tags";
 					tagEditable.Title = "Tags";
 					tagEditable.SortOrder = 500;
 					tagEditable.TypeFilter = typeof(Tag);
 					tagEditable.ContainerName = "Content";
 
-					contentType.Add(tagEditable);
+					editableType.Add(tagEditable);
 				}
 			}
 		}

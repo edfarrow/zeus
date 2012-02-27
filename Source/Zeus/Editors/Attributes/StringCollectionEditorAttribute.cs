@@ -1,6 +1,7 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes

@@ -34,6 +34,11 @@ namespace Zeus.Engine
 			get { return Resolve<IContentTypeManager>(); }
 		}
 
+		public IEditableTypeManager EditableTypes
+		{
+			get { return Resolve<IEditableTypeManager>(); }
+		}
+
 		public ISecurityManager SecurityManager
 		{
 			get { return Resolve<ISecurityManager>(); }

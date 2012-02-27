@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Zeus.ContentTypes
 {
 	[AttributeUsage(AttributeTargets.Class)]
-	public class ContentTypeAuthorizedRolesAttribute : AbstractContentTypeRefiner, IInheritableDefinitionRefiner
+	public class ContentTypeAuthorizedRolesAttribute : ContentTypeRefinerAttributeBase, IInheritableContentTypeRefiner
 	{
 		/// <summary>Initializes a new ContentTypeAuthorizedRolesAttribute used to restrict permission to create items in edit mode.</summary>
 		public ContentTypeAuthorizedRolesAttribute()

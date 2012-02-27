@@ -8,7 +8,7 @@ namespace Zeus.ContentTypes
 	/// attribute. This can be used to disable and replace items in external
 	/// class libraries.
 	/// </summary>
-	public class ReplacesParentContentTypeAttribute : AbstractContentTypeRefiner, IDefinitionRefiner
+	public class ReplacesParentContentTypeAttribute : ContentTypeRefinerAttributeBase, IContentTypeRefiner
 	{
 		public override void Refine(ContentType currentContentType, IList<ContentType> allContentTypes)
 		{

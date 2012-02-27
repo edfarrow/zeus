@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.UI.WebControls
 {
 	public class ItemEditView : WebControl, INamingContainer, ContentItemEditor
 	{
-		private ITypeDefinition _currentTypeDefinition;
+		private EditableType _currentEditableType;
 		private ContentItem _currentItem;
 		private bool _postedBack;
 
 		public event EventHandler<ItemViewEditableObjectEventArgs> ItemCreating;
-		public event EventHandler<ItemViewTypeDefinitionEventArgs> DefinitionCreating;
+		public event EventHandler<ItemEditViewEditableTypeEventArgs> DefinitionCreating;
 
 		#region Properties
 
@@ -55,7 +56,7 @@ namespace Zeus.Web.UI.WebControls
 				ItemCreating(this, args);
 		}
 
-		protected virtual void OnDefinitionCreating(ItemViewTypeDefinitionEventArgs args)
+		protected virtual void OnDefinitionCreating(ItemEditViewEditableTypeEventArgs args)
 		{
 			if (DefinitionCreating != null)
 				DefinitionCreating(this, args);
@@ -66,28 +67,28 @@ namespace Zeus.Web.UI.WebControls
 			
 		}
 
-		public ITypeDefinition CurrentItemDefinition
+		public EditableType CurrentEditableType
 		{
 			get
 			{
-				if (_currentTypeDefinition == null)
+				if (_currentEditableType == null)
 				{
 					if (CurrentItem != null)
 					{
-						_currentTypeDefinition = Zeus.Context.ContentTypes.GetContentType(CurrentItem);
+						_currentEditableType = Zeus.Context.EditableTypes.GetEditableType(CurrentItem);
 					}
 					else
 					{
-						var args = new ItemViewTypeDefinitionEventArgs(null);
+						var args = new ItemEditViewEditableTypeEventArgs(null);
 						OnDefinitionCreating(args);
-						_currentTypeDefinition = args.TypeDefinition;
+						_currentEditableType = args.EditableType;
 					}
 				}
-				return _currentTypeDefinition;
+				return _currentEditableType;
 			}
 			set
 			{
-				_currentTypeDefinition = value;
+				_currentEditableType = value;
 			}
 		}
 
@@ -141,10 +142,10 @@ namespace Zeus.Web.UI.WebControls
 
 		protected virtual void AddPropertyControls()
 		{
-			if (CurrentItemDefinition != null)
+			if (CurrentEditableType != null)
 			{
 				// Add editors and containers recursively.
-				AddPropertyControlsRecursive(this, CurrentItemDefinition.RootContainer);
+				AddPropertyControlsRecursive(this, CurrentEditableType.RootContainer);
 
 				if (!_postedBack)
 					UpdateEditors();
@@ -153,7 +154,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private void UpdateEditors()
 		{
-			foreach (IEditor editor in CurrentItemDefinition.GetEditors(Page.User))
+			foreach (IEditor editor in CurrentEditableType.GetEditors(Page.User))
 				editor.UpdateEditor(CurrentItem, PropertyControls[editor.Name]);
 		}
 

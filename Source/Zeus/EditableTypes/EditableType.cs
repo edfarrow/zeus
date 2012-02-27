@@ -4,9 +4,9 @@ using System.Linq;
 using System.Security.Principal;
 using Zeus.Editors.Attributes;
 
-namespace Zeus.ContentTypes
+namespace Zeus.EditableTypes
 {
-	public abstract class EditableType
+	public class EditableType
 	{
 		public IList<EditorContainerAttribute> EditorContainers { get; set; }
 
@@ -17,6 +17,11 @@ namespace Zeus.ContentTypes
 		public IList<IEditorContainer> Containers { get; internal set; }
 
 		public Type ItemType { get; set; }
+
+		public EditableType(Type itemType)
+		{
+			ItemType = itemType;
+		}
 
 		/// <summary>Gets editable attributes available to user.</summary>
 		/// <returns>A filtered list of editable fields.</returns>

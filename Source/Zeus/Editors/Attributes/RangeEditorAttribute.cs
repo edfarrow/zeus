@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
 {

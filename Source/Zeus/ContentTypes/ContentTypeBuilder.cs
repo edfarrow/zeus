@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.BaseLibrary.Reflection;
-using Zeus.Editors.Attributes;
 
 namespace Zeus.ContentTypes
 {
@@ -11,23 +10,14 @@ namespace Zeus.ContentTypes
 		#region Fields
 
 		private readonly ITypeFinder _typeFinder;
-		private readonly IEditableHierarchyBuilder<IEditor> _hierarchyBuilder;
-		private readonly AttributeExplorer<IEditor> _editableExplorer;
-		private readonly AttributeExplorer<IEditorContainer> _containableExplorer;
 
 		#endregion
 
 		#region Constructor
 
-		public ContentTypeBuilder(ITypeFinder typeFinder, 
-			IEditableHierarchyBuilder<IEditor> hierarchyBuilder,
-			AttributeExplorer<IEditor> editableExplorer,
-			AttributeExplorer<IEditorContainer> containableExplorer)
+		public ContentTypeBuilder(ITypeFinder typeFinder)
 		{
 			_typeFinder = typeFinder;
-			_hierarchyBuilder = hierarchyBuilder;
-			_editableExplorer = editableExplorer;
-			_containableExplorer = containableExplorer;
 		}
 
 		#endregion
@@ -36,41 +26,27 @@ namespace Zeus.ContentTypes
 
 		public IDictionary<Type, ContentType> GetContentTypes()
 		{
-			IList<ContentType> definitions = FindDefinitions();
-			ExecuteRefiners(definitions);
-			return definitions.ToDictionary(ct => ct.ItemType);
+			IList<ContentType> contentTypes = FindContentTypes();
+			ExecuteRefiners(contentTypes);
+			return contentTypes.ToDictionary(ct => ct.ItemType);
 		}
 
-		private IList<ContentType> FindDefinitions()
+		private IList<ContentType> FindContentTypes()
 		{
-			// Find definitions.
-			var definitions = new List<ContentType>();
-			foreach (Type type in EnumerateTypes())
-			{
-				var itemDefinition = new ContentType(type);
+			var contentTypes = EnumerateTypes().Select(type => new ContentType(type)).ToList();
+			contentTypes.Sort();
 
-				var editors = _editableExplorer.Find(itemDefinition.ItemType).ToList();
-				editors.Sort();
-				itemDefinition.Editors = editors;
-
-				itemDefinition.Containers = _containableExplorer.Find(itemDefinition.ItemType);
-
-				itemDefinition.RootContainer = _hierarchyBuilder.Build(itemDefinition.Containers, editors);
-				definitions.Add(itemDefinition);
-			}
-			definitions.Sort();
-
-			return definitions;
+			return contentTypes;
 		}
 
-		protected void ExecuteRefiners(IList<ContentType> definitions)
+		protected void ExecuteRefiners(IList<ContentType> contentTypes)
 		{
-			foreach (ContentType definition in definitions)
-				foreach (IDefinitionRefiner refiner in definition.ItemType.GetCustomAttributes(typeof(IDefinitionRefiner), false))
-					refiner.Refine(definition, definitions);
-			foreach (ContentType definition in definitions)
-				foreach (IInheritableDefinitionRefiner refiner in definition.ItemType.GetCustomAttributes(typeof(IInheritableDefinitionRefiner), true))
-					refiner.Refine(definition, definitions);
+			foreach (var contentType in contentTypes)
+				foreach (IContentTypeRefiner refiner in contentType.ItemType.GetCustomAttributes(typeof(IContentTypeRefiner), false))
+					refiner.Refine(contentType, contentTypes);
+			foreach (var contentType in contentTypes)
+				foreach (IInheritableContentTypeRefiner refiner in contentType.ItemType.GetCustomAttributes(typeof(IInheritableContentTypeRefiner), true))
+					refiner.Refine(contentType, contentTypes);
 		}
 
 		private IEnumerable<Type> EnumerateTypes()

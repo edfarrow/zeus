@@ -10,7 +10,7 @@ namespace Zeus
 	/// mode and for data integrity.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
-	public class ContentTypeAttribute : AbstractContentTypeRefiner, IDefinitionRefiner
+	public class ContentTypeAttribute : ContentTypeRefinerAttributeBase, IContentTypeRefiner
 	{
 		#region Public properties
 

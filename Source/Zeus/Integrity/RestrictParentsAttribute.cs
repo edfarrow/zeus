@@ -8,7 +8,7 @@ namespace Zeus.Integrity
 	/// A class decoration used to restrict which items may be placed under which.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
-	public class RestrictParentsAttribute : TypeIntegrityAttribute, IInheritableDefinitionRefiner
+	public class RestrictParentsAttribute : TypeIntegrityAttribute, IInheritableContentTypeRefiner
 	{
 		/// <summary>Initializes a new instance of the RestrictParentsAttribute which is used to restrict which types of items may be added below which.</summary>
 		public RestrictParentsAttribute()

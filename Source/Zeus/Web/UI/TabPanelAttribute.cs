@@ -1,6 +1,7 @@
 ﻿using Ext.Net;
 using Zeus.ContentTypes;
 using System.Web.UI;
+using Zeus.EditableTypes;
 
 namespace Zeus.Web.UI
 {

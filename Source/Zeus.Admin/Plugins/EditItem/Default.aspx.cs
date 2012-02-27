@@ -2,6 +2,7 @@
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Resources;
 using Zeus.Security;
 using Zeus.Web;
@@ -23,7 +24,7 @@ namespace Zeus.Admin.Plugins.EditItem
 		{
 			if (Discriminator != null)
 			{
-				Title = "New " + TypeDefinition.Title;
+				Title = "New " + CurrentContentType.Title;
 			}
 			else
 			{
@@ -83,15 +84,37 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 		}
 
-		/// <summary>Gets the type defined by <see cref="TypeDefinition"/>.</summary>
-		/// <returns>The item's type.</returns>
+		private ContentType CurrentContentType
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(Discriminator))
+					return Engine.ContentTypes.GetContentType(Discriminator);
+				if (SelectedItem != null)
+					return Engine.ContentTypes.GetContentType(SelectedItem);
+				return null;
+			}
+		}
+
+		private EditableType EditableType
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(Discriminator))
+					return Engine.EditableTypes.GetEditableType(Zeus.Context.Current.ContentTypes.GetContentType(Discriminator).ItemType);
+				if (SelectedItem != null)
+					return Engine.EditableTypes.GetEditableType(SelectedItem);
+				return null;
+			}
+		}
+
 		private Type CurrentItemType
 		{
 			get
 			{
-				ITypeDefinition contentType = TypeDefinition;
-				if (contentType != null)
-					return contentType.ItemType;
+				var editableType = EditableType;
+				if (editableType != null)
+					return editableType.ItemType;
 				return null;
 			}
 		}
@@ -106,21 +129,9 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 		}
 
-		private ContentType TypeDefinition
+		protected void zeusItemEditView_DefinitionCreating(object sender, ItemEditViewEditableTypeEventArgs e)
 		{
-			get
-			{
-				if (!string.IsNullOrEmpty(Discriminator))
-					return Zeus.Context.Current.ContentTypes.GetContentType(Discriminator);
-				if (SelectedItem != null)
-					return Zeus.Context.Current.ContentTypes.GetContentType(SelectedItem);
-				return null;
-			}
-		}
-
-		protected void zeusItemEditView_DefinitionCreating(object sender, ItemViewTypeDefinitionEventArgs e)
-		{
-			e.TypeDefinition = TypeDefinition;
+			e.EditableType = EditableType;
 		}
 
 		protected override void OnPreRender(EventArgs e)

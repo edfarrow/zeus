@@ -1,4 +1,4 @@
-﻿namespace Zeus.ContentTypes
+﻿namespace Zeus.EditableTypes
 {
 	public interface IEditableObject
 	{

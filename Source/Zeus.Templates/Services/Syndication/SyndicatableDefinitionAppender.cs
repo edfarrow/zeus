@@ -12,15 +12,15 @@ namespace Zeus.Templates.Services.Syndication
 	/// </summary>
 	public class SyndicatableDefinitionAppender : IInitializable
 	{
-		private readonly IContentTypeManager _contentTypeManager;
+		private readonly IEditableTypeManager _editableTypeManager;
 		private string checkBoxText = "Make available for syndication.";
 		private string containerName = "Syndication";
 		private int sortOrder = 30;
 		public static readonly string SyndicatableDetailName = "Syndicate";
 
-		public SyndicatableDefinitionAppender(IContentTypeManager definitions)
+		public SyndicatableDefinitionAppender(IEditableTypeManager editableTypeManager)
 		{
-			_contentTypeManager = definitions;
+			_editableTypeManager = editableTypeManager;
 		}
 
 		public int SortOrder
@@ -43,12 +43,11 @@ namespace Zeus.Templates.Services.Syndication
 
 		public void Initialize()
 		{
-			foreach (ContentType contentType in _contentTypeManager.GetContentTypes())
-			{
-				if (typeof(ISyndicatable).IsAssignableFrom(contentType.ItemType))
+			foreach (var editableType in _editableTypeManager.GetEditableTypes())
+				if (typeof(ISyndicatable).IsAssignableFrom(editableType.ItemType))
 				{
 					FieldSetAttribute seoTab = new FieldSetAttribute("Syndication", "Syndication", 30);
-					contentType.Add(seoTab);
+					editableType.Add(seoTab);
 
 					CheckBoxEditorAttribute ecb = new CheckBoxEditorAttribute(CheckBoxText, string.Empty, 10)
 					{
@@ -58,9 +57,8 @@ namespace Zeus.Templates.Services.Syndication
 						DefaultValue = true
 					};
 
-					contentType.Add(ecb);
+					editableType.Add(ecb);
 				}
-			}
 		}
 	}
 }

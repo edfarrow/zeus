@@ -1,6 +1,7 @@
 using System;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Attributes;
 using Zeus.Web.UI;
 

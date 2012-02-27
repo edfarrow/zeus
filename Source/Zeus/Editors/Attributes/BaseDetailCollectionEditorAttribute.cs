@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.UI;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes

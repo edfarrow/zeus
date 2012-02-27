@@ -9,7 +9,7 @@ namespace Zeus.ContentTypes
 	/// attribute doesn't modify any existing data. It only removes types from 
 	/// the items that can be created.
 	/// </summary>
-	public class ReplacesContentTypesAttribute : AbstractContentTypeRefiner, IDefinitionRefiner
+	public class ReplacesContentTypesAttribute : ContentTypeRefinerAttributeBase, IContentTypeRefiner
 	{
 		private readonly Type[] _replacedContentTypes;
 

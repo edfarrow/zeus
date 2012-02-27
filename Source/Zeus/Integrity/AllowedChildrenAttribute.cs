@@ -11,7 +11,7 @@ namespace Zeus.Integrity
 	/// considered to be allowed.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
-	public class AllowedChildrenAttribute : TypeIntegrityAttribute, IInheritableDefinitionRefiner
+	public class AllowedChildrenAttribute : TypeIntegrityAttribute, IInheritableContentTypeRefiner
 	{
 		/// <summary>Initializes a new instance of the AllowedChildrenAttribute which is used to restrict which types of items may be added below which.</summary>
 		public AllowedChildrenAttribute()

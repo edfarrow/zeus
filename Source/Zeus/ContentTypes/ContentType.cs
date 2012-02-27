@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using Zeus.Editors.Attributes;
 using Zeus.Web;
 
 namespace Zeus.ContentTypes
 {
-	public class ContentType : EditableType, IComparable<ContentType>, ITypeDefinition
+	public class ContentType : IComparable<ContentType>, ITypeDefinition
 	{
 		#region Fields
 
@@ -16,6 +14,8 @@ namespace Zeus.ContentTypes
 		#endregion
 
 		#region Properties
+
+		public Type ItemType { get; set; }
 
 		/// <summary>Gets or sets additional child types allowed below this item.</summary>
 		public IList<ContentType> AllowedChildren

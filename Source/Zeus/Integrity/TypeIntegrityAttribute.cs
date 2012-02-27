@@ -6,7 +6,7 @@ namespace Zeus.Integrity
 	/// <summary>
 	/// Base class for attributes used to restrict which types can be created below which.
 	/// </summary>
-	public abstract class TypeIntegrityAttribute : AbstractContentTypeRefiner
+	public abstract class TypeIntegrityAttribute : ContentTypeRefinerAttributeBase
 	{
 		private Type[] types = new Type[0];
 

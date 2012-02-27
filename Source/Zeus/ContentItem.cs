@@ -11,6 +11,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using Ormongo.Ancestry;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Integrity;
 using Zeus.Linq;
 using Zeus.Persistence;

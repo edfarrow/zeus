@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 
 [assembly: WebResource("NameEditorAttribute.js", "text/javascript")]
@@ -45,7 +46,7 @@ namespace Zeus.Editors.Attributes
 			ne.Suffix = contentItem.Extension;
 			try
 			{
-				if (Context.UrlParser.StartPage == item || contentItem.Parent == null)
+				if (Context.UrlParser.StartPage == contentItem || contentItem.Parent == null)
 				{
 					ne.Prefix = string.Empty;
 					ne.Suffix = string.Empty;

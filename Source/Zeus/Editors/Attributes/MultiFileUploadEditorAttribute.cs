@@ -5,6 +5,7 @@ using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;

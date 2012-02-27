@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Zeus.BaseLibrary.Collections;
+using Zeus.ContentTypes;
 using Zeus.Engine;
 using Zeus.Web;
 
@@ -34,9 +35,14 @@ namespace Zeus
 			get { return Current.AdminManager; }
 		}
 
-		public static ContentTypes.IContentTypeManager ContentTypes
+		public static IContentTypeManager ContentTypes
 		{
 			get { return Current.ContentTypes; }
+		}
+
+		public static IEditableTypeManager EditableTypes
+		{
+			get { return Current.EditableTypes; }
 		}
 
 		/// <summary>

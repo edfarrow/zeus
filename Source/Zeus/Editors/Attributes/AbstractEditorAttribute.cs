@@ -6,6 +6,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Ext.Net;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 using Zeus.Security;
 using Label = System.Web.UI.WebControls.Label;

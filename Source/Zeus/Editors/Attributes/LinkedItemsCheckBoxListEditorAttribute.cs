@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
 {

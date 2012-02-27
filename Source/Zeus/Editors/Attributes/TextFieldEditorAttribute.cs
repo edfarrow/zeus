@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
 {

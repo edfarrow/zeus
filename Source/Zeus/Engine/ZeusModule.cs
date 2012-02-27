@@ -4,6 +4,7 @@ using Zeus.Admin;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
 using Zeus.ContentTypes;
+using Zeus.EditableTypes;
 using Zeus.FileSystem;
 using Zeus.Installation;
 using Zeus.Integrity;
@@ -30,11 +31,15 @@ namespace Zeus.Engine
 			Bind<Navigator>().To<Navigator>().InSingletonScope();
 
 			// Content Types
-			Bind(typeof(AttributeExplorer<>)).To(typeof(AttributeExplorer<>)).InSingletonScope();
-			Bind(typeof(IEditableHierarchyBuilder<>)).To(typeof(EditableHierarchyBuilder<>)).InSingletonScope();
 			Bind<IContentTypeBuilder>().To<ContentTypeBuilder>().InSingletonScope();
 			Bind<IContentTypeManager>().To<ContentTypeManager>().InSingletonScope();
 			Bind<ContentTypeConfigurationService>().ToSelf().InSingletonScope();
+
+			// Editable Types
+			Bind(typeof(AttributeExplorer<>)).To(typeof(AttributeExplorer<>)).InSingletonScope();
+			Bind(typeof(IEditableHierarchyBuilder<>)).To(typeof(EditableHierarchyBuilder<>)).InSingletonScope();
+			Bind<IEditableTypeBuilder>().To<EditableTypeBuilder>().InSingletonScope();
+			Bind<IEditableTypeManager>().To<EditableTypeManager>().InSingletonScope();
 
 			// Engine
 			Bind<IContentAdapterProvider>().To<ContentAdapterProvider>().InSingletonScope();
