@@ -291,8 +291,6 @@
     <Compile Include="PreviewFrame.master.designer.cs">
       <DependentUpon>PreviewFrame.master</DependentUpon>
     </Compile>
-    <Compile Include="Web\UI\WebControls\ToolbarHyperLink.cs" />
-    <Compile Include="Web\UI\WebControls\ToolbarButton.cs" />
     <Compile Include="AdminInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

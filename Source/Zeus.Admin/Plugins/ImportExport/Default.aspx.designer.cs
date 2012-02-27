@@ -13,15 +13,6 @@ namespace Zeus.Admin.Plugins.ImportExport {
     public partial class Default {
         
         /// <summary>
-        /// hlCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarHyperLink hlCancel;
-        
-        /// <summary>
         /// tbpExport control.
         /// </summary>
         /// <remarks>

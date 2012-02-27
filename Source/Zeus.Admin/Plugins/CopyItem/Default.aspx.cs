@@ -14,7 +14,6 @@ namespace Zeus.Admin.Plugins.CopyItem
 
 		private void LoadDefaultsAndInfo()
 		{
-			hlCancel.NavigateUrl = CancelUrl();
 			txtNewName.Text = MemorizedItem.Name;
 
 			Title = string.Format("Copy '{0}' onto '{1}'",

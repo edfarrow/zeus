@@ -1,16 +1,10 @@
 ﻿<%@ Page Title="Import / Export Items" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.ImportExport.Default" %>
-<%@ Import Namespace="Zeus.Web.UI"%>
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <%@ Register Src="../../AffectedItems.ascx" TagName="AffectedItems" TagPrefix="admin" %>
-<%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
-<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
 	<style type="text/css">
 		p { margin-bottom: 10px; }
 	</style>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="Toolbar" runat="server">
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<ext:TabPanel runat="server">

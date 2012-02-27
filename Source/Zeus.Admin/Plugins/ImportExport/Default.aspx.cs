@@ -17,12 +17,6 @@ namespace Zeus.Admin.Plugins.ImportExport
 
 		#region Methods
 
-		protected override void OnLoad(EventArgs e)
-		{
-			hlCancel.NavigateUrl = CancelUrl();
-			base.OnLoad(e);
-		}
-
 		protected void btnExport_Command(object sender, CommandEventArgs e)
 		{
 			throw new NotImplementedException();

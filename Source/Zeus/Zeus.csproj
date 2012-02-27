@@ -357,16 +357,9 @@
     <Compile Include="Web\UI\PanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
-    <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
-    <Compile Include="Web\UI\WebControls\ExtendedListView.cs" />
-    <Compile Include="Web\UI\WebControls\FakePropertyInfo.cs" />
     <Compile Include="Web\UI\WebControls\LoginName.cs" />
     <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
     <Compile Include="Web\UI\WebControls\TemplateField.cs" />
-    <Compile Include="Web\UI\WebControls\TypedListView.cs" />
-    <Compile Include="Web\UI\WebControls\TypedListViewControlBuilder.cs" />
-    <Compile Include="Web\UI\WebControls\TypedListViewDataItem.cs" />
-    <Compile Include="Web\UI\WebControls\TypedListViewFakeType.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
