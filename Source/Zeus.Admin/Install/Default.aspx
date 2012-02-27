@@ -24,6 +24,8 @@
 	<form runat="server">
 		<asp:Literal ID="ltStartupError" runat="server" />
 		
+		<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
+		
 		<ext:TabPanel runat="server" ID="tbcInstallation">
 			<Items>
 				<ext:Panel runat="server" ID="tbiWelcome" Title="1. Welcome">
@@ -38,7 +40,7 @@
 					</Content>
 				</ext:Panel>
 			
-				<ext:Panel runat="server" ID="tbiDatabaseConnection" ToolTip="2. Database connection">
+				<ext:Panel runat="server" ID="tbiDatabaseConnection" Title="2. Database connection">
 					<Content>
 						<h1>Check database connection</h1>
 						<asp:Literal runat="server" Visible='<%# Status.IsConnected %>'>
@@ -55,7 +57,7 @@
 					</Content>
 				</ext:Panel>
 			
-				<ext:Panel runat="server" ID="tbiDatabaseTables" ToolTip="3. Database tables">
+				<ext:Panel runat="server" ID="tbiDatabaseTables" Title="3. Database tables">
 					<Content>
 						<h1>Create database tables</h1>
 						<asp:Literal runat="server" Visible='<%# Status.HasSchema %>'>
@@ -73,7 +75,7 @@
 					</Content>
 				</ext:Panel>
 
-				<ext:Panel runat="server" ID="tbiRootNode" ToolTip="4. Root node">
+				<ext:Panel runat="server" ID="tbiRootNode" Title="4. Root node">
 					<Content>
 						<h1>Insert root node (required)</h1>
 				
@@ -163,7 +165,7 @@
 					</Content>
 				</ext:Panel>
 			
-				<ext:Panel runat="server" ID="tbiUsers" ToolTip="5. Users">
+				<ext:Panel runat="server" ID="tbiUsers" Title="5. Users">
 					<Content>
 						<h1>Create administrator login</h1>
 						<asp:Literal runat="server" Visible='<%# !Status.HasSchema %>'>
@@ -181,7 +183,7 @@
 					</Content>
 				</ext:Panel>
 
-				<ext:Panel runat="server" ID="tbiFinishingTouches" ToolTip="6. Finishing touches">
+				<ext:Panel runat="server" ID="tbiFinishingTouches" Title="6. Finishing touches">
 					<Content>
 						<h1>Almost done!</h1>
 						<p><b>IMPORTANT!</b> Now that you've finished installing Zeus, you need to turn off the installation mode in web.config.
@@ -191,10 +193,10 @@
 						before you continue.</p>
 					</Content>
 				</ext:Panel>
-			
-				<asp:Label EnableViewState="false" ID="errorLabel" runat="server" CssClass="errorLabel" />
 			</Items>
 		</ext:TabPanel>
+		
+		<asp:Label EnableViewState="false" ID="errorLabel" runat="server" CssClass="errorLabel" />
 	</form>
 </body>
 </html>
