@@ -13,24 +13,57 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders {
     public partial class Default {
         
         /// <summary>
-        /// lsvOrders control.
+        /// scriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.TypedListView lsvOrders;
+        protected global::Ext.Net.ResourceManager scriptManager;
         
         /// <summary>
-        /// dpgSearchResultsPager control.
+        /// exsDataStore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataPager dpgSearchResultsPager;
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSeeAll;
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSeeOnlyUnprocessed;
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSearch;
+        protected global::Ext.Net.Store exsDataStore;
+        
+        /// <summary>
+        /// gpaChildren control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.GridPanel gpaChildren;
+        
+        /// <summary>
+        /// btnSeeAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnSeeAll;
+        
+        /// <summary>
+        /// btnSeeOnlyUnprocessed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnSeeOnlyUnprocessed;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnSearch;
     }
 }

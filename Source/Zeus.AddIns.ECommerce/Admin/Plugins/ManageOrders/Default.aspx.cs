@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Web.UI.WebControls;
-using MongoDB.Bson;
-using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
 
@@ -10,67 +8,45 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 {
 	public partial class Default : PreviewFrameAdminPage
 	{
-		#region Methods
-
 		protected override void OnLoad(EventArgs e)
 		{
-			if (!IsPostBack)
-				ReBind();
+			if (!ExtNet.IsAjaxRequest)
+				RefreshData();
 
 			base.OnLoad(e);
 		}
 
-		private void ReBind()
+		protected void exsDataStore_RefreshData(object sender, StoreRefreshDataEventArgs e)
 		{
-			lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status == OrderStatus.Paid).OrderByDescending(o => o.ID).ToList();
-			lsvOrders.DataBind();
+			RefreshData();
 		}
 
-		protected override void OnPreRender(EventArgs e)
+		private void RefreshData()
 		{
-			Page.ClientScript.RegisterCssResource(typeof(PreviewFrameAdminPage), "Zeus.Admin.Assets.Css.view.css");
-			base.OnPreRender(e);
-		}
-
-		#endregion
-
-		protected void btnProcess_Command(object sender, CommandEventArgs e)
-		{
-			ObjectId orderID = ObjectId.Parse(e.CommandArgument.ToString());
-
-			Order order = ContentItem.Find<Order>(orderID);
-			order.Status = OrderStatus.Processed;
-			order.Save();
-
-			ReBind();
+			exsDataStore.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status == OrderStatus.Paid).OrderByDescending(o => o.ID).ToList();
+			exsDataStore.DataBind();
 		}
 
         protected void btnSeeAll_Click(object sender, EventArgs e)
 		{
-            btnSeeAll.Visible = false;
-            btnSeeOnlyUnprocessed.Visible = true;
+            btnSeeAll.Disabled = true;
+			btnSeeOnlyUnprocessed.Disabled = false;
 
-            lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
-            lsvOrders.DataBind();
+			exsDataStore.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
+			exsDataStore.DataBind();
         }
 
         protected void btnSeeOnlyUnprocessed_Click(object sender, EventArgs e)
         {
-            btnSeeAll.Visible = true;
-            btnSeeOnlyUnprocessed.Visible = false;
+			btnSeeAll.Disabled = false;
+			btnSeeOnlyUnprocessed.Disabled = true;
 
-            ReBind();
+			RefreshData();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
 		{
-            Response.Redirect("admin.plugins.manage-orders.search.aspx?selected=" + Request.QueryString["selected"]);
-		}
-
-		protected void lsvOrders_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
-		{
-			dpgSearchResultsPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-			ReBind();
+            Response.Redirect(Engine.GetServerResourceUrl(typeof(Default), "Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders.Search.aspx") + "?selected=" + Request.QueryString["selected"]);
 		}
 	}
 }

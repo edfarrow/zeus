@@ -1,79 +1,90 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders.Default" %>
-<%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
-<%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods" %>
+<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 
-<asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<admin:ToolbarButton runat="server" ID="btnSeeAll" Text="See All Orders" Icon="BasketGo" CssClass="positive" OnClick="btnSeeAll_Click" />
-	<admin:ToolbarButton runat="server" ID="btnSeeOnlyUnprocessed" Text="See Only Unprocessed Orders" Icon="Basket" CssClass="positive" OnClick="btnSeeOnlyUnprocessed_Click" Visible="false" />
-	<admin:ToolbarButton runat="server" ID="btnSearch" Text="Search for an Order" Icon="Magnifier" CssClass="positive" OnClick="btnSearch_Click" />
-</asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-<style>
-/* ORDER TABLES */
-            #adminTable, .tb {
-                border-collapse: collapse; border-spacing: 0;
-                margin: 0 10px 10px 0 ;
-                float: left;
-            }
-
-            #adminTable td, #adminTable th, .tb td, .tb th{
-                border: 1px solid #ddd;
-                font-family: arial;
-                padding: 7px;
-            }
-
-            #adminTable th, .tb th {
-                font-weight: bold;
-                font-size: 12px;
-                color: Black;
-                background: #f0fdff;
-                text-align: left;
-            }
-
-            #adminTable td, .tb td {
-                font-size: 12px;
-                line-height: 17px;
-            }
-</style>
-	<h2>Manage Orders</h2>
-
-	<zeus:TypedListView runat="server" ID="lsvOrders" DataItemTypeName="Zeus.AddIns.ECommerce.ContentTypes.Data.Order"
-		OnPagePropertiesChanging="lsvOrders_PagePropertiesChanging">
-		<LayoutTemplate>
-			<table class="tb" id="adminTable">
-				<tr class="titles">
-					<th>Order Number</th>
-					<th>Date Placed</th>
-					<th>Customer</th>
-					<th># Items</th>
-					<th>Total Price</th>
-					<th>Status</th>
-					<th>Method</th>
-					<th>Details</th>
-				</tr>
-				<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
-			</table>
-		</LayoutTemplate>
-		<ItemTemplate>
-			<tr>
-				<td style="vertical-align:top"><%# Container.DataItem.ID %></td>
-				<td style="vertical-align:top"><%# Container.DataItem.Created.ToShortDateString() %></td>
-				<td style="vertical-align:top"><%# Container.DataItem.ShippingAddress.FirstName + " " + Container.DataItem.ShippingAddress.Surname + " - " + Container.DataItem.EmailAddress%></td>
-				<td style="vertical-align:top"><%# Container.DataItem.TotalItemCount%></td>
-				<td style="vertical-align:top"><%# Container.DataItem.TotalPrice.ToString("C2") %></td>
-				<td style="vertical-align:top"><%# Container.DataItem.Status.GetDescription() %></td>
-				<td style="vertical-align:top"><%# Container.DataItem.PaymentMethod.GetDescription() %></td>
-				<td style="vertical-align:top">
-					<a href="admin.plugins.manage-orders.view-order.aspx?selected=<%# Container.DataItem.Path %>">Details</a>
-				</td>
-			</tr>
-		</ItemTemplate>
-	</zeus:TypedListView>
+	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
 	
-	  <asp:DataPager ID="dpgSearchResultsPager" runat="server" PageSize="30" PagedControlID="lsvOrders">
-		<Fields>
-      <asp:NumericPagerField ButtonCount="10" ButtonType="Link" />
-    </Fields>
-	</asp:DataPager>
+	<ext:Store ID="exsDataStore" runat="server" OnRefreshData="exsDataStore_RefreshData">
+		<Reader>
+			<ext:ArrayReader IDProperty="ID">
+				<Fields>
+					<ext:RecordField Name="ID" Mapping="ID" Type="String" />
+					<ext:RecordField Name="Created" Mapping="Created" Type="Date" />
+					<ext:RecordField Name="CustomerName" Mapping="CustomerName" Type="String" />
+					<ext:RecordField Name="TotalItemCount" Mapping="TotalItemCount" Type="Int" />
+					<ext:RecordField Name="TotalPrice" Mapping="TotalPrice" Type="Float" />
+					<ext:RecordField Name="Status" Mapping="Status" Type="String" />
+					<ext:RecordField Name="PaymentMethod" Mapping="PaymentMethod" Type="String" />
+					<ext:RecordField Name="Path" Mapping="Path" Type="String" />
+				</Fields>
+			</ext:ArrayReader>
+		</Reader>
+	</ext:Store>
+	
+	<ext:Viewport runat="server">
+		<Content>
+			<ext:FitLayout runat="server">
+				<Items>
+					<ext:GridPanel runat="server" ID="gpaChildren" StoreID="exsDataStore" StripeRows="true" Border="false">
+						<CustomConfig>
+							<ext:ConfigItem Name="viewConfig" Value="{ emptyText: 'No orders matching the selected filter.' }" />
+						</CustomConfig>
+						<TopBar>
+							<ext:Toolbar runat="server">
+								<Items>
+									<ext:Button runat="server" ID="btnSeeAll" Text="See All Orders" Icon="BasketGo">
+										<DirectEvents>
+											<Click OnEvent="btnSeeAll_Click">
+												<EventMask ShowMask="true" Msg="Updating... Please wait." Target="Page" />
+											</Click>
+										</DirectEvents>
+									</ext:Button>
+									<ext:Button runat="server" ID="btnSeeOnlyUnprocessed" Text="See Only Unprocessed Orders" Icon="Basket" Disabled="true">
+										<DirectEvents>
+											<Click OnEvent="btnSeeOnlyUnprocessed_Click">
+												<EventMask ShowMask="true" Msg="Updating... Please wait." Target="Page" />
+											</Click>
+										</DirectEvents>
+									</ext:Button>
+									<ext:Button runat="server" ID="btnSearch" Text="Search for an Order" Icon="Magnifier">
+										<DirectEvents>
+											<Click OnEvent="btnSearch_Click">
+												<EventMask ShowMask="true" Msg="Updating... Please wait." Target="Page" />
+											</Click>
+										</DirectEvents>
+									</ext:Button>
+								</Items>
+							</ext:Toolbar>
+						</TopBar>
+						<ColumnModel>
+							<Columns>
+								<ext:Column ColumnID="ID" Header="Order Number" Sortable="true" DataIndex="ID" />
+								<ext:Column ColumnID="Created" Header="Date Placed" Sortable="true" DataIndex="Created">
+									<Renderer Format="Date" />
+								</ext:Column>
+								<ext:Column ColumnID="CustomerName" Header="Customer" Sortable="true" DataIndex="CustomerName" />
+								<ext:Column ColumnID="TotalItemCount" Header="# Items" Sortable="true" DataIndex="TotalItemCount" />
+								<ext:Column ColumnID="TotalPrice" Header="Total Price" Sortable="true" DataIndex="TotalPrice" />
+								<ext:Column ColumnID="Status" Header="Status" Sortable="true" DataIndex="Status" />
+								<ext:Column ColumnID="PaymentMethod" Header="Method" Sortable="true" DataIndex="PaymentMethod" />
+								<ext:CommandColumn>
+									<Commands>
+										<ext:GridCommand ToolTip-Text="Details" CommandName="Details" Icon="NoteEdit" />
+									</Commands>
+								</ext:CommandColumn>
+							</Columns>
+						</ColumnModel>
+						<LoadMask ShowMask="true" />
+						<BottomBar>
+							<ext:PagingToolBar runat="server" PageSize="30" StoreID="exsDataStore" />
+						</BottomBar>
+						<Listeners>
+							<Command Handler="window.location.href = 'vieworder.aspx?selected=' + record.data.Path;" />
+						</Listeners>
+					</ext:GridPanel>
+				</Items>
+			</ext:FitLayout>
+		</Content>
+	</ext:Viewport>
 </asp:Content>

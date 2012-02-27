@@ -128,7 +128,7 @@ namespace Zeus.Admin.Plugins.RecycleBin
 		public bool IsInTrash(ContentItem item)
 		{
 			RecycleBinContainer trash = GetTrashContainer(false);
-			return trash != null && item.DescendantsAndSelf.Contains(trash);
+			return trash != null && trash.DescendantsAndSelf.Any(ci => ci.ID == item.ID);
 		}
 	}
 }

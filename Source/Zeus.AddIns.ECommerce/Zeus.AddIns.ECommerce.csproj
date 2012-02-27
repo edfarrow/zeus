@@ -104,7 +104,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\Plugins\ManageOrdersActionPlugin.cs" />
+    <Compile Include="Admin\Plugins\ManageOrdersMenuPlugin.cs" />
     <Compile Include="Admin\AdminInitializer.cs" />
     <Compile Include="Admin\Plugins\ManageOrders\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

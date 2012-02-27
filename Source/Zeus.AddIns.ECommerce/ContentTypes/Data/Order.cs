@@ -16,7 +16,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.BasketPut; }
 		}
 
-		public User User { get; set; }
+		public virtual User User { get; set; }
 
 		public virtual Address ShippingAddress { get; set; }
 		public virtual Address BillingAddress { get; set; }
@@ -25,7 +25,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		public OrderStatus Status { get; set; }
 		public PaymentMethod PaymentMethod { get; set; }
 		public string BookingRef { get; set; }
-		public DeliveryMethod DeliveryMethod { get; set; }
+		public virtual DeliveryMethod DeliveryMethod { get; set; }
 		public string EmailAddress { get; set; }
 		public string TelephoneNumber { get; set; }
 		public string MobileTelephoneNumber { get; set; }
