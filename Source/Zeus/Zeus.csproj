@@ -259,7 +259,7 @@
     <Compile Include="ContentTypes\ReplacesContentTypesAttribute.cs" />
     <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
     <Compile Include="DataContentItem.cs" />
-    <Compile Include="Editors\Attributes\EmbeddedDocumentEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedItemEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TextEditorAttributeBase.cs" />
     <Compile Include="Editors\Attributes\TextFieldEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\PageTitleEditorAttribute.cs" />

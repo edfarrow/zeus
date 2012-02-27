@@ -53,19 +53,19 @@ namespace Zeus.Admin.Plugins.EditItem
 			catch (Exception ex)
 			{
 				Engine.Resolve<IErrorHandler>().Notify(ex);
-				//ExtNet.MessageBox.Show(new MessageBoxConfig
-				//{
-				//    Icon = MessageBox.Icon.ERROR,
-				//    Buttons = MessageBox.Button.OK,
-				//    Message = "Unexpected error: " + ex
-				//});
+				ExtNet.MessageBox.Show(new MessageBoxConfig
+				{
+					Icon = MessageBox.Icon.ERROR,
+					Buttons = MessageBox.Button.OK,
+					Message = "Unexpected error: " + ex
+				});
 			}
 		}
 
 		private void SaveChanges()
 		{
-			zeusItemEditView.Save(zeusItemEditView.CurrentItem);
-			ContentItem currentItem = zeusItemEditView.CurrentItem;
+			zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem);
+			var currentItem = (ContentItem) zeusItemEditView.CurrentItem;
 
 			if (currentItem.IsPage)
 			{

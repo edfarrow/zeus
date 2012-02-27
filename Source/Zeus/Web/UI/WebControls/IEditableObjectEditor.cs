@@ -1,9 +1,9 @@
-﻿using Zeus.ContentTypes;
+﻿using Zeus.EditableTypes;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public interface ContentItemEditor
+	public interface IEditableObjectEditor
 	{
-		ContentItem CurrentItem { get; }
+		IEditableObject CurrentItem { get; }
 	}
 }

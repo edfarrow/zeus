@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class ItemEditView : WebControl, INamingContainer, ContentItemEditor
+	public class ItemEditView : WebControl, INamingContainer, IEditableObjectEditor
 	{
 		private EditableType _currentEditableType;
-		private ContentItem _currentItem;
+		private IEditableObject _currentItem;
 		private bool _postedBack;
 
 		public event EventHandler<ItemViewEditableObjectEventArgs> ItemCreating;
@@ -26,7 +25,7 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		/// <summary>Gets or sets the item to edit with this form.</summary>
-		public virtual ContentItem CurrentItem
+		public virtual IEditableObject CurrentItem
 		{
 			get
 			{
