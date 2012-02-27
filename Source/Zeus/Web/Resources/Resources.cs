@@ -29,14 +29,8 @@
 
 [assembly: WebResource("Zeus.Web.Resources.jQuery.Plugins.jquery.colorpicker.css", "text/css", PerformSubstitution = true)]
 [assembly: WebResource("Zeus.Web.Resources.jQuery.Plugins.jquery.colorpicker.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.jQuery.Plugins.jquery.timePicker.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.jQuery.Plugins.jquery.timePicker.css", "text/css")]
 
 [assembly: WebResource("Zeus.Web.Resources.jQuery.jquery.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.jQuery.TimePicker.css", "text/css")]
-[assembly: WebResource("Zeus.Web.Resources.jQuery.ui.core.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.jQuery.ui.sortable.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.jQuery.ui.tabs.js", "text/javascript")]
 
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.attach.png", "image/png")]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.bar.gif", "image/gif")]

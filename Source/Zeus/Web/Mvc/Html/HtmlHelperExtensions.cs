@@ -22,7 +22,7 @@ namespace Zeus.Web.Mvc.Html
 				return string.Empty;
 
 			htmlHelper.ViewContext.HttpContext.Items["RegisterJQuery"] = true;
-			return htmlHelper.IncludeJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.jQuery.jquery.js");
+			return htmlHelper.IncludeJavascriptResource(typeof(TimeRange), "Zeus.Web.Resources.jQuery.jquery.js");
 		}
 
 		public static string IncludeJavascriptResource(this HtmlHelper html, Type type, string resourceName)

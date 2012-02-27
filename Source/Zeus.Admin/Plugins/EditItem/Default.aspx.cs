@@ -138,19 +138,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
 			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
 
-			// HtmlTextBox
-			//Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(typeof(HtmlTextBox), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderTop);
-			Page.ClientScript.RegisterClientScriptBlock(typeof(HtmlTextBox), "HtmlTextBox",
-				@"function fileBrowserCallBack(fieldName, url, destinationType, win)
-				{
-					var srcField = win.document.forms[0].elements[fieldName];
-					var insertFileUrl = function(data) {
-						srcField.value = data.url;
-					};
-
-					top.fileManager.show(Ext.get(fieldName), insertFileUrl, destinationType);
-				}", true);
-
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");
 			base.OnPreRender(e);
