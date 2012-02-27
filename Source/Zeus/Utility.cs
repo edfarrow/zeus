@@ -91,15 +91,5 @@ namespace Zeus
 		{
 			return _resourceManager.GetIconUrl(icon);
 		}
-
-		public static string GetClientResourceUrl(Assembly assembly, string relativePath)
-		{
-			throw new NotImplementedException();
-		}
-
-		public static string GetClientResourceUrl(Type type, string relativePath)
-		{
-			return GetClientResourceUrl(type.Assembly, relativePath);
-		}
 	}
 }

@@ -46,6 +46,7 @@
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.mootools.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.progress.gif", "image/gif")]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.swf", "application/x-shockwave-flash")]
 
 [assembly: WebResource("Zeus.Web.Resources.xregexp-unicode-base.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.xregexp-unicode-categories.js", "text/javascript")]

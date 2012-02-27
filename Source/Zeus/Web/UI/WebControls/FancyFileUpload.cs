@@ -194,7 +194,7 @@ function prepare{8}() {{
 }};
 if (typeof (Sys) !== 'undefined') Sys.Application.add_load(prepare{8});
 if (window.addEvent) window.addEvent('domready', prepare{8});
-", Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Swiff.Uploader.swf"),
+", Page.ClientScript.GetWebResourceUrl(GetType(), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.swf"),
 		 TypeFilterDescription,
 		 string.Join(";",  TypeFilter),
 		 GetListClientID(),
