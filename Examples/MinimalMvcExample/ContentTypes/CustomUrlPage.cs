@@ -36,8 +36,8 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		[EmbeddedCroppedImageEditor("Banner", 200, FixedWidthValue = 400, FixedHeightValue = 200)]
 		public virtual EmbeddedCroppedImage Banner { get; set; }
 
-		//[EmbeddedDocumentEditor("MyPage", 200)]
-		//public virtual MyLittleType MyPage { get; set; }
+		[EmbeddedDocumentEditor("MyPage", 210)]
+		public virtual MyLittleType MyPage { get; set; }
 
 		[EnumEditor("Vegetable", 300, typeof(Vegetable))]
 		public virtual Vegetable Vegetable { get; set; }

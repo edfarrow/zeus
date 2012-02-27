@@ -87,13 +87,11 @@ namespace Zeus.Admin
 		/// <param name="addedEditors">The editors to update the item with.</param>
 		/// <param name="user">The user that is performing the saving.</param>
 		/// <param name="onSavingCallback"> </param>
-		public virtual ContentItem Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user,
-			Action<ContentItem> onSavingCallback)
+		public virtual void Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
 		{
 			bool wasUpdated = UpdateItem(item, addedEditors, user);
 			if (wasUpdated || item.IsNewRecord)
 			{
-				onSavingCallback(item);
 				item.Save();
 
 				ContentItem theParent = item.Parent;
@@ -104,8 +102,6 @@ namespace Zeus.Admin
 					theParent = theParent.Parent;
 				}
 			}
-
-			return item;
 		}
 
 		/// <summary>Updates the item by way of letting the defined editable attributes interpret the added editors.</summary>
@@ -113,7 +109,7 @@ namespace Zeus.Admin
 		/// <param name="addedEditors">The previously added editors.</param>
 		/// <param name="user">The user for filtering updatable editors.</param>
 		/// <returns>Whether any property on the item was updated.</returns>
-		public bool UpdateItem(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
+		private bool UpdateItem(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
 		{
 			if (item == null) throw new ArgumentNullException("item");
 			if (addedEditors == null) throw new ArgumentNullException("addedEditors");

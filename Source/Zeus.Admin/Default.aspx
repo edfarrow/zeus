@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Default" %>
-<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
+<%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Controls" Assembly="Zeus.Admin" %>
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -38,8 +38,8 @@
 							<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
 							<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
 							<div id="headerRight">
-								<zeus:LoginStatus runat="server" ID="logOut" />
-								<p id="loggedAs">You are logged in as <zeus:LoginName runat="server" /></p>
+								<admin:LoginStatus runat="server" ID="logOut" />
+								<p id="loggedAs">You are logged in as <admin:LoginName runat="server" /></p>
 							</div>
 						</div>
 

@@ -9,13 +9,6 @@ namespace Zeus.Web.UI.WebControls
 	{
 		private bool _postedBack;
 
-		#region Events
-
-		public event EventHandler<ItemViewEditableObjectEventArgs> Saving;
-		public event EventHandler<ItemViewEditableObjectEventArgs> Saved;
-
-		#endregion
-
 		protected override void AddPropertyControls()
 		{
 			if (CurrentItemDefinition != null)
@@ -59,48 +52,14 @@ namespace Zeus.Web.UI.WebControls
 
 		private void UpdateEditors()
 		{
-            foreach (IEditor editor in CurrentItemDefinition.GetEditors(Page.User))
-            {
-                editor.UpdateEditor(CurrentItem, PropertyControls[editor.Name]);
-            }
+			foreach (IEditor editor in CurrentItemDefinition.GetEditors(Page.User))
+				editor.UpdateEditor(CurrentItem, PropertyControls[editor.Name]);
 		}
 
-		public ContentItem Save(ContentItem item)
+		public void Save(ContentItem item)
 		{
 			EnsureChildControls();
-
-			item = Zeus.Context.AdminManager.Save(item, PropertyControls, Page.User,
-				c => OnSaving(new ItemViewEditableObjectEventArgs(c)));
-
-			OnSaved(new ItemViewEditableObjectEventArgs(CurrentItem));
-			
-			return item;
-		}
-
-		/// <summary>Saves <see cref="CurrentItem"/> with the values entered in the form.</summary>
-		/// <returns>The saved item.</returns>
-		public ContentItem Save()
-		{
-			CurrentItem = Save((ContentItem) CurrentItem);
-			return CurrentItem;
-		}
-
-		/// <summary>Updates the <see cref="CurrentItem"/> with the values entered in the form without saving it.</summary>
-		public void Update()
-		{
-			Zeus.Context.AdminManager.UpdateItem((ContentItem) CurrentItem, PropertyControls, Page.User);
-		}
-
-		protected virtual void OnSaving(ItemViewEditableObjectEventArgs args)
-		{
-			if (Saving != null)
-				Saving(this, args);
-		}
-
-		protected virtual void OnSaved(ItemViewEditableObjectEventArgs args)
-		{
-			if (Saved != null)
-				Saved(this, args);
+			Zeus.Context.AdminManager.Save(item, PropertyControls, Page.User);
 		}
 	}
 }

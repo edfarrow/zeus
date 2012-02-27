@@ -252,7 +252,7 @@
     <Compile Include="ContentTypes\ReplacesContentTypesAttribute.cs" />
     <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
     <Compile Include="DataContentItem.cs" />
-    <Compile Include="Editors\Attributes\ChildEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedDocumentEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TextEditorAttributeBase.cs" />
     <Compile Include="Editors\Attributes\TextFieldEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\PageTitleEditorAttribute.cs" />
@@ -349,8 +349,6 @@
     <Compile Include="Web\UI\PanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
-    <Compile Include="Web\UI\WebControls\LoginName.cs" />
-    <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
@@ -531,7 +529,6 @@
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
     <Compile Include="Editors\Controls\ColourPickerTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\IItemView.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditView.cs" />
     <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>

@@ -3,17 +3,11 @@ using System.Collections;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Zeus.BaseLibrary.Web;
 using Zeus.Web.Security;
-using CommandEventArgs=System.Web.UI.WebControls.CommandEventArgs;
-using CommandEventHandler=System.Web.UI.WebControls.CommandEventHandler;
-using CompositeControl=System.Web.UI.WebControls.CompositeControl;
-using ImageButton=System.Web.UI.WebControls.ImageButton;
-using LinkButton=System.Web.UI.WebControls.LinkButton;
-using LoginCancelEventArgs=System.Web.UI.WebControls.LoginCancelEventArgs;
-using WebControl=System.Web.UI.WebControls.WebControl;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Admin.Controls
 {
 	[DefaultEvent("LoggingOut"), Bindable(false)]
 	public class LoginStatus : CompositeControl

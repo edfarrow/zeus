@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Admin.Controls
 {
 	[DefaultProperty("FormatString"), Bindable(false)]
 	public class LoginName : WebControl

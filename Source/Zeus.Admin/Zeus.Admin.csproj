@@ -104,6 +104,8 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\LoginName.cs" />
+    <Compile Include="Controls\LoginStatus.cs" />
     <Compile Include="Imagecrop.aspx.cs">
       <DependentUpon>Imagecrop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

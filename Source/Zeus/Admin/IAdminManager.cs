@@ -29,14 +29,7 @@ namespace Zeus.Admin
 		/// <param name="item">The item to update.</param>
 		/// <param name="addedEditors">The editors to update the item with.</param>
 		/// <param name="user">The user that is performing the saving.</param>
-		/// <param name="onSavingCallback"> </param>
-		ContentItem Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user, Action<ContentItem> onSavingCallback);
-
-		/// <summary>Updates the item with the values from the editors.</summary>
-		/// <param name="item">The item to update.</param>
-		/// <param name="addedEditors">The previously added editors.</param>
-		/// <param name="user">The user for filtering updatable editors.</param>
-		bool UpdateItem(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user);
+		void Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user);
 
 		bool TreeTooltipsEnabled { get; }
 	}

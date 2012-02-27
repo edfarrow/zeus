@@ -63,7 +63,8 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		private void SaveChanges()
 		{
-			ContentItem currentItem = (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem);
+			zeusItemEditView.Save(zeusItemEditView.CurrentItem);
+			ContentItem currentItem = zeusItemEditView.CurrentItem;
 
 			if (currentItem.IsPage)
 			{
