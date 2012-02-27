@@ -2,6 +2,7 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes
@@ -21,7 +22,7 @@ namespace Zeus.Editors.Attributes
 			return new LinkedItemsEditor { ID = Name, TypeFilter = TypeFilter.ToString() };
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, object existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateDetailCollectionItem(IEditableObject item, object existingDetail, Control editor, out object newDetail)
 		{
 			DropDownList ddl = (DropDownList) editor;
 			newDetail = ContentItem.Find(ObjectId.Parse(ddl.SelectedValue));

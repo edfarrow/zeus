@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
 using System.Web.UI;
@@ -39,7 +38,7 @@ namespace Zeus.Editors.Controls
 		protected override Control CreateDetailEditor(int id, object detail)
 		{
 			DropDownList ddl = new DropDownList { CssClass = "linkedItem", ID = ID + "_ddl_" + id };
-			IEnumerable<ContentItem> contentItems = ContentItem.All().OfType(TypeFilterInternal);
+			var contentItems = ContentItem.All().OfType(TypeFilterInternal);
 			ddl.Items.AddRange(contentItems.Select(ci => new ListItem(ci.Title, ci.ID.ToString())).ToArray());
 			if (detail != null)
 				ddl.SelectedValue = detail.ToString();

@@ -60,7 +60,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 			return true;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			// Create editors for each of the possible permutations of variations.
 			CheckBoxList checkBoxList = (CheckBoxList) editor;

@@ -23,7 +23,7 @@ namespace Zeus.Web.Security.Details
 			return true;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			CheckBoxList cbl = editor as CheckBoxList;
 			var dc = item[Name] as List<Items.Role>;

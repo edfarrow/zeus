@@ -22,6 +22,6 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Updates the editor with the values from the object.</summary>
 		/// <param name="item">The object that contains values to assign to the editor.</param>
 		/// <param name="editor">The editor to load with a value.</param>
-		void UpdateEditor(ContentItem item, Control editor);
+		void UpdateEditor(IEditableObject item, Control editor);
 	}
 }

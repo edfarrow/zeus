@@ -22,7 +22,7 @@ namespace Zeus.Editors.Attributes
 			return range;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			TimeField range = (TimeField)editor;
 			range.Text = (string) item[Name];

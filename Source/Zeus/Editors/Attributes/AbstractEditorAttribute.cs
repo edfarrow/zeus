@@ -5,7 +5,6 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Ext.Net;
-using MongoDB.Bson;
 using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 using Zeus.Security;
@@ -260,12 +259,12 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Updates the editor with the values from the item.</summary>
 		/// <param name="item">The item that contains values to assign to the editor.</param>
 		/// <param name="editor">The editor to load with a value.</param>
-		public void UpdateEditor(ContentItem item, Control editor)
+		public void UpdateEditor(IEditableObject item, Control editor)
 		{
 			UpdateEditorInternal(item, editor);
 		}
 
-		protected abstract void UpdateEditorInternal(ContentItem item, Control editor);
+		protected abstract void UpdateEditorInternal(IEditableObject item, Control editor);
 
 		int IComparable<IContainable>.CompareTo(IContainable other)
 		{

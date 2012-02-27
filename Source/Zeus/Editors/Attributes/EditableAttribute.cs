@@ -116,7 +116,7 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Updates the editor with the values from the item.</summary>
 		/// <param name="item">The item that contains values to assign to the editor.</param>
 		/// <param name="editor">The editor to load with a value.</param>
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			SetEditorValue(editor, item[Name]);
 		}

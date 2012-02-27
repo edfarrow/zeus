@@ -32,7 +32,7 @@ namespace Zeus.Editors.Attributes
 
 		protected abstract IEnumerable GetSelectedItems(IEnumerable<ListItem> selectedListItems);
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			CheckBoxList cbl = (CheckBoxList) editor;
 			cbl.Items.AddRange(GetListItems(item));
@@ -78,6 +78,6 @@ namespace Zeus.Editors.Attributes
 			return new CheckBoxList();
 		}
 
-		protected abstract ListItem[] GetListItems(ContentItem item);
+		protected abstract ListItem[] GetListItems(IEditableObject item);
 	}
 }

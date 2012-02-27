@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -24,7 +25,7 @@ namespace Zeus.Editors.Attributes
 
 		protected override IEnumerable GetSelectedItems(IEnumerable<ListItem> selectedListItems)
 		{
-			List<ContentItem> result = new List<ContentItem>();
+			var result = new List<ContentItem>();
 			foreach (ListItem listItem in selectedListItems)
 				result.Add(ContentItem.Find(ObjectId.Parse(listItem.Value)));
 			return result;
@@ -35,9 +36,9 @@ namespace Zeus.Editors.Attributes
 			return ((ContentItem) detail).ID.ToString();
 		}
 
-		protected override ListItem[] GetListItems(ContentItem item)
+		protected override ListItem[] GetListItems(IEditableObject item)
 		{
-			IQueryable<ContentItem> contentItems = ContentItem.All();
+			var contentItems = ContentItem.All();
 			var tempContentItems = contentItems.OfType(TypeFilter).OfType<object>();
 			return tempContentItems.ToArray().Cast<ContentItem>()
 				.Select(p => new ListItem(p.Title, p.ID.ToString()))

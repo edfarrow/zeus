@@ -1,5 +1,6 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes
@@ -17,7 +18,7 @@ namespace Zeus.Editors.Attributes
 			return new StringCollectionEditor { ID = Name };
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, object existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateDetailCollectionItem(IEditableObject item, object existingDetail, Control editor, out object newDetail)
 		{
 			newDetail = ((TextBox) editor).Text;
 		}

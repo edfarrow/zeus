@@ -4,6 +4,7 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
@@ -19,8 +20,9 @@ namespace Zeus.Editors.Attributes
 			
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, object existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateDetailCollectionItem(IEditableObject item, object existingDetail, Control editor, out object newDetail)
 		{
+			var contentItem = (ContentItem) item;
 			FancyFileUpload fileEditor = (FancyFileUpload)editor;
 			if (fileEditor.HasNewOrChangedFile)
 			{

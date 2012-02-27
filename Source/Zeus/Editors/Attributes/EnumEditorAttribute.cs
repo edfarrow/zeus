@@ -29,7 +29,7 @@ namespace Zeus.Editors.Attributes
 			_enumType = enumType;
 		}
 
-		protected override ListItem[] GetListItems(ContentItem contentItem)
+		protected override ListItem[] GetListItems(IEditableObject item)
 		{
 			Array values = Enum.GetValues(_enumType);
 			ListItem[] items = new ListItem[values.Length];

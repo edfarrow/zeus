@@ -149,7 +149,7 @@ namespace Zeus.Editors.Attributes
 			return false;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			TextFieldBase tb = editor as TextFieldBase;
 			tb.Text = Utility.Convert<string>(item[Name]) ?? DefaultValue;

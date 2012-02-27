@@ -27,7 +27,7 @@ namespace Zeus.Editors.Attributes
 			throw new NotImplementedException();
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			throw new NotImplementedException();
 		}

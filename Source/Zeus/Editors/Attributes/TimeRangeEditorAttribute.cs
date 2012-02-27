@@ -39,7 +39,7 @@ namespace Zeus.Editors.Attributes
 			return range;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			TimeRange range = (TimeRange)editor;
 			range.From = (string) item[Name];

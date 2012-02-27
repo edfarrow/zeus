@@ -63,7 +63,7 @@ namespace Zeus.Examples.MinimalMvcExample.Design.Editors
             return result;
         }
 
-        protected override ListItem[] GetListItems(ContentItem item)
+		protected override ListItem[] GetListItems(IEditableObject item)
         {
             return Context.StartPage.AccessibleDescendants.NavigablePages()
                 .ToList()

@@ -36,28 +36,29 @@ namespace Zeus.Editors.Attributes
             return false;			
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			NameEditor ne = (NameEditor) editor;
-			ne.Text = item.Name;
+			var ne = (NameEditor) editor;
+			var contentItem = (ContentItem) item;
+			ne.Text = contentItem.Name;
 			ne.Prefix = "/";
-			ne.Suffix = item.Extension;
+			ne.Suffix = contentItem.Extension;
 			try
 			{
-				if (Context.UrlParser.StartPage == item || item.Parent == null)
+				if (Context.UrlParser.StartPage == item || contentItem.Parent == null)
 				{
 					ne.Prefix = string.Empty;
 					ne.Suffix = string.Empty;
 				}
-				else if (Context.UrlParser.StartPage != item.Parent)
+				else if (Context.UrlParser.StartPage != contentItem.Parent)
 				{
-					string parentUrl = item.Parent.Url;
+					string parentUrl = contentItem.Parent.Url;
 					if (!parentUrl.Contains("?"))
 					{
 						string prefix = parentUrl;
-						if (!string.IsNullOrEmpty(item.Extension))
+						if (!string.IsNullOrEmpty(contentItem.Extension))
 						{
-							int aspxIndex = parentUrl.IndexOf(item.Extension, StringComparison.InvariantCultureIgnoreCase);
+							int aspxIndex = parentUrl.IndexOf(contentItem.Extension, StringComparison.InvariantCultureIgnoreCase);
 							prefix = parentUrl.Substring(0, aspxIndex);
 						}
 						prefix += "/";

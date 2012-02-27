@@ -51,7 +51,7 @@ namespace Zeus.Editors.Attributes
 			return placeHolder;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			CompositeField placeHolder = (CompositeField)editor;
 			DateField tb = (DateField)placeHolder.Items[0];

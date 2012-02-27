@@ -38,7 +38,7 @@ namespace Zeus.Editors.Attributes
 			return ddl.SelectedValue;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			ListControl ddl = (ListControl) editor;
 			ddl.Items.AddRange(GetListItems(item));
@@ -75,6 +75,6 @@ namespace Zeus.Editors.Attributes
 		protected abstract ListControl CreateEditor();
 		protected virtual void ModifyEditor(ListControl listControl) {}
 
-		protected abstract ListItem[] GetListItems(ContentItem item);
+		protected abstract ListItem[] GetListItems(IEditableObject item);
 	}
 }

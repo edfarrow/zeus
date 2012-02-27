@@ -28,7 +28,7 @@ namespace Zeus.Editors.Attributes
 				{
 					object existingDetail = (detailCollection.Count > i) ? detailCollection[i] : null;
 					object newDetail;
-					CreateOrUpdateDetailCollectionItem((ContentItem) item, existingDetail, detailCollectionEditor.Editors[i], out newDetail);
+					CreateOrUpdateDetailCollectionItem(item, existingDetail, detailCollectionEditor.Editors[i], out newDetail);
 					if (newDetail != null)
 						if (detailCollection.Count > i)
 							detailCollection[i] = newDetail;
@@ -48,7 +48,7 @@ namespace Zeus.Editors.Attributes
 			return detailCollectionEditor.DeletedIndexes.Count > 0 || detailCollectionEditor.AddedEditors;
 		}
 
-		protected abstract void CreateOrUpdateDetailCollectionItem(ContentItem item, object existingDetail, Control editor, out object newDetail);
+		protected abstract void CreateOrUpdateDetailCollectionItem(IEditableObject item, object existingDetail, Control editor, out object newDetail);
 		protected abstract BaseDetailCollectionEditor CreateEditor();
 
 		protected override Control AddEditor(Control container)
@@ -59,7 +59,7 @@ namespace Zeus.Editors.Attributes
 			return detailCollectionEditor;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			BaseDetailCollectionEditor detailCollectionEditor = (BaseDetailCollectionEditor) editor;
 			IEnumerable detailCollection = item[Name] as IEnumerable ?? new List<object>();

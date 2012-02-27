@@ -102,7 +102,7 @@ namespace Zeus.Editors.Attributes
 			return fileUpload;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;
 			EmbeddedFile file = (EmbeddedFile)item[Name];

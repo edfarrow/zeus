@@ -77,13 +77,14 @@ namespace Zeus.Editors.Attributes
             return false;
         }
 
-		protected override ListItem[] GetListItems(ContentItem item)
+		protected override ListItem[] GetListItems(IEditableObject item)
 		{
+			var contentItem = (ContentItem)item;
 			IQueryable<ContentItem> items = ContentItem.All();
 			if (TypeFilter != null)
 				items = items.OfType(TypeFilter);
 			if (ExcludeSelf)
-				items = items.Where(i => i.ID != item.ID);
+				items = items.Where(i => i.ID != contentItem.ID);
 			return items.ToList().OrderBy(i => i.HierarchicalTitle)
                 .Select(i => new ListItem { Value = i.ID.ToString(), Text = UseNonHiearchicalTitle ? i.Title : i.HierarchicalTitle })
 				.ToArray();

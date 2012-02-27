@@ -1,3 +1,5 @@
+using Zeus.ContentTypes;
+
 namespace Zeus.Editors.Attributes
 {
 	public class PageTitleEditorAttribute : ReactiveTextBoxEditorAttribute
@@ -14,9 +16,9 @@ namespace Zeus.Editors.Attributes
 			MaxLength = 200;
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, System.Web.UI.Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, System.Web.UI.Control editor)
 		{
-			if (!Context.ContentTypes.GetContentType(item).IsPage)
+			if (!Context.ContentTypes.GetContentType((ContentItem) item).IsPage)
 				editor.Parent.Visible = false;
 
 			base.UpdateEditorInternal(item, editor);

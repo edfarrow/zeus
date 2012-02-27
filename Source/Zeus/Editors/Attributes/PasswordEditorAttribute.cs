@@ -12,7 +12,7 @@ namespace Zeus.Editors.Attributes
 			
 		}
 
-		protected override void UpdateEditorInternal(ContentItem item, System.Web.UI.Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, System.Web.UI.Control editor)
 		{
 			
 		}
