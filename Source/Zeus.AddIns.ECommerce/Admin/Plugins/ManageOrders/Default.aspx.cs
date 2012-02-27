@@ -23,6 +23,8 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 
 		private void RefreshData()
 		{
+			// TODO: Filtering
+
 			exsDataStore.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status == OrderStatus.Paid).OrderByDescending(o => o.ID).ToList();
 			exsDataStore.DataBind();
 		}

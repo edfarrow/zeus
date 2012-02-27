@@ -64,8 +64,6 @@ namespace Zeus.Admin.Plugins.Permissions
 				BindAvailableUsers();
 			}
 
-			hlCancel.NavigateUrl = CancelUrl();
-
 			base.OnLoad(e);
 		}
 

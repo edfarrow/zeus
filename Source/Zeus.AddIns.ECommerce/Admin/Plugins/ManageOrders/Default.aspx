@@ -76,6 +76,16 @@
 							</Columns>
 						</ColumnModel>
 						<LoadMask ShowMask="true" />
+						<Plugins>
+							<ext:GridFilters runat="server">
+								<Filters>
+									<ext:StringFilter DataIndex="ID" />
+									<ext:StringFilter DataIndex="CustomerFirstName" />
+									<ext:StringFilter DataIndex="CustomerLastName" />
+									<ext:StringFilter DataIndex="CustomerEmail" />
+								</Filters>
+							</ext:GridFilters>
+						</Plugins>
 						<BottomBar>
 							<ext:PagingToolBar runat="server" PageSize="30" StoreID="exsDataStore" />
 						</BottomBar>
