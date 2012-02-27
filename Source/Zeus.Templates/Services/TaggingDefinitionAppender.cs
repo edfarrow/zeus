@@ -31,6 +31,8 @@ namespace Zeus.Templates.Services
 			foreach (var editableType in _editableTypeManager.GetEditableTypes())
 			{
 				ContentType contentType = _contentTypeManager.GetContentType(editableType.ItemType);
+				if (contentType == null)
+					continue;
 				if (IsPage(contentType))
 				{
 					var tagEditable = new LinkedItemsCheckBoxListEditorAttribute();

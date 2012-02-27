@@ -10,12 +10,12 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using Ormongo.Ancestry;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 using Zeus.Integrity;
 using Zeus.Linq;
 using Zeus.Persistence;
 using Zeus.Security;
+using Zeus.Util;
 using Zeus.Web;
 
 namespace Zeus
@@ -199,42 +199,12 @@ namespace Zeus
 
         /// <summary>Used primarily by editors to provide untyped access to this item's properties. If this class
         /// does not contain the specified property, it falls back to the ExtraData dictionary.</summary>
-        /// <param name="detailName">The name of the propery or detail.</param>
-        /// <returns>The value of the property. If no property exists, null is returned.</returns>
-        public virtual object this[string detailName]
+		/// <param name="propertyName">The name of the propery or key into ExtraData.</param>
+        /// <returns>The value of the property. If it could not be found, null is returned.</returns>
+		public virtual object this[string propertyName]
         {
-            get
-            {
-				if (detailName == null)
-					throw new ArgumentNullException("detailName");
-
-				// If we have a class property matching this name, get the property value.
-				// TODO: Cache this reflection
-				var propertyInfo = GetType().GetProperty(detailName);
-				if (propertyInfo != null && propertyInfo.CanRead)
-					return propertyInfo.GetValue(this, null);
-
-				if (ExtraData.ContainsKey(detailName))
-					return ExtraData[detailName];
-
-				return null;
-            }
-            set
-            {
-				if (string.IsNullOrEmpty(detailName))
-					throw new ArgumentNullException("detailName");
-
-				// If we have a class property matching this name, set the property value.
-				// TODO: Cache this reflection
-				var propertyInfo = GetType().GetProperty(detailName);
-            	if (propertyInfo != null && propertyInfo.CanWrite)
-            		propertyInfo.SetValue(this, value, null);
-            	else
-            		ExtraData[detailName] = value;
-
-            	if (string.IsNullOrEmpty(detailName))
-                    throw new ArgumentNullException("detailName", "Parameter 'detailName' cannot be null or empty.");
-            }
+            get { return EditableObjectUtility.GetValue(this, propertyName); }
+            set { EditableObjectUtility.SetValue(this, propertyName, value); }
         }
 
         #endregion

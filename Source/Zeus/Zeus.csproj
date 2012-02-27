@@ -245,6 +245,7 @@
     <Compile Include="Editors\Attributes\HtmlTextBoxEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TextAreaEditorAttribute.cs" />
     <Compile Include="Editors\Controls\HtmlTextBox.cs" />
+    <Compile Include="EmbeddedItem.cs" />
     <Compile Include="Engine\IContextAwareAttribute.cs" />
     <Compile Include="FileSystem\Images\EmbeddedCroppedImage.cs" />
     <Compile Include="FileSystem\EmbeddedFile.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Security\User.cs" />
     <Compile Include="Security\UserContainer.cs" />
     <Compile Include="SystemNode.cs" />
+    <Compile Include="Util\EditableObjectUtility.cs" />
     <Compile Include="Web\Caching\CachingExtensions.cs" />
     <Compile Include="Web\Caching\CachingService.cs" />
     <Compile Include="Web\Caching\ICachingService.cs" />
