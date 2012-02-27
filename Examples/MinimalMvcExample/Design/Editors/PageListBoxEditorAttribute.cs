@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
+using Zeus.ContentTypes;
 using Zeus.Editors.Attributes;
 using Zeus.Linq;
 
@@ -51,7 +52,7 @@ namespace Zeus.Examples.MinimalMvcExample.Design.Editors
                 .ToList();
         }
 
-        protected override object GetValue(ContentItem item)
+        protected override object GetValue(IEditableObject item)
         {
             string [] result = new string [0];
 

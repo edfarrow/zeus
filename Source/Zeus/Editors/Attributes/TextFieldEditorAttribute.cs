@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -136,7 +137,7 @@ namespace Zeus.Editors.Attributes
 			throw new NotSupportedException();
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			TextFieldBase tb = editor as TextFieldBase;
 			string value = (tb.Text == DefaultValue) ? null : tb.Text;

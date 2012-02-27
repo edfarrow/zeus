@@ -1,4 +1,5 @@
 ﻿using System.Web.UI;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes
@@ -45,7 +46,7 @@ namespace Zeus.Editors.Attributes
 			range.To = (string)item[NameEndRange];
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			TimeRange range = (TimeRange) editor;
 			if ((string) item[Name] != range.From || (string) item[NameEndRange] != range.To)

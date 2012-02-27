@@ -68,8 +68,6 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Gets or sets the label used for presentation.</summary>
         public string Title { get; set; }
 
-        public ObjectId? CurrentID { get; set; }
-
 		public string ContainerName { get; set; }
 
 		public bool Required { get; set; }
@@ -257,7 +255,7 @@ namespace Zeus.Editors.Attributes
 		/// <param name="item">The object to update.</param>
 		/// <param name="editor">The editor contorl whose values to update the object with.</param>
 		/// <returns>True if the item was changed (and needs to be saved).</returns>
-		public abstract bool UpdateItem(ContentItem item, Control editor);
+		public abstract bool UpdateItem(IEditableObject item, Control editor);
 
 		/// <summary>Updates the editor with the values from the item.</summary>
 		/// <param name="item">The item that contains values to assign to the editor.</param>

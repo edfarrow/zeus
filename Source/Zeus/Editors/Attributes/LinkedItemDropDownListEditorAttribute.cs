@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using System.Web.UI;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -36,7 +37,7 @@ namespace Zeus.Editors.Attributes
 			return null;
 		}
 
-		protected override object GetValue(ContentItem item)
+		protected override object GetValue(IEditableObject item)
 		{
 			ContentItem linkedItem = (ContentItem) item[Name];
 			if (linkedItem != null)
@@ -44,7 +45,7 @@ namespace Zeus.Editors.Attributes
 			return string.Empty;
 		}
 
-        public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
         {
             ListControl ddl = (ListControl)editor;
             object one = GetValue(ddl);

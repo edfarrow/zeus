@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -21,7 +22,7 @@ namespace Zeus.Editors.Attributes
 			throw new NotImplementedException();
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			throw new NotImplementedException();
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Web.UI;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -88,7 +89,7 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Updates the item with the values from the editor.</summary>
 		/// <param name="item">The item to update.</param>
 		/// <param name="editor">The editor contorl whose values to update the item with.</param>
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			object editorValue = GetEditorValue(editor);
 			object itemValue = item[Name];

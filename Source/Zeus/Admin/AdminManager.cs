@@ -86,7 +86,6 @@ namespace Zeus.Admin
 		/// <param name="item">The item to update.</param>
 		/// <param name="addedEditors">The editors to update the item with.</param>
 		/// <param name="user">The user that is performing the saving.</param>
-		/// <param name="onSavingCallback"> </param>
 		public virtual void Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
 		{
 			bool wasUpdated = UpdateItem(item, addedEditors, user);
@@ -117,23 +116,8 @@ namespace Zeus.Admin
 			bool updated = false;
 			ContentType contentType = _contentTypeManager.GetContentType(item);
 			foreach (IEditor e in contentType.GetEditors(user))
-            {
 				if (addedEditors.ContainsKey(e.Name))
-                {
 					updated = e.UpdateItem(item, addedEditors[e.Name]) || updated;
-                    /*
-                    if (updated)
-                    {
-                        System.Web.HttpContext.Current.Response.Write("Editor Name = " + e.Name + "<br/>");
-                        System.Web.HttpContext.Current.Response.Write("Item Name = " + item.Name + "<br/>");
-                        System.Web.HttpContext.Current.Response.Write("Item Url = " + item.Url + "<br/>");
-                        System.Web.HttpContext.Current.Response.End();
-                    }
-                     */
-                    
-                }
-            }
-            
 
 			return updated;
 		}

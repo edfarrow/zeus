@@ -5,6 +5,6 @@ namespace Zeus.ContentTypes
 {
 	public interface IContentTypeBuilder
 	{
-		IDictionary<Type, ContentType> GetDefinitions();
+		IDictionary<Type, ContentType> GetContentTypes();
 	}
 }

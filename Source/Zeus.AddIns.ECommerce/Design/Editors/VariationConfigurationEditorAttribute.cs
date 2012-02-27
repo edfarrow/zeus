@@ -33,7 +33,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 			return checkBoxList;
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			CheckBoxList checkBoxList = (CheckBoxList)editor;
 			Product product = (Product)item;

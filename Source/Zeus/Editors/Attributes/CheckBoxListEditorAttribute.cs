@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -21,7 +22,7 @@ namespace Zeus.Editors.Attributes
 
 		#endregion
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			CheckBoxList cbl = (CheckBoxList) editor;
 			IEnumerable selected = GetSelectedItems(cbl.Items.Cast<ListItem>().Where(li => li.Selected));

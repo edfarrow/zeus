@@ -9,7 +9,7 @@ namespace Zeus.ContentTypes
 	{
 		#region Fields
 
-		private readonly IDictionary<Type, ContentType> _definitions;
+		private readonly IDictionary<Type, ContentType> _contentTypes;
 
 		#endregion
 
@@ -17,11 +17,11 @@ namespace Zeus.ContentTypes
 
 		public ContentTypeManager(IContentTypeBuilder contentTypeBuilder)
 		{
-			_definitions = contentTypeBuilder.GetDefinitions();
+			_contentTypes = contentTypeBuilder.GetContentTypes();
 
 			// Verify that content types have unique names.
-			List<string> discriminators = new List<string>();
-			foreach (ContentType contentType in _definitions.Values)
+			var discriminators = new List<string>();
+			foreach (var contentType in _contentTypes.Values)
 			{
 				if (discriminators.Contains(contentType.Discriminator))
 					throw new ZeusException("Duplicate content type discriminator. The discriminator '{0}' is already in use.", contentType.Discriminator);
@@ -44,7 +44,7 @@ namespace Zeus.ContentTypes
 
 		public ICollection<ContentType> GetContentTypes()
 		{
-			return _definitions.Values;
+			return _contentTypes.Values;
 		}
 
 		public ContentType GetContentType(ContentItem item)
@@ -54,8 +54,8 @@ namespace Zeus.ContentTypes
 
 		public ContentType GetContentType(Type type)
 		{
-			if (_definitions.ContainsKey(type))
-				return _definitions[type];
+			if (_contentTypes.ContainsKey(type))
+				return _contentTypes[type];
 			return null;
 		}
 
@@ -78,7 +78,7 @@ namespace Zeus.ContentTypes
 
 		public ContentType GetContentType(string discriminator)
 		{
-			return _definitions.Values.SingleOrDefault(ct => ct.Discriminator == discriminator);
+			return _contentTypes.Values.SingleOrDefault(ct => ct.Discriminator == discriminator);
 		}
 
 		#endregion

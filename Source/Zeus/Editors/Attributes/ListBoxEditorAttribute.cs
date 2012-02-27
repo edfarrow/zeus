@@ -2,6 +2,7 @@
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
 using System.Web.UI;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -37,7 +38,7 @@ namespace Zeus.Editors.Attributes
 			return ddl.Items.Cast<ListItem>().Where(li => li.Selected).Select(li => li.Value).ToArray();
 		}
 
-		protected override object GetValue(ContentItem item)
+		protected override object GetValue(IEditableObject item)
 		{
 			return item[Name] as string[];
 		}
@@ -53,7 +54,7 @@ namespace Zeus.Editors.Attributes
 			}
 		}
 
-        public override bool UpdateItem(ContentItem item, Control editor)
+        public override bool UpdateItem(IEditableObject item, Control editor)
         {
             //check if there's a value yet...
             if (item[Name] == null)

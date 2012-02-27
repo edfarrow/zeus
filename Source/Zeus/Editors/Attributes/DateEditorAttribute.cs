@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using Ext.Net;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -62,7 +63,7 @@ namespace Zeus.Editors.Attributes
 			}
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			CompositeField placeHolder = (CompositeField)editor;
 			DateField tb = (DateField)placeHolder.Items[0];

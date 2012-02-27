@@ -1,4 +1,5 @@
 using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 using Zeus.Web.Security;
 
 namespace Zeus.Editors.Attributes
@@ -16,7 +17,7 @@ namespace Zeus.Editors.Attributes
 			
 		}
 
-		public override bool UpdateItem(ContentItem item, System.Web.UI.Control editor)
+		public override bool UpdateItem(IEditableObject item, System.Web.UI.Control editor)
 		{
 			TextBox tb = editor as TextBox;
 			string value = (tb.Text == DefaultValue) ? null : tb.Text;

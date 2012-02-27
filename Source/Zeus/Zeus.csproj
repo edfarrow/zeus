@@ -223,6 +223,8 @@
     <Compile Include="Configuration\SiteElement.cs" />
     <Compile Include="Configuration\SiteElementCollection.cs" />
     <Compile Include="Configuration\UserElement.cs" />
+    <Compile Include="ContentTypes\EditableType.cs" />
+    <Compile Include="ContentTypes\IEditableObject.cs" />
     <Compile Include="ContentTypes\PropertyAuthorizedRolesAttribute.cs" />
     <Compile Include="ContentTypes\AbstractContentTypeRefiner.cs" />
     <Compile Include="ContentTypes\AttributeExplorer.cs" />

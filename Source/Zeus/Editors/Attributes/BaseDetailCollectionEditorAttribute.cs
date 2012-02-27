@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes
@@ -13,7 +14,7 @@ namespace Zeus.Editors.Attributes
 			
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			IList detailCollection = item[Name] as IList;
 			BaseDetailCollectionEditor detailCollectionEditor = (BaseDetailCollectionEditor) editor;

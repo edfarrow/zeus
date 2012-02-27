@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -31,7 +32,7 @@ namespace Zeus.Editors.Attributes
 			return items.ToArray();
 		}
 
-		protected override object GetValue(ContentItem item)
+		protected override object GetValue(IEditableObject item)
 		{
 			return item[Name];
 		}

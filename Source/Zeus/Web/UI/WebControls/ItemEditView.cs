@@ -7,7 +7,7 @@ using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ItemEditView : WebControl, INamingContainer, ContentItemEditor
+	public class ItemEditView : WebControl, INamingContainer, ContentItemEditor
 	{
 		private ITypeDefinition _currentTypeDefinition;
 		private ContentItem _currentItem;

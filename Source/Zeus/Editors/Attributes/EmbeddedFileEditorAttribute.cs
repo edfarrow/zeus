@@ -5,6 +5,7 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
@@ -38,7 +39,7 @@ namespace Zeus.Editors.Attributes
 			return Path.Combine(uploadFolder, HttpUtility.UrlDecode(fileUpload.FileName));
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;
 			EmbeddedFile file = (EmbeddedFile)item[Name];

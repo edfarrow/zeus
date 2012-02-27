@@ -1,5 +1,6 @@
 ﻿using System.Web.UI;
 using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -18,7 +19,7 @@ namespace Zeus.Editors.Attributes
 
 		#endregion
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			ListControl ddl = (ListControl) editor;
 			if (GetValue(ddl) != GetValue(item))
@@ -53,7 +54,7 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Gets a string value for the drop down list editor from the content item.</summary>
 		/// <param name="item">The item containing the value.</param>
 		/// <returns>A string to use as selected value.</returns>
-		protected virtual object GetValue(ContentItem item)
+		protected virtual object GetValue(IEditableObject item)
 		{
 			return item[Name] as string;
 		}

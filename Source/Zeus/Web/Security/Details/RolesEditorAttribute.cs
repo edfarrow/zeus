@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.Security.Details
 {
 	public class RolesEditorAttribute : AbstractEditorAttribute
 	{
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			CheckBoxList cbl = editor as CheckBoxList;
 			List<Items.Role> roles = new List<Items.Role>();

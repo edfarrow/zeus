@@ -2,6 +2,7 @@
 using System.Web.UI.WebControls;
 using Zeus.BaseLibrary;
 using System.Web.UI;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -41,7 +42,7 @@ namespace Zeus.Editors.Attributes
 			return items;
 		}
 
-		protected override object GetValue(ContentItem item)
+		protected override object GetValue(IEditableObject item)
 		{
 			object value = item[Name];
 
@@ -75,7 +76,7 @@ namespace Zeus.Editors.Attributes
 			return null;
 		}
 
-        public override bool UpdateItem(ContentItem item, Control editor)
+        public override bool UpdateItem(IEditableObject item, Control editor)
         {
             ListControl ddl = (ListControl)editor;
             string selectedText = "";

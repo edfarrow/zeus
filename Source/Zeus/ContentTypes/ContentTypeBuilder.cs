@@ -34,7 +34,7 @@ namespace Zeus.ContentTypes
 
 		#region Methods
 
-		public IDictionary<Type, ContentType> GetDefinitions()
+		public IDictionary<Type, ContentType> GetContentTypes()
 		{
 			IList<ContentType> definitions = FindDefinitions();
 			ExecuteRefiners(definitions);
@@ -44,7 +44,7 @@ namespace Zeus.ContentTypes
 		private IList<ContentType> FindDefinitions()
 		{
 			// Find definitions.
-			List<ContentType> definitions = new List<ContentType>();
+			var definitions = new List<ContentType>();
 			foreach (Type type in EnumerateTypes())
 			{
 				var itemDefinition = new ContentType(type);

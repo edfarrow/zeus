@@ -29,7 +29,7 @@ namespace Zeus.ContentTypes
 		public IDictionary<string, T> Map(Type typeToExplore)
 		{
 			IList<T> attributes = Find(typeToExplore);
-			Dictionary<string, T> map = new Dictionary<string, T>();
+			var map = new Dictionary<string, T>();
 			foreach (T a in attributes)
 				map[a.Name] = a;
 			return map;

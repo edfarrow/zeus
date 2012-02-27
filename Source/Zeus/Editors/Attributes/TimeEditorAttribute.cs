@@ -1,5 +1,6 @@
 ﻿using System.Web.UI;
 using Ext.Net;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -27,7 +28,7 @@ namespace Zeus.Editors.Attributes
 			range.Text = (string) item[Name];
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			TimeField range = (TimeField) editor;
 			if ((string) item[Name] != range.Text)

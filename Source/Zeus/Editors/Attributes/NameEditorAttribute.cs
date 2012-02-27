@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using Zeus.ContentTypes;
 using Zeus.Editors.Controls;
 
 [assembly: WebResource("NameEditorAttribute.js", "text/javascript")]
@@ -23,7 +24,7 @@ namespace Zeus.Editors.Attributes
 			return nameEditor;
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
             object editorValue = ((NameEditor)editor).Text;
             object itemValue = item[Name];
@@ -37,27 +38,26 @@ namespace Zeus.Editors.Attributes
 
 		protected override void UpdateEditorInternal(ContentItem item, Control editor)
 		{
-			ContentItem contentItem = (ContentItem) item;
 			NameEditor ne = (NameEditor) editor;
-			ne.Text = contentItem.Name;
+			ne.Text = item.Name;
 			ne.Prefix = "/";
-			ne.Suffix = contentItem.Extension;
+			ne.Suffix = item.Extension;
 			try
 			{
-				if (Context.UrlParser.StartPage == item || contentItem.Parent == null)
+				if (Context.UrlParser.StartPage == item || item.Parent == null)
 				{
 					ne.Prefix = string.Empty;
 					ne.Suffix = string.Empty;
 				}
-				else if (Context.UrlParser.StartPage != contentItem.Parent)
+				else if (Context.UrlParser.StartPage != item.Parent)
 				{
-					string parentUrl = contentItem.Parent.Url;
+					string parentUrl = item.Parent.Url;
 					if (!parentUrl.Contains("?"))
 					{
 						string prefix = parentUrl;
-						if (!string.IsNullOrEmpty(contentItem.Extension))
+						if (!string.IsNullOrEmpty(item.Extension))
 						{
-							int aspxIndex = parentUrl.IndexOf(contentItem.Extension, StringComparison.InvariantCultureIgnoreCase);
+							int aspxIndex = parentUrl.IndexOf(item.Extension, StringComparison.InvariantCultureIgnoreCase);
 							prefix = parentUrl.Substring(0, aspxIndex);
 						}
 						prefix += "/";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using Zeus.ContentTypes;
 
 namespace Zeus.Editors.Attributes
 {
@@ -54,7 +55,7 @@ namespace Zeus.Editors.Attributes
 
 		#endregion
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			ITextControl tb = editor as ITextControl;
 			string value = (tb.Text == DefaultValue) ? null : tb.Text;

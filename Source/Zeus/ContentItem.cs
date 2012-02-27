@@ -10,6 +10,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using Ormongo.Ancestry;
+using Zeus.ContentTypes;
 using Zeus.Integrity;
 using Zeus.Linq;
 using Zeus.Persistence;
@@ -21,7 +22,7 @@ namespace Zeus
     [RestrictParents(typeof(ContentItem))]
     [Serializable]
 	[BsonDiscriminator(RootClass = true)]
-    public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode
+    public /*abstract*/ class ContentItem : OrderedAncestryDocument<ContentItem>, IUrlParserDependency, INode, IEditableObject
 	{
 		static ContentItem()
 		{
