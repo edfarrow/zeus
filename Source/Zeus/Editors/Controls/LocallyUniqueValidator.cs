@@ -1,8 +1,8 @@
-﻿using System;
-using System.Web.UI.WebControls;
+﻿using System.Web.UI.WebControls;
 using Zeus.Integrity;
+using Zeus.Web.UI;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class LocallyUniqueValidator : CustomValidator
 	{

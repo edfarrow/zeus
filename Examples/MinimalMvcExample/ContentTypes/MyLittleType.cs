@@ -1,5 +1,5 @@
 using Ormongo;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes

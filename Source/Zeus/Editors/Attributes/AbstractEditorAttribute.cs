@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 using Ext.Net;
 using MongoDB.Bson;
 using Zeus.ContentTypes;
+using Zeus.Editors.Controls;
 using Zeus.Security;
-using Zeus.Web.UI.WebControls;
 using Label = System.Web.UI.WebControls.Label;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public abstract class AbstractEditorAttribute : Attribute, IEditor, ISecurable, IPropertyAwareAttribute
 	{

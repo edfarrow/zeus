@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.ContentTypes
 {

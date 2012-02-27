@@ -1,5 +1,5 @@
 using Ormongo;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Templates.ContentTypes.ReferenceData;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data

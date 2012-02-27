@@ -2,7 +2,7 @@ using SoundInTheory.DynamicImage;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Filters;
 using SoundInTheory.DynamicImage.Layers;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.FileSystem.Images
 {

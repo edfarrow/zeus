@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
 using MongoDB.Bson.Serialization.Attributes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 using Zeus.Linq;
 using Zeus.Templates.Services.Syndication;

@@ -5,12 +5,12 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
+using Zeus.Editors.Controls;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
-using Zeus.Web.UI.WebControls;
 using File = System.IO.File;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	[AttributeUsage(AttributeTargets.Property)]
 	public class EmbeddedFileEditorAttribute : AbstractEditorAttribute

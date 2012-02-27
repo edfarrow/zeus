@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using MongoDB.Bson.Serialization.Attributes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 using Zeus.Web;
 using Zeus.Web.Security;

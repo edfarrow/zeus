@@ -5,7 +5,7 @@ using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using System.Web.UI;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
     public class LinkedItemDropDownListEditor : DropDownListEditorAttribute
 	{

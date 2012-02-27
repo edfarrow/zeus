@@ -4,7 +4,7 @@ using Ext.Net;
 using Ormongo;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.Design.Editors;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.FileSystem;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;

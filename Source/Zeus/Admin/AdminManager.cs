@@ -7,7 +7,7 @@ using System.Web.UI;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Engine;
 using Zeus.Linq;
 using Zeus.Security;

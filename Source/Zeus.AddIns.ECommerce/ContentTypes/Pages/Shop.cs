@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;

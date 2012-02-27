@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using System.Web.UI;
-using Zeus.ContentTypes;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>Attribute used to mark properties as editable. This is used to associate the control used for the editing with the property/detail on the content item whose value we are editing.</summary>
 	[AttributeUsage(AttributeTargets.Property)]

@@ -1,8 +1,7 @@
 ﻿using System.Web.UI;
-using Ext.Net;
-using Zeus.Web.UI.WebControls;
+using Zeus.Editors.Controls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>
 	/// Decorates the content item with a time range editable that will update two time fields.

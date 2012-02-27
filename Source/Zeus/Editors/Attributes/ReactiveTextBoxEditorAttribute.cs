@@ -1,7 +1,7 @@
 using System.Web.UI.WebControls;
-using Zeus.Web.UI.WebControls;
+using Zeus.Editors.Controls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class ReactiveTextBoxEditorAttribute : TextBoxEditorAttribute
 	{

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Web.UI;
 using Ext.Net;
-using Zeus.ContentTypes;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class DateEditorAttribute : AbstractEditorAttribute
 	{

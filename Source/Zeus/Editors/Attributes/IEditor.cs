@@ -3,7 +3,7 @@ using System.Web.UI;
 using MongoDB.Bson;
 using Zeus.ContentTypes;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public interface IEditor : IContainable, IComparable<IEditor>
 	{

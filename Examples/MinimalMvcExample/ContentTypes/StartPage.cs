@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Zeus;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Web;
 using Zeus.Templates.ContentTypes;
 using Zeus.AddIns.ECommerce.PaypalExpress.Mvc.ContentTypeInterfaces;

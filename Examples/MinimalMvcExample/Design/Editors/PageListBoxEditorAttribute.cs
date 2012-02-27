@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Linq;
 
 namespace Zeus.Examples.MinimalMvcExample.Design.Editors

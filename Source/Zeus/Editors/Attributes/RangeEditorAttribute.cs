@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Zeus.ContentTypes;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class RangeEditorAttribute : DropDownListEditorAttribute
 	{

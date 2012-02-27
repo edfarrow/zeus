@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Web.UI;
-using Zeus.ContentTypes;
-using Zeus.Web.UI.WebControls;
+using Zeus.Editors.Controls;
 
 [assembly: WebResource("NameEditorAttribute.js", "text/javascript")]
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class NameEditorAttribute : AbstractEditorAttribute
 	{

@@ -4,9 +4,11 @@ using System.Web.UI;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Editors.Resources;
 using Zeus.Integrity;
+using Zeus.Web.UI;
+using Zeus.Web.UI.WebControls;
 
 [assembly: WebResource("Zeus.Editors.Controls.NameEditor.js", "text/javascript")]
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	[ValidationProperty("Text")]
 	public class NameEditor : CompositeControl, IValidator

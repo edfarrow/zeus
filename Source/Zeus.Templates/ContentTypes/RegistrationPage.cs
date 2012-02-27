@@ -1,6 +1,6 @@
 using System;
 using MongoDB.Bson.Serialization.Attributes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.Templates.ContentTypes
 {

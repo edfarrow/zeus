@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ext.Net;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 using Zeus.Web.Security.Details;
 using Zeus.Web.Security.Items;

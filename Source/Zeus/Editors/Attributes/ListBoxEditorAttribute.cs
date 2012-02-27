@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
-using Zeus.ContentTypes;
 using System.Web.UI;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public abstract class ListBoxEditorAttribute : ListEditorAttribute
 	{

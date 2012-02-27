@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI;
-using Zeus.Web.UI.WebControls;
+using Zeus.Editors.Controls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public abstract class BaseDetailCollectionEditorAttribute : AbstractEditorAttribute
 	{

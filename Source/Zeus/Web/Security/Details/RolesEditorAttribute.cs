@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.Security.Details
 {

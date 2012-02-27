@@ -1,6 +1,6 @@
 using Ninject;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Templates.Configuration;
 using Zeus.Templates.ContentTypes;
 

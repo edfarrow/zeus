@@ -1,8 +1,8 @@
 ﻿using Ext.Net;
 using MongoDB.Bson.Serialization.Attributes;
 using Zeus.BaseLibrary;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
-using Zeus.Design.Editors;
 
 namespace Zeus.Templates.ContentTypes.ReferenceData
 {

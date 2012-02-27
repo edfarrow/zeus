@@ -1,6 +1,6 @@
 ﻿using Ext.Net;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class TimeRange : CompositeField
 	{

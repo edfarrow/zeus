@@ -9,7 +9,7 @@ using Button = Ext.Net.Button;
 using Panel = Ext.Net.Panel;
 using Parameter = Ext.Net.Parameter;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	[DirectMethodProxyID(IDMode = DirectMethodProxyIDMode.ClientID)]
 	public abstract class BaseDetailCollectionEditor : WebControl

@@ -1,11 +1,8 @@
 using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Ext.Net;
-using Zeus.BaseLibrary.ExtensionMethods;
-using Zeus.ContentTypes;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>
 	/// Attribute used to mark properties as editable. This attribute is predefined to use 

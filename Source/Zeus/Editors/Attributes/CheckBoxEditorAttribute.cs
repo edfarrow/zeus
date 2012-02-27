@@ -1,7 +1,7 @@
 ﻿using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>An editable checkbox attribute. Besides creating a checkbox it also uses the checkbox's text property to display text.</summary>
 	public class CheckBoxEditorAttribute : EditableAttribute

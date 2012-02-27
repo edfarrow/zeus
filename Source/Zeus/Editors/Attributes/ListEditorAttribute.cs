@@ -1,8 +1,7 @@
 ﻿using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.ContentTypes;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public abstract class ListEditorAttribute : AbstractEditorAttribute
 	{

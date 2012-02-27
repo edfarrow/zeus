@@ -3,7 +3,7 @@ using Ext.Net;
 using MongoDB.Bson.Serialization.Attributes;
 using Zeus.Admin.RecycleBin;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Installation;
 using Zeus.Integrity;
 

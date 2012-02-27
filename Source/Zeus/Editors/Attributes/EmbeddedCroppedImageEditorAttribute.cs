@@ -4,7 +4,7 @@ using SoundInTheory.DynamicImage;
 using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	[AttributeUsage(AttributeTargets.Property)]
 	public class EmbeddedCroppedImageEditorAttribute : EmbeddedImageEditorAttribute

@@ -1,7 +1,7 @@
 ﻿using System.Web.UI;
 using Ext.Net;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>
 	/// Decorates the content item with a time editor.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.UI.WebControls
 {

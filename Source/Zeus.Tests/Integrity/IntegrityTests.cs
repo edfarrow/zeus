@@ -5,7 +5,7 @@ using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 using Zeus.Persistence;
 using Zeus.Tests.Integrity.ContentTypes;

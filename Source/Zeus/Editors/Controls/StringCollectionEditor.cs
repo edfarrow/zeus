@@ -1,7 +1,7 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class StringCollectionEditor : BaseDetailCollectionEditor
 	{

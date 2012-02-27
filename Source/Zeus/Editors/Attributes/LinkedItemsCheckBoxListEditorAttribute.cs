@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class LinkedItemsCheckBoxListEditorAttribute : CheckBoxListEditorAttribute
 	{

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI;
-using Zeus.Design.Editors;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes

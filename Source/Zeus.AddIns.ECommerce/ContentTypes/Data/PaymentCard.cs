@@ -1,7 +1,7 @@
 using System;
 using Ormongo;
 using Zeus.AddIns.ECommerce.PaymentGateways;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {

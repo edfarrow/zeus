@@ -1,6 +1,6 @@
 using Ext.Net;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data

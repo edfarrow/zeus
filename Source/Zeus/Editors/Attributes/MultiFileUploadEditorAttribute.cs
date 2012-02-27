@@ -4,12 +4,12 @@ using System.Web.UI;
 using Ormongo;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
+using Zeus.Editors.Controls;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
-using Zeus.Web.UI.WebControls;
-using File=Zeus.FileSystem.File;
+using File = Zeus.FileSystem.File;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class MultiFileUploadEditorAttribute : BaseDetailCollectionEditorAttribute
 	{

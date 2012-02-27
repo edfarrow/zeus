@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.Compilation;
 using System.Linq;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public sealed class LinkedItemsEditor : BaseDetailCollectionEditor
 	{

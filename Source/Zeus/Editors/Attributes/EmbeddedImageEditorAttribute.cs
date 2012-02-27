@@ -1,7 +1,7 @@
 using System;
-using Zeus.Web.UI.WebControls;
+using Zeus.Editors.Controls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	[AttributeUsage(AttributeTargets.Property)]
 	public class EmbeddedImageEditorAttribute : EmbeddedFileEditorAttribute

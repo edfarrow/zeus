@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using Zeus.BaseLibrary;
-using Zeus.ContentTypes;
 using System.Web.UI;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class EnumEditorAttribute : DropDownListEditorAttribute
 	{

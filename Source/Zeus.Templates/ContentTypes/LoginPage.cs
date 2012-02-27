@@ -1,5 +1,5 @@
 using System;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Web;
 using Zeus.Integrity;
 using Zeus.Web.Security;

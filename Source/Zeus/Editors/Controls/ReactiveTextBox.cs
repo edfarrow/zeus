@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 using System.Web.UI;
-using Zeus.Integrity;
+using Zeus.Web.UI;
+using Zeus.Web.UI.WebControls;
 
 [assembly: WebResource("Zeus.Editors.Controls.ReactiveTextBox.js", "text/javascript")]
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class ReactiveTextBox : TextBox
 	{

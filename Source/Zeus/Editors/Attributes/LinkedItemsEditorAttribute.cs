@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using MongoDB.Bson;
-using Zeus.Web.UI.WebControls;
-using DropDownList=System.Web.UI.WebControls.DropDownList;
+using Zeus.Editors.Controls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class LinkedItemsEditorAttribute : BaseDetailCollectionEditorAttribute
 	{

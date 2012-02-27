@@ -1,4 +1,4 @@
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class MultiImageUploadEditor : MultiFileUploadEditor
 	{

@@ -1,7 +1,7 @@
 using System.Web.UI.WebControls;
 using Zeus.Web.Security;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class PasswordEditorAttribute : TextBoxEditorAttribute
 	{

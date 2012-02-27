@@ -1,7 +1,6 @@
-﻿using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System.Web.UI.WebControls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public abstract class DropDownListEditorAttribute : ListEditorAttribute
 	{

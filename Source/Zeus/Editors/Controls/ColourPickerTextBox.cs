@@ -3,7 +3,7 @@ using System.Web.UI.WebControls;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Editors.Resources;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class ColourPickerTextBox : TextBox
 	{

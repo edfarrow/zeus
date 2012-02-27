@@ -1,5 +1,5 @@
 ﻿using Ext.Net;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes.ReferenceData

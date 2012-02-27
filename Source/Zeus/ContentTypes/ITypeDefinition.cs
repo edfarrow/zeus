@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.ContentTypes
 {

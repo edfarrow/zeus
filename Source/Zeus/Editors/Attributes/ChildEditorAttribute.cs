@@ -7,7 +7,7 @@ using Zeus.ContentTypes;
 using Zeus.Web.UI;
 using Zeus.Web.UI.WebControls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>
 	/// Defines an editable child item. The edited item is referenced by the 

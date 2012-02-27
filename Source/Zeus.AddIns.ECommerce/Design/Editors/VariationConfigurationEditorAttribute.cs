@@ -9,7 +9,7 @@ using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.AddIns.ECommerce.Design.Editors
 {

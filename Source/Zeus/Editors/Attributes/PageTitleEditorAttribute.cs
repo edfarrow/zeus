@@ -1,4 +1,4 @@
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class PageTitleEditorAttribute : ReactiveTextBoxEditorAttribute
 	{

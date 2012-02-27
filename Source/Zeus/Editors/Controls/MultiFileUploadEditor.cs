@@ -1,7 +1,7 @@
 ﻿using System.Web.UI;
 using Zeus.FileSystem;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class MultiFileUploadEditor : BaseDetailCollectionEditor
 	{

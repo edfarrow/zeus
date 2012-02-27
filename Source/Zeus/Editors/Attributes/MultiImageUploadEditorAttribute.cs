@@ -1,8 +1,8 @@
-﻿using Zeus.FileSystem;
+﻿using Zeus.Editors.Controls;
+using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
-using Zeus.Web.UI.WebControls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.Editors.Attributes
 {
 	public class MultiImageUploadEditorAttribute : MultiFileUploadEditorAttribute
 	{

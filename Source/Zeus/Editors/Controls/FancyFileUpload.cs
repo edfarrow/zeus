@@ -3,11 +3,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.Editors.Resources;
-using ScriptManager = System.Web.UI.ScriptManager;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class FancyFileUpload : Control
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Web.UI;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
 	public class FancyImageUpload : FancyFileUpload, IValidator
 	{

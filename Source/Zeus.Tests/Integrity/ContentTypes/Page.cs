@@ -1,5 +1,5 @@
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 
 namespace Zeus.Tests.Integrity.ContentTypes

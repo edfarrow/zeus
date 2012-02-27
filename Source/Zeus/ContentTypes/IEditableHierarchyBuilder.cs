@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Zeus.Design.Editors;
 
 namespace Zeus.ContentTypes
 {

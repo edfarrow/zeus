@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Web;
 
 namespace Zeus.ContentTypes
