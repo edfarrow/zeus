@@ -77,11 +77,11 @@ namespace Zeus.Editors.Controls
 			Page.ClientScript.RegisterClientScriptResource(typeof(EditorsResources), "Zeus.Editors.Resources.xregexp.js");
 			Page.ClientScript.RegisterClientScriptResource(typeof(EditorsResources), "Zeus.Editors.Resources.xregexp-unicode-base.js");
 			Page.ClientScript.RegisterClientScriptResource(typeof(EditorsResources), "Zeus.Editors.Resources.xregexp-unicode-categories.js");
-			Page.ClientScript.RegisterClientScriptResource(typeof(EditorsResources), "Zeus.Editors.Controls.NameEditor.js");
+			Page.ClientScript.RegisterClientScriptResource(typeof(NameEditor), "Zeus.Editors.Controls.NameEditor.js");
 
 			_labelPanel.Controls.Add(new LiteralControl("<br /><span class=\"edit\"><a href=\"#\" onclick=\"jQuery('#" + _label.ClientID + "').hide();jQuery('#" + _textBox.ClientID + "').show();return false;\">Edit</a></span>"));
 
-			ItemView itemView = Parent.FindParent<ItemView>();
+			ItemEditView itemView = Parent.FindParent<ItemEditView>();
 			Control titleEditor = itemView.PropertyControls["Title"];
 			string script = string.Format(@"jQuery(document).ready(function() {{
 					jQuery('#{0}, #{1}').nameEditor({{titleEditorID: '{2}'}});

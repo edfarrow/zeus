@@ -36,7 +36,7 @@ namespace Zeus.Editors.Controls
 			Page.ClientScript.RegisterClientScriptResource(typeof(ReactiveTextBox), "Zeus.Editors.Controls.ReactiveTextBox.js");
 
 			List<string> otherEditors = new List<string>();
-			foreach (KeyValuePair<string, Control> propertyControl in Parent.FindParent<ItemView>().PropertyControls)
+			foreach (KeyValuePair<string, Control> propertyControl in Parent.FindParent<ItemEditView>().PropertyControls)
 				otherEditors.Add("'" + propertyControl.Key + "' : '" + propertyControl.Value.ClientID + "'");
 			string reactiveOptions = string.Format(@"{{formatString: '{0}', keepUpdatedClientID: '{1}', otherEditors: {{{2}}} }}",
 				FormatString, chkKeepUpdated.ClientID, string.Join(", ", otherEditors.ToArray()));
