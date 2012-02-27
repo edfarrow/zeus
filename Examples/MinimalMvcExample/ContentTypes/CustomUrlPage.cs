@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MongoDB.Bson;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Design.Editors;
 using Zeus.Editors.Attributes;
@@ -28,7 +29,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         }
 
 		[PageListBoxEditor("Selection Of Pages", 110)]
-		public List<int> PagesSelection { get; set; }
+		public List<ObjectId> PagesSelection { get; set; }
 
         /// <summary>
         /// Banner image

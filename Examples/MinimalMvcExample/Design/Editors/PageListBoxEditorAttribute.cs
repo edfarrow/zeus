@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.Design.Editors;
 using Zeus.Linq;
 
@@ -46,7 +47,7 @@ namespace Zeus.Examples.MinimalMvcExample.Design.Editors
                 .Items
                 .Cast<ListItem>()
                 .Where(li => li.Selected)
-                .Select(li => int.Parse(li.Value))
+                .Select(li => ObjectId.Parse(li.Value))
                 .ToList();
         }
 

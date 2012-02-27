@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MongoDB.Bson;
 using Zeus.ContentTypes;
 using System.Web.UI;
 
@@ -70,9 +71,9 @@ namespace Zeus.Design.Editors
                         selectedInEditor += "_" + listItem.Value;
                 }
 
-                System.Collections.Generic.List<int> orig_ddl = (System.Collections.Generic.List<int>)item[Name];
+				var orig_ddl = (System.Collections.Generic.List<ObjectId>)item[Name];
                 string selectedInObject = "";
-                foreach (int val in orig_ddl)
+                foreach (var val in orig_ddl)
                 {
                     selectedInObject += "_" + val;
                 }
