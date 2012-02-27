@@ -1,30 +1,18 @@
 using System;
+using System.Collections;
 using System.Linq.Expressions;
-using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
 using Zeus.BaseLibrary.Web.UI;
-using Zeus.Web.Mvc.ViewModels;
-using Zeus.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-using System.Collections;
-using System.Text;
 
 namespace Zeus.Web.Mvc.Html
 {
 	public static class HtmlHelperExtensions
 	{
-		public static string RegisterJQuery(this HtmlHelper htmlHelper)
-		{
-			if (htmlHelper.ViewContext.HttpContext.Items["RegisterJQuery"] != null)
-				return string.Empty;
-
-			htmlHelper.ViewContext.HttpContext.Items["RegisterJQuery"] = true;
-			return htmlHelper.IncludeJavascriptResource(typeof(TimeRange), "Zeus.Web.Resources.jQuery.jquery.js");
-		}
-
 		public static string IncludeJavascriptResource(this HtmlHelper html, Type type, string resourceName)
 		{
 			return html.Javascript(WebResourceUtility.GetUrl(type, resourceName));

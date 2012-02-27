@@ -8,7 +8,7 @@ namespace Zeus.Web.UI
 	{
 		public static void RegisterJQuery(this ClientScriptManager clientScriptManager)
 		{
-			clientScriptManager.RegisterJavascriptResource(typeof(TimeRange), "Zeus.Web.Resources.jQuery.jquery.js", ResourceInsertPosition.HeaderTop);
+			clientScriptManager.RegisterJavascriptResource(typeof(TimeRange), "Zeus.Web.Resources.jquery.js", ResourceInsertPosition.HeaderTop);
 			clientScriptManager.RegisterClientScriptBlock(typeof(TimeRange), "JQueryNoConflict", "jQuery.noConflict();", true);
 		}
 	}

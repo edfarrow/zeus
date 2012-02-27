@@ -2,9 +2,9 @@
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.ContentTypes;
+using Zeus.Editors.Resources;
 using Zeus.Security;
 using Zeus.Web;
-using Zeus.Web.Hosting;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin.Plugins.EditItem
@@ -128,15 +128,15 @@ namespace Zeus.Admin.Plugins.EditItem
 			// which means if the control wasn't already present on the page, the scripts will be missing.
 
 			// FancyFileUpload
-			ExtNet.ResourceManager.RegisterClientStyleInclude(typeof(FancyFileUpload),
-				"Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css");
+			ExtNet.ResourceManager.RegisterClientStyleInclude(typeof(EditorsResources),
+				"Zeus.Editors.Resources.FancyFileUpload.FancyFileUpload.css");
 
 			ExtNet.ResourceManager.RegisterIcon(Icon.Delete);
 			ExtNet.ResourceManager.RegisterIcon(Icon.ArrowNsew);
-			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.mootools.js");
-			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
-			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
-			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(EditorsResources), "Zeus.Editors.Resources.FancyFileUpload.mootools.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(EditorsResources), "Zeus.Editors.Resources.FancyFileUpload.Fx.ProgressBar.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(EditorsResources), "Zeus.Editors.Resources.FancyFileUpload.Swiff.Uploader.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(EditorsResources), "Zeus.Editors.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
 
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");

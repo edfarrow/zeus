@@ -56,7 +56,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Templates.Tests", "Zeu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.AddIns.ECommerce.PaypalExpress", "Zeus.AddIns.ECommerce.PaypalExpress\Zeus.AddIns.ECommerce.PaypalExpress.csproj", "{730D671D-33B8-4BF5-80B4-729E0965EACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Editors", "Zeus.Editors\Zeus.Editors.csproj", "{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Editors.Resources", "Zeus.Editors.Resources\Zeus.Editors.Resources.csproj", "{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

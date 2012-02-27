@@ -74,6 +74,9 @@
     <Reference Include="Camino">
       <HintPath>..\..\Libraries\Camino.dll</HintPath>
     </Reference>
+    <Reference Include="CKEditor.NET">
+      <HintPath>..\..\Libraries\CKEditor.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Ext.Net, Version=1.0.0.36291, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ext.Net\Ext.Net.dll</HintPath>
@@ -86,10 +89,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -131,13 +130,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.Entity">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions">
@@ -154,10 +147,6 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
@@ -244,10 +233,12 @@
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />
     <Compile Include="ContentTypes\IEditableHierarchyBuilder.cs" />
-    <Compile Include="Design\Editors\EmbeddedCroppedImageEditorAttribute.cs" />
-    <Compile Include="Design\Editors\EmbeddedFileEditorAttribute.cs" />
-    <Compile Include="Design\Editors\EmbeddedImageEditorAttribute.cs" />
-    <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedCroppedImageEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedFileEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedImageEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\HtmlTextBoxEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\TextAreaEditorAttribute.cs" />
+    <Compile Include="Editors\Controls\HtmlTextBox.cs" />
     <Compile Include="Engine\IContextAwareAttribute.cs" />
     <Compile Include="FileSystem\Images\EmbeddedCroppedImage.cs" />
     <Compile Include="FileSystem\EmbeddedFile.cs" />
@@ -261,15 +252,15 @@
     <Compile Include="ContentTypes\ReplacesContentTypesAttribute.cs" />
     <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
     <Compile Include="DataContentItem.cs" />
-    <Compile Include="Design\Editors\ChildEditorAttribute.cs" />
-    <Compile Include="Design\Editors\TextEditorAttributeBase.cs" />
-    <Compile Include="Design\Editors\TextFieldEditorAttribute.cs" />
-    <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
-    <Compile Include="Design\Editors\PasswordEditorAttribute.cs" />
-    <Compile Include="Design\Editors\RangeEditorAttribute.cs" />
-    <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
-    <Compile Include="Design\Editors\StringCollectionEditorAttribute.cs" />
-    <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\ChildEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\TextEditorAttributeBase.cs" />
+    <Compile Include="Editors\Attributes\TextFieldEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\PageTitleEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\PasswordEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\RangeEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\ReactiveTextBoxEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\StringCollectionEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\MultiImageUploadEditorAttribute.cs" />
     <Compile Include="Net\Mail\FakeMailSender.cs" />
     <Compile Include="Net\Mail\MailSender.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -322,6 +313,7 @@
     <Compile Include="Web\Mvc\ViewModels\ViewModel.cs" />
     <Compile Include="Web\Mvc\ViewPageResult.cs" />
     <Compile Include="Web\PageContentItem.cs" />
+    <Compile Include="Web\Resources\Resources.cs" />
     <Compile Include="Web\Security\IWebSecurityService.cs" />
     <Compile Include="Web\Security\PasswordResetRequestValidity.cs" />
     <Compile Include="Web\Security\PasswordResetRequest.cs" />
@@ -359,7 +351,6 @@
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\WebControls\LoginName.cs" />
     <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
-    <Compile Include="Web\UI\WebControls\TemplateField.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
@@ -410,11 +401,11 @@
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
-    <Compile Include="Web\UI\WebControls\FancyImageUpload.cs" />
-    <Compile Include="Web\UI\WebControls\FancyFileUpload.cs" />
-    <Compile Include="Web\UI\WebControls\MultiImageUploadEditor.cs" />
-    <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
+    <Compile Include="Editors\Controls\FancyImageUpload.cs" />
+    <Compile Include="Editors\Controls\FancyFileUpload.cs" />
+    <Compile Include="Editors\Controls\MultiImageUploadEditor.cs" />
+    <Compile Include="Editors\Controls\ReactiveTextBox.cs" />
+    <Compile Include="Editors\Controls\StringCollectionEditor.cs" />
     <Compile Include="Web\UI\WebControls\IEditableObjectEditor.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewTypeDefinitionEventArgs.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewEditableObjectEventArgs.cs" />
@@ -436,18 +427,18 @@
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\NotAllowedParentException.cs" />
     <Compile Include="ContentTypes\Property.cs" />
-    <Compile Include="Design\Editors\ColourEditorAttribute.cs" />
-    <Compile Include="Design\Editors\CheckBoxListEditorAttribute.cs" />
-    <Compile Include="Design\Editors\BaseDetailCollectionEditorAttribute.cs" />
-    <Compile Include="Design\Editors\MultiFileUploadEditorAttribute.cs" />
-    <Compile Include="Design\Editors\TimeEditorAttribute.cs" />
-    <Compile Include="Design\Editors\ListBoxEditorAttribute.cs" />
-    <Compile Include="Design\Editors\ListEditorAttribute.cs" />
-    <Compile Include="Design\Editors\EnumEditorAttribute.cs" />
-    <Compile Include="Design\Editors\DateEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\ColourEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\CheckBoxListEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\BaseDetailCollectionEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\MultiFileUploadEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\TimeEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\ListBoxEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\ListEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EnumEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\DateEditorAttribute.cs" />
     <Compile Include="DestinationEventArgs.cs" />
-    <Compile Include="Design\Editors\DropDownListEditorAttribute.cs" />
-    <Compile Include="Design\Editors\LinkedItemsEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\DropDownListEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\LinkedItemsEditorAttribute.cs" />
     <Compile Include="Engine\EventBroker.cs" />
     <Compile Include="Engine\IPluginFinder.cs" />
     <Compile Include="Engine\PluginFinder.cs" />
@@ -473,20 +464,19 @@
     <Compile Include="Web\RequestDispatcher.cs" />
     <Compile Include="Web\RequestItem.cs" />
     <Compile Include="Web\RequestLifecycleHandler.cs" />
-    <Compile Include="Web\Resources\Resources.cs" />
     <Compile Include="Web\Security\CredentialStore.cs" />
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
     <Compile Include="Web\TemplateAttribute.cs" />
     <Compile Include="Web\UI\FieldSetAttribute.cs" />
-    <Compile Include="Web\UI\WebControls\BaseDetailCollectionEditor.cs" />
-    <Compile Include="Web\UI\WebControls\MultiFileUploadEditor.cs" />
+    <Compile Include="Editors\Controls\BaseDetailCollectionEditor.cs" />
+    <Compile Include="Editors\Controls\MultiFileUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />
-    <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
-    <Compile Include="Design\Editors\LinkedItemDropDownListEditorAttribute.cs" />
-    <Compile Include="Design\Editors\LinkedItemsCheckBoxListEditorAttribute.cs" />
-    <Compile Include="Design\Editors\NameEditorAttribute.cs" />
-    <Compile Include="Design\Editors\TimeRangeEditorAttribute.cs" />
+    <Compile Include="Editors\Controls\LinkedItemsEditor.cs" />
+    <Compile Include="Editors\Attributes\LinkedItemDropDownListEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\LinkedItemsCheckBoxListEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\NameEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\TimeRangeEditorAttribute.cs" />
     <Compile Include="ContentTypes\RootEditorContainer.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="ContentTypeAttribute.cs" />
@@ -496,11 +486,11 @@
     <Compile Include="ContentTypes\IDefinitionRefiner.cs" />
     <Compile Include="ContentTypes\IInheritableDefinitionRefiner.cs" />
     <Compile Include="ContentTypes\ContentType.cs" />
-    <Compile Include="Design\Editors\AbstractEditorAttribute.cs" />
-    <Compile Include="Design\Editors\EditableAttribute.cs" />
-    <Compile Include="Design\Editors\CheckBoxEditorAttribute.cs" />
-    <Compile Include="Design\Editors\TextBoxEditorAttribute.cs" />
-    <Compile Include="Design\Editors\IEditor.cs" />
+    <Compile Include="Editors\Attributes\AbstractEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EditableAttribute.cs" />
+    <Compile Include="Editors\Attributes\CheckBoxEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\TextBoxEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\IEditor.cs" />
     <Compile Include="Engine\ContentEngine.cs" />
     <Compile Include="FileSystem\File.cs" />
     <Compile Include="FileSystem\FileSystemNode.cs" />
@@ -516,7 +506,7 @@
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
     <Compile Include="Web\UI\ItemUtility.cs" />
-    <Compile Include="Web\UI\WebControls\TimeRange.cs" />
+    <Compile Include="Editors\Controls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationRule.cs" />
@@ -540,20 +530,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
-    <Compile Include="Web\UI\WebControls\ColourPickerTextBox.cs" />
+    <Compile Include="Editors\Controls\ColourPickerTextBox.cs" />
     <Compile Include="Web\UI\WebControls\IItemView.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditView.cs" />
     <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
-    <Compile Include="Web\UI\WebControls\NameEditor.cs" />
+    <Compile Include="Editors\Controls\LocallyUniqueValidator.cs" />
+    <Compile Include="Editors\Controls\NameEditor.cs" />
     <Compile Include="Web\UrlParser.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
     <Compile Include="ZeusException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
+    <EmbeddedResource Include="Editors\Controls\NameEditor.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coolite.Ext.UX\Coolite.Ext.UX.csproj">
@@ -564,62 +554,18 @@
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Zeus.BaseLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.colorpicker.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\ColorPicker\blank.gif" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_background.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hex.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hsb_b.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hsb_h.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hsb_s.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_indic.gif" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_overlay.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_rgb_b.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_rgb_g.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_rgb_r.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_select.gif" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_submit.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_background.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hex.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hsb_b.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hsb_h.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hsb_s.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_indic.gif" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_rgb_b.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_rgb_g.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_rgb_r.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_submit.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\select.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\select2.png" />
-    <EmbeddedResource Include="Web\Resources\ColorPicker\slider.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.colorpicker.js" />
+    <ProjectReference Include="..\Zeus.Editors.Resources\Zeus.Editors.Resources.csproj">
+      <Project>{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}</Project>
+      <Name>Zeus.Editors.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Web\Resources\jQuery\jquery.js" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyUpload3.Attach2.js" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\Fx.ProgressBar.js" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.js" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.swf" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\attach.png" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\bar.gif" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\error.png" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\progress.gif" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyFileUpload.css" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\mootools.js" />
-    <EmbeddedResource Include="Web\Resources\xregexp.js" />
-    <EmbeddedResource Include="Web\Resources\xregexp.min.js" />
-    <EmbeddedResource Include="Web\Resources\xregexp-unicode-base.js" />
-    <EmbeddedResource Include="Web\Resources\xregexp-unicode-categories.js" />
-    <EmbeddedResource Include="Web\UI\WebControls\ReactiveTextBox.js" />
+    <EmbeddedResource Include="Web\Resources\jquery.js" />
+    <EmbeddedResource Include="Editors\Controls\ReactiveTextBox.js" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zeus.Editors.Resources</RootNamespace>
+    <AssemblyName>Zeus.Editors.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EditorsResources.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\blank.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CKEditor\.htaccess" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CKEditor\adapters\jquery.js" />
+    <EmbeddedResource Include="CKEditor\CHANGES.html" />
+    <EmbeddedResource Include="CKEditor\ckeditor.js" />
+    <EmbeddedResource Include="CKEditor\ckeditor_basic.js" />
+    <EmbeddedResource Include="CKEditor\config.js" />
+    <EmbeddedResource Include="CKEditor\contents.css" />
+    <EmbeddedResource Include="CKEditor\images\spacer.gif" />
+    <EmbeddedResource Include="CKEditor\INSTALL.html" />
+    <EmbeddedResource Include="CKEditor\lang\af.js" />
+    <EmbeddedResource Include="CKEditor\lang\ar.js" />
+    <EmbeddedResource Include="CKEditor\lang\bg.js" />
+    <EmbeddedResource Include="CKEditor\lang\bn.js" />
+    <EmbeddedResource Include="CKEditor\lang\bs.js" />
+    <EmbeddedResource Include="CKEditor\lang\ca.js" />
+    <EmbeddedResource Include="CKEditor\lang\cs.js" />
+    <EmbeddedResource Include="CKEditor\lang\cy.js" />
+    <EmbeddedResource Include="CKEditor\lang\da.js" />
+    <EmbeddedResource Include="CKEditor\lang\de.js" />
+    <EmbeddedResource Include="CKEditor\lang\el.js" />
+    <EmbeddedResource Include="CKEditor\lang\en-au.js" />
+    <EmbeddedResource Include="CKEditor\lang\en-ca.js" />
+    <EmbeddedResource Include="CKEditor\lang\en-gb.js" />
+    <EmbeddedResource Include="CKEditor\lang\en.js" />
+    <EmbeddedResource Include="CKEditor\lang\eo.js" />
+    <EmbeddedResource Include="CKEditor\lang\es.js" />
+    <EmbeddedResource Include="CKEditor\lang\et.js" />
+    <EmbeddedResource Include="CKEditor\lang\eu.js" />
+    <EmbeddedResource Include="CKEditor\lang\fa.js" />
+    <EmbeddedResource Include="CKEditor\lang\fi.js" />
+    <EmbeddedResource Include="CKEditor\lang\fo.js" />
+    <EmbeddedResource Include="CKEditor\lang\fr-ca.js" />
+    <EmbeddedResource Include="CKEditor\lang\fr.js" />
+    <EmbeddedResource Include="CKEditor\lang\gl.js" />
+    <EmbeddedResource Include="CKEditor\lang\gu.js" />
+    <EmbeddedResource Include="CKEditor\lang\he.js" />
+    <EmbeddedResource Include="CKEditor\lang\hi.js" />
+    <EmbeddedResource Include="CKEditor\lang\hr.js" />
+    <EmbeddedResource Include="CKEditor\lang\hu.js" />
+    <EmbeddedResource Include="CKEditor\lang\is.js" />
+    <EmbeddedResource Include="CKEditor\lang\it.js" />
+    <EmbeddedResource Include="CKEditor\lang\ja.js" />
+    <EmbeddedResource Include="CKEditor\lang\ka.js" />
+    <EmbeddedResource Include="CKEditor\lang\km.js" />
+    <EmbeddedResource Include="CKEditor\lang\ko.js" />
+    <EmbeddedResource Include="CKEditor\lang\lt.js" />
+    <EmbeddedResource Include="CKEditor\lang\lv.js" />
+    <EmbeddedResource Include="CKEditor\lang\mn.js" />
+    <EmbeddedResource Include="CKEditor\lang\ms.js" />
+    <EmbeddedResource Include="CKEditor\lang\nb.js" />
+    <EmbeddedResource Include="CKEditor\lang\nl.js" />
+    <EmbeddedResource Include="CKEditor\lang\no.js" />
+    <EmbeddedResource Include="CKEditor\lang\pl.js" />
+    <EmbeddedResource Include="CKEditor\lang\pt-br.js" />
+    <EmbeddedResource Include="CKEditor\lang\pt.js" />
+    <EmbeddedResource Include="CKEditor\lang\ro.js" />
+    <EmbeddedResource Include="CKEditor\lang\ru.js" />
+    <EmbeddedResource Include="CKEditor\lang\sk.js" />
+    <EmbeddedResource Include="CKEditor\lang\sl.js" />
+    <EmbeddedResource Include="CKEditor\lang\sr-latn.js" />
+    <EmbeddedResource Include="CKEditor\lang\sr.js" />
+    <EmbeddedResource Include="CKEditor\lang\sv.js" />
+    <EmbeddedResource Include="CKEditor\lang\th.js" />
+    <EmbeddedResource Include="CKEditor\lang\tr.js" />
+    <EmbeddedResource Include="CKEditor\lang\uk.js" />
+    <EmbeddedResource Include="CKEditor\lang\vi.js" />
+    <EmbeddedResource Include="CKEditor\lang\zh-cn.js" />
+    <EmbeddedResource Include="CKEditor\lang\zh.js" />
+    <EmbeddedResource Include="CKEditor\lang\_languages.js" />
+    <EmbeddedResource Include="CKEditor\lang\_translationstatus.txt" />
+    <EmbeddedResource Include="CKEditor\LICENSE.html" />
+    <EmbeddedResource Include="CKEditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <EmbeddedResource Include="CKEditor\plugins\a11yhelp\lang\en.js" />
+    <EmbeddedResource Include="CKEditor\plugins\a11yhelp\lang\he.js" />
+    <EmbeddedResource Include="CKEditor\plugins\about\dialogs\about.js" />
+    <EmbeddedResource Include="CKEditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <EmbeddedResource Include="CKEditor\plugins\adobeair\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\ajax\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\autogrow\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\bbcode\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\clipboard\dialogs\paste.js" />
+    <EmbeddedResource Include="CKEditor\plugins\colordialog\dialogs\colordialog.js" />
+    <EmbeddedResource Include="CKEditor\plugins\devtools\lang\en.js" />
+    <EmbeddedResource Include="CKEditor\plugins\devtools\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\dialog\dialogDefinition.js" />
+    <EmbeddedResource Include="CKEditor\plugins\div\dialogs\div.js" />
+    <EmbeddedResource Include="CKEditor\plugins\docprops\dialogs\docprops.js" />
+    <EmbeddedResource Include="CKEditor\plugins\docprops\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\find\dialogs\find.js" />
+    <EmbeddedResource Include="CKEditor\plugins\flash\dialogs\flash.js" />
+    <EmbeddedResource Include="CKEditor\plugins\flash\images\placeholder.png" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\button.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\checkbox.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\form.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\hiddenfield.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\radio.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\select.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\textarea.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\dialogs\textfield.js" />
+    <EmbeddedResource Include="CKEditor\plugins\forms\images\hiddenfield.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\iframedialog\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\iframe\dialogs\iframe.js" />
+    <EmbeddedResource Include="CKEditor\plugins\iframe\images\placeholder.png" />
+    <EmbeddedResource Include="CKEditor\plugins\image\dialogs\image.js" />
+    <EmbeddedResource Include="CKEditor\plugins\link\dialogs\anchor.js" />
+    <EmbeddedResource Include="CKEditor\plugins\link\dialogs\link.js" />
+    <EmbeddedResource Include="CKEditor\plugins\link\images\anchor.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\liststyle\dialogs\liststyle.js" />
+    <EmbeddedResource Include="CKEditor\plugins\pagebreak\images\pagebreak.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\pastefromword\filter\default.js" />
+    <EmbeddedResource Include="CKEditor\plugins\pastetext\dialogs\pastetext.js" />
+    <EmbeddedResource Include="CKEditor\plugins\placeholder\dialogs\placeholder.js" />
+    <EmbeddedResource Include="CKEditor\plugins\placeholder\lang\en.js" />
+    <EmbeddedResource Include="CKEditor\plugins\placeholder\lang\he.js" />
+    <EmbeddedResource Include="CKEditor\plugins\placeholder\placeholder.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\placeholder\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\scayt\dialogs\options.js" />
+    <EmbeddedResource Include="CKEditor\plugins\scayt\dialogs\toolbar.css" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_address.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_blockquote.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_div.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_h1.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_h2.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_h3.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_h4.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_h5.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_h6.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_p.png" />
+    <EmbeddedResource Include="CKEditor\plugins\showblocks\images\block_pre.png" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\dialogs\smiley.js" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\angel_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\angry_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\broken_heart.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\confused_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\cry_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\devil_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\embaressed_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\envelope.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\heart.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\kiss.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\lightbulb.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\omg_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\regular_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\sad_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\shades_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\teeth_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\thumbs_down.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\thumbs_up.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\tounge_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\smiley\images\wink_smile.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\specialchar\dialogs\specialchar.js" />
+    <EmbeddedResource Include="CKEditor\plugins\specialchar\lang\en.js" />
+    <EmbeddedResource Include="CKEditor\plugins\stylesheetparser\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\styles\styles\default.js" />
+    <EmbeddedResource Include="CKEditor\plugins\tableresize\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\tabletools\dialogs\tableCell.js" />
+    <EmbeddedResource Include="CKEditor\plugins\table\dialogs\table.js" />
+    <EmbeddedResource Include="CKEditor\plugins\templates\dialogs\templates.js" />
+    <EmbeddedResource Include="CKEditor\plugins\templates\templates\default.js" />
+    <EmbeddedResource Include="CKEditor\plugins\templates\templates\images\template1.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\templates\templates\images\template2.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\templates\templates\images\template3.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\dialogs\uicolor.js" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\lang\en.js" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\lang\he.js" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\plugin.js" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\uicolor.gif" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\yui\assets\yui.css" />
+    <EmbeddedResource Include="CKEditor\plugins\uicolor\yui\yui.js" />
+    <EmbeddedResource Include="CKEditor\plugins\wsc\dialogs\ciframe.html" />
+    <EmbeddedResource Include="CKEditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <EmbeddedResource Include="CKEditor\plugins\wsc\dialogs\wsc.css" />
+    <EmbeddedResource Include="CKEditor\plugins\wsc\dialogs\wsc.js" />
+    <EmbeddedResource Include="CKEditor\plugins\xml\plugin.js" />
+    <EmbeddedResource Include="CKEditor\skins\kama\dialog.css" />
+    <EmbeddedResource Include="CKEditor\skins\kama\editor.css" />
+    <EmbeddedResource Include="CKEditor\skins\kama\icons.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\icons_rtl.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\dialog_sides.gif" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\dialog_sides.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\dialog_sides_rtl.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\mini.gif" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\noimage.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\sprites.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\sprites_ie6.png" />
+    <EmbeddedResource Include="CKEditor\skins\kama\images\toolbar_start.gif" />
+    <EmbeddedResource Include="CKEditor\skins\kama\skin.js" />
+    <EmbeddedResource Include="CKEditor\skins\kama\templates.css" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\dialog.css" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\editor.css" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\icons.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\icons_rtl.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\dialog_sides.gif" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\dialog_sides.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\dialog_sides_rtl.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\mini.gif" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\noimage.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\sprites.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\images\sprites_ie6.png" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\skin.js" />
+    <EmbeddedResource Include="CKEditor\skins\office2003\templates.css" />
+    <EmbeddedResource Include="CKEditor\skins\v2\dialog.css" />
+    <EmbeddedResource Include="CKEditor\skins\v2\editor.css" />
+    <EmbeddedResource Include="CKEditor\skins\v2\icons.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\icons_rtl.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\dialog_sides.gif" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\dialog_sides.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\dialog_sides_rtl.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\mini.gif" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\noimage.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\sprites.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\sprites_ie6.png" />
+    <EmbeddedResource Include="CKEditor\skins\v2\images\toolbar_start.gif" />
+    <EmbeddedResource Include="CKEditor\skins\v2\skin.js" />
+    <EmbeddedResource Include="CKEditor\skins\v2\templates.css" />
+    <EmbeddedResource Include="CKEditor\themes\default\theme.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_hex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_hsb_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_hsb_h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_hsb_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_indic.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_overlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_rgb_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_rgb_g.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_rgb_r.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_select.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\colorpicker_submit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_hex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_hsb_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_hsb_h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_hsb_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_indic.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_rgb_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_rgb_g.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_rgb_r.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\custom_submit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\jquery.colorpicker.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\jquery.colorpicker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\select2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPicker\slider.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="xregexp.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\attach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\bar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\FancyFileUpload.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\FancyUpload3.Attach2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\Fx.ProgressBar.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\mootools.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\progress.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\Swiff.Uploader.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FancyFileUpload\Swiff.Uploader.swf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="xregexp-unicode-base.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="xregexp-unicode-categories.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="xregexp.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

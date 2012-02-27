@@ -142,12 +142,12 @@ namespace Zeus.Admin.Install
 			{
 				InstallationManager im = CurrentInstallationManager;
 
-				using (IDbConnection conn = im.GetConnection())
-				{
-					conn.Open();
-					lblStatus.CssClass = "ok";
-					lblStatus.Text = "Connection OK";
-				}
+				//using (IDbConnection conn = im.GetConnection())
+				//{
+				//    conn.Open();
+				//    lblStatus.CssClass = "ok";
+				//    lblStatus.Text = "Connection OK";
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -432,12 +432,12 @@ namespace Zeus.Admin.Install
 			// Attempt to create user.
 			try
 			{
-				string connectionString = CurrentInstallationManager.CreateDatabase(txtDatabaseServer.Text, txtDatabaseName.Text);
+				//string connectionString = CurrentInstallationManager.CreateDatabase(txtDatabaseServer.Text, txtDatabaseName.Text);
 
-				System.Configuration.Configuration cfg = WebConfigurationManager.OpenWebConfiguration("~");
-				ConnectionStringSettings connectionStringSettings = cfg.ConnectionStrings.ConnectionStrings[CurrentInstallationManager.GetConnectionStringName()];
-				connectionStringSettings.ConnectionString = connectionString;
-				cfg.Save();
+				//System.Configuration.Configuration cfg = WebConfigurationManager.OpenWebConfiguration("~");
+				//ConnectionStringSettings connectionStringSettings = cfg.ConnectionStrings.ConnectionStrings[CurrentInstallationManager.GetConnectionStringName()];
+				//connectionStringSettings.ConnectionString = connectionString;
+				//cfg.Save();
 
 				ltlCreateDatabase.Text = "<span class='ok'>Database created and web.config updated.</span>";
 			}

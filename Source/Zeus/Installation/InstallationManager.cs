@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using Microsoft.SqlServer.Management.Smo;
 using MongoDB.Bson;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
@@ -49,7 +46,6 @@ namespace Zeus.Installation
 		{
 			DatabaseStatus status = new DatabaseStatus();
 
-			UpdateConnection(status);
 			UpdateSchema(status);
 			UpdateItems(status);
 
@@ -63,15 +59,6 @@ namespace Zeus.Installation
 				true, out createStatus);
 			if (createStatus != UserCreateStatus.Success)
 				throw new ZeusException("Could not create user: " + createStatus);
-		}
-
-		public string CreateDatabase(string server, string name)
-		{
-			Server dbServer = new Server(server);
-			Database db = new Database(dbServer, name);
-			db.Create();
-
-			return string.Format(@"Server={0};Database={1};Integrated Security=True", server, name);
 		}
 
 		private void UpdateItems(DatabaseStatus status)
@@ -108,27 +95,6 @@ namespace Zeus.Installation
 				status.HasSchema = false;
 				status.SchemaError = ex.Message;
 				status.SchemaException = ex;
-			}
-		}
-
-		private void UpdateConnection(DatabaseStatus status)
-		{
-			try
-			{
-				using (IDbConnection conn = GetConnection())
-				{
-					conn.Open();
-					conn.Close();
-					status.ConnectionType = conn.GetType().Name;
-				}
-				status.IsConnected = true;
-				status.ConnectionError = null;
-			}
-			catch (Exception ex)
-			{
-				status.IsConnected = false;
-				status.ConnectionError = ex.Message;
-				status.ConnectionException = ex;
 			}
 		}
 
@@ -208,38 +174,6 @@ namespace Zeus.Installation
 			//    throw new ZeusException("Missing connection string '" + configSection.ConnectionStringName + "'");
 			//return configSection.ConnectionStringName;
 		}
-
-		public IDbConnection GetConnection()
-		{
-			return new SqlConnection(GetConnectionString());
-		}
-
-		/*public IDbConnection GetConnection()
-		{
-			IDriver driver = GetDriver();
-
-			IDbConnection conn = driver.CreateConnection();
-			if (Cfg.Properties.ContainsKey(Environment.ConnectionString))
-				conn.ConnectionString = (string) Cfg.Properties[Environment.ConnectionString];
-			else if (Cfg.Properties.ContainsKey(Environment.ConnectionStringName))
-				conn.ConnectionString = ConfigurationManager.ConnectionStrings[(string) Cfg.Properties[Environment.ConnectionStringName]].ConnectionString;
-			else
-				throw new Exception("Didn't find a confgiured connection string or connection string name in the nhibernate configuration.");
-			return conn;
-		}
-
-		public IDbCommand GenerateCommand(CommandType type, string sqlString)
-		{
-			IDriver driver = GetDriver();
-			return driver.GenerateCommand(type, new NHibernate.SqlCommand.SqlString(sqlString), new SqlType[0]);
-		}
-
-		private IDriver GetDriver()
-		{
-			string driverName = (string) Cfg.Properties[Environment.ConnectionDriver];
-			Type driverType = NHibernate.Util.ReflectHelper.ClassForName(driverName);
-			return (IDriver) Activator.CreateInstance(driverType);
-		}*/
 
 		#endregion
 
