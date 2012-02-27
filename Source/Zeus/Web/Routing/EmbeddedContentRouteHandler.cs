@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Web;
 using System.Web.Routing;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Web.Routing
 {
@@ -39,25 +40,30 @@ namespace Zeus.Web.Routing
 				_requestContext = requestContext;
 			}
 
-			public bool IsReusable { get { return false; } }
+			public bool IsReusable
+			{
+				get { return false; }
+			}
 
-			private static readonly IDictionary<Assembly, DateTime> _assemblyLastModifiedCache =
+			private static readonly IDictionary<Assembly, DateTime> AssemblyLastModifiedCache =
 				new Dictionary<Assembly, DateTime>();
 
 			private static DateTime GetAssemblyLastModified(Assembly assembly)
 			{
 				DateTime lastModified;
-				if (!_assemblyLastModifiedCache.TryGetValue(assembly, out lastModified))
+				if (!AssemblyLastModifiedCache.TryGetValue(assembly, out lastModified))
 				{
 					AssemblyName x = assembly.GetName();
 					lastModified = new DateTime(File.GetLastWriteTime(new Uri(x.CodeBase).LocalPath).Ticks);
-					_assemblyLastModifiedCache.Add(assembly, lastModified);
+					AssemblyLastModifiedCache.Add(assembly, lastModified);
 				}
 				return lastModified;
 			}
 
 			public void ProcessRequest(HttpContext context)
 			{
+				context.Response.Clear();
+
 				HttpCachePolicy cache = context.Response.Cache;
 				cache.SetCacheability(HttpCacheability.Public);
 				cache.SetOmitVaryStar(true);
@@ -66,40 +72,22 @@ namespace Zeus.Web.Routing
 				cache.SetLastModified(GetAssemblyLastModified(_routeHandler._assembly));
 
 				var resource = _requestContext.RouteData.GetRequiredString("resource");
-				switch (Path.GetExtension(resource))
-				{
-					case ".css":
-						context.Response.ContentType = "text/css";
-						break;
-					case ".js":
-						context.Response.ContentType = "application/x-javascript";
-						break;
-					case ".png":
-						context.Response.ContentType = "image/png";
-						break;
-					case ".gif":
-						context.Response.ContentType = "image/gif";
-						break;
-					case ".jpg":
-						context.Response.ContentType = "image/jpeg";
-						break;
-					case ".bmp":
-						context.Response.ContentType = "image/bmp";
-						break;
-				}
+				context.Response.ContentType = MimeUtility.GetMimeType(Path.GetExtension(resource));
+				
 				using (var stream = _routeHandler.GetStream(resource))
 				{
 					if (stream == null)
-						throw new ZeusException("Could not find embedded resource with name '" + resource + "'.");
+						throw new HttpException(404, "Could not find embedded resource with name '" + resource + "'.");
 
-					var buffer = new byte[1024];
-					for (; ; )
+					byte[] buffer = new byte[1024];
+					Stream outputStream = context.Response.OutputStream;
+					int count = 1;
+					while (count > 0)
 					{
-						var size = stream.Read(buffer, 0, buffer.Length);
-						if (size == 0)
-							break;
-						context.Response.OutputStream.Write(buffer, 0, size);
+						count = stream.Read(buffer, 0, 1024);
+						outputStream.Write(buffer, 0, count);
 					}
+					outputStream.Flush(); 
 				}
 			}
 		}

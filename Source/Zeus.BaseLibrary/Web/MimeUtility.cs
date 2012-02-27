@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Zeus.BaseLibrary.Web
@@ -38,6 +39,28 @@ namespace Zeus.BaseLibrary.Web
 			catch
 			{
 				return "application/octet-stream";
+			}
+		}
+
+		public static string GetMimeType(string fileExtension)
+		{
+			switch (fileExtension)
+			{
+				case ".css":
+					return "text/css";
+				case ".js":
+					return "application/x-javascript";
+				case ".png":
+					return "image/png";
+				case ".gif":
+					return "image/gif";
+				case ".jpg":
+				case ".jpeg":
+					return "image/jpeg";
+				case ".bmp":
+					return "image/bmp";
+				default :
+					return "application/octet-stream";
 			}
 		}
 	}

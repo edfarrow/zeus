@@ -32,7 +32,7 @@ namespace Zeus.Admin
 
 		public string AdminPath
 		{
-			get { return _configSection.Path; }
+			get { return _configSection.Path.Trim('/'); }
 		}
 
 		#region Constructor

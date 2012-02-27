@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Design.Editors;
+using Zeus.Editors.Attributes;
 using Zeus.Examples.MinimalMvcExample.Design.Editors;
 using Zeus.Examples.MinimalMvcExample.Enums;
 using Zeus.FileSystem.Images;

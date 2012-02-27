@@ -192,7 +192,6 @@
     <Compile Include="Admin\Plugins\IToolbarPlugin.cs" />
     <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
     <Compile Include="Admin\SecurityInitializer.cs" />
-    <Compile Include="CancelDestinationEventArgs.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
     <Compile Include="Collections\ItemComparer.cs" />
     <Compile Include="Collections\ItemComparer.generic.cs" />
@@ -508,7 +507,6 @@
     <Compile Include="Design\Editors\AbstractEditorAttribute.cs" />
     <Compile Include="Design\Editors\EditableAttribute.cs" />
     <Compile Include="Design\Editors\CheckBoxEditorAttribute.cs" />
-    <Compile Include="Design\Editors\HtmlTextBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\TextBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\IEditor.cs" />
     <Compile Include="Engine\ContentEngine.cs" />

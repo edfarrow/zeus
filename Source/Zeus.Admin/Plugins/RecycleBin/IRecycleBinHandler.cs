@@ -35,11 +35,5 @@ namespace Zeus.Admin.Plugins.RecycleBin
 		/// <summary>Throws an item in a way that it later may be restored to it's original location at a later stage.</summary>
 		/// <param name="item">The item to throw.</param>
 		void Throw(ContentItem item);
-
-		/// <summary>Occurs before an item is thrown.</summary>
-		event EventHandler<CancelItemEventArgs> ItemThrowing;
-
-		/// <summary>Occurs after an item has been thrown.</summary>
-		event EventHandler<ItemEventArgs> ItemThrowed;
 	}
 }

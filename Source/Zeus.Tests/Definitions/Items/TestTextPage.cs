@@ -1,4 +1,4 @@
-﻿using Zeus.Design.Editors;
+﻿using Zeus.Editors.Attributes;
 
 namespace Zeus.Tests.Definitions.Items
 {

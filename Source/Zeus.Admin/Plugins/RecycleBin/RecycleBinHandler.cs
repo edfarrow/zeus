@@ -25,12 +25,6 @@ namespace Zeus.Admin.Plugins.RecycleBin
 			_host = host;
 		}
 
-		/// <summary>Occurs before an item is thrown.</summary>
-		public event EventHandler<CancelItemEventArgs> ItemThrowing;
-
-		/// <summary>Occurs after an item has been thrown.</summary>
-		public event EventHandler<ItemEventArgs> ItemThrowed;
-
 		/// <summary>The container of thrown items.</summary>
 		IRecycleBin IRecycleBinHandler.TrashContainer
 		{
@@ -72,24 +66,16 @@ namespace Zeus.Admin.Plugins.RecycleBin
 		/// <param name="item">The item to throw.</param>
 		public virtual void Throw(ContentItem item)
 		{
-			CancelItemEventArgs args = Invoke(ItemThrowing, new CancelItemEventArgs(item));
-			if (!args.Cancel)
+			ExpireTrashedItem(item);
+			item.Parent = GetTrashContainer(true);
+
+			try
 			{
-				item = args.AffectedItem;
-
-				ExpireTrashedItem(item);
-				item.Parent = GetTrashContainer(true);
-
-				try
-				{
-					item.Save();
-				}
-				catch (PermissionDeniedException ex)
-				{
-					throw new PermissionDeniedException("Permission denied while moving item to trash. Try disabling security checks using Zeus.Context.Security or preventing items from being moved to the trash with the [NonThrowable] attribute", ex);
-				}
-
-				Invoke(ItemThrowed, new ItemEventArgs(item));
+				item.Save();
+			}
+			catch (PermissionDeniedException ex)
+			{
+				throw new PermissionDeniedException("Permission denied while moving item to trash. Try disabling security checks using Zeus.Context.Security or preventing items from being moved to the trash with the [NonThrowable] attribute", ex);
 			}
 		}
 
@@ -143,14 +129,6 @@ namespace Zeus.Admin.Plugins.RecycleBin
 		{
 			RecycleBinContainer trash = GetTrashContainer(false);
 			return trash != null && item.DescendantsAndSelf.Contains(trash);
-		}
-
-		protected virtual T Invoke<T>(EventHandler<T> handler, T args)
-				where T : ItemEventArgs
-		{
-			if (handler != null)
-				handler.Invoke(this, args);
-			return args;
 		}
 	}
 }
