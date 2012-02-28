@@ -4,8 +4,6 @@
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
-	
 	<ext:Viewport runat="server">
 		<Content>
 			<ext:FitLayout runat="server">

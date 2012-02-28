@@ -31,13 +31,13 @@ namespace Zeus.Admin.Plugins.EditItem {
         protected global::Ext.Net.Button btnCancel;
         
         /// <summary>
-        /// zeusItemEditView control.
+        /// itemEditor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ItemEditView zeusItemEditView;
+        protected global::Zeus.Web.UI.WebControls.ItemEditor itemEditor;
         
         /// <summary>
         /// btnSave2 control.

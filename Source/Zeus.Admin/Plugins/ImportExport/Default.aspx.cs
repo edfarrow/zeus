@@ -7,7 +7,7 @@ using Zeus.Security;
 namespace Zeus.Admin.Plugins.ImportExport
 {
 	[AvailableOperation(Operations.ImportExport, "Import / Export", 48)]
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		public string UploadedFilePath
 		{

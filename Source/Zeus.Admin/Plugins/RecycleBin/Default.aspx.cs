@@ -7,7 +7,7 @@ using Zeus.Linq;
 
 namespace Zeus.Admin.Plugins.RecycleBin
 {
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		#region Properties
 

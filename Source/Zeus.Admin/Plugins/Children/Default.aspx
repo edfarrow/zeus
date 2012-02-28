@@ -1,13 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Children.Default" %>
-<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Children.Default" MasterPageFile="../../PreviewFrame.master" %>
+<%@ Register TagPrefix="ext" Assembly="Ext.Net" Namespace="Ext.Net" %>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
-	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
-	
 	<script type="text/javascript">
 		var renderIcon = function(value, p, record) {
 			return String.format('<img src="{0}" alt="{1}" />',
 				value, record.data.Title);
-		}
+		};
 
 		function prepareToolbar(grid, toolbar, index, record)
 		{

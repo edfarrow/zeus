@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.EditableTypes;
@@ -8,7 +7,7 @@ using Zeus.Editors.Attributes;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class ItemEditView : WebControl, INamingContainer, IEditableObjectEditor
+	public class ItemEditor : WebControl, INamingContainer, IEditableObjectEditor
 	{
 		private EditableType _currentEditableType;
 		private IEditableObject _currentItem;

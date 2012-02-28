@@ -1,8 +1,6 @@
-﻿<%@ Page Title="Recycle Bin" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.RecycleBin.Default" %>
+﻿<%@ Page Title="Recycle Bin" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.RecycleBin.Default" MasterPageFile="../../PreviewFrame.master" %>
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
-	
 	<script type="text/javascript">
 		var renderIcon = function(value, p, record) {
 			return String.format('<img src="{0}" alt="{1}" />',

@@ -5,7 +5,7 @@ using Zeus.Linq;
 
 namespace Zeus.Admin.Plugins.Children
 {
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		protected override void OnInit(EventArgs e)
 		{

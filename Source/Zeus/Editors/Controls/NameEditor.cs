@@ -81,7 +81,7 @@ namespace Zeus.Editors.Controls
 
 			_labelPanel.Controls.Add(new LiteralControl("<br /><span class=\"edit\"><a href=\"#\" onclick=\"jQuery('#" + _label.ClientID + "').hide();jQuery('#" + _textBox.ClientID + "').show();return false;\">Edit</a></span>"));
 
-			ItemEditView itemView = Parent.FindParent<ItemEditView>();
+			ItemEditor itemView = Parent.FindParent<ItemEditor>();
 			Control titleEditor = itemView.PropertyControls["Title"];
 			string script = string.Format(@"jQuery(document).ready(function() {{
 					jQuery('#{0}, #{1}').nameEditor({{titleEditorID: '{2}'}});

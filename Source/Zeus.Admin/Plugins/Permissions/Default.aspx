@@ -1,8 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Permissions.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Permissions.Default" MasterPageFile="../../PreviewFrame.master" %>
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
-	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
-	
 	<ext:Viewport runat="server">
 		<Content>
 			<ext:FitLayout runat="server">

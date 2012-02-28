@@ -1,5 +1,5 @@
-﻿<%@ Page Title="Import / Export Items" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.ImportExport.Default" %>
-<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+﻿<%@ Page Title="Import / Export Items" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.ImportExport.Default" MasterPageFile="../../PreviewFrame.master" %>
+<%@ Register TagPrefix="ext" Assembly="Ext.Net" Namespace="Ext.Net" %>
 <%@ Register Src="../../AffectedItems.ascx" TagName="AffectedItems" TagPrefix="admin" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
 	<style type="text/css">
@@ -28,7 +28,7 @@
 							<div class="upload">
 								<p>
 									<asp:FileUpload ID="fuImport" runat="server" />
-									<asp:RequiredFieldValidator ID="rfvUpload" ControlToValidate="fuImport" runat="server" ErrorMessage="*"  meta:resourceKey="rfvImport"/>
+									<asp:RequiredFieldValidator ID="rfvUpload" ControlToValidate="fuImport" runat="server" ErrorMessage="*" />
 								</p>
 								<p>
 									<asp:Button ID="btnVerify" runat="server" Text="Upload and examine" OnClick="btnVerify_Click" Display="Dynamic" />

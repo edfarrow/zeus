@@ -1,9 +1,7 @@
-﻿<%@ Page Title="Move Item" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.CopyItem.Default" %>
+﻿<%@ Page Title="Move Item" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.CopyItem.Default" MasterPageFile="../../PreviewFrame.master" %>
 <%@ Register Src="../../AffectedItems.ascx" TagName="AffectedItems" TagPrefix="zeus" %>
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
-	
 	<ext:Viewport runat="server">
 		<Content>
 			<ext:FitLayout runat="server">

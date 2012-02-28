@@ -22,7 +22,7 @@ namespace Zeus.Editors.Attributes
 		public override Control AddTo(Control container)
 		{
 			var panel = AddPanel(container);
-			var itemEditor = new ItemEditView { ID = Name };
+			var itemEditor = new ItemEditor { ID = Name };
 			panel.Controls.Add(itemEditor);	
 			return itemEditor;
 		}
@@ -34,7 +34,7 @@ namespace Zeus.Editors.Attributes
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			var itemEditor = (ItemEditView)editor;
+			var itemEditor = (ItemEditor)editor;
 			var currentItem = (IEditableObject)item[Name] ??
 				(IEditableObject)Activator.CreateInstance(UnderlyingProperty.PropertyType);
 			itemEditor.CurrentItem = currentItem;
@@ -42,7 +42,7 @@ namespace Zeus.Editors.Attributes
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			var itemEditor = (ItemEditView) editor;
+			var itemEditor = (ItemEditor) editor;
 			itemEditor.UpdateItem();
 			item[Name] = itemEditor.CurrentItem;
 			return true;

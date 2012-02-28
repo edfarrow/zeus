@@ -1,15 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.EditItem.Default" ValidateRequest="false" %>
-<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.EditItem.Default" ValidateRequest="false" MasterPageFile="../../PreviewFrame.master" %>
+<%@ Register TagPrefix="ext" Assembly="Ext.Net" Namespace="Ext.Net" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <asp:Content runat="server" ContentPlaceHolderID="head">
 	<ext:ResourcePlaceHolder runat="server" Mode="Script" />
 	<ext:ResourcePlaceHolder runat="server" Mode="Style" />
 </asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="ToolbarContainer"></asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="ContentContainer"></asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="Outside">
-	<ext:ResourceManager runat="server" Theme="Gray" AjaxViewStateMode="Enabled" />
-
+<asp:Content runat="server" ContentPlaceHolderID="Content">
 	<ext:Viewport runat="server">
 		<Content>
 			<ext:BorderLayout runat="server">
@@ -18,7 +14,7 @@
 						<TopBar>
 							<ext:Toolbar runat="server">
 								<Items>
-									<ext:Button runat="server" ID="btnSave" Text="Save" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
+									<ext:Button runat="server" ID="btnSave" Text="Save" Icon="PageSave">
 										<DirectEvents>
 											<Click OnEvent="btnSave_Click">
 												<EventMask ShowMask="true" Msg="Saving... Please wait." Target="Page" />
@@ -32,14 +28,13 @@
 						</TopBar>
 						<Content>
 							<asp:ValidationSummary runat="server" CssClass="info validator" />
-							
-							<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
+							<zeus:ItemEditor runat="server" ID="itemEditor" OnItemCreating="zeusItemEditView_ItemCreating"
 								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" />
 						</Content>
 						<BottomBar>
 							<ext:Toolbar runat="server">
 								<Items>
-									<ext:Button runat="server" ID="btnSave2" Text="Save" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
+									<ext:Button runat="server" ID="btnSave2" Text="Save" Icon="PageSave">
 										<DirectEvents>
 											<Click OnEvent="btnSave_Click">
 												<EventMask ShowMask="true" Msg="Saving... Please wait." Target="Page" />
@@ -79,6 +74,5 @@
 				}
 			};
 		})(jQuery);
-
    </script>
 </asp:Content>

@@ -20,9 +20,6 @@ namespace Zeus.Admin
 			Page.ClientScript.RegisterCssResource(typeof(PreviewFrame), "Zeus.Admin.Assets.Css.shared.css");
 			Page.ClientScript.RegisterCssResource(typeof(PreviewFrame), "Zeus.Admin.Assets.Css.preview.css");
 
-			if (h2Title != null)
-				h2Title.InnerText = Page.Title;
-
 			base.OnPreRender(e);
 		}
 	}

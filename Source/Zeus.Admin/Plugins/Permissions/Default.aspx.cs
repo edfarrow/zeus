@@ -16,7 +16,7 @@ using LinkButton = System.Web.UI.WebControls.LinkButton;
 namespace Zeus.Admin.Plugins.Permissions
 {
 	[AvailableOperation(Operations.Administer, "Administer", 50)]
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		#region Fields
 

@@ -13,7 +13,7 @@ namespace Zeus.Admin.Plugins.EditItem
 	[ActionPluginGroup("NewEditDelete", 10)]
 	[AvailableOperation(Operations.Create, "Create", 20)]
 	[AvailableOperation(Operations.Change, "Change", 30)]
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		private string Discriminator
 		{
@@ -28,7 +28,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 			else
 			{
-				zeusItemEditView.CurrentItem = SelectedItem;
+				itemEditor.CurrentItem = SelectedItem;
 				Title = "Edit \"" + SelectedItem.Title + "\"";
 			}
 
@@ -64,8 +64,8 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		private void SaveChanges()
 		{
-			bool wasUpdated = zeusItemEditView.UpdateItem();
-			var currentItem = (ContentItem) zeusItemEditView.CurrentItem;
+			bool wasUpdated = itemEditor.UpdateItem();
+			var currentItem = (ContentItem) itemEditor.CurrentItem;
 			if (wasUpdated || currentItem.IsNewRecord)
 			{
 				currentItem.Save();
@@ -83,7 +83,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			{
 				Refresh(currentItem, AdminFrame.Both);
 				Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
-				zeusItemEditView.Visible = false;
+				itemEditor.Visible = false;
 			}
 			else
 			{

@@ -13,15 +13,6 @@ namespace Zeus.Admin.Plugins.Permissions {
     public partial class Default {
         
         /// <summary>
-        /// scriptManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.ResourceManager scriptManager;
-        
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

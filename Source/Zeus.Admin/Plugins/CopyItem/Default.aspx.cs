@@ -4,7 +4,7 @@ using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.Admin.Plugins.CopyItem
 {
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

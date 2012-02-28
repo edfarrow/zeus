@@ -2,7 +2,7 @@
 
 namespace Zeus.Admin.Plugins.PasteItem
 {
-	public partial class Default : PreviewFrameAdminPage
+	public partial class Default : AdminPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

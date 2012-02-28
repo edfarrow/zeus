@@ -540,7 +540,7 @@
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
     <Compile Include="Editors\Controls\ColourPickerTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\ItemEditView.cs">
+    <Compile Include="Web\UI\WebControls\ItemEditor.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Editors\Controls\LocallyUniqueValidator.cs" />

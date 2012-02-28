@@ -3,8 +3,6 @@
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
-	
 	<ext:Store ID="exsDataStore" runat="server" OnRefreshData="exsDataStore_RefreshData">
 		<Reader>
 			<ext:ArrayReader IDProperty="ID">
