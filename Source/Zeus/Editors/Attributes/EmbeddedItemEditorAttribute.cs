@@ -1,6 +1,6 @@
 using System;
 using System.Web.UI;
-using Zeus.ContentTypes;
+using Ext.Net;
 using Zeus.EditableTypes;
 using Zeus.Web.UI.WebControls;
 
@@ -21,8 +21,9 @@ namespace Zeus.Editors.Attributes
 
 		public override Control AddTo(Control container)
 		{
+			var panel = AddPanel(container);
 			var itemEditor = new ItemEditView { ID = Name };
-			container.Controls.Add(itemEditor);
+			panel.Controls.Add(itemEditor);	
 			return itemEditor;
 		}
 

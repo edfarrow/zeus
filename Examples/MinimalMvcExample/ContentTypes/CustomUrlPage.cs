@@ -28,13 +28,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			get { return true; }
         }
 
-		[PageListBoxEditor("Selection Of Pages", 110)]
+		[PageListBoxEditor("Selection Of Pages", 110, ContainerName = "MyPage")]
 		public List<ObjectId> PagesSelection { get; set; }
 
         /// <summary>
         /// Banner image
         /// </summary>
-		[EmbeddedCroppedImageEditor("Banner", 200, FixedWidthValue = 400, FixedHeightValue = 200)]
+		[EmbeddedCroppedImageEditor("Banner", 200, FixedWidthValue = 400, FixedHeightValue = 200, ContainerName = "Images")]
 		public virtual EmbeddedCroppedImage Banner { get; set; }
 
 		[EmbeddedItemEditor("MyPage", 210, ContainerName = "MyPage")]
