@@ -152,8 +152,8 @@ namespace Zeus.Editors.Attributes
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			TextFieldBase tb = editor as TextFieldBase;
-			tb.Text = Utility.Convert<string>(item[Name]) ?? DefaultValue;
+			var tb = editor as TextFieldBase;
+			tb.Text = ConvertUtility.Convert<string>(item[Name]) ?? DefaultValue;
 		}
 
 		public override Control AddTo(Control container)

@@ -136,7 +136,7 @@ namespace Zeus.Editors.Attributes
 				throw new ZeusException("No property '{0}' found on the editor control '{1}'.", ControlPropertyName,
 				                        editor.GetType());
 			if (value != null && !value.GetType().IsAssignableFrom(pi.PropertyType))
-				value = Utility.Convert(value, pi.PropertyType);
+				value = ConvertUtility.Convert(value, pi.PropertyType);
 			pi.SetValue(editor, value, null);
 		}
 

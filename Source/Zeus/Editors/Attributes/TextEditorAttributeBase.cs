@@ -71,7 +71,7 @@ namespace Zeus.Editors.Attributes
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			ITextControl tb = editor as ITextControl;
-			tb.Text = Utility.Convert<string>(item[Name]) ?? DefaultValue;
+			tb.Text = ConvertUtility.Convert<string>(item[Name]) ?? DefaultValue;
 		}
 	}
 }

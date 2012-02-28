@@ -248,6 +248,7 @@
     <Compile Include="Editors\Attributes\FileUploadUtility.cs" />
     <Compile Include="Editors\Attributes\HtmlTextBoxEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TextAreaEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\ConvertUtility.cs" />
     <Compile Include="Editors\Controls\HtmlTextBox.cs" />
     <Compile Include="Editors\Controls\HtmlTextBoxResourcesInitializer.cs" />
     <Compile Include="EmbeddedItem.cs" />

@@ -1,4 +1,5 @@
-﻿using Ext.Net;
+﻿using System;
+using Ext.Net;
 using MongoDB.Bson;
 using Zeus.Security;
 
@@ -29,7 +30,7 @@ namespace Zeus.Admin.Plugins.MoveItem
 			sourceContentItem.MoveToPosition(pos);
 
             //set the updated value on the parent of the item that has been moved (for caching purposes)
-            sourceContentItem.Parent.Updated = Utility.CurrentTime();
+            sourceContentItem.Parent.Updated = DateTime.Now;
             sourceContentItem.Parent.Save();
 
             ContentItem theParent = sourceContentItem.Parent.Parent;

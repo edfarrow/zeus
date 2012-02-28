@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Templates.Services
@@ -14,7 +15,7 @@ namespace Zeus.Templates.Services
 					return childTag;
 
 			Tag tag = new Tag { Parent = tagGroup };
-			tag.Name = Utility.GetSafeName(tagName);
+			tag.Name = tagName.ToSafeUrl();
 			tag.Title = tagName;
 			tag.Save();
 

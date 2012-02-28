@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ext.Net;
 using MongoDB.Bson;
 
@@ -148,7 +149,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			}
 
             //set the updated value on the parent of the item that has been moved (for caching purposes)
-            parent.Updated = Utility.CurrentTime();
+            parent.Updated = DateTime.Now;
             parent.Save();
 
             ContentItem theParent = parent;
