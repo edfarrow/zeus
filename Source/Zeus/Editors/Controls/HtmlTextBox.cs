@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Web.Routing;
 using CKEditor.NET;
 using Ext.Net;
-using Zeus.Editors.Resources;
-using Zeus.Web.Routing;
 
 namespace Zeus.Editors.Controls
 {
 	public class HtmlTextBox : CKEditorControl
 	{
-		static HtmlTextBox()
-		{
-			var assembly = typeof(EditorsResources).Assembly;
-			var routeHandler = new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".CKEditor");
-			RouteTable.Routes.Add(new Route(GetBasePath() + "/{*resource}", new RouteValueDictionary(), routeHandler));
-		}
-
-		private static string GetBasePath()
+		internal static string GetBasePath()
 		{
 			return Zeus.Context.AdminManager.AdminPath + "/assets/ckeditor";
 		}

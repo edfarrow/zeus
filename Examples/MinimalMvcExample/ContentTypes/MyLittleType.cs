@@ -2,7 +2,6 @@ using Zeus.Editors.Attributes;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
-	[ContentType("My Little Type")]
 	public class MyLittleType : EmbeddedItem
 	{
 		[TextBoxEditor("Test String", 10)]

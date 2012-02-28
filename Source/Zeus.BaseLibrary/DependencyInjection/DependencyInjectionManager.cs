@@ -108,9 +108,9 @@ namespace Zeus.BaseLibrary.DependencyInjection
 		private static AppDomain CreateTemporaryAppDomain()
 		{
 			return AppDomain.CreateDomain(
-					"AssemblyScanner",
-					AppDomain.CurrentDomain.Evidence,
-					AppDomain.CurrentDomain.SetupInformation);
+				"AssemblyScanner",
+				AppDomain.CurrentDomain.Evidence,
+				AppDomain.CurrentDomain.SetupInformation);
 		}
 
 		public void Initialize()

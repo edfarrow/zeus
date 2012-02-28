@@ -5,6 +5,7 @@ using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
 using Zeus.ContentTypes;
 using Zeus.EditableTypes;
+using Zeus.Editors.Controls;
 using Zeus.FileSystem;
 using Zeus.Installation;
 using Zeus.Integrity;
@@ -40,6 +41,9 @@ namespace Zeus.Engine
 			Bind(typeof(IEditableHierarchyBuilder<>)).To(typeof(EditableHierarchyBuilder<>)).InSingletonScope();
 			Bind<IEditableTypeBuilder>().To<EditableTypeBuilder>().InSingletonScope();
 			Bind<IEditableTypeManager>().To<EditableTypeManager>().InSingletonScope();
+
+			// Editors
+			Bind<HtmlTextBoxResourcesInitializer>().ToSelf().InSingletonScope();
 
 			// Engine
 			Bind<IContentAdapterProvider>().To<ContentAdapterProvider>().InSingletonScope();
