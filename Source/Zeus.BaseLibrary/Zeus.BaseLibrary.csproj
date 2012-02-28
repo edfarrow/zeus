@@ -132,7 +132,6 @@
     <Compile Include="Reflection\IAssemblyFinder.cs" />
     <Compile Include="Reflection\ITypeFinder.cs" />
     <Compile Include="Reflection\TypeFinder.cs" />
-    <Compile Include="ConvertUtility.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ExtensionMethods\Enum.cs" />
     <Compile Include="ExtensionMethods\Linq\IEnumerable.cs" />

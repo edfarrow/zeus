@@ -12,7 +12,7 @@ namespace Zeus.Web
 	{
 		protected override Icon Icon
 		{
-			get { return Icon.PageWord; }
+			get { return Icon.PageWorld; }
 		}
 
 		[LinkedItemDropDownListEditor("404 Page", 25, TypeFilter = typeof(PageContentItem), Description = "This page will be used if a user requests a page that does not exist.")]

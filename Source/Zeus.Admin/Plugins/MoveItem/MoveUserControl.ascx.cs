@@ -29,17 +29,9 @@ namespace Zeus.Admin.Plugins.MoveItem
 
 			sourceContentItem.MoveToPosition(pos);
 
-            //set the updated value on the parent of the item that has been moved (for caching purposes)
-            sourceContentItem.Parent.Updated = DateTime.Now;
-            sourceContentItem.Parent.Save();
-
-            ContentItem theParent = sourceContentItem.Parent.Parent;
-            while (theParent.Parent != null)
-            {
-                //go up the tree updating - if a child has been changed, so effectively has the parent
-                theParent.Save();
-                theParent = theParent.Parent;
-            }
+            // force a save on the ancestors of the item that has been moved (for caching purposes)
+			foreach (var ancestor in sourceContentItem.Ancestors)
+				ancestor.Save();
 		}
 	}
 }
