@@ -2,13 +2,12 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MongoDB.Bson;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes
 {
-	public class LinkedItemsEditorAttribute : BaseDetailCollectionEditorAttribute
+	public class LinkedItemsEditorAttribute : EmbeddedCollectionEditorAttributeBase
 	{
 		public LinkedItemsEditorAttribute(string title, int sortOrder, Type typeFilter)
 			: base(title, sortOrder)
@@ -18,15 +17,19 @@ namespace Zeus.Editors.Attributes
 
 		public Type TypeFilter { get; set; }
 
-		protected override BaseDetailCollectionEditor CreateEditor()
+		protected override EmbeddedCollectionEditorBase CreateEditor()
 		{
-			return new LinkedItemsEditor { ID = Name, TypeFilter = TypeFilter.ToString() };
+			return new LinkedItemsEditor
+			{
+				ID = Name,
+				TypeFilter = TypeFilter.ToString()
+			};
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(IEditableObject item, object existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateItem(IEditableObject item, object existingValue, Control editor, out object newValue)
 		{
-			DropDownList ddl = (DropDownList) editor;
-			newDetail = ContentItem.Find(ObjectId.Parse(ddl.SelectedValue));
+			var ddl = (DropDownList) editor;
+			newValue = ContentItem.Find(ObjectId.Parse(ddl.SelectedValue));
 		}
 	}
 }

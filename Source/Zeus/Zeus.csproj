@@ -435,7 +435,7 @@
     <Compile Include="ContentTypes\NotAllowedParentException.cs" />
     <Compile Include="Editors\Attributes\ColourEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\CheckBoxListEditorAttribute.cs" />
-    <Compile Include="Editors\Attributes\BaseDetailCollectionEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedCollectionEditorAttributeBase.cs" />
     <Compile Include="Editors\Attributes\MultiFileUploadEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TimeEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\ListBoxEditorAttribute.cs" />
@@ -474,7 +474,7 @@
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
     <Compile Include="Web\TemplateAttribute.cs" />
     <Compile Include="Web\UI\FieldSetAttribute.cs" />
-    <Compile Include="Editors\Controls\BaseDetailCollectionEditor.cs" />
+    <Compile Include="Editors\Controls\EmbeddedCollectionEditorBase.cs" />
     <Compile Include="Editors\Controls\MultiFileUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />

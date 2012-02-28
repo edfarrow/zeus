@@ -8,15 +8,11 @@ namespace Zeus.Editors.Attributes
 	[AttributeUsage(AttributeTargets.Property)]
 	public class EmbeddedItemEditorAttribute : AbstractEditorAttribute
 	{
-		#region Constructors
-
 		public EmbeddedItemEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
 
 		}
-
-		#endregion
 
 		public override Control AddTo(Control container)
 		{

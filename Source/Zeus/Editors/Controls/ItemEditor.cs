@@ -32,10 +32,9 @@ namespace Zeus.Editors.Controls
 			}
 		}
 
-		public EditableType CurrentEditableType
+		private EditableType CurrentEditableType
 		{
 			get { return _currentEditableType ?? (_currentEditableType = Zeus.Context.EditableTypes.GetEditableType(CurrentItem)); }
-			set { _currentEditableType = value; }
 		}
 
 		#endregion

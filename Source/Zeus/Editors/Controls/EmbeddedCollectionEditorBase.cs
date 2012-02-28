@@ -12,7 +12,7 @@ using Parameter = Ext.Net.Parameter;
 namespace Zeus.Editors.Controls
 {
 	[DirectMethodProxyID(IDMode = DirectMethodProxyIDMode.ClientID)]
-	public abstract class BaseDetailCollectionEditor : WebControl
+	public abstract class EmbeddedCollectionEditorBase : WebControl
 	{
 		private class CustomContainer : Container
 		{
@@ -23,6 +23,7 @@ namespace Zeus.Editors.Controls
 				return control;
 			}
 		}
+
 		#region Fields
 
 		private readonly List<Panel> _panels = new List<Panel>();
@@ -36,7 +37,7 @@ namespace Zeus.Editors.Controls
 
 		#region Constructor
 
-		protected BaseDetailCollectionEditor()
+		protected EmbeddedCollectionEditorBase()
 		{
 			CssClass = "linkedItemsEditor";
 		}
@@ -98,9 +99,9 @@ namespace Zeus.Editors.Controls
 
 		#endregion
 
-		public void Initialize(IEnumerable linkedItemDetails)
+		public void Initialize(IEnumerable collection)
 		{
-			_initialValues = linkedItemDetails;
+			_initialValues = collection;
 		}
 
 		protected override void OnInit(EventArgs e)
@@ -116,10 +117,10 @@ namespace Zeus.Editors.Controls
 			_container = new CustomContainer { ID = ID + "_container" };
 			Controls.Add(_container);
 
-			foreach (var linkDetail in _initialValues)
-				CreateLinkedItemEditor(linkDetail);
+			foreach (var value in _initialValues)
+				CreateValueEditor(value);
 			for (int i = 0; i < AddedEditorCount; ++i)
-				CreateLinkedItemEditor(null);
+				CreateValueEditor(null);
 
 			AddNewItemButton();
 			Controls.Add(new LiteralControl("<br style=\"clear:both\" />") { ID = ID + "_literalControl" });
@@ -145,13 +146,13 @@ namespace Zeus.Editors.Controls
 		private void OnAddButtonDirectClick(object sender, DirectEventArgs e)
 		{
 			++AddedEditorCount;
-			Panel panel = CreateLinkedItemEditor(null);
+			Panel panel = CreateValueEditor(null);
 			panel.Render(_container);
 		}
 
-		private Panel CreateLinkedItemEditor(object detail)
+		private Panel CreateValueEditor(object value)
 		{
-			Control editor = CreateDetailEditor(_editorIndex, detail);
+			Control editor = CreateValueEditor(_editorIndex, value);
 			Panel panel = CreatePanel(editor, _editorIndex);
 			_container.Controls.Add(panel);
 			Panels.Add(panel);
@@ -161,9 +162,9 @@ namespace Zeus.Editors.Controls
 			return panel;
 		}
 
-		protected abstract Control CreateDetailEditor(int id, object detail);
+		protected abstract Control CreateValueEditor(int id, object value);
 
-		private Panel CreatePanel(Control itemEditor, int id)
+		private Panel CreatePanel(Control valueEditor, int id)
 		{
 			var panel = new Panel
 			{
@@ -191,7 +192,7 @@ namespace Zeus.Editors.Controls
 			deleteButton.DirectEvents.Click.ExtraParams.Add(new Parameter("ID", id.ToString()));
 			toolbar.Items.Add(deleteButton);
 
-			panel.ContentControls.Add(itemEditor);
+			panel.ContentControls.Add(valueEditor);
 
 			return panel;
 		}

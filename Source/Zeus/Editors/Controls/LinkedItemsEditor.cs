@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Zeus.Editors.Controls
 {
-	public sealed class LinkedItemsEditor : BaseDetailCollectionEditor
+	public sealed class LinkedItemsEditor : EmbeddedCollectionEditorBase
 	{
 		#region Properties
 
@@ -35,13 +35,13 @@ namespace Zeus.Editors.Controls
 
 		#endregion
 
-		protected override Control CreateDetailEditor(int id, object detail)
+		protected override Control CreateValueEditor(int id, object value)
 		{
-			DropDownList ddl = new DropDownList { CssClass = "linkedItem", ID = ID + "_ddl_" + id };
+			var ddl = new DropDownList { CssClass = "linkedItem", ID = ID + "_ddl_" + id };
 			var contentItems = ContentItem.All().OfType(TypeFilterInternal);
 			ddl.Items.AddRange(contentItems.Select(ci => new ListItem(ci.Title, ci.ID.ToString())).ToArray());
-			if (detail != null)
-				ddl.SelectedValue = detail.ToString();
+			if (value != null)
+				ddl.SelectedValue = value.ToString();
 			return ddl;
 		}
 	}

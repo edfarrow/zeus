@@ -3,7 +3,7 @@ using Zeus.FileSystem;
 
 namespace Zeus.Editors.Controls
 {
-	public class MultiFileUploadEditor : BaseDetailCollectionEditor
+	public class MultiFileUploadEditor : EmbeddedCollectionEditorBase
 	{
 		#region Properties
 
@@ -14,13 +14,13 @@ namespace Zeus.Editors.Controls
 
 		#endregion
 
-		protected override Control CreateDetailEditor(int id, object detail)
+		protected override Control CreateValueEditor(int id, object value)
 		{
 			FancyFileUpload fileUpload = CreateEditor();
 			fileUpload.ID = ID + "_upl_" + id;
 
-			if (detail != null)
-				fileUpload.CurrentFileName = ((File) detail).FileName;
+			if (value != null)
+				fileUpload.CurrentFileName = ((File) value).FileName;
 
 			return fileUpload;
 		}

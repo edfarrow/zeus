@@ -22,7 +22,7 @@ namespace Zeus.Editors.Attributes
 			return new Image();
 		}
 
-		protected override BaseDetailCollectionEditor CreateEditor()
+		protected override EmbeddedCollectionEditorBase CreateEditor()
 		{
 			return new MultiImageUploadEditor();
 		}
