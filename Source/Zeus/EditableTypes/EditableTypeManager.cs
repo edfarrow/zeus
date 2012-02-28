@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Ormongo;
 using Zeus.ContentTypes;
 
 namespace Zeus.EditableTypes
@@ -30,8 +31,7 @@ namespace Zeus.EditableTypes
 
 		public EditableType GetEditableType(object value)
 		{
-			// TODO: This won't work
-			Type underlyingType = (value is ContentItem) ? ((ContentItem) value).GetUnderlyingType() : value.GetType();
+			Type underlyingType = (value is IProxy) ? ((IProxy) value).GetUnderlyingType() : value.GetType();
 			return GetEditableType(underlyingType);
 		}
 

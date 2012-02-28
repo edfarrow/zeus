@@ -14,6 +14,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
     [ContentType("Custom Url Page")]
     [RestrictParents(typeof(CustomUrlContainer))]
     [Panel("Images", "Images", 340)]
+	[Panel("MyPage", "My Page", 320)]
     [AllowedChildren(typeof(Page))]
 	public class CustomUrlPage : BasePage
 	{
@@ -36,7 +37,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		[EmbeddedCroppedImageEditor("Banner", 200, FixedWidthValue = 400, FixedHeightValue = 200)]
 		public virtual EmbeddedCroppedImage Banner { get; set; }
 
-		[EmbeddedItemEditor("MyPage", 210)]
+		[EmbeddedItemEditor("MyPage", 210, ContainerName = "MyPage")]
 		public virtual MyLittleType MyPage { get; set; }
 
 		[EnumEditor("Vegetable", 300, typeof(Vegetable))]

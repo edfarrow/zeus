@@ -19,11 +19,16 @@ namespace Zeus.Editors.Attributes
 
 		#endregion
 
-		protected override Control AddEditor(Control container)
+		public override Control AddTo(Control container)
 		{
 			var itemEditor = new ItemEditView { ID = Name };
 			container.Controls.Add(itemEditor);
 			return itemEditor;
+		}
+
+		protected override Control AddEditor(Control container)
+		{
+			throw new NotImplementedException();
 		}
 
 		public override bool UpdateItem(IEditableObject item, Control editor)

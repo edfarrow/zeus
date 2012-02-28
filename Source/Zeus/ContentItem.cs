@@ -9,7 +9,9 @@ using Ext.Net;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using Ormongo;
 using Ormongo.Ancestry;
+using Ormongo.IdentityMap;
 using Zeus.EditableTypes;
 using Zeus.Integrity;
 using Zeus.Linq;
@@ -27,6 +29,7 @@ namespace Zeus
 	{
 		static ContentItem()
 		{
+			Plugins.Add(new IdentityMap<ContentItem>());
 			CacheDepth = true;
 		}
 
@@ -475,5 +478,12 @@ namespace Zeus
 		}
 
 		#endregion
+
+		public Type GetUnderlyingType()
+		{
+			return (this is IProxy)
+				? ((IProxy) this).GetUnderlyingType()
+				: GetType();
+		}
 	}
 }

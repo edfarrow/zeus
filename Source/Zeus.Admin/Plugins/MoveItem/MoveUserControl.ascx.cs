@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Ext.Net;
+﻿using Ext.Net;
 using MongoDB.Bson;
 using Zeus.Security;
-using System;
 
 namespace Zeus.Admin.Plugins.MoveItem
 {
@@ -10,16 +8,16 @@ namespace Zeus.Admin.Plugins.MoveItem
 	public partial class MoveUserControl : PluginUserControlBase
 	{
 		[DirectMethod]
-		public void MoveNode(ObjectId source, ObjectId destination, int pos)
+		public void MoveNode(string source, string destination, int pos)
 		{
 			// TODO: Work out what this does...
 			//int destinationID = Convert.ToInt32(destination);
 			//if (destinationID < 0)
 			//    destinationID = -1 * (destinationID % 100000);
 
-			ContentItem sourceContentItem = ContentItem.Find(source);
+			ContentItem sourceContentItem = ContentItem.Find(ObjectId.Parse(source));
             //get abs value of destination - this sorts out placement folders, which have to have the a negative value of their parent node so that sorting, moving etc can work
-			ContentItem destinationContentItem = ContentItem.Find(destination);
+			ContentItem destinationContentItem = ContentItem.Find(ObjectId.Parse(destination));
 
 			// Check user has permission to create items under the SelectedItem
 			if (!Engine.SecurityManager.IsAuthorized(destinationContentItem, Page.User, Operations.Create))
