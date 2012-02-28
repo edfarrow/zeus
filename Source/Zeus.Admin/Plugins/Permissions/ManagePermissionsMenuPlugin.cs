@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.Permissions
 {
@@ -36,7 +37,7 @@ namespace Zeus.Admin.Plugins.Permissions
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Permissions",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Lock),
+				IconUrl = IconUtility.GetIconUrl(Icon.Lock),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

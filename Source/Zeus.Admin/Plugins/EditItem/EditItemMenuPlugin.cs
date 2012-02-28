@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.EditItem
 {
@@ -31,7 +32,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Edit",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PageEdit),
+				IconUrl = IconUtility.GetIconUrl(Icon.PageEdit),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

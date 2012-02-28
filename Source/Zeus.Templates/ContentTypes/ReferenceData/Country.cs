@@ -45,9 +45,9 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 		[BsonDefaultValue(Icon.Map)]
 		public Icon FlagIcon { get; set; }
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(FlagIcon); }
+			get { return FlagIcon; }
 		}
 	}
 }

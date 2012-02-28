@@ -1,6 +1,7 @@
 using Ext.Net;
 using Zeus.FileSystem;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.FileManager
 {
@@ -44,7 +45,7 @@ namespace Zeus.Admin.Plugins.FileManager
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "File Manager",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Folder),
+				IconUrl = IconUtility.GetIconUrl(Icon.Folder),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

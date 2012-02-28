@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.PageCaching
 {
@@ -45,7 +46,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Page Caching",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Package),
+				IconUrl = IconUtility.GetIconUrl(Icon.Package),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

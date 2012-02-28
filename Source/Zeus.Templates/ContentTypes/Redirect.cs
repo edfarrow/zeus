@@ -26,9 +26,9 @@ namespace Zeus.Templates.ContentTypes
 		[BsonDefaultValue(true)]
 		public virtual bool CheckChildrenForNavigationState { get; set; }
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.PageGo); }
+			get { return Icon.PageGo; }
 		}
 	}
 }

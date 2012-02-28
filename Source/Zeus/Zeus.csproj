@@ -516,7 +516,7 @@
     <Compile Include="Security\SecurityManager.cs" />
     <Compile Include="Web\Security\Details\RolesEditorAttribute.cs" />
     <Compile Include="Security\ISecurityEnforcer.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="Util\IconUtility.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\ExtensionMethods.cs" />
     <Compile Include="Web\Host.cs" />

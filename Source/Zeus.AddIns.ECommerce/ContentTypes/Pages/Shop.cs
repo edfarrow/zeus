@@ -20,9 +20,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		private const string DeliveryMethodsName = "delivery-methods";
 		private const string CheckoutName = "checkout";
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Money); }
+			get { return Icon.Money; }
 		}
 
 		public VariationSetContainer VariationsSet

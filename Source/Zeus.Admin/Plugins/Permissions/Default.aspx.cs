@@ -10,6 +10,7 @@ using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Linq;
 using Zeus.Security;
+using Zeus.Util;
 using Zeus.Web.Security;
 using LinkButton = System.Web.UI.WebControls.LinkButton;
 
@@ -117,7 +118,7 @@ namespace Zeus.Admin.Plugins.Permissions
 			IPrincipal user = new GenericPrincipal(identity, roles);
 			TableRow row = new TableRow();
 			TableCell imageCell = new TableCell();
-			imageCell.Controls.Add(new LiteralControl("<img src=\"" + Utility.GetCooliteIconUrl(icon) + "\" />"));
+			imageCell.Controls.Add(new LiteralControl("<img src=\"" + IconUtility.GetIconUrl(icon) + "\" />"));
 			imageCell.Controls.Add(new HiddenField { ID = "hdn" + index + "Type", Value = type.ToString() });
 			imageCell.Controls.Add(new HiddenField { ID = "hdn" + index + "RoleOrUser", Value = roleOrUser });
 			row.Cells.Add(imageCell);

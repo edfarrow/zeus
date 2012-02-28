@@ -8,9 +8,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[RestrictParents(typeof(Category))]
 	public class Subcategory : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.PageRed); }
+			get { return Icon.PageRed; }
 		}
 	}
 }

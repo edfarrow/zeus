@@ -35,9 +35,9 @@ namespace Zeus.Web
 			set { base.Visible = value; }
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Page); }
+			get { return Icon.Page; }
 		}
 
 		public override bool IsPage

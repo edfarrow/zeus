@@ -59,9 +59,9 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 		[BsonDefaultValue(Icon.MoneyAdd)]
 		public Icon CurrencyIcon { get; set; }
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(CurrencyIcon); }
+			get { return CurrencyIcon; }
 		}
 	}
 }

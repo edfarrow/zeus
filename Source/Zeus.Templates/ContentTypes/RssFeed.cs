@@ -14,9 +14,9 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]    
 	public class RssFeed : PageContentItem, IFeed, INode
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Feed); }
+			get { return Icon.Feed; }
 		}
 
 		[LinkedItemDropDownListEditor("Feed root", 90)]

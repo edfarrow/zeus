@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.Children
 {
@@ -41,7 +42,7 @@ namespace Zeus.Admin.Plugins.Children
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Manage Children",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.SitemapColor),
+				IconUrl = IconUtility.GetIconUrl(Icon.SitemapColor),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

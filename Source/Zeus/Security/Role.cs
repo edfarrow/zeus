@@ -21,9 +21,9 @@ namespace Zeus.Web.Security.Items
 			set { base.Name = value; }
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.BulletKey); }
+			get { return Icon.BulletKey; }
 		}
 	}
 }

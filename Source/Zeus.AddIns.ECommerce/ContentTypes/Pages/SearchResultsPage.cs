@@ -8,9 +8,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[RestrictParents(typeof(Shop))]
 	public class SearchResultsPage : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Magnifier); }
+			get { return Icon.Magnifier; }
 		}
 	}
 }

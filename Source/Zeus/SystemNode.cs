@@ -13,9 +13,9 @@ namespace Zeus
 			Title = "System";
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Computer); }
+			get { return Icon.Computer; }
 		}
 	}
 }

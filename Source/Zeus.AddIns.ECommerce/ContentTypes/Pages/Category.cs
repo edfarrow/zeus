@@ -9,9 +9,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[RestrictParents(typeof(Shop))]
 	public class Category : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.PageGreen); }
+			get { return Icon.PageGreen; }
 		}
 
 		[HtmlTextBoxEditor("Description", 200)]

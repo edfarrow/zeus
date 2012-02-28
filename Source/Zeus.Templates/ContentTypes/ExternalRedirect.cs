@@ -25,9 +25,9 @@ namespace Zeus.Templates.ContentTypes
 		[TextBoxEditor("Redirect to", 31, Required = true, ContainerName = "Content", Description = "Please make sure you enter the complete address including the http prefix", Shared = true)]
 		public virtual string RedirectAddress { get; set; }
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.DoorOut); }
+			get { return Icon.DoorOut; }
 		}
 	}
 }

@@ -10,9 +10,9 @@ namespace Zeus.Web
 	[RestrictParents(typeof(RootItem))]
 	public class WebsiteNode : PageContentItem, IFileSystemContainer, ILoginContext
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.PageWorld); }
+			get { return Icon.PageWord; }
 		}
 
 		[LinkedItemDropDownListEditor("404 Page", 25, TypeFilter = typeof(PageContentItem), Description = "This page will be used if a user requests a page that does not exist.")]

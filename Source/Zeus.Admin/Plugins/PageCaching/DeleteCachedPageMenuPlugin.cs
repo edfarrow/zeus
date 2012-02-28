@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 using Zeus.Web.Caching;
 
 namespace Zeus.Admin.Plugins.PageCaching
@@ -59,7 +60,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Delete Cached Page",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageDelete),
+				IconUrl = IconUtility.GetIconUrl(Icon.PackageDelete),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

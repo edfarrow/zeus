@@ -7,9 +7,9 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(ITagGroupContainer))]
 	public class TagGroup : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.TagBlue); }
+			get { return Icon.TagBlue; }
 		}
 	}
 }

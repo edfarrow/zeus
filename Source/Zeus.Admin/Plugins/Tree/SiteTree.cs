@@ -4,6 +4,7 @@ using Ext.Net;
 using Zeus.Collections;
 using System.Collections.Generic;
 using Zeus.Linq;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.Tree
 {
@@ -109,7 +110,7 @@ namespace Zeus.Admin.Plugins.Tree
 					TreeNode folderNode = new TreeNode
 					{
 						Text = folderGroup,
-						IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
+						IconFile = IconUtility.GetIconUrl(Icon.FolderGo),
 						Cls = "zeus-tree-node",
 						Expanded = false,
 						// TODO: Check why this was necessary

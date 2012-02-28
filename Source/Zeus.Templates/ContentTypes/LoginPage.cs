@@ -1,4 +1,4 @@
-using System;
+using Ext.Net;
 using Zeus.Editors.Attributes;
 using Zeus.Web;
 using Zeus.Integrity;
@@ -10,9 +10,9 @@ namespace Zeus.Templates.ContentTypes
     [RestrictParents(typeof(ILoginContext))]
 	public class LoginPage : PageContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Ext.Net.Icon.Key); }
+			get { return Icon.Key; }
 		}
 
 		[LinkedItemDropDownListEditor("Forgotten Password Page", 100)]

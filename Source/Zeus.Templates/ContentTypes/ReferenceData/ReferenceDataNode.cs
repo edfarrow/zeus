@@ -13,9 +13,9 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Title = "Reference Data";
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.BookOpen); }
+			get { return Icon.BookOpen; }
 		}
 
 		protected override void OnAfterCreate()

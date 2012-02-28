@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.Preview
 {
@@ -44,7 +45,7 @@ namespace Zeus.Admin.Plugins.Preview
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Preview",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Magnifier),
+				IconUrl = IconUtility.GetIconUrl(Icon.Magnifier),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

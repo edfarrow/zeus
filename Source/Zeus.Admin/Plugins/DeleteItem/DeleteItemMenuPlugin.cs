@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.DeleteItem
 {
@@ -51,7 +52,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Delete",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PageDelete),
+				IconUrl = IconUtility.GetIconUrl(Icon.PageDelete),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

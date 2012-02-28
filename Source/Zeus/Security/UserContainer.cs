@@ -19,9 +19,9 @@ namespace Zeus.Web.Security.Items
 			Title = ContainerTitle;
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Group); }
+			get { return Icon.Group; }
 		}
 	}
 }

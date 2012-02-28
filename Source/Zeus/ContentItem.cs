@@ -148,7 +148,7 @@ namespace Zeus
         /// <summary>Gets the icon of this item. This can be used to distinguish item types in edit mode.</summary>
         public virtual string IconUrl
         {
-            get { return Utility.GetCooliteIconUrl(Icon); }
+            get { return IconUtility.GetIconUrl(Icon); }
         }
 
         protected virtual Icon Icon

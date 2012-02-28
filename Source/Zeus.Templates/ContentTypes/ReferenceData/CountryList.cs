@@ -13,9 +13,9 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Title = "Countries";
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.World); }
+			get { return Icon.World; }
 		}
 
 		protected override void OnAfterCreate()

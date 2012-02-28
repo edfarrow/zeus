@@ -8,9 +8,9 @@ namespace Zeus
 	[RestrictParents(AllowedTypes.None)]
 	public class RootItem : DataContentItem, IRootItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.PageGear); }
+			get { return Icon.PageGear; }
 		}
 	}
 }

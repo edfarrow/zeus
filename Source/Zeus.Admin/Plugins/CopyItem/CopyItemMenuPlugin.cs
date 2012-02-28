@@ -1,4 +1,5 @@
 using Ext.Net;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.CopyItem
 {
@@ -25,7 +26,7 @@ namespace Zeus.Admin.Plugins.CopyItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Copy",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PageCopy),
+				IconUrl = IconUtility.GetIconUrl(Icon.PageCopy),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

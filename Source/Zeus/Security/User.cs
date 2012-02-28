@@ -90,9 +90,9 @@ namespace Zeus.Security
 			set { _lastPasswordChangedDate = value; }
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.User); }
+			get { return Icon.User; }
 		}
 
         public override string FolderPlacementGroup

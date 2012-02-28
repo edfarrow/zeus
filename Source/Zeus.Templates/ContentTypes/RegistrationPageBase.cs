@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Web;
 using Zeus.Web.Security;
@@ -9,9 +10,9 @@ namespace Zeus.Templates.ContentTypes
 	{
         public string MonkeyNonStat { get { return "Monkey"; } }
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Ext.Net.Icon.KeyAdd); }
+			get { return Icon.KeyAdd; }
 		}
 	}
 }

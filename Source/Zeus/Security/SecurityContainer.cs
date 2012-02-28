@@ -16,9 +16,9 @@ namespace Zeus.Security.ContentTypes
 			Title = ContainerTitle;
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.FolderKey); }
+			get { return Icon.FolderKey; }
 		}
 	}
 }

@@ -9,9 +9,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[RestrictParents(typeof(Shop))]
 	public class CheckoutPage : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.MoneyPound); }
+			get { return Icon.MoneyPound; }
 		}
 
 		[HtmlTextBoxEditor("Extra Information", 210)]

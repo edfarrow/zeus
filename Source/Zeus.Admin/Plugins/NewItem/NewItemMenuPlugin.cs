@@ -5,6 +5,7 @@ using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Security;
+using Zeus.Util;
 
 [assembly: WebResource("Zeus.Admin.Plugins.NewItem.Resources.Ext.ux.zeus.NewItemContextMenuPlugin.js", "text/javascript")]
 [assembly: WebResource("Zeus.Admin.Plugins.NewItem.Resources.Ext.ux.zeus.NewItemGridMenuPlugin.js", "text/javascript")]
@@ -66,7 +67,7 @@ namespace Zeus.Admin.Plugins.NewItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "New",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PageAdd),
+				IconUrl = IconUtility.GetIconUrl(Icon.PageAdd),
 				Handler = "function() { return false; }"
 			};
 

@@ -1,5 +1,6 @@
 using Ext.Net;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.RecycleBin
 {
@@ -44,7 +45,7 @@ namespace Zeus.Admin.Plugins.RecycleBin
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "View Recycle Bin",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Bin),
+				IconUrl = IconUtility.GetIconUrl(Icon.Bin),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

@@ -2,6 +2,7 @@ using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
 using Zeus.Admin.Plugins;
+using Zeus.Util;
 
 namespace Zeus.AddIns.ECommerce.Admin.Plugins
 {
@@ -43,7 +44,7 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Manage Orders",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Basket),
+				IconUrl = IconUtility.GetIconUrl(Icon.Basket),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

@@ -1,6 +1,7 @@
 using Ext.Net;
 using Zeus.Configuration;
 using Zeus.Security;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.ImportExport
 {
@@ -46,7 +47,7 @@ namespace Zeus.Admin.Plugins.ImportExport
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Import / Export",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageGo),
+				IconUrl = IconUtility.GetIconUrl(Icon.PackageGo),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

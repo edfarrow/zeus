@@ -14,9 +14,9 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Title = "Currencies";
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Money); }
+			get { return Icon.Money; }
 		}
 
 		[LinkedItemDropDownListEditor("Base Currency", 100)]

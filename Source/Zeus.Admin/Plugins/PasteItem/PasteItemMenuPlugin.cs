@@ -1,4 +1,5 @@
 using Ext.Net;
+using Zeus.Util;
 
 namespace Zeus.Admin.Plugins.PasteItem
 {
@@ -25,7 +26,7 @@ namespace Zeus.Admin.Plugins.PasteItem
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Paste",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PagePaste),
+				IconUrl = IconUtility.GetIconUrl(Icon.PagePaste),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

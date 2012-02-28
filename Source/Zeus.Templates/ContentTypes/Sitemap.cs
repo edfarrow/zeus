@@ -8,9 +8,9 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
 	public class Sitemap : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Sitemap); }
+			get { return Icon.Sitemap; }
 		}
 	}
 }
