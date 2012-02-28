@@ -74,15 +74,6 @@ namespace Zeus.Web
 		{
 			string[] keys = new string[RequestItems.Keys.Count];
 			RequestItems.Keys.CopyTo(keys, 0);
-
-			foreach (string key in keys)
-			{
-				IClosable value = RequestItems[key] as IClosable;
-				if (value != null)
-				{
-					(value as IClosable).Dispose();
-				}
-			}
 			items = null;
 		}
 

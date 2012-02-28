@@ -40,13 +40,6 @@ namespace Zeus.Web
 		{
 			object[] keys = new object[RequestItems.Keys.Count];
 			RequestItems.Keys.CopyTo(keys, 0);
-
-			foreach (object key in keys)
-			{
-				IClosable value = RequestItems[key] as IClosable;
-				if (value != null)
-					value.Dispose();
-			}
 		}
 
 		public void TransferRequest(string path)

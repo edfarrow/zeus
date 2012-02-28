@@ -458,7 +458,6 @@
     <Compile Include="Web\ControlsAttribute.cs" />
     <Compile Include="Web\ErrorHandler.cs" />
     <Compile Include="Web\HttpRequestContextAccessor.cs" />
-    <Compile Include="Web\IClosable.cs" />
     <Compile Include="Web\IControllerDescriptor.cs" />
     <Compile Include="Web\IErrorHandler.cs" />
     <Compile Include="Web\InitializerModule.cs" />
