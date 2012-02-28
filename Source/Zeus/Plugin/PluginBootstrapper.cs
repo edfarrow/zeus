@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ninject;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.Engine;
 
@@ -31,14 +32,14 @@ namespace Zeus.Plugin
 		}
 
 		/// <summary>Invokes the initialize method on the supplied plugins.</summary>
-		public void InitializePlugins(ContentEngine engine, IEnumerable<IPluginDefinition> plugins)
+		public void InitializePlugins(IKernel kernel, IEnumerable<IPluginDefinition> plugins)
 		{
-			List<Exception> exceptions = new List<Exception>();
-			foreach (IPluginDefinition plugin in plugins)
+			var exceptions = new List<Exception>();
+			foreach (var plugin in plugins)
 			{
 				try
 				{
-					plugin.Initialize(engine);
+					plugin.Initialize(kernel);
 				}
 				catch (Exception ex)
 				{

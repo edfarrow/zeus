@@ -61,7 +61,7 @@ namespace Zeus.Admin.Controls
 
 		private static IAuthenticationService CurrentAuthenticationService
 		{
-			get { return WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService(); }
+			get { return Zeus.Context.Current.Resolve<IAuthenticationContextService>().GetCurrentService(); }
 		}
 
 		private void LogoutClicked(object Source, CommandEventArgs e)

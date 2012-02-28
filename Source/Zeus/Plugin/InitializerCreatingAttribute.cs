@@ -1,4 +1,5 @@
 using System;
+using Ninject;
 using Zeus.Engine;
 
 namespace Zeus.Plugin
@@ -11,10 +12,10 @@ namespace Zeus.Plugin
 	{
 		public Type InitializerType { get; set; }
 
-		public virtual void Initialize(ContentEngine engine)
+		public virtual void Initialize(IKernel kernel)
 		{
 			if (InitializerType == null) throw new ArgumentNullException("InitializerType");
-			CreateInitializer().Initialize(engine);
+			CreateInitializer().Initialize(kernel);
 		}
 
 		/// <summary>Creates an instance of the initializer defined by this attribute.</summary>

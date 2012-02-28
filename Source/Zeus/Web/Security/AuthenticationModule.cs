@@ -25,7 +25,7 @@ namespace Zeus.Web.Security
 
 		protected static IAuthenticationService CurrentAuthenticationService
 		{
-			get { return WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService(); }
+			get { return Context.Current.Resolve<IAuthenticationContextService>().GetCurrentService(); }
 		}
 
 		#endregion
@@ -46,7 +46,7 @@ namespace Zeus.Web.Security
 			HttpApplication application = (HttpApplication) source;
 			HttpContextBase context = new HttpContextWrapper(application.Context);
 
-			IAuthenticationContextService authenticationContextService = WebSecurityEngine.Get<IAuthenticationContextService>();
+			IAuthenticationContextService authenticationContextService = Context.Current.Resolve<IAuthenticationContextService>();
 			AuthenticationSection authenticationConfig = System.Web.Configuration.WebConfigurationManager.GetSection("zeus/authentication") as AuthenticationSection;
 			string locationPath = context.Request.Path.ToLower();
 			if (authenticationConfig != null && !authenticationContextService.ContainsLocation(locationPath))
@@ -103,7 +103,7 @@ namespace Zeus.Web.Security
 			User membershipUser = null;
 			try
 			{
-				membershipUser = WebSecurityEngine.Get<ICredentialService>().GetUser(ticket.Name);	
+				membershipUser = Context.Current.Resolve<ICredentialService>().GetUser(ticket.Name);	
 			}
 			catch
 			{

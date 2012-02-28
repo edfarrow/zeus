@@ -1,5 +1,4 @@
-using System;
-using Zeus.Engine;
+using Ninject;
 using Zeus.Plugin;
 
 namespace Zeus.FileSystem.Images
@@ -7,9 +6,9 @@ namespace Zeus.FileSystem.Images
 	[AutoInitialize]
 	public class ImageCachingServiceInitializer : IPluginInitializer
 	{
-		public void Initialize(ContentEngine engine)
+		public void Initialize(IKernel kernel)
 		{
-			engine.AddComponent("zeus.fileSystem.images.imageCachingService", typeof(ImageCachingService));
+			kernel.Bind<ImageCachingService>().ToSelf();
 		}
 	}
 }

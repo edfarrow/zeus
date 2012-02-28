@@ -251,6 +251,7 @@
     <Compile Include="Editors\Controls\HtmlTextBoxResourcesInitializer.cs" />
     <Compile Include="EmbeddedItem.cs" />
     <Compile Include="Engine\IContextAwareAttribute.cs" />
+    <Compile Include="Engine\ZeusKernel.cs" />
     <Compile Include="FileSystem\Images\EmbeddedCroppedImage.cs" />
     <Compile Include="FileSystem\EmbeddedFile.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
@@ -356,7 +357,6 @@
     <Compile Include="Web\Security\UserCreateStatus.cs" />
     <Compile Include="Web\Security\WebIdentity.cs" />
     <Compile Include="Web\Security\WebPrincipal.cs" />
-    <Compile Include="Web\Security\WebSecurityEngine.cs" />
     <Compile Include="Web\Security\WebSecurityService.cs" />
     <Compile Include="Web\UI\PanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />

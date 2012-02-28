@@ -1,6 +1,5 @@
-using Zeus.Admin.RecycleBin;
+using Ninject;
 using Zeus.Configuration;
-using Zeus.Engine;
 using Zeus.Plugin;
 
 namespace Zeus.Admin.Plugins.RecycleBin
@@ -8,12 +7,12 @@ namespace Zeus.Admin.Plugins.RecycleBin
 	[AutoInitialize]
 	public class RecycleBinInitializer : IPluginInitializer
 	{
-		public void Initialize(ContentEngine engine)
+		public void Initialize(IKernel kernel)
 		{
-			if (engine.Resolve<AdminSection>().RecycleBin.Enabled)
+			if (kernel.Get<AdminSection>().RecycleBin.Enabled)
 			{
-				engine.AddComponent("zeus.recycleBin", typeof(IRecycleBinHandler), typeof(RecycleBinHandler));
-				engine.AddComponent("zeus.deleteInterceptor", typeof(DeleteInterceptor));
+				kernel.Bind<IRecycleBinHandler>().To<RecycleBinHandler>();
+				kernel.Bind<DeleteInterceptor>().ToSelf();
 			}
 		}
 	}

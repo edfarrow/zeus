@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ninject;
 using Zeus.Engine;
 
 namespace Zeus.Plugin
@@ -9,6 +10,6 @@ namespace Zeus.Plugin
 	public interface IPluginBootstrapper
 	{
 		IEnumerable<IPluginDefinition> GetPluginDefinitions();
-		void InitializePlugins(ContentEngine engine, IEnumerable<IPluginDefinition> plugins);
+		void InitializePlugins(IKernel kernel, IEnumerable<IPluginDefinition> plugins);
 	}
 }

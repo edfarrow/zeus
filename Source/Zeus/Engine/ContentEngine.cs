@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using Ninject;
 using Ormongo;
 using Zeus.Admin;
-using Zeus.BaseLibrary.DependencyInjection;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
@@ -20,7 +20,7 @@ namespace Zeus.Engine
 {
 	public class ContentEngine
 	{
-		private readonly DependencyInjectionManager _dependencyInjectionManager;
+		private readonly ZeusKernel _kernel;
 
 		#region Properties
 
@@ -70,18 +70,17 @@ namespace Zeus.Engine
 
 		public ContentEngine(EventBroker eventBroker)
 		{
-			HostSection hostSection = (HostSection) ConfigurationManager.GetSection("zeus/host");
+			_kernel = new ZeusKernel();
+			_kernel.Bind<IAssemblyFinder>().To<AssemblyFinder>();
 
-			_dependencyInjectionManager = new DependencyInjectionManager();
-			_dependencyInjectionManager.Bind<IAssemblyFinder, AssemblyFinder>();
-
-			DatabaseSection databaseSection = (DatabaseSection) ConfigurationManager.GetSection("zeus/database");
-			_dependencyInjectionManager.BindInstance(eventBroker);
-			_dependencyInjectionManager.BindInstance(databaseSection);
-			_dependencyInjectionManager.BindInstance(hostSection);
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/contentTypes") as ContentTypesSection);
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/customUrls") as CustomUrlsSection ?? new CustomUrlsSection());
+			var hostSection = (HostSection)ConfigurationManager.GetSection("zeus/host");
+			var databaseSection = (DatabaseSection)ConfigurationManager.GetSection("zeus/database");
+			_kernel.Bind<EventBroker>().ToConstant(eventBroker);
+			_kernel.Bind<DatabaseSection>().ToConstant(databaseSection);
+			_kernel.Bind<HostSection>().ToConstant(hostSection);
+			_kernel.Bind<AdminSection>().ToConstant(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
+			_kernel.Bind<ContentTypesSection>().ToConstant(ConfigurationManager.GetSection("zeus/contentTypes") as ContentTypesSection);
+			_kernel.Bind<CustomUrlsSection>().ToConstant(ConfigurationManager.GetSection("zeus/customUrls") as CustomUrlsSection ?? new CustomUrlsSection());
 
 			OrmongoConfiguration.Database = databaseSection.DatabaseName;
 			OrmongoConfiguration.ServerHost = databaseSection.ServerHost;
@@ -93,55 +92,29 @@ namespace Zeus.Engine
 
 		#endregion
 
-		public void AddComponent(string key, Type serviceType, Type classType)
-		{
-			_dependencyInjectionManager.Bind(serviceType, classType);
-		}
-
-		public void AddComponent(string key, Type classType)
-		{
-			_dependencyInjectionManager.Bind(classType);
-		}
-
-		public void AddComponentInstance(string key, object instance)
-		{
-			_dependencyInjectionManager.BindInstance(instance);
-		}
-
-		public void Bind<TService, TComponent>()
-			where TComponent : TService
-		{
-			_dependencyInjectionManager.Bind<TService, TComponent>();
-		}
-
 		public void Initialize()
 		{
-			_dependencyInjectionManager.BindInstance(this);
+			_kernel.Bind<ContentEngine>().ToConstant(this);
 
-			WebSecurityEngine.DependencyInjectionManager = _dependencyInjectionManager;
+			var invoker = Resolve<IPluginBootstrapper>();
+			invoker.InitializePlugins(_kernel, invoker.GetPluginDefinitions());
 
-			IPluginBootstrapper invoker = Resolve<IPluginBootstrapper>();
-			invoker.InitializePlugins(this, invoker.GetPluginDefinitions());
-
-			_dependencyInjectionManager.Initialize();
+			_kernel.InitializeServices();
 		}
 
 		public T Resolve<T>()
 		{
-			return _dependencyInjectionManager.Get<T>();
+			return _kernel.Get<T>();
 		}
 
 		public IEnumerable<T> ResolveAll<T>()
 		{
-			return _dependencyInjectionManager.GetAll<T>();
+			return _kernel.GetAll<T>();
 		}
 
-		/// <summary>Resolves a service configured for the factory.</summary>
-		/// <param name="serviceType">The type of service to resolve.</param>
-		/// <returns>An instance of the resolved service.</returns>
 		public object Resolve(Type serviceType)
 		{
-			return _dependencyInjectionManager.Get(serviceType);
+			return _kernel.Get(serviceType);
 		}
 
 		public string GetServerResourceUrl(Assembly assembly, string resourcePath)
@@ -153,27 +126,5 @@ namespace Zeus.Engine
 		{
 			return GetServerResourceUrl(type.Assembly, resourcePath);
 		}
-
-		/*/// <summary>Releases a component from the IoC container.</summary>
-		/// <param name="instance">The component instance to release.</param>
-		public void Release(object instance)
-		{
-			IoC.Container.Release(instance);
-		}*/
-
-		/*public void AddComponentLifeStyle(string key, Type classType, ComponentLifeStyle lifeStyle)
-		{
-			LifestyleType lifeStyleType = lifeStyle == ComponentLifeStyle.Singleton
-				? LifestyleType.Singleton
-				: LifestyleType.Transient;
-
-			Container.AddComponentLifeStyle(key, classType, lifeStyleType);
-		}*/
-	}
-
-	public enum ComponentLifeStyle
-	{
-		Singleton = 0,
-		Transient = 1,
 	}
 }

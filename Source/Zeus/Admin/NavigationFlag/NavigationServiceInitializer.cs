@@ -1,5 +1,4 @@
-using System;
-using Zeus.Engine;
+using Ninject;
 using Zeus.Plugin;
 
 namespace Zeus.Admin.NavigationFlag
@@ -7,9 +6,9 @@ namespace Zeus.Admin.NavigationFlag
 	[AutoInitialize]
 	public class NavigationCachingServiceInitializer : IPluginInitializer
 	{
-		public void Initialize(ContentEngine engine)
+		public void Initialize(IKernel kernel)
 		{
-            engine.AddComponent("zeus.admin.navigationFlag.navigationCachingService", typeof(NavigationCachingService));
+            kernel.Bind<NavigationCachingService>().ToSelf();
 		}
 	}
 }

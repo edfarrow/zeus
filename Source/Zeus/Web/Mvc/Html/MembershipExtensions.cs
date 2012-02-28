@@ -8,7 +8,7 @@ namespace Zeus.Web.Mvc.Html
 	{
 		private static IAuthenticationService CurrentAuthenticationService
 		{
-			get { return WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService(); }
+			get { return Context.Current.Resolve<IAuthenticationContextService>().GetCurrentService(); }
 		}
 
 		public static string CurrentUsername(this HtmlHelper html, string formatString)

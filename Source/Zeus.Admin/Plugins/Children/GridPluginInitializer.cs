@@ -1,6 +1,6 @@
 using System.Linq;
+using Ninject;
 using Zeus.BaseLibrary.Reflection;
-using Zeus.Engine;
 using Zeus.Plugin;
 
 namespace Zeus.Admin.Plugins.Children
@@ -8,12 +8,12 @@ namespace Zeus.Admin.Plugins.Children
 	[AutoInitialize]
 	public class GridPluginInitializer : IPluginInitializer
 	{
-		public void Initialize(ContentEngine engine)
+		public void Initialize(IKernel kernel)
 		{
-			engine.Resolve<ITypeFinder>().Find(typeof(IGridToolbarPlugin))
+			kernel.Get<ITypeFinder>().Find(typeof(IGridToolbarPlugin))
 				.Where(t => !t.IsInterface && !t.IsAbstract)
 				.ToList()
-				.ForEach(t => engine.AddComponent(null, typeof(IGridToolbarPlugin), t));
+				.ForEach(t => kernel.Bind<IGridToolbarPlugin>().To(t));
 		}
 	}
 }

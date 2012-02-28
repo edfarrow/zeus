@@ -1,3 +1,4 @@
+using Ninject;
 using Zeus.Engine;
 
 namespace Zeus.Plugin
@@ -9,7 +10,7 @@ namespace Zeus.Plugin
 	public interface IPluginDefinition
 	{
 		/// <summary>Executes the plugin initializer.</summary>
-		/// <param name="engine">A reference to the current engine.</param>
-		void Initialize(ContentEngine engine);
+		/// <param name="kernel">A reference to the current Ninject kernel.</param>
+		void Initialize(IKernel kernel);
 	}
 }

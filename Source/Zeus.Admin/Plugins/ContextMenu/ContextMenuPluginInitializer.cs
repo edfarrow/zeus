@@ -1,6 +1,6 @@
 using System.Linq;
+using Ninject;
 using Zeus.BaseLibrary.Reflection;
-using Zeus.Engine;
 using Zeus.Plugin;
 
 namespace Zeus.Admin.Plugins.ContextMenu
@@ -8,12 +8,12 @@ namespace Zeus.Admin.Plugins.ContextMenu
 	[AutoInitialize]
 	public class ContextMenuPluginInitializer : IPluginInitializer
 	{
-		public void Initialize(ContentEngine engine)
+		public void Initialize(IKernel kernel)
 		{
-			engine.Resolve<ITypeFinder>().Find(typeof(IContextMenuPlugin))
+			kernel.Get<ITypeFinder>().Find(typeof(IContextMenuPlugin))
 				.Where(t => !t.IsInterface && !t.IsAbstract)
 				.ToList()
-				.ForEach(t => engine.AddComponent(null, typeof(IContextMenuPlugin), t));
+				.ForEach(t => kernel.Bind<IContextMenuPlugin>().To(t));
 		}
 	}
 }

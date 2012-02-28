@@ -1,7 +1,7 @@
 using System.Linq;
+using Ninject;
 using Zeus.Admin.Plugins;
 using Zeus.BaseLibrary.Reflection;
-using Zeus.Engine;
 using Zeus.Plugin;
 
 namespace Zeus.Admin
@@ -9,12 +9,12 @@ namespace Zeus.Admin
 	[AutoInitialize]
 	public class MainInterfacePluginInitializer : IPluginInitializer
 	{
-		public void Initialize(ContentEngine engine)
+		public void Initialize(IKernel kernel)
 		{
-			engine.Resolve<ITypeFinder>().Find(typeof(IMainInterfacePlugin))
+			kernel.Get<ITypeFinder>().Find(typeof(IMainInterfacePlugin))
 				.Where(t => !t.IsInterface && !t.IsAbstract)
 				.ToList()
-				.ForEach(t => engine.AddComponent(null, typeof(IMainInterfacePlugin), t));
+				.ForEach(t => kernel.Bind<IMainInterfacePlugin>().To(t));
 		}
 	}
 }
