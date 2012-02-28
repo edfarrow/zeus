@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using Camino;
 using Ninject.Modules;
 using Zeus.Admin;
 using Zeus.BaseLibrary.Reflection;
@@ -15,7 +16,6 @@ using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.Caching;
-using Zeus.Web.Hosting;
 using Zeus.Web.Mvc;
 using Zeus.Web.Mvc.Html;
 using Zeus.Web.Security;
@@ -89,7 +89,7 @@ namespace Zeus.Engine
 			Bind<IRequestDispatcher>().To<RequestDispatcher>().InSingletonScope();
 			Bind<IRequestLifecycleHandler>().To<RequestLifecycleHandler>().InSingletonScope();
 			Bind<IWebContext>().To<WebRequestContext>().InSingletonScope();
-			Bind<IEmbeddedResourceManager>().To<EmbeddedResourceManager>().InSingletonScope();
+			Bind<EmbeddedResourcePathProvider>().ToSelf().InSingletonScope();
 
 			// Web / Caching
 			Bind<ICachingService>().To<CachingService>().InSingletonScope();

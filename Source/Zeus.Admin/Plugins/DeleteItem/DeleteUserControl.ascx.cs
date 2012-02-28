@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Ext.Net;
 using MongoDB.Bson;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins.DeleteItem
 {

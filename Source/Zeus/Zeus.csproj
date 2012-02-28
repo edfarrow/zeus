@@ -396,8 +396,6 @@
     <Compile Include="Web\Handlers\CacheHandler.cs" />
     <Compile Include="Web\Handlers\GoogleSiteMapHandler.cs" />
     <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceManager.cs" />
-    <Compile Include="Web\Hosting\IEmbeddedResourceManager.cs" />
     <Compile Include="Web\HttpRequestSupport.cs" />
     <Compile Include="Web\IAdapterDescriptor.cs" />
     <Compile Include="Web\IHost.cs" />

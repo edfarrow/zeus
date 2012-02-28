@@ -2,7 +2,6 @@ using Ext.Net;
 using Zeus.ContentTypes;
 using Zeus.Linq;
 using Zeus.Security;
-using Zeus.Web.Hosting;
 using Zeus.BaseLibrary.Web.UI;
 
 [assembly: System.Web.UI.WebResource("Zeus.Admin.Plugins.Tree.Resources.TreeCssInitializer.js", "text/javascript")]
@@ -13,7 +12,7 @@ namespace Zeus.Admin.Plugins.Tree
 		public override void ModifyInterface(IMainInterface mainInterface)
 		{
 			// Add tree.
-			TreePanel treePanel = new TreePanel
+			var treePanel = new TreePanel
 			{
 				ID = "stpNavigation",
 				Width = 200,
@@ -33,10 +32,10 @@ namespace Zeus.Admin.Plugins.Tree
 			mainInterface.Viewport.Items.Add(treePanel);
 
 			// Setup tree top toolbar.
-			Toolbar topToolbar = new Toolbar();
+			var topToolbar = new Toolbar();
 			treePanel.TopBar.Add(topToolbar);
 
-			TriggerField filterField = new TriggerField
+			var filterField = new TriggerField
 			{
 				EnableKeyEvents = true,
 				Width = 100,

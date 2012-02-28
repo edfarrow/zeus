@@ -1,7 +1,6 @@
 using Ninject.Modules;
 using Zeus.AddIns.ECommerce.Admin;
 using Zeus.AddIns.ECommerce.Services;
-using Zeus.Web.Hosting;
 
 namespace Zeus.AddIns.ECommerce
 {

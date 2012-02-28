@@ -1,6 +1,4 @@
-using System;
 using Ext.Net;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins
 {

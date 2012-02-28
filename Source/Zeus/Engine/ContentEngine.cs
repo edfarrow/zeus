@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using Camino;
 using Ninject;
 using Ormongo;
 using Zeus.Admin;
@@ -12,7 +13,6 @@ using Zeus.ContentTypes;
 using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Web;
-using Zeus.Web.Hosting;
 using Zeus.Web.Security;
 using IWebContext=Zeus.Web.IWebContext;
 
@@ -119,7 +119,7 @@ namespace Zeus.Engine
 
 		public string GetServerResourceUrl(Assembly assembly, string resourcePath)
 		{
-			return Resolve<IEmbeddedResourceManager>().GetUrl(assembly, resourcePath);
+			return Resolve<EmbeddedResourcePathProvider>().GetUrl(assembly, resourcePath);
 		}
 
 		public string GetServerResourceUrl(Type type, string resourcePath)

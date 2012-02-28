@@ -1,12 +1,12 @@
 using System;
 using System.Web;
 using System.Web.Hosting;
+using Camino;
 using Zeus.BaseLibrary.Web;
-using Zeus.Web.Hosting;
 
 namespace Zeus.Web
 {
-	public class Global : System.Web.HttpApplication
+	public class Global : HttpApplication
 	{
 		public override void Init()
 		{
@@ -82,7 +82,7 @@ namespace Zeus.Web
 
 		protected virtual void OnApplicationStart(EventArgs e)
 		{
-			var virtualPathProvider = Zeus.Context.Current.Resolve<IEmbeddedResourceManager>().VirtualPathProvider;
+			var virtualPathProvider = Zeus.Context.Current.Resolve<EmbeddedResourcePathProvider>();
 			HostingEnvironment.RegisterVirtualPathProvider(virtualPathProvider);
 		}
 	}
