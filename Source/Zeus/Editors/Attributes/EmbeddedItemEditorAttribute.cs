@@ -32,19 +32,20 @@ namespace Zeus.Editors.Attributes
 			throw new NotImplementedException();
 		}
 
-		public override bool UpdateItem(IEditableObject item, Control editor)
-		{
-			var itemEditor = (ItemEditView)editor;
-			item[Name] = itemEditor.CurrentItem;
-			return true;
-		}
-
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			var itemEditor = (ItemEditView) editor;
-			var currentItem = (IEditableObject) item[Name] ??
-				(IEditableObject) Activator.CreateInstance(UnderlyingProperty.PropertyType);
+			var itemEditor = (ItemEditView)editor;
+			var currentItem = (IEditableObject)item[Name] ??
+				(IEditableObject)Activator.CreateInstance(UnderlyingProperty.PropertyType);
 			itemEditor.CurrentItem = currentItem;
+		}
+
+		public override bool UpdateItem(IEditableObject item, Control editor)
+		{
+			var itemEditor = (ItemEditView) editor;
+			itemEditor.UpdateItem();
+			item[Name] = itemEditor.CurrentItem;
+			return true;
 		}
 	}
 }

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
-using System.Web.UI;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
-using Zeus.ContentTypes;
-using Zeus.Editors.Attributes;
 using Zeus.Engine;
 using Zeus.Linq;
 using Zeus.Security;
@@ -24,8 +21,6 @@ namespace Zeus.Admin
 
 		private readonly AdminSection _configSection;
 		private readonly ISecurityManager _securityManager;
-		private readonly IContentTypeManager _contentTypeManager;
-		private readonly IEditableTypeManager _editableTypeManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
 
@@ -39,13 +34,11 @@ namespace Zeus.Admin
 		#region Constructor
 
 		public AdminManager(AdminSection configSection, ISecurityManager securityManager, 
-			IContentTypeManager contentTypeManager, IEditableTypeManager editableTypeManager,
 			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder)
 		{
 			_configSection = configSection;
 			_securityManager = securityManager;
-			_contentTypeManager = contentTypeManager;
-			_editableTypeManager = editableTypeManager;
+
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
 		}
@@ -83,46 +76,6 @@ namespace Zeus.Admin
 				HttpUtility.UrlEncode(selectedItem.PreviewUrl)
 				);
 			return Url.ToAbsolute(url);
-		}
-
-		/// <summary>Saves an item using values from the supplied item editor.</summary>
-		/// <param name="item">The item to update.</param>
-		/// <param name="addedEditors">The editors to update the item with.</param>
-		/// <param name="user">The user that is performing the saving.</param>
-		public virtual void Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
-		{
-			bool wasUpdated = UpdateItem(item, addedEditors, user);
-			if (wasUpdated || item.IsNewRecord)
-			{
-				item.Save();
-
-				ContentItem theParent = item.Parent;
-				while (theParent.Parent != null) // TODO: Shouldn't this be theParent != null ?
-				{
-					//go up the tree updating - if a child has been changed, so effectively has the parent
-					theParent.Save();
-					theParent = theParent.Parent;
-				}
-			}
-		}
-
-		/// <summary>Updates the item by way of letting the defined editable attributes interpret the added editors.</summary>
-		/// <param name="item">The item to update.</param>
-		/// <param name="addedEditors">The previously added editors.</param>
-		/// <param name="user">The user for filtering updatable editors.</param>
-		/// <returns>Whether any property on the item was updated.</returns>
-		private bool UpdateItem(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
-		{
-			if (item == null) throw new ArgumentNullException("item");
-			if (addedEditors == null) throw new ArgumentNullException("addedEditors");
-
-			bool updated = false;
-			var editableType = _editableTypeManager.GetEditableType(item);
-			foreach (IEditor e in editableType.GetEditors(user))
-				if (addedEditors.ContainsKey(e.Name))
-					updated = e.UpdateItem(item, addedEditors[e.Name]) || updated;
-
-			return updated;
 		}
 
 		#endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.EditableTypes;
@@ -157,10 +158,15 @@ namespace Zeus.Web.UI.WebControls
 				editor.UpdateEditor(CurrentItem, PropertyControls[editor.Name]);
 		}
 
-		public void Save(ContentItem item)
+		public bool UpdateItem()
 		{
 			EnsureChildControls();
-			Zeus.Context.AdminManager.Save(item, PropertyControls, Page.User);
+
+			bool updated = false;
+			foreach (IEditor e in CurrentEditableType.GetEditors(Page.User))
+				if (PropertyControls.ContainsKey(e.Name))
+					updated = e.UpdateItem(CurrentItem, PropertyControls[e.Name]) || updated;
+			return updated;
 		}
 
 		#endregion

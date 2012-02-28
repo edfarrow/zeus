@@ -64,8 +64,20 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		private void SaveChanges()
 		{
-			zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem);
+			bool wasUpdated = zeusItemEditView.UpdateItem();
 			var currentItem = (ContentItem) zeusItemEditView.CurrentItem;
+			if (wasUpdated || currentItem.IsNewRecord)
+			{
+				currentItem.Save();
+
+				ContentItem theParent = currentItem.Parent;
+				while (theParent.Parent != null) // TODO: Shouldn't this be theParent != null ?
+				{
+					//go up the tree updating - if a child has been changed, so effectively has the parent
+					theParent.Save();
+					theParent = theParent.Parent;
+				}
+			}
 
 			if (currentItem.IsPage)
 			{

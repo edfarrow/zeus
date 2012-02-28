@@ -25,12 +25,6 @@ namespace Zeus.Admin
 		/// <returns>A url.</returns>
 		string GetPreviewUrl(INode selectedItem);
 
-		/// <summary>Saves an item using values from the supplied item editor.</summary>
-		/// <param name="item">The item to update.</param>
-		/// <param name="addedEditors">The editors to update the item with.</param>
-		/// <param name="user">The user that is performing the saving.</param>
-		void Save(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user);
-
 		bool TreeTooltipsEnabled { get; }
 	}
 }
