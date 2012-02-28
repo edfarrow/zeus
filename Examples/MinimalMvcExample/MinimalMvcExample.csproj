@@ -101,6 +101,7 @@
     <Compile Include="ContentTypes\CustomUrlContainer.cs" />
     <Compile Include="ContentTypes\CustomUrlPage.cs" />
     <Compile Include="ContentTypes\EditorTests\Address.cs" />
+    <Compile Include="ContentTypes\EditorTests\EmbeddedFileCollectionEditorPage.cs" />
     <Compile Include="ContentTypes\EditorTests\StringCollectionEditorPage.cs" />
     <Compile Include="ContentTypes\EditorTests\EmbeddedItemEditorPage.cs" />
     <Compile Include="ContentTypes\MyLittleType.cs" />

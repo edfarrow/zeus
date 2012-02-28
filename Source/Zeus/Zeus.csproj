@@ -238,13 +238,14 @@
     <Compile Include="ContentTypes\ContentTypeConfigurationService.cs" />
     <Compile Include="ContentTypes\AdminSiteTreeVisibility.cs" />
     <Compile Include="ContentTypes\AdminSiteTreeVisibilityAttribute.cs" />
-    <Compile Include="EditableTypes\DefaultContainerAttribute.cs" />
+    <Compile Include="Editors\Attributes\DefaultContainerAttribute.cs" />
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="EditableTypes\EditableHierarchyBuilder.cs" />
     <Compile Include="EditableTypes\IEditableHierarchyBuilder.cs" />
     <Compile Include="Editors\Attributes\EmbeddedCroppedImageEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\EmbeddedFileEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\EmbeddedImageEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\FileUploadUtility.cs" />
     <Compile Include="Editors\Attributes\HtmlTextBoxEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TextAreaEditorAttribute.cs" />
     <Compile Include="Editors\Controls\HtmlTextBox.cs" />
@@ -272,7 +273,7 @@
     <Compile Include="Editors\Attributes\RangeEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\ReactiveTextBoxEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\StringCollectionEditorAttribute.cs" />
-    <Compile Include="Editors\Attributes\MultiImageUploadEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedImageCollectionEditorAttribute.cs" />
     <Compile Include="Net\Mail\FakeMailSender.cs" />
     <Compile Include="Net\Mail\MailSender.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -326,7 +327,6 @@
     <Compile Include="Web\Mvc\ViewModels\ViewModel.cs" />
     <Compile Include="Web\Mvc\ViewPageResult.cs" />
     <Compile Include="Web\PageContentItem.cs" />
-    <Compile Include="Web\Resources\Resources.cs" />
     <Compile Include="Web\Security\IWebSecurityService.cs" />
     <Compile Include="Web\Security\PasswordResetRequestValidity.cs" />
     <Compile Include="Web\Security\PasswordResetRequest.cs" />
@@ -358,7 +358,7 @@
     <Compile Include="Web\Security\WebIdentity.cs" />
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityService.cs" />
-    <Compile Include="Web\UI\PanelAttribute.cs" />
+    <Compile Include="Editors\Attributes\PanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
@@ -395,7 +395,6 @@
     <Compile Include="Web\Global.cs" />
     <Compile Include="Web\Handlers\CacheHandler.cs" />
     <Compile Include="Web\Handlers\GoogleSiteMapHandler.cs" />
-    <Compile Include="Web\Handlers\BaseFileUploadHandler.cs" />
     <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />
     <Compile Include="Web\Hosting\EmbeddedResourceManager.cs" />
     <Compile Include="Web\Hosting\IEmbeddedResourceManager.cs" />
@@ -410,7 +409,6 @@
     <Compile Include="Web\Routing\EmbeddedContentRouteHandler.cs" />
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
-    <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
     <Compile Include="Editors\Controls\FancyImageUpload.cs" />
     <Compile Include="Editors\Controls\FancyFileUpload.cs" />
     <Compile Include="Editors\Controls\MultiImageUploadEditor.cs" />
@@ -427,7 +425,7 @@
     <Compile Include="ContentItem.cs" />
     <Compile Include="ContentTypes\ContentTypeAuthorizedRolesAttribute.cs" />
     <Compile Include="ContentTypes\ContentTypeBuilder.cs" />
-    <Compile Include="EditableTypes\EditorContainerAttribute.cs" />
+    <Compile Include="Editors\Attributes\EditorContainerAttribute.cs" />
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="EditableTypes\IEditorContainer.cs" />
     <Compile Include="ContentTypes\IRootItem.cs" />
@@ -436,7 +434,7 @@
     <Compile Include="Editors\Attributes\ColourEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\CheckBoxListEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\EmbeddedCollectionEditorAttributeBase.cs" />
-    <Compile Include="Editors\Attributes\MultiFileUploadEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\EmbeddedFileCollectionEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TimeEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\ListBoxEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\ListEditorAttribute.cs" />
@@ -472,7 +470,7 @@
     <Compile Include="Web\Security\CredentialStore.cs" />
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
     <Compile Include="Web\TemplateAttribute.cs" />
-    <Compile Include="Web\UI\FieldSetAttribute.cs" />
+    <Compile Include="Editors\Attributes\FieldSetAttribute.cs" />
     <Compile Include="Editors\Controls\EmbeddedCollectionEditorBase.cs" />
     <Compile Include="Editors\Controls\MultiFileUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
@@ -510,7 +508,6 @@
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
-    <Compile Include="Web\UI\ItemUtility.cs" />
     <Compile Include="Editors\Controls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -521,7 +518,6 @@
     <Compile Include="Web\Security\Details\RolesEditorAttribute.cs" />
     <Compile Include="Security\ISecurityEnforcer.cs" />
     <Compile Include="Utility.cs" />
-    <Compile Include="Web\Handlers\FileHandler.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\ExtensionMethods.cs" />
     <Compile Include="Web\Host.cs" />
@@ -530,11 +526,8 @@
     <Compile Include="Web\PageNotFoundEventArgs.cs" />
     <Compile Include="Web\TemplateNotFoundException.cs" />
     <Compile Include="Editors\Controls\ControlExtensions.cs" />
-    <Compile Include="Web\UI\IContentItemContainer.cs" />
-    <Compile Include="Web\UI\IContentTemplate.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\UI\TabPanelAttribute.cs" />
+    <Compile Include="Web\Mvc\IContentItemContainer.cs" />
+    <Compile Include="Editors\Attributes\TabPanelAttribute.cs" />
     <Compile Include="Editors\Controls\ColourPickerTextBox.cs" />
     <Compile Include="Editors\Controls\ItemEditor.cs">
       <SubType>Code</SubType>
@@ -567,7 +560,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Web\Resources\jquery.js" />
     <EmbeddedResource Include="Editors\Controls\ReactiveTextBox.js" />
   </ItemGroup>
   <ItemGroup />

@@ -59,7 +59,6 @@ namespace Zeus.Web
 
 			broker.BeginRequest += Application_BeginRequest;
 			broker.AuthorizeRequest += Application_AuthorizeRequest;
-			broker.AcquireRequestState += Application_AcquireRequestState;
 			broker.Error += Application_Error;
 			broker.EndRequest += Application_EndRequest;
 		}
@@ -97,15 +96,6 @@ namespace Zeus.Web
 			}
 		}
 
-		/// <summary>Infuses the http handler (usually an aspx page) with the content page associated with the url if it implements the <see cref="IContentTemplate"/> interface.</summary>
-		protected virtual void Application_AcquireRequestState(object sender, EventArgs e)
-		{
-			if (webContext.CurrentPath == null || webContext.CurrentPath.IsEmpty()) return;
-
-			RequestAdapter controller = dispatcher.ResolveAdapter<RequestAdapter>();
-			controller.InjectCurrentPage(webContext.Handler);
-		}
-
 		protected virtual void Application_AuthorizeRequest(object sender, EventArgs e)
 		{
 			if (webContext.CurrentPath == null || webContext.CurrentPath.IsEmpty()) return;
@@ -121,9 +111,7 @@ namespace Zeus.Web
 			{
 				Exception ex = application.Server.GetLastError();
 				if (ex != null)
-				{
 					errors.Notify(ex);
-				}
 			}
 		}
 
@@ -138,7 +126,6 @@ namespace Zeus.Web
 		{
 			broker.BeginRequest += Application_BeginRequest;
 			broker.AuthorizeRequest += Application_AuthorizeRequest;
-			broker.AcquireRequestState += Application_AcquireRequestState;
 			broker.Error += Application_Error;
 			broker.EndRequest += Application_EndRequest;
 		}
@@ -147,7 +134,6 @@ namespace Zeus.Web
 		{
 			broker.BeginRequest -= Application_BeginRequest;
 			broker.AuthorizeRequest -= Application_AuthorizeRequest;
-			broker.AcquireRequestState -= Application_AcquireRequestState;
 			broker.Error -= Application_Error;
 			broker.EndRequest -= Application_EndRequest;
 		}

@@ -1,23 +1,21 @@
 using System.Web.UI;
 using Ext.Net;
-using Zeus.ContentTypes;
-using Zeus.EditableTypes;
 
-namespace Zeus.Web.UI
+namespace Zeus.Editors.Attributes
 {
 	/// <summary>Defines a fieldset that can contain editors when editing an item.</summary>
-	public class FieldSetAttribute : EditorContainerAttribute
+	public class PanelAttribute : EditorContainerAttribute
 	{
-		/// <summary>Gets or sets the fieldset legend (text/title).</summary>
-		public string Legend { get; set; }
+		/// <summary>Gets or sets the panel title.</summary>
+		public string Title { get; set; }
 
 		public bool Collapsible { get; set; }
 		public bool Collapsed { get; set; }
 
-		public FieldSetAttribute(string name, string legend, int sortOrder)
+		public PanelAttribute(string name, string title, int sortOrder)
 			: base(name, sortOrder)
 		{
-			Legend = legend;
+			Title = title;
 		}
 
 		/// <summary>Adds the fieldset to a parent container and returns it.</summary>
@@ -25,27 +23,19 @@ namespace Zeus.Web.UI
 		/// <returns>The newly added fieldset.</returns>
 		public override Control AddTo(Control container)
 		{
-			FieldSet fieldSet = new FieldSet
+			Panel panel = new Panel
 			{
 				ID = "FieldSet" + Name,
-				Title = Legend,
+				Title = Title,
 				Collapsible = Collapsible,
 				Collapsed = Collapsed,
 				LabelAlign = LabelAlign.Top,
 				Padding = 5,
 				LabelSeparator = " "
 			};
-			if (container is ContentPanel)
-			{
-				((ContentPanel) container).ContentControls.Add(fieldSet);
-				((ContentPanel) container).ContentControls.Add(new LiteralControl("<br />"));
-			}
-			else
-			{
-				container.Controls.Add(fieldSet);
-				container.Controls.Add(new LiteralControl("<br />"));
-			}
-			return fieldSet;
+			container.Controls.Add(panel);
+			container.Controls.Add(new LiteralControl("<br />"));
+			return panel;
 		}
 	}
 }

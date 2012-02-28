@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web.UI;
+using Zeus.EditableTypes;
 
-namespace Zeus.EditableTypes
+namespace Zeus.Editors.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public abstract class EditorContainerAttribute : Attribute, IEditorContainer
 	{
 		private readonly List<IContainable> _contained = new List<IContainable>();
 
-		public EditorContainerAttribute(string name, int sortOrder)
+		protected EditorContainerAttribute(string name, int sortOrder)
 		{
 			Name = name;
 			SortOrder = sortOrder;
@@ -38,10 +39,7 @@ namespace Zeus.EditableTypes
 			if (user == null)
 				return false;
 
-			foreach (string role in AuthorizedRoles)
-				if (user.IsInRole(role))
-					return true;
-			return false;
+			return AuthorizedRoles.Any(user.IsInRole);
 		}
 
 		public List<IContainable> Contained

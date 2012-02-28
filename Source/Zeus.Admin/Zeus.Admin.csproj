@@ -104,6 +104,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ClientScriptManagerExtensions.cs" />
     <Compile Include="Controls\LoginName.cs" />
     <Compile Include="Controls\LoginStatus.cs" />
     <Compile Include="Imagecrop.aspx.cs">
@@ -371,6 +372,7 @@
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.js" />
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />
     <EmbeddedResource Include="Plugins\PageCaching\PageCachingUserControl.ascx" />
+    <EmbeddedResource Include="Assets\JS\jquery.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -5,8 +5,8 @@ using Zeus.Editors.Attributes;
 
 namespace Zeus.Web
 {
-	[UI.Panel("Titles", "Page Identification", 10, Collapsible = true)]
-	[UI.Panel("Content", "Content", 20, Collapsible = true)]
+	[Panel("Titles", "Page Identification", 10, Collapsible = true)]
+	[Panel("Content", "Content", 20, Collapsible = true)]
 	[DefaultContainer("Content")]
     [System.Serializable]
 	public abstract class PageContentItem : ContentItem

@@ -64,7 +64,7 @@ namespace Zeus.Editors.Controls
 			if (MinimumWidth == null && MinimumHeight == null)
 				return;
 
-			using (Bitmap bitmap = new Bitmap(EmbeddedFileEditorAttribute.GetUploadedFilePath(this)))
+			using (var bitmap = FileUploadUtility.GetUploadedImage(this))
 			{
 				if (MinimumWidth != null && bitmap.Width < MinimumWidth)
 				{

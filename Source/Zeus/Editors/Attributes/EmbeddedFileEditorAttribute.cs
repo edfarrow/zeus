@@ -1,16 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Web;
 using System.Web.UI;
 using Ormongo;
-using Zeus.BaseLibrary.ExtensionMethods.IO;
-using Zeus.BaseLibrary.Web;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 using Zeus.Editors.Controls;
 using Zeus.FileSystem;
-using Zeus.Web.Handlers;
-using File = System.IO.File;
 
 namespace Zeus.Editors.Attributes
 {
@@ -34,16 +27,10 @@ namespace Zeus.Editors.Attributes
 
 		#endregion
 
-		public static string GetUploadedFilePath(FancyFileUpload fileUpload)
-		{
-			string uploadFolder = BaseFileUploadHandler.GetUploadFolder(fileUpload.Identifier);
-			return Path.Combine(uploadFolder, HttpUtility.UrlDecode(fileUpload.FileName));
-		}
-
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			FancyFileUpload fileUpload = (FancyFileUpload)editor;
-			EmbeddedFile file = (EmbeddedFile)item[Name];
+			var fileUpload = (FancyFileUpload)editor;
+			var file = (EmbeddedFile)item[Name];
 
 			bool result = false;
 			if (fileUpload.HasDeletedFile)
@@ -54,28 +41,15 @@ namespace Zeus.Editors.Attributes
 			}
 			else if (fileUpload.HasNewOrChangedFile)
 			{
-				// Populate File object.
-				string uploadedFile = GetUploadedFilePath(fileUpload);
-				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
-				{
-					var bytes = fs.ReadAllBytes();
-					fs.Position = 0;
-					var embeddedFile = CreateEmbeddedFile();
-					embeddedFile.Data = Attachment.Create(new Attachment
-					{
-						Content = fs,
-						FileName = fileUpload.FileName,
-						ContentType = MimeUtility.GetMimeType(bytes)
-					});
-					item[Name] = embeddedFile;
-				}
-
-				// Delete temp folder.
-				File.Delete(uploadedFile);
-				Directory.Delete(BaseFileUploadHandler.GetUploadFolder(fileUpload.Identifier));
+				var embeddedFile = file ?? CreateEmbeddedFile();
+				FileUploadUtility.HandleUpload(fileUpload, embeddedFile);
+				item[Name] = embeddedFile;
 
 				result = true;
 			}
+
+			if (file != null)
+				HandleUpdatedFile(file);
 
 			return result;
 		}
@@ -83,6 +57,11 @@ namespace Zeus.Editors.Attributes
 		protected virtual EmbeddedFile CreateEmbeddedFile()
 		{
 			return new EmbeddedFile();
+		}
+
+		protected virtual void HandleUpdatedFile(EmbeddedFile file)
+		{
+
 		}
 
 		/// <summary>Creates a text box editor.</summary>
@@ -105,8 +84,8 @@ namespace Zeus.Editors.Attributes
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			FancyFileUpload fileUpload = (FancyFileUpload)editor;
-			EmbeddedFile file = (EmbeddedFile)item[Name];
+			var fileUpload = (FancyFileUpload)editor;
+			var file = (EmbeddedFile)item[Name];
 			if (file != null)
 				fileUpload.CurrentFileName = file.Data.FileName;
 		}

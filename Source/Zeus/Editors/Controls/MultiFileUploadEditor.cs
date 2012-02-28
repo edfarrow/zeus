@@ -20,7 +20,7 @@ namespace Zeus.Editors.Controls
 			fileUpload.ID = ID + "_upl_" + id;
 
 			if (value != null)
-				fileUpload.CurrentFileName = ((File) value).FileName;
+				fileUpload.CurrentFileName = ((EmbeddedFile) value).Data.FileName;
 
 			return fileUpload;
 		}

@@ -6,7 +6,7 @@ using Zeus.Web.UI;
 
 namespace Zeus.Admin
 {
-	public partial class AffectedItems : System.Web.UI.UserControl, IContentTemplate
+	public partial class AffectedItems : System.Web.UI.UserControl
 	{
 		protected override void OnDataBinding(EventArgs e)
 		{

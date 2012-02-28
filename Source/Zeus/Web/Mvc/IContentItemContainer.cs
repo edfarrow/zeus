@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Zeus.Web.UI
+﻿namespace Zeus.Web.Mvc
 {
 	public interface IContentItemContainer
 	{

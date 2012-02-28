@@ -20,7 +20,7 @@ namespace Zeus.Editors.Controls
 
 		protected override bool OnServerValidate(string value)
 		{
-			ContentItem currentItem = this.FindCurrentItem();
+			ContentItem currentItem = this.FindCurrentEditableObject() as ContentItem;
 
 			if (currentItem != null)
 			{

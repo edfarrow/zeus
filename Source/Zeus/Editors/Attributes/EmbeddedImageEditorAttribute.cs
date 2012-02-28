@@ -1,5 +1,7 @@
 using System;
 using Zeus.Editors.Controls;
+using Zeus.FileSystem;
+using Zeus.FileSystem.Images;
 
 namespace Zeus.Editors.Attributes
 {
@@ -21,6 +23,11 @@ namespace Zeus.Editors.Attributes
 		protected override FancyFileUpload CreateEditor()
 		{
 			return new FancyImageUpload { MinimumWidth = MinimumWidth, MinimumHeight = MinimumHeight };
+		}
+
+		protected override void HandleUpdatedFile(EmbeddedFile file)
+		{
+			Context.Current.Resolve<ImageCachingService>().DeleteCachedImages(file.Data);
 		}
 	}
 }

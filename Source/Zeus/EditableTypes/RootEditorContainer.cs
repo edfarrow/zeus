@@ -1,4 +1,5 @@
 ﻿using System.Web.UI;
+using Zeus.Editors.Attributes;
 
 namespace Zeus.EditableTypes
 {

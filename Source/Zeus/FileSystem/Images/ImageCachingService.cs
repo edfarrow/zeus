@@ -1,4 +1,5 @@
 using Ninject;
+using Ormongo;
 using SoundInTheory.DynamicImage.Caching;
 using Zeus.Persistence;
 
@@ -25,11 +26,15 @@ namespace Zeus.FileSystem.Images
 
 		public void DeleteCachedImages(ContentItem contentItem)
 		{
-			if (contentItem is Image)
-			{
-				var source = new OrmongoImageSource(((Image) contentItem).Data.Data);
-				DynamicImageCacheManager.Remove(source);
-			}
+			var image = contentItem as Image;
+			if (image != null)
+				DeleteCachedImages((image).Data.Data);
+		}
+
+		public void DeleteCachedImages(Attachment attachment)
+		{
+			var source = new OrmongoImageSource(attachment);
+			DynamicImageCacheManager.Remove(source);
 		}
 	}
 }

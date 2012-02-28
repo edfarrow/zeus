@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Zeus.Editors.Attributes;
+using Zeus.EditableTypes;
 
-namespace Zeus.EditableTypes
+namespace Zeus.Editors.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 	public class DefaultContainerAttribute : Attribute, IInheritableEditableTypeRefiner

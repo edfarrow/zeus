@@ -39,7 +39,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		[EmbeddedImageEditor("Main Image", 230)]
 		public virtual EmbeddedFile Image { get; set; }
 
-		[MultiImageUploadEditor("Extra Images", 250, ContainerName = "Images")]
+		[EmbeddedImageCollectionEditor("Extra Images", 250, ContainerName = "Images")]
 		public List<EmbeddedFile> ExtraImages { get; set; }
 
 		[VariationConfigurationEditor("Variations", 260)]

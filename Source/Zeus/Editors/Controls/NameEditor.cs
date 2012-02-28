@@ -108,7 +108,7 @@ namespace Zeus.Editors.Controls
 		/// <summary>Validates the name editor's value checking uniqueness and lenght.</summary>
 		public void Validate()
 		{
-			ContentItem currentItem = this.FindCurrentItem();
+			var currentItem = this.FindCurrentEditableObject() as ContentItem;
 
 			if (currentItem != null)
 			{

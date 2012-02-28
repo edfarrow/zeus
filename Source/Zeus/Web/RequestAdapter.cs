@@ -1,9 +1,7 @@
 using System.Security.Principal;
-using System.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
 using Zeus.Security;
-using Zeus.Web.UI;
 
 namespace Zeus.Web
 {
@@ -34,17 +32,6 @@ namespace Zeus.Web
 		protected virtual string GetHandlerPath()
 		{
 			return Path.RewrittenUrl;
-		}
-
-		/// <summary>Inject the current page into the page handler.</summary>
-		/// <param name="handler">The handler executing the request.</param>
-		public virtual void InjectCurrentPage(IHttpHandler handler)
-		{
-			IContentTemplate template = handler as IContentTemplate;
-			if (template != null && Path != null)
-			{
-				template.CurrentItem = Path.CurrentItem;
-			}
 		}
 
 		/// <summary>Authorize the user against the current content item. Throw an exception if not authorized.</summary>
