@@ -1,8 +1,7 @@
 using System;
 using System.Web.UI;
-using Ext.Net;
 using Zeus.EditableTypes;
-using Zeus.Web.UI.WebControls;
+using Zeus.Editors.Controls;
 
 namespace Zeus.Editors.Attributes
 {

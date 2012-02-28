@@ -416,9 +416,6 @@
     <Compile Include="Editors\Controls\MultiImageUploadEditor.cs" />
     <Compile Include="Editors\Controls\ReactiveTextBox.cs" />
     <Compile Include="Editors\Controls\StringCollectionEditor.cs" />
-    <Compile Include="Web\UI\WebControls\IEditableObjectEditor.cs" />
-    <Compile Include="Web\UI\WebControls\ItemEditViewEditableTypeEventArgs.cs" />
-    <Compile Include="Web\UI\WebControls\ItemViewEditableObjectEventArgs.cs" />
     <Compile Include="ContentTypes\ITypeDefinition.cs" />
     <Compile Include="Configuration\AdminSection.cs" />
     <Compile Include="Configuration\FileSystemSection.cs" />
@@ -540,7 +537,7 @@
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
     <Compile Include="Editors\Controls\ColourPickerTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\ItemEditor.cs">
+    <Compile Include="Editors\Controls\ItemEditor.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Editors\Controls\LocallyUniqueValidator.cs" />

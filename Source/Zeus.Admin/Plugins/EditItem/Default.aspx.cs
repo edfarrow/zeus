@@ -1,12 +1,9 @@
 ﻿using System;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
-using Zeus.ContentTypes;
-using Zeus.EditableTypes;
 using Zeus.Editors.Resources;
 using Zeus.Security;
 using Zeus.Web;
-using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin.Plugins.EditItem
 {
@@ -24,7 +21,10 @@ namespace Zeus.Admin.Plugins.EditItem
 		{
 			if (Discriminator != null)
 			{
-				Title = "New " + CurrentContentType.Title;
+				ContentItem parentItem = Engine.Resolve<Navigator>().Navigate(SelectedItem.Path);
+				var selectedContentType = Engine.ContentTypes.GetContentType(Discriminator);
+				itemEditor.CurrentItem = Engine.ContentTypes.CreateInstance(selectedContentType.ItemType, parentItem);
+				Title = "New " + selectedContentType.Title;
 			}
 			else
 			{
@@ -96,64 +96,13 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 		}
 
-		private ContentType CurrentContentType
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(Discriminator))
-					return Engine.ContentTypes.GetContentType(Discriminator);
-				if (SelectedItem != null)
-					return Engine.ContentTypes.GetContentType(SelectedItem);
-				return null;
-			}
-		}
-
-		private EditableType EditableType
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(Discriminator))
-					return Engine.EditableTypes.GetEditableType(Zeus.Context.Current.ContentTypes.GetContentType(Discriminator).ItemType);
-				if (SelectedItem != null)
-					return Engine.EditableTypes.GetEditableType(SelectedItem);
-				return null;
-			}
-		}
-
-		private Type CurrentItemType
-		{
-			get
-			{
-				var editableType = EditableType;
-				if (editableType != null)
-					return editableType.ItemType;
-				return null;
-			}
-		}
-
-		protected void zeusItemEditView_ItemCreating(object sender, ItemViewEditableObjectEventArgs e)
-		{
-			if (!string.IsNullOrEmpty(Discriminator))
-			{
-				ContentItem parentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(SelectedItem.Path);
-				ContentItem contentItem = Zeus.Context.Current.ContentTypes.CreateInstance(CurrentItemType, parentItem);
-				e.AffectedItem = contentItem;
-			}
-		}
-
-		protected void zeusItemEditView_DefinitionCreating(object sender, ItemEditViewEditableTypeEventArgs e)
-		{
-			e.EditableType = EditableType;
-		}
-
 		protected override void OnPreRender(EventArgs e)
 		{
 			// The following resources are registered here because we can't register them during an Ext.NET AJAX request,
 			// which means if the control wasn't already present on the page, the scripts will be missing.
 
 			// FancyFileUpload
-			ExtNet.ResourceManager.RegisterClientStyleInclude(typeof(EditorsResources),
-				"Zeus.Editors.Resources.FancyFileUpload.FancyFileUpload.css");
+			ExtNet.ResourceManager.RegisterClientStyleInclude(typeof(EditorsResources), "Zeus.Editors.Resources.FancyFileUpload.FancyFileUpload.css");
 
 			ExtNet.ResourceManager.RegisterIcon(Icon.Delete);
 			ExtNet.ResourceManager.RegisterIcon(Icon.ArrowNsew);

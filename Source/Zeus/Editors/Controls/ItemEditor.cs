@@ -5,38 +5,22 @@ using System.Web.UI.WebControls;
 using Zeus.EditableTypes;
 using Zeus.Editors.Attributes;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Editors.Controls
 {
-	public class ItemEditor : WebControl, INamingContainer, IEditableObjectEditor
+	public class ItemEditor : WebControl, INamingContainer
 	{
 		private EditableType _currentEditableType;
 		private IEditableObject _currentItem;
 		private bool _postedBack;
 
-		public event EventHandler<ItemViewEditableObjectEventArgs> ItemCreating;
-		public event EventHandler<ItemEditViewEditableTypeEventArgs> DefinitionCreating;
-
 		#region Properties
 
-		public IDictionary<string, Control> PropertyControls
-		{
-			get;
-			private set;
-		}
+		public IDictionary<string, Control> PropertyControls { get; private set; }
 
 		/// <summary>Gets or sets the item to edit with this form.</summary>
 		public virtual IEditableObject CurrentItem
 		{
-			get
-			{
-				if (_currentItem == null)
-				{
-					var args = new ItemViewEditableObjectEventArgs(null);
-					OnItemCreating(args);
-					_currentItem = args.AffectedItem;
-				}
-				return _currentItem;
-			}
+			get { return _currentItem; }
 			set
 			{
 				_currentItem = value;
@@ -44,62 +28,19 @@ namespace Zeus.Web.UI.WebControls
 				{
 					ChildControlsCreated = false;
 					EnsureChildControls();
-					OnCurrentItemChanged(EventArgs.Empty);
 				}
 			}
-		}
-
-		protected virtual void OnItemCreating(ItemViewEditableObjectEventArgs args)
-		{
-			if (ItemCreating != null)
-				ItemCreating(this, args);
-		}
-
-		protected virtual void OnDefinitionCreating(ItemEditViewEditableTypeEventArgs args)
-		{
-			if (DefinitionCreating != null)
-				DefinitionCreating(this, args);
-		}
-
-		protected virtual void OnCurrentItemChanged(EventArgs eventArgs)
-		{
-			
 		}
 
 		public EditableType CurrentEditableType
 		{
-			get
-			{
-				if (_currentEditableType == null)
-				{
-					if (CurrentItem != null)
-					{
-						_currentEditableType = Zeus.Context.EditableTypes.GetEditableType(CurrentItem);
-					}
-					else
-					{
-						var args = new ItemEditViewEditableTypeEventArgs(null);
-						OnDefinitionCreating(args);
-						_currentEditableType = args.EditableType;
-					}
-				}
-				return _currentEditableType;
-			}
-			set
-			{
-				_currentEditableType = value;
-			}
+			get { return _currentEditableType ?? (_currentEditableType = Zeus.Context.EditableTypes.GetEditableType(CurrentItem)); }
+			set { _currentEditableType = value; }
 		}
 
 		#endregion
 
 		#region Methods
-
-		/*protected override void OnLoad(EventArgs e)
-		{
-			EnsureChildControls();
-			base.OnLoad(e);
-		}*/
 
 		protected override void CreateChildControls()
 		{

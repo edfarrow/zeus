@@ -37,7 +37,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ItemEditor itemEditor;
+        protected global::Zeus.Editors.Controls.ItemEditor itemEditor;
         
         /// <summary>
         /// btnSave2 control.

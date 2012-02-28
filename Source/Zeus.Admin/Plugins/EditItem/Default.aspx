@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.EditItem.Default" ValidateRequest="false" MasterPageFile="../../PreviewFrame.master" %>
 <%@ Register TagPrefix="ext" Assembly="Ext.Net" Namespace="Ext.Net" %>
-<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
+<%@ Register TagPrefix="zeus" Namespace="Zeus.Editors.Controls" Assembly="Zeus" %>
 <asp:Content runat="server" ContentPlaceHolderID="head">
 	<ext:ResourcePlaceHolder runat="server" Mode="Script" />
 	<ext:ResourcePlaceHolder runat="server" Mode="Style" />
