@@ -1,11 +1,11 @@
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.Web.Mvc
 {
 	/// <summary>
 	/// When applied to a content item this interface helps the breadcrumbs control to 
 	/// determine the item appearance in the <see cref="Breadcrumbs"/> control.
 	/// </summary>
-	public interface IBreadcrumbAppearance : ILink
+	public interface ISitemapAppearance
 	{
-		bool VisibleInBreadcrumb { get; }
+		bool VisibleInSitemap { get; }
 	}
 }

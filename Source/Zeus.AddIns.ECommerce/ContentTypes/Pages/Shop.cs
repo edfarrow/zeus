@@ -6,7 +6,6 @@ using Zeus.Editors.Attributes;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
-using Zeus.Web.UI;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {

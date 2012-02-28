@@ -8,8 +8,6 @@ using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using System.Configuration;
 using Zeus.Security;
-using Zeus.Web.Hosting;
-using Zeus.Web.UI;
 
 namespace Zeus.Admin
 {

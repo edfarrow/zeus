@@ -7,7 +7,7 @@ using Ormongo.Ancestry;
 using Zeus.Linq;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
-using Zeus.Web.UI.WebControls;
+using Zeus.Web.Mvc;
 
 namespace Zeus.Templates.Mvc.Html
 {
@@ -116,7 +116,7 @@ namespace Zeus.Templates.Mvc.Html
 				parents = parents.Take(parents.Count() - startLevel);
 			foreach (ContentItem page in parents)
 			{
-				IBreadcrumbAppearance appearance = page as IBreadcrumbAppearance;
+				var appearance = page as IBreadcrumbAppearance;
 				bool visible = appearance == null || appearance.VisibleInBreadcrumb;
 				if (visible && page.IsPage)
 				{

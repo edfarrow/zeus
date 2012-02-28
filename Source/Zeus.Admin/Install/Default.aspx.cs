@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI.WebControls;
@@ -10,7 +8,6 @@ using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Installation;
-using Zeus.Web.UI;
 
 namespace Zeus.Admin.Install
 {

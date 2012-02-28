@@ -359,7 +359,7 @@
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityService.cs" />
     <Compile Include="Editors\Attributes\PanelAttribute.cs" />
-    <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
+    <Compile Include="Web\Mvc\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
@@ -473,7 +473,7 @@
     <Compile Include="Editors\Attributes\FieldSetAttribute.cs" />
     <Compile Include="Editors\Controls\EmbeddedCollectionEditorBase.cs" />
     <Compile Include="Editors\Controls\MultiFileUploadEditor.cs" />
-    <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
+    <Compile Include="Web\Mvc\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />
     <Compile Include="Editors\Controls\LinkedItemsEditor.cs" />
     <Compile Include="Editors\Attributes\LinkedItemDropDownListEditorAttribute.cs" />

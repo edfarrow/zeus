@@ -1,6 +1,5 @@
 using Zeus.Editors.Attributes;
 using Zeus.Templates.ContentTypes;
-using Zeus.Web.UI;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes.EditorTests
 {

@@ -4,7 +4,6 @@ using Zeus.EditableTypes;
 using Zeus.Editors.Attributes;
 using Zeus.Templates.Configuration;
 using Zeus.Templates.ContentTypes;
-using Zeus.Web.UI;
 using Zeus.Web;
 
 namespace Zeus.Templates.Services

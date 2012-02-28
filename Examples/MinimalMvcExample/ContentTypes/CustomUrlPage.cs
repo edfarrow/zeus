@@ -7,7 +7,6 @@ using Zeus.Examples.MinimalMvcExample.Enums;
 using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
-using Zeus.Web.UI;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {

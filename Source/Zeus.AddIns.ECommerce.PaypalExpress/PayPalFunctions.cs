@@ -362,7 +362,7 @@ public class NVPAPICaller
                 myWriter.Write(strPost);
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             /*
             if (log.IsFatalEnabled)

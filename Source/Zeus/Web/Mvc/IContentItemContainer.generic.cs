@@ -1,5 +1,3 @@
-using Zeus.Web.UI;
-
 namespace Zeus.Web.Mvc
 {
 	public interface IContentItemContainer<TItem> : IContentItemContainer

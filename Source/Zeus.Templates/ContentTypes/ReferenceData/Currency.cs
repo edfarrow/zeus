@@ -37,7 +37,6 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 					break;
 			}
 			CurrencyIcon = icon;
-			const decimal v = 1.0m;
 		}
 
 		[TextBoxEditor("Name", 10, Required = true)]

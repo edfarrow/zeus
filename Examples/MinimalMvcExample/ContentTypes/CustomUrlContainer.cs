@@ -1,10 +1,5 @@
-using Zeus;
 using Zeus.Web;
 using Zeus.Integrity;
-using System.Collections.Generic;
-using Zeus.Web.UI;
-using Zeus.ContentTypes;
-using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {

@@ -6,7 +6,6 @@ using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
 using Zeus.Installation;
-using Zeus.Web.UI;
 
 namespace Zeus.Web
 {
