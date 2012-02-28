@@ -530,7 +530,7 @@
     <Compile Include="Web\IUrlParserDependency.cs" />
     <Compile Include="Web\PageNotFoundEventArgs.cs" />
     <Compile Include="Web\TemplateNotFoundException.cs" />
-    <Compile Include="Web\UI\Control.extensions.cs" />
+    <Compile Include="Editors\Controls\ControlExtensions.cs" />
     <Compile Include="Web\UI\IContentItemContainer.cs" />
     <Compile Include="Web\UI\IContentTemplate.cs">
       <SubType>Code</SubType>

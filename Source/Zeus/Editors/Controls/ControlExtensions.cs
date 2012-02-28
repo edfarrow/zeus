@@ -1,16 +1,14 @@
 ﻿using System.Web.UI;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
-using Zeus.Editors.Controls;
-using Zeus.Web.UI.WebControls;
+using Zeus.Web.UI;
 
-namespace Zeus.Web.UI
+namespace Zeus.Editors.Controls
 {
-	public static class ControlExtensionMethods
+	public static class ControlExtensions
 	{
 		public static ContentItem FindCurrentItem(this Control control)
 		{
-			IContentItemContainer container = FindParent<IContentItemContainer>(control.Parent);
+			var container = FindParent<IContentItemContainer>(control.Parent);
 			if (container != null)
 				return container.CurrentItem;
 			
