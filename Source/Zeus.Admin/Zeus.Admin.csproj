@@ -374,9 +374,6 @@
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />
     <EmbeddedResource Include="Plugins\PageCaching\PageCachingUserControl.ascx" />
     <EmbeddedResource Include="Assets\JS\jquery.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <EmbeddedResource Include="Assets\Css\view.css" />
     <EmbeddedResource Include="Assets\Css\login.css" />
     <EmbeddedResource Include="Assets\Css\thickbox.css" />
