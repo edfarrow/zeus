@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using Rhino.Mocks;
-using Zeus.Persistence;
-using Zeus.Tests.Definitions.Items;
-
-namespace Zeus.Tests.Persistence.Specifications
+﻿namespace Zeus.Tests.Persistence.Specifications
 {
 	/*[TestFixture]
 	public class SpecificationTests

@@ -464,7 +464,6 @@
     <Compile Include="Web\RequestLifecycleHandler.cs" />
     <Compile Include="Web\Security\CredentialStore.cs" />
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
-    <Compile Include="Web\TemplateAttribute.cs" />
     <Compile Include="Editors\Attributes\FieldSetAttribute.cs" />
     <Compile Include="Editors\Controls\EmbeddedCollectionEditorBase.cs" />
     <Compile Include="Editors\Controls\MultiFileUploadEditor.cs" />
@@ -504,7 +503,6 @@
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
     <Compile Include="Editors\Controls\TimeRange.cs" />
-    <Compile Include="Web\ThreadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationRule.cs" />
     <Compile Include="Security\ISecurityManager.cs" />

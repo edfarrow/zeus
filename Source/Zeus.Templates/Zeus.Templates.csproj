@@ -156,7 +156,6 @@
     <Compile Include="ContentTypes\ReferenceData\Country.cs" />
     <Compile Include="ContentTypes\ReferenceData\CountryList.cs" />
     <Compile Include="ContentTypes\Tag.cs" />
-    <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\TagGroup.cs" />
     <Compile Include="ContentTypes\Page.cs" />
     <Compile Include="ContentTypes\Redirect.cs" />
