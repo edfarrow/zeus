@@ -108,7 +108,7 @@ jQuery(document).ready(function() {{
 
 			// If content item is not visible in tree, then get the first parent item
 			// that is visible.
-			contentItem = contentItem.AncestorsAndSelf
+			contentItem = contentItem.AncestorsAndSelf.OrderByDescending(ci => ci.AncestryDepth)
 				.First(TreeMainInterfacePlugin.IsVisibleInTree);
 
 			script = string.Format(script,

@@ -5,7 +5,6 @@ using Ext.Net;
 using MongoDB.Bson;
 using Zeus.Linq;
 using Zeus.Security;
-using Zeus.Web;
 
 namespace Zeus.Admin.Plugins.Tree
 {
