@@ -14,30 +14,28 @@ namespace Zeus.Web
 	/// </summary>
 	public class RequestDispatcher : IRequestDispatcher
 	{
-		readonly IContentAdapterProvider aspectProvider;
-		readonly IWebContext webContext;
-		readonly IUrlParser parser;
-		readonly IErrorHandler errorHandler;
-		readonly bool rewriteEmptyExtension = true;
-		readonly bool observeAllExtensions = true;
-		readonly string[] observedExtensions = new[] { ".aspx" };
-		readonly string[] nonRewritablePaths = new[] { "~/admin/" };
+		private readonly IContentAdapterProvider _aspectProvider;
+		private readonly IWebContext _webContext;
+		private readonly IUrlParser _parser;
+		private readonly bool _rewriteEmptyExtension = true;
+		private readonly bool observeAllExtensions = true;
+		private readonly string[] _observedExtensions = new[] { ".aspx" };
+		private readonly string[] _nonRewritablePaths = new[] { "~/admin/" };
 
-		public RequestDispatcher(IContentAdapterProvider aspectProvider, IWebContext webContext, IUrlParser parser, IErrorHandler errorHandler, HostSection config)
+		public RequestDispatcher(IContentAdapterProvider aspectProvider, IWebContext webContext, IUrlParser parser, HostSection config)
 		{
-			this.aspectProvider = aspectProvider;
-			this.webContext = webContext;
-			this.parser = parser;
-			this.errorHandler = errorHandler;
+			this._aspectProvider = aspectProvider;
+			this._webContext = webContext;
+			this._parser = parser;
 			//observeAllExtensions = config.Web.ObserveAllExtensions;
-			rewriteEmptyExtension = config.Web.ObserveEmptyExtension;
+			_rewriteEmptyExtension = config.Web.ObserveEmptyExtension;
 			StringCollection additionalExtensions = config.Web.ObservedExtensions;
 			if (additionalExtensions != null && additionalExtensions.Count > 0)
 			{
-				observedExtensions = new string[additionalExtensions.Count + 1];
-				additionalExtensions.CopyTo(observedExtensions, 1);
+				_observedExtensions = new string[additionalExtensions.Count + 1];
+				additionalExtensions.CopyTo(_observedExtensions, 1);
 			}
-			observedExtensions[0] = config.Web.Extension;
+			_observedExtensions[0] = config.Web.Extension;
 			//nonRewritablePaths = config.Web.Urls.NonRewritable.GetPaths(webContext);
 		}
 
@@ -48,16 +46,16 @@ namespace Zeus.Web
 			T controller = RequestItem<T>.Instance;
 			if (controller != null) return controller;
 
-			Url url = webContext.Url;
+			Url url = _webContext.Url;
 			string path = url.Path;
-			foreach (string nonRewritablePath in nonRewritablePaths)
+			foreach (string nonRewritablePath in _nonRewritablePaths)
 			{
 				if (path.StartsWith(VirtualPathUtility.ToAbsolute(nonRewritablePath)))
 					return null;
 			}
 
 			PathData data = ResolveUrl(url);
-			controller = aspectProvider.ResolveAdapter<T>(data);
+			controller = _aspectProvider.ResolveAdapter<T>(data);
 
 			RequestItem<T>.Instance = controller;
 			return controller;
@@ -67,11 +65,11 @@ namespace Zeus.Web
 		{
 			try
 			{
-				if (IsObservable(url)) return parser.ResolvePath(url);
+				if (IsObservable(url)) return _parser.ResolvePath(url);
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				errorHandler.Notify(ex);
+				
 			}
 			return PathData.Empty;
 		}
@@ -85,9 +83,9 @@ namespace Zeus.Web
 				return true;
 
 			string extension = url.Extension;
-			if (rewriteEmptyExtension && string.IsNullOrEmpty(extension))
+			if (_rewriteEmptyExtension && string.IsNullOrEmpty(extension))
 				return true;
-			foreach (string observed in observedExtensions)
+			foreach (string observed in _observedExtensions)
 				if (string.Equals(observed, extension, StringComparison.InvariantCultureIgnoreCase))
 					return true;
 			if (url.GetQuery(PathData.PageQueryKey) != null)

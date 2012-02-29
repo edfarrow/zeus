@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Zeus.Integrity
+﻿namespace Zeus.Integrity
 {
 	/// <summary>
 	/// An exception that is thrown when an item is saved and another sibling 

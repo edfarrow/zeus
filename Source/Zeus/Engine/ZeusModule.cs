@@ -80,7 +80,6 @@ namespace Zeus.Engine
 			//Bind<ItemXmlReader>().To<ItemXmlReader>().InSingletonScope();
 
 			// Web
-			Bind<IErrorHandler>().To<ErrorHandler>().InSingletonScope();
 			Bind<IHost>().To<Host>().InSingletonScope();
 			Bind<IUrlParser>().To<MultipleSitesUrlParser>().InSingletonScope();
 			Bind<IPermanentLinkManager>().To<PermanentLinkManager>().InSingletonScope();

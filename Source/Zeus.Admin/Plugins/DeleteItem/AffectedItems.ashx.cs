@@ -29,7 +29,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 				{
 					ContentItem selectedItem = ContentItem.Find(nodeID);
 
-					SiteTree tree = SiteTree.From(selectedItem, int.MaxValue);
+					SiteTree tree = SiteTree.From(selectedItem);
 
 					TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read))
 						.ToTreeNode(false);

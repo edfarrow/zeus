@@ -15,7 +15,6 @@ namespace Zeus.Web
 	/// </summary>
 	public class RequestLifecycleHandler : IRequestLifecycleHandler, IStartable
 	{
-		readonly IErrorHandler errors;
 		readonly IWebContext webContext;
 		readonly EventBroker broker;
 		readonly InstallationManager installer;
@@ -29,8 +28,8 @@ namespace Zeus.Web
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
 		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, IErrorHandler errors, AdminSection editConfig, HostSection hostConfig)
-			: this(webContext, broker, installer, dispatcher, errors)
+		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, AdminSection editConfig, HostSection hostConfig)
+			: this(webContext, broker, installer, dispatcher)
 		{
 			checkInstallation = editConfig.Installer.CheckInstallationStatus;
 			//installerUrl = editConfig.Installer.InstallUrl;
@@ -40,11 +39,10 @@ namespace Zeus.Web
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
 		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, IErrorHandler errors)
+		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher)
 		{
 			this.webContext = webContext;
 			this.broker = broker;
-			this.errors = errors;
 			this.installer = installer;
 			this.dispatcher = dispatcher;
 			_adminConfig = null;
@@ -58,7 +56,6 @@ namespace Zeus.Web
 
 			broker.BeginRequest += Application_BeginRequest;
 			broker.AuthorizeRequest += Application_AuthorizeRequest;
-			broker.Error += Application_Error;
 			broker.EndRequest += Application_EndRequest;
 		}
 
@@ -103,17 +100,6 @@ namespace Zeus.Web
 			controller.AuthorizeRequest(webContext.User);
 		}
 
-		protected virtual void Application_Error(object sender, EventArgs e)
-		{
-			HttpApplication application = sender as HttpApplication;
-			if (application != null)
-			{
-				Exception ex = application.Server.GetLastError();
-				if (ex != null)
-					errors.Notify(ex);
-			}
-		}
-
 		protected virtual void Application_EndRequest(object sender, EventArgs e)
 		{
 			webContext.Close();
@@ -125,7 +111,6 @@ namespace Zeus.Web
 		{
 			broker.BeginRequest += Application_BeginRequest;
 			broker.AuthorizeRequest += Application_AuthorizeRequest;
-			broker.Error += Application_Error;
 			broker.EndRequest += Application_EndRequest;
 		}
 
@@ -133,7 +118,6 @@ namespace Zeus.Web
 		{
 			broker.BeginRequest -= Application_BeginRequest;
 			broker.AuthorizeRequest -= Application_AuthorizeRequest;
-			broker.Error -= Application_Error;
 			broker.EndRequest -= Application_EndRequest;
 		}
 

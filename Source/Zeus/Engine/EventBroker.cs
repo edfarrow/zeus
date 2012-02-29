@@ -35,7 +35,6 @@ namespace Zeus.Engine
 
 			application.BeginRequest += Application_BeginRequest;
 			application.AuthorizeRequest += Application_AuthorizeRequest;
-			application.Error += Application_Error;
 			application.EndRequest += Application_EndRequest;
 
 			application.Disposed += Application_Disposed;
@@ -58,7 +57,6 @@ namespace Zeus.Engine
 
 		public EventHandler<EventArgs> BeginRequest;
 		public EventHandler<EventArgs> AuthorizeRequest;
-		public EventHandler<EventArgs> Error;
 		public EventHandler<EventArgs> EndRequest;
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
@@ -71,12 +69,6 @@ namespace Zeus.Engine
 		{
 			if (AuthorizeRequest != null && !IsStaticResource(sender))
 				AuthorizeRequest(sender, e);
-		}
-
-		protected void Application_Error(object sender, EventArgs e)
-		{
-			if (Error != null && !IsStaticResource(sender))
-				Error(sender, e);
 		}
 
 		protected void Application_EndRequest(object sender, EventArgs e)

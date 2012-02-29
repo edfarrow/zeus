@@ -52,7 +52,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 			catch (Exception ex)
 			{
-				Engine.Resolve<IErrorHandler>().Notify(ex);
 				ExtNet.MessageBox.Show(new MessageBoxConfig
 				{
 					Icon = MessageBox.Icon.ERROR,

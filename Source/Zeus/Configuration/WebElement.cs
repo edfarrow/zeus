@@ -33,14 +33,6 @@ namespace Zeus.Configuration
 			set { base["observedExtensions"] = value; }
 		}
 
-		/// <summary>Whether the current application is running in a web context. This affects how database sessions are stored during a request.</summary>
-		[ConfigurationProperty("isWeb", DefaultValue = true)]
-		public bool IsWeb
-		{
-			get { return (bool) base["isWeb"]; }
-			set { base["isWeb"] = value; }
-		}
-
 		/// <summary>Enables rewriting of requests to the page handler of a certain content item.</summary>
 		[ConfigurationProperty("rewrite", DefaultValue = RewriteMethod.RewriteRequest)]
 		public RewriteMethod Rewrite
