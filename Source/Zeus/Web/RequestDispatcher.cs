@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
-using Zeus.Engine;
 
 namespace Zeus.Web
 {
@@ -14,7 +13,6 @@ namespace Zeus.Web
 	/// </summary>
 	public class RequestDispatcher : IRequestDispatcher
 	{
-		private readonly IContentAdapterProvider _aspectProvider;
 		private readonly IWebContext _webContext;
 		private readonly IUrlParser _parser;
 		private readonly bool _rewriteEmptyExtension = true;
@@ -22,9 +20,8 @@ namespace Zeus.Web
 		private readonly string[] _observedExtensions = new[] { ".aspx" };
 		private readonly string[] _nonRewritablePaths = new[] { "~/admin/" };
 
-		public RequestDispatcher(IContentAdapterProvider aspectProvider, IWebContext webContext, IUrlParser parser, HostSection config)
+		public RequestDispatcher(IWebContext webContext, IUrlParser parser, HostSection config)
 		{
-			this._aspectProvider = aspectProvider;
 			this._webContext = webContext;
 			this._parser = parser;
 			//observeAllExtensions = config.Web.ObserveAllExtensions;
@@ -41,11 +38,8 @@ namespace Zeus.Web
 
 		/// <summary>Resolves the controller for the current Url.</summary>
 		/// <returns>A suitable controller for the given Url.</returns>
-		public virtual T ResolveAdapter<T>() where T : class, IContentAdapter
+		public PathData ResolvePath() 
 		{
-			T controller = RequestItem<T>.Instance;
-			if (controller != null) return controller;
-
 			Url url = _webContext.Url;
 			string path = url.Path;
 			foreach (string nonRewritablePath in _nonRewritablePaths)
@@ -54,11 +48,7 @@ namespace Zeus.Web
 					return null;
 			}
 
-			PathData data = ResolveUrl(url);
-			controller = _aspectProvider.ResolveAdapter<T>(data);
-
-			RequestItem<T>.Instance = controller;
-			return controller;
+			return ResolveUrl(url);
 		}
 
 		public PathData ResolveUrl(string url)

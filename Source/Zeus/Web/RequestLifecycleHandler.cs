@@ -6,6 +6,7 @@ using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
 using Zeus.Installation;
+using Zeus.Security;
 
 namespace Zeus.Web
 {
@@ -22,30 +23,22 @@ namespace Zeus.Web
 
 		protected bool initialized = false;
 		protected bool checkInstallation = false;
-		protected RewriteMethod rewriteMethod = RewriteMethod.RewriteRequest;
 		protected string installerUrl = "~/admin/install/default.aspx";
 		private readonly AdminSection _adminConfig;
+		private readonly ISecurityEnforcer _securityEnforcer;
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
 		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, AdminSection editConfig, HostSection hostConfig)
-			: this(webContext, broker, installer, dispatcher)
-		{
-			checkInstallation = editConfig.Installer.CheckInstallationStatus;
-			//installerUrl = editConfig.Installer.InstallUrl;
-			rewriteMethod = hostConfig.Web.Rewrite;
-			_adminConfig = editConfig;
-		}
-
-		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
-		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher)
+		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, AdminSection editConfig, ISecurityEnforcer securityEnforcer)
 		{
 			this.webContext = webContext;
 			this.broker = broker;
 			this.installer = installer;
 			this.dispatcher = dispatcher;
-			_adminConfig = null;
+			checkInstallation = editConfig.Installer.CheckInstallationStatus;
+			//installerUrl = editConfig.Installer.InstallUrl;
+			_adminConfig = editConfig;
+			_securityEnforcer = securityEnforcer;
 		}
 
 		/// <summary>Subscribes to applications events.</summary>
@@ -75,12 +68,7 @@ namespace Zeus.Web
 				}
 			}
 
-			RequestAdapter controller = dispatcher.ResolveAdapter<RequestAdapter>();
-			if (controller != null)
-			{
-				webContext.CurrentPath = controller.Path;
-				controller.RewriteRequest(rewriteMethod);
-			}
+			webContext.CurrentPath = dispatcher.ResolvePath();
 		}
 
 		private void CheckInstallation()
@@ -94,10 +82,7 @@ namespace Zeus.Web
 
 		protected virtual void Application_AuthorizeRequest(object sender, EventArgs e)
 		{
-			if (webContext.CurrentPath == null || webContext.CurrentPath.IsEmpty()) return;
-
-			RequestAdapter controller = dispatcher.ResolveAdapter<RequestAdapter>();
-			controller.AuthorizeRequest(webContext.User);
+			_securityEnforcer.AuthoriseRequest();
 		}
 
 		protected virtual void Application_EndRequest(object sender, EventArgs e)

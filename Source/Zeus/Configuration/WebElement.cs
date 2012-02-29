@@ -33,14 +33,6 @@ namespace Zeus.Configuration
 			set { base["observedExtensions"] = value; }
 		}
 
-		/// <summary>Enables rewriting of requests to the page handler of a certain content item.</summary>
-		[ConfigurationProperty("rewrite", DefaultValue = RewriteMethod.RewriteRequest)]
-		public RewriteMethod Rewrite
-		{
-			get { return (RewriteMethod) base["rewrite"]; }
-			set { base["rewrite"] = value; }
-		}
-
 		/// <summary>Tells the rewriter whether it should rewrite when the url matches an existing file. By default Zeus doesn't rewrite when the file exists.</summary>
 		[ConfigurationProperty("ignoreExistingFiles", DefaultValue = false)]
 		public bool IgnoreExistingFiles

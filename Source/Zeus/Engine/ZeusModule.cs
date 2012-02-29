@@ -46,7 +46,6 @@ namespace Zeus.Engine
 			Bind<HtmlTextBoxResourcesInitializer>().ToSelf().InSingletonScope();
 
 			// Engine
-			Bind<IContentAdapterProvider>().To<ContentAdapterProvider>().InSingletonScope();
 			Bind(typeof(IPluginFinder<>)).To(typeof(PluginFinder<>)).InSingletonScope();
 			Bind<ITypeFinder>().To<TypeFinder>().InSingletonScope();
 

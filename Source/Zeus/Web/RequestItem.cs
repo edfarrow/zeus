@@ -6,7 +6,8 @@ namespace Zeus.Web
 	/// Provides access to shared objects stored in the request context.
 	/// </summary>
 	/// <typeparam name="T">The type of object to get. This class only holds one instance of such an object for each request.</typeparam>
-	public class RequestItem<T> : RequestItem where T : class
+	public class RequestItem<T> : RequestItem 
+		where T : class
 	{
 		/// <summary>
 		/// The instance of the object of the type as provided by <see cref="RequestItem.Accessor"/>.

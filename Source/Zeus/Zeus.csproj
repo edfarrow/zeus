@@ -360,10 +360,6 @@
     <Compile Include="Editors\Attributes\PanelAttribute.cs" />
     <Compile Include="Web\Mvc\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
-    <Compile Include="Engine\AbstractContentAdapter.cs" />
-    <Compile Include="Engine\ContentAdapterProvider.cs" />
-    <Compile Include="Engine\IContentAdapter.cs" />
-    <Compile Include="Engine\IContentAdapterProvider.cs" />
     <Compile Include="Engine\ZeusModule.cs" />
     <Compile Include="FileSystem\FileSystemService.cs" />
     <Compile Include="FileSystem\IFileSystemService.cs" />
@@ -402,7 +398,6 @@
     <Compile Include="Web\MultipleSitesUrlParser.cs" />
     <Compile Include="Web\PathDictionary.cs" />
     <Compile Include="Web\PermanentLinkManager.cs" />
-    <Compile Include="Web\RequestAdapter.cs" />
     <Compile Include="Web\Routing\EmbeddedContentRouteHandler.cs" />
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
@@ -416,7 +411,6 @@
     <Compile Include="Configuration\FileSystemSection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\HostSection.cs" />
-    <Compile Include="Configuration\RewriteMethod.cs" />
     <Compile Include="Configuration\WebElement.cs" />
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
