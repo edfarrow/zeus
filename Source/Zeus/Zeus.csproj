@@ -319,7 +319,6 @@
     <Compile Include="Web\Mvc\IContentItemContainer.generic.cs" />
     <Compile Include="Web\Mvc\IControllerMapper.cs" />
     <Compile Include="Web\Mvc\ModelStateDictionaryExtensions.cs" />
-    <Compile Include="Web\Mvc\MvcGlobal.cs" />
     <Compile Include="Web\Mvc\NinjectActionInvoker.cs" />
     <Compile Include="Web\Mvc\NotModifiedResult.cs" />
     <Compile Include="Web\Mvc\StandardAreaRegistration.cs" />
@@ -387,7 +386,7 @@
     <Compile Include="Plugin\PluginInitializationException.cs" />
     <Compile Include="Security\PermissionDeniedException.cs" />
     <Compile Include="Security\RoleNames.cs" />
-    <Compile Include="Web\Global.cs" />
+    <Compile Include="Web\ZeusHttpApplication.cs" />
     <Compile Include="Web\Handlers\CacheHandler.cs" />
     <Compile Include="Web\Handlers\GoogleSiteMapHandler.cs" />
     <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />

@@ -1,6 +1,8 @@
-﻿namespace Zeus.Examples.MinimalMvcExample
+﻿using Zeus.Web;
+
+namespace Zeus.Examples.MinimalMvcExample
 {
-	public class Global : Zeus.Web.Mvc.MvcGlobal
+	public class Global : ZeusHttpApplication
 	{
 		
 	}

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Web.UI;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
@@ -13,14 +12,14 @@ namespace Zeus.Editors.Attributes
 		#region Constructors
 
 		/// <summary>Default/empty constructor.</summary>
-		public EditableAttribute()
+		protected EditableAttribute()
 		{
 		}
 
-		public EditableAttribute(string title, int sortOrder)
+		protected EditableAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
-			// TODO: Use property type to get the default editor.
+			
 		}
 
 		/// <summary>

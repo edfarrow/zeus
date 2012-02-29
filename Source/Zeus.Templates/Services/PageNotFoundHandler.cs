@@ -1,8 +1,6 @@
 using System;
 using Ninject;
-using Zeus.Admin;
 using Zeus.Configuration;
-using Zeus.Templates.ContentTypes;
 using Zeus.Web;
 
 namespace Zeus.Templates.Services

@@ -11,9 +11,8 @@ namespace Zeus.Admin.Plugins
 
 		public static string GetAdminDefaultUrl()
 		{
-			// TODO: Make this use the path from web.config. And is it necessary anyway?
-			// Ideally we can make Ext.NET direct methods not need this URL.
-			return "/admin/default.aspx";
+			// TODO: Ideally we can make Ext.NET direct methods not need this URL.
+			return "/" + Context.AdminManager.AdminPath + "/default.aspx";
 		}
 	}
 }
