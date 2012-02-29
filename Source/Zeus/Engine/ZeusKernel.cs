@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using Ninject;
+using Ninject.Activation;
+using Ninject.Parameters;
 using Ninject.Planning.Bindings;
 
 namespace Zeus.Engine
@@ -29,9 +31,11 @@ namespace Zeus.Engine
 			Type initializableInterfaceType = typeof(IInitializable);
 			Type startableInterfaceType = typeof(IStartable);
 			foreach (IBinding binding in _bindings)
-				if (initializableInterfaceType.IsAssignableFrom(binding.Service) ||
-					startableInterfaceType.IsAssignableFrom(binding.Service))
-					this.Get(binding.Service); // Force creation.
+			{
+				IContext context = CreateContext(CreateRequest(binding.Service, null, new List<IParameter>(), false, false), binding);
+				if (binding.GetProvider(context).Type.GetInterfaces().Any(i => i == initializableInterfaceType || i == startableInterfaceType))
+					this.GetAll(binding.Service).ToList(); // Force creation.
+			}
 		}
 	}
 

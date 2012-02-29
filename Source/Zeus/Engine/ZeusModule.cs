@@ -84,7 +84,6 @@ namespace Zeus.Engine
 			Bind<IPermanentLinkManager>().To<PermanentLinkManager>().InSingletonScope();
 			Bind<IWebSecurityManager>().To<CredentialStore>().InSingletonScope();
 			Bind<PermissionDeniedHandler>().To<PermissionDeniedHandler>().InSingletonScope(); // FIX
-			Bind<IRequestDispatcher>().To<RequestDispatcher>().InSingletonScope();
 			Bind<IRequestLifecycleHandler>().To<RequestLifecycleHandler>().InSingletonScope();
 			Bind<IWebContext>().To<WebRequestContext>().InSingletonScope();
 			Bind<EmbeddedResourcePathProvider>().ToSelf().InSingletonScope();
@@ -98,7 +97,6 @@ namespace Zeus.Engine
 			Bind<IControllerFactory>().To<ControllerFactory>().InSingletonScope();
 
 			// Web / Security
-			Bind<BaseLibrary.Web.IWebContext>().To<WebContext>().InSingletonScope();
 			Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
 			Bind<ICredentialStore>().To<CredentialStore>().InSingletonScope();
 			Bind<ICredentialService>().To<CredentialService>().InSingletonScope();

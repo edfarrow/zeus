@@ -10,7 +10,7 @@ namespace Zeus.Web.Security
 	{
 		#region Fields
 
-		private readonly BaseLibrary.Web.IWebContext _webContext;
+		private readonly IWebContext _webContext;
 		private readonly AuthenticationLocation _config;
 		private readonly string _loginUrl;
 
@@ -18,7 +18,7 @@ namespace Zeus.Web.Security
 
 		#region Constructor
 
-		public AuthenticationService(BaseLibrary.Web.IWebContext webContext, AuthenticationLocation config, string loginUrl)
+		public AuthenticationService(IWebContext webContext, AuthenticationLocation config, string loginUrl)
 		{
 			_webContext = webContext;
 			_config = config;

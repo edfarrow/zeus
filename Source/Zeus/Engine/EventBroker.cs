@@ -35,7 +35,6 @@ namespace Zeus.Engine
 
 			application.BeginRequest += Application_BeginRequest;
 			application.AuthorizeRequest += Application_AuthorizeRequest;
-			application.EndRequest += Application_EndRequest;
 
 			application.Disposed += Application_Disposed;
 		}
@@ -57,7 +56,6 @@ namespace Zeus.Engine
 
 		public EventHandler<EventArgs> BeginRequest;
 		public EventHandler<EventArgs> AuthorizeRequest;
-		public EventHandler<EventArgs> EndRequest;
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
@@ -69,12 +67,6 @@ namespace Zeus.Engine
 		{
 			if (AuthorizeRequest != null && !IsStaticResource(sender))
 				AuthorizeRequest(sender, e);
-		}
-
-		protected void Application_EndRequest(object sender, EventArgs e)
-		{
-			if (EndRequest != null && !IsStaticResource(sender))
-				EndRequest(sender, e);
 		}
 
 		/// <summary>Returns true if the requested resource is one of the typical resources that needn't be processed by the cms engine.</summary>

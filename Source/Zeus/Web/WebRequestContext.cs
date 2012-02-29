@@ -1,28 +1,93 @@
 ﻿using System;
+using System.Collections;
+using System.Security.Principal;
 using System.Web;
 using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Web
 {
-	public class WebRequestContext : WebContext, IWebContext, IDisposable
+	public class WebRequestContext : IWebContext
 	{
+		/// <summary>Provides access to HttpContext.Current.</summary>
+		protected virtual HttpContext CurrentHttpContext
+		{
+			get
+			{
+				if (System.Web.HttpContext.Current == null)
+					throw new Exception("Tried to retrieve HttpContext.Current but it's null. This may happen when working outside a request or when doing stuff after the context has been recycled.");
+				return System.Web.HttpContext.Current;
+			}
+		}
+
+		public IHttpHandler Handler
+		{
+			get { return CurrentHttpContext.Handler; }
+		}
+
+		public Url LocalUrl
+		{
+			get { return Url.Parse(CurrentHttpContext.Request.RawUrl); }
+		}
+
+		/// <summary>Gets a dictionary of request scoped items.</summary>
+		public IDictionary RequestItems
+		{
+			get { return CurrentHttpContext.Items; }
+		}
+
+		/// <summary>The current request object.</summary>
+		public HttpRequestBase Request
+		{
+			get { return new HttpRequestWrapper(CurrentHttpContext.Request); }
+		}
+
+		/// <summary>The current request object.</summary>
+		public HttpResponseBase Response
+		{
+			get { return new HttpResponseWrapper(CurrentHttpContext.Response); }
+		}
+
+		/// <summary>The current session object.</summary>
+		public HttpSessionStateBase Session
+		{
+			get { return new HttpSessionStateWrapper(CurrentHttpContext.Session); }
+		}
+
+		public Url Url
+		{
+			get { return new Url(Request.Url.Scheme, Request.Url.Authority, Request.RawUrl); }
+		}
+
+		/// <summary>Gets the current user in the web execution context.</summary>
+		public IPrincipal User
+		{
+			get { return CurrentHttpContext.User; }
+		}
+
+		public string MapPath(string path)
+		{
+			return CurrentHttpContext.Server.MapPath(path);
+		}
+
+		public void RewritePath(string path)
+		{
+			CurrentHttpContext.RewritePath(path);
+		}
+
+		public string ToAbsolute(string virtualPath)
+		{
+			return Url.ToAbsolute(virtualPath);
+		}
+
+		public string ToAppRelative(string virtualPath)
+		{
+			return VirtualPathUtility.ToAppRelative(virtualPath);
+		}
+
 		public ContentItem CurrentPage
 		{
 			get { return CurrentHttpContext.Items["CurrentPage"] as ContentItem; }
 			set { CurrentHttpContext.Items["CurrentPage"] = value; }
-		}
-
-		public PathData CurrentPath
-		{
-			get { return RequestItems["CurrentTemplate"] as PathData; }
-			set
-			{
-				RequestItems["CurrentTemplate"] = value;
-				if (value != null)
-					CurrentPage = value.CurrentItem as ContentItem;
-				else
-					CurrentPage = null;
-			}
 		}
 
 		/// <summary>The physical path on disk to the requested resource.</summary>
@@ -36,30 +101,9 @@ namespace Zeus.Web
 			get { return new HttpContextWrapper(CurrentHttpContext); }
 		}
 
-		public virtual void Close()
-		{
-			object[] keys = new object[RequestItems.Keys.Count];
-			RequestItems.Keys.CopyTo(keys, 0);
-		}
-
-		public void TransferRequest(string path)
-		{
-			string url = Url.Parse(path).AppendQuery("postback", Url.LocalUrl);
-			CurrentHttpContext.Server.TransferRequest(url, true);
-		}
-
 		public string GetFullyQualifiedUrl(string url)
 		{
 			return Url.HostUrl + url;
 		}
-
-		#region IDisposable Members
-
-		void IDisposable.Dispose()
-		{
-			Close();
-		}
-
-		#endregion
 	}
 }

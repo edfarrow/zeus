@@ -8,11 +8,11 @@ namespace Zeus.Web.Security
 {
 	public class AuthenticationContextService : IAuthenticationContextService
 	{
-		private readonly BaseLibrary.Web.IWebContext _webContext;
+		private readonly IWebContext _webContext;
 		private readonly AdminSection _adminConfig;
 		private readonly AuthenticationLocation _rootLocation;
 
-		public AuthenticationContextService(BaseLibrary.Web.IWebContext webContext,
+		public AuthenticationContextService(IWebContext webContext,
 			IAuthenticationContextInitializer[] authenticationContextInitializers,
 			AdminSection adminConfig)
 		{

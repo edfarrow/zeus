@@ -145,13 +145,11 @@
     <Compile Include="ExtensionMethods\String.cs" />
     <Compile Include="ExtensionMethods\Type.cs" />
     <Compile Include="Security\NonceUtility.cs" />
-    <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\MimeUtility.cs" />
     <Compile Include="ExtensionMethods\Web\UI\ClientScriptManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\UI\WebResourceUtility.cs" />
     <Compile Include="Web\Url.cs" />
-    <Compile Include="Web\WebContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

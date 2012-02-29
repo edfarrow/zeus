@@ -17,22 +17,6 @@ namespace Zeus.Configuration
 			set { base["extension"] = value; }
 		}
 
-		/// <summary>Look for a content page when the requested resource has no extension.</summary>
-		[ConfigurationProperty("observeEmptyExtension")]
-		public bool ObserveEmptyExtension
-		{
-			get { return (bool) base["observeEmptyExtension"] || string.IsNullOrEmpty(Extension) || Extension == "/"; }
-			set { base["observeEmptyExtension"] = value; }
-		}
-
-		/// <summary>Additional extensions observed by the rewriter.</summary>
-		[ConfigurationProperty("observedExtensions"), TypeConverter(typeof(CommaDelimitedStringCollectionConverter))]
-		public StringCollection ObservedExtensions
-		{
-			get { return (CommaDelimitedStringCollection) base["observedExtensions"]; }
-			set { base["observedExtensions"] = value; }
-		}
-
 		/// <summary>Tells the rewriter whether it should rewrite when the url matches an existing file. By default Zeus doesn't rewrite when the file exists.</summary>
 		[ConfigurationProperty("ignoreExistingFiles", DefaultValue = false)]
 		public bool IgnoreExistingFiles

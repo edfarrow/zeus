@@ -19,7 +19,6 @@ namespace Zeus.Web
 		readonly IWebContext webContext;
 		readonly EventBroker broker;
 		readonly InstallationManager installer;
-		readonly IRequestDispatcher dispatcher;
 
 		protected bool initialized = false;
 		protected bool checkInstallation = false;
@@ -29,12 +28,11 @@ namespace Zeus.Web
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
 		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, AdminSection editConfig, ISecurityEnforcer securityEnforcer)
+		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, AdminSection editConfig, ISecurityEnforcer securityEnforcer)
 		{
 			this.webContext = webContext;
 			this.broker = broker;
 			this.installer = installer;
-			this.dispatcher = dispatcher;
 			checkInstallation = editConfig.Installer.CheckInstallationStatus;
 			//installerUrl = editConfig.Installer.InstallUrl;
 			_adminConfig = editConfig;
@@ -49,7 +47,6 @@ namespace Zeus.Web
 
 			broker.BeginRequest += Application_BeginRequest;
 			broker.AuthorizeRequest += Application_AuthorizeRequest;
-			broker.EndRequest += Application_EndRequest;
 		}
 
 		protected virtual void Application_BeginRequest(object sender, EventArgs e)
@@ -59,16 +56,11 @@ namespace Zeus.Web
 				// we need to have reached begin request before we can do certain 
 				// things in IIS7. concurrency isn't crucial here.
 				initialized = true;
-				if (webContext.IsWeb)
-				{
-					if (Url.ServerUrl == null)
-						Url.ServerUrl = webContext.Url.HostUrl;
-					if (checkInstallation)
-						CheckInstallation();
-				}
+				if (Url.ServerUrl == null)
+					Url.ServerUrl = webContext.Url.HostUrl;
+				if (checkInstallation)
+					CheckInstallation();
 			}
-
-			webContext.CurrentPath = dispatcher.ResolvePath();
 		}
 
 		private void CheckInstallation()
@@ -85,25 +77,18 @@ namespace Zeus.Web
 			_securityEnforcer.AuthoriseRequest();
 		}
 
-		protected virtual void Application_EndRequest(object sender, EventArgs e)
-		{
-			webContext.Close();
-		}
-
 		#region IStartable Members
 
 		public void Start()
 		{
 			broker.BeginRequest += Application_BeginRequest;
 			broker.AuthorizeRequest += Application_AuthorizeRequest;
-			broker.EndRequest += Application_EndRequest;
 		}
 
 		public void Stop()
 		{
 			broker.BeginRequest -= Application_BeginRequest;
 			broker.AuthorizeRequest -= Application_AuthorizeRequest;
-			broker.EndRequest -= Application_EndRequest;
 		}
 
 		#endregion

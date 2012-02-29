@@ -447,13 +447,10 @@
     <Compile Include="Web\ControlsAttribute.cs" />
     <Compile Include="Web\HttpRequestContextAccessor.cs" />
     <Compile Include="Web\IControllerDescriptor.cs" />
-    <Compile Include="Web\InitializerModule.cs" />
     <Compile Include="Web\IPathFinder.cs" />
     <Compile Include="Web\IRequestContextAccessor.cs" />
-    <Compile Include="Web\IRequestDispatcher.cs" />
     <Compile Include="Web\IRequestLifecycleHandler.cs" />
     <Compile Include="Web\PathData.cs" />
-    <Compile Include="Web\RequestDispatcher.cs" />
     <Compile Include="Web\RequestItem.cs" />
     <Compile Include="Web\RequestLifecycleHandler.cs" />
     <Compile Include="Web\Security\CredentialStore.cs" />
