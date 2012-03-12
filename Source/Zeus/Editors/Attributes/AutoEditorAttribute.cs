@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Zeus.ContentTypes;
+using Zeus.FileSystem;
+using Zeus.FileSystem.Images;
 using Zeus.Security;
 
 namespace Zeus.Editors.Attributes
 {
-	public class AutoEditorAttribute : IEditorAttribute, ISecurable, IPropertyAwareAttribute
+	public class AutoEditorAttribute : Attribute, IEditorAttribute, ISecurable, IPropertyAwareAttribute
 	{
 		private static readonly Dictionary<Type, Func<AbstractEditorAttribute>> Editors;
 
@@ -23,7 +25,10 @@ namespace Zeus.Editors.Attributes
 				{ typeof(decimal), () => new TextBoxEditorAttribute() },
 				{ typeof(DateTime), () => new DateEditorAttribute() },
 				{ typeof(TimeSpan), () => new TimeEditorAttribute() },
-				{ typeof(ContentItem), () => new LinkedItemDropDownListEditor() }
+				{ typeof(ContentItem), () => new LinkedItemDropDownListEditor() },
+				{ typeof(EmbeddedCroppedImage), () => new EmbeddedCroppedImageEditorAttribute() },
+				{ typeof(EmbeddedFile), () => new EmbeddedFileEditorAttribute() },
+				{ typeof(EmbeddedItem), () => new EmbeddedItemEditorAttribute() }
 			};
 		}
  
@@ -34,9 +39,15 @@ namespace Zeus.Editors.Attributes
 		public string Title { get; set; }
 		public PropertyInfo UnderlyingProperty { get; set; }
 
+		public AutoEditorAttribute(string title, int sortOrder)
+		{
+			Title = title;
+			SortOrder = sortOrder;
+		}
+
 		public IEditor GetEditor()
 		{
-			var knownType = Editors.Keys.SingleOrDefault(type => type.IsAssignableFrom(UnderlyingProperty.PropertyType));
+			var knownType = Editors.Keys.FirstOrDefault(type => type.IsAssignableFrom(UnderlyingProperty.PropertyType));
 			if (knownType == null)
 				throw new InvalidOperationException("No default editor for property type '" + UnderlyingProperty.PropertyType + "'");
 

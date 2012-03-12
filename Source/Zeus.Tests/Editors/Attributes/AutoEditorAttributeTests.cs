@@ -1,6 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
 using Zeus.Editors.Attributes;
+using Zeus.FileSystem;
+using Zeus.FileSystem.Images;
 
 namespace Zeus.Tests.Editors.Attributes
 {
@@ -18,6 +20,9 @@ namespace Zeus.Tests.Editors.Attributes
 			public DateTime Date { get; set; }
 			public TimeSpan Time { get; set; }
 			public DataContentItem AnotherContentItem { get; set; }
+			public EmbeddedItem EmbeddedItem { get; set; }
+			public EmbeddedFile EmbeddedFile { get; set; }
+			public EmbeddedCroppedImage EmbeddedCroppedImage { get; set; }
 		}
 
 		[Test]
@@ -30,10 +35,13 @@ namespace Zeus.Tests.Editors.Attributes
 		[TestCase("Date", typeof(DateEditorAttribute))]
 		[TestCase("Time", typeof(TimeEditorAttribute))]
 		[TestCase("AnotherContentItem", typeof(LinkedItemDropDownListEditor))]
+		[TestCase("EmbeddedItem", typeof(EmbeddedItemEditorAttribute))]
+		[TestCase("EmbeddedFile", typeof(EmbeddedFileEditorAttribute))]
+		[TestCase("EmbeddedCroppedImage", typeof(EmbeddedCroppedImageEditorAttribute))]
 		public void CanGetAutoEditorForPropertyTypes(string propertyName, Type editorType)
 		{
 			// Arrange.
-			var autoEditor = new AutoEditorAttribute
+			var autoEditor = new AutoEditorAttribute(null, 0)
 			{
 				UnderlyingProperty = typeof(MyPage).GetProperty(propertyName)
 			};

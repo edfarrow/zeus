@@ -8,7 +8,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 	[Panel("NewContainer", "All My Types Go in Here!", 100)]
 	public class MyPage : BasePage
 	{
-		[LinkedItemDropDownListEditor("Product", 99)]
+		[AutoEditor("Product", 99)]
 		public virtual ContentItem Product { get; set; }
 
 		[EmbeddedImageEditor("Image", 100)]

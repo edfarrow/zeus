@@ -19,6 +19,11 @@ namespace Zeus.Editors.Attributes
 
 		}
 
+		internal EmbeddedFileEditorAttribute()
+		{
+			
+		}
+
 		#region Properties
 
 		public string TypeFilterDescription { get; set; }

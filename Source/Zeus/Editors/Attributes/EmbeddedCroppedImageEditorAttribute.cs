@@ -23,6 +23,11 @@ namespace Zeus.Editors.Attributes
 
 		}
 
+		internal EmbeddedCroppedImageEditorAttribute()
+		{
+			
+		}
+
         protected override void UpdateEditorInternal(IEditableObject item, Control editor)
         {
             base.UpdateEditorInternal(item, editor);

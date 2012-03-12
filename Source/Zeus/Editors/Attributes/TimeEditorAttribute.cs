@@ -15,7 +15,7 @@ namespace Zeus.Editors.Attributes
 			
 		}
 
-		public TimeEditorAttribute()
+		internal TimeEditorAttribute()
 		{
 			
 		}

@@ -20,6 +20,11 @@ namespace Zeus.Editors.Attributes
 
 		}
 
+		internal EmbeddedImageEditorAttribute()
+		{
+			
+		}
+
 		protected override FancyFileUpload CreateEditor()
 		{
 			return new FancyImageUpload { MinimumWidth = MinimumWidth, MinimumHeight = MinimumHeight };

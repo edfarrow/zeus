@@ -14,6 +14,11 @@ namespace Zeus.Editors.Attributes
 
 		}
 
+		internal EmbeddedItemEditorAttribute()
+		{
+			
+		}
+
 		public override Control AddTo(Control container)
 		{
 			var panel = AddPanel(container);
