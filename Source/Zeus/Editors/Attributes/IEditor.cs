@@ -4,7 +4,7 @@ using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
 {
-	public interface IEditor : IContainable, IComparable<IEditor>
+	public interface IEditor : IContainable
 	{
 		Type PropertyType { get; set; }
 

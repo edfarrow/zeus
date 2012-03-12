@@ -274,7 +274,7 @@ namespace Zeus.Editors.Attributes
 		}
 
 		/// <summary>Compares the sort order of editable attributes.</summary>
-		public int CompareTo(IEditor other)
+		public int CompareTo(IEditorAttribute other)
 		{
 			if (SortOrder != other.SortOrder)
 				return SortOrder - other.SortOrder;

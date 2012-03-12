@@ -62,5 +62,19 @@ namespace Zeus.Editors.Attributes
 
 			return editor;
 		}
+
+		/// <summary>Compares the sort order of editable attributes.</summary>
+		int IComparable<IEditorAttribute>.CompareTo(IEditorAttribute other)
+		{
+			if (SortOrder != other.SortOrder)
+				return SortOrder - other.SortOrder;
+			if (Title != null && other.Title != null)
+				return Title.CompareTo(other.Title);
+			if (Title != null)
+				return -1;
+			if (other.Title != null)
+				return 1;
+			return 0;
+		}
 	}
 }

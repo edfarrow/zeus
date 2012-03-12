@@ -103,6 +103,7 @@
     <Compile Include="ContentTypes\EditorTests\EmbeddedFileCollectionEditorPage.cs" />
     <Compile Include="ContentTypes\EditorTests\StringCollectionEditorPage.cs" />
     <Compile Include="ContentTypes\EditorTests\EmbeddedItemEditorPage.cs" />
+    <Compile Include="ContentTypes\LegacyContentItem.cs" />
     <Compile Include="ContentTypes\MyLittleType.cs" />
     <Compile Include="ContentTypes\MyPage.cs" />
     <Compile Include="ContentTypes\StartPage.cs" />
