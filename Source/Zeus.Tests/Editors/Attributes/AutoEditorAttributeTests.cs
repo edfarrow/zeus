@@ -15,6 +15,9 @@ namespace Zeus.Tests.Editors.Attributes
 			public float Num2 { get; set; }
 			public double Num3 { get; set; }
 			public decimal Num4 { get; set; }
+			public DateTime Date { get; set; }
+			public TimeSpan Time { get; set; }
+			public DataContentItem AnotherContentItem { get; set; }
 		}
 
 		[Test]
@@ -24,6 +27,9 @@ namespace Zeus.Tests.Editors.Attributes
 		[TestCase("Num2", typeof(TextBoxEditorAttribute))]
 		[TestCase("Num3", typeof(TextBoxEditorAttribute))]
 		[TestCase("Num4", typeof(TextBoxEditorAttribute))]
+		[TestCase("Date", typeof(DateEditorAttribute))]
+		[TestCase("Time", typeof(TimeEditorAttribute))]
+		[TestCase("AnotherContentItem", typeof(LinkedItemDropDownListEditor))]
 		public void CanGetAutoEditorForPropertyTypes(string propertyName, Type editorType)
 		{
 			// Arrange.

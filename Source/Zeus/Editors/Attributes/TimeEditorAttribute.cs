@@ -1,6 +1,5 @@
 ﻿using System.Web.UI;
 using Ext.Net;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
@@ -12,6 +11,11 @@ namespace Zeus.Editors.Attributes
 	{
 		public TimeEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
+		{
+			
+		}
+
+		public TimeEditorAttribute()
 		{
 			
 		}

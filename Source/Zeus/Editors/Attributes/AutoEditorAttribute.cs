@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Zeus.ContentTypes;
 using Zeus.Security;
@@ -19,7 +20,10 @@ namespace Zeus.Editors.Attributes
 				{ typeof(int), () => new TextBoxEditorAttribute() },
 				{ typeof(float), () => new TextBoxEditorAttribute() },
 				{ typeof(double), () => new TextBoxEditorAttribute() },
-				{ typeof(decimal), () => new TextBoxEditorAttribute() }
+				{ typeof(decimal), () => new TextBoxEditorAttribute() },
+				{ typeof(DateTime), () => new DateEditorAttribute() },
+				{ typeof(TimeSpan), () => new TimeEditorAttribute() },
+				{ typeof(ContentItem), () => new LinkedItemDropDownListEditor() }
 			};
 		}
  
@@ -32,10 +36,11 @@ namespace Zeus.Editors.Attributes
 
 		public IEditor GetEditor()
 		{
-			if (!Editors.ContainsKey(UnderlyingProperty.PropertyType))
+			var knownType = Editors.Keys.SingleOrDefault(type => type.IsAssignableFrom(UnderlyingProperty.PropertyType));
+			if (knownType == null)
 				throw new InvalidOperationException("No default editor for property type '" + UnderlyingProperty.PropertyType + "'");
 
-			var editor = Editors[UnderlyingProperty.PropertyType]();
+			var editor = Editors[knownType]();
 
 			editor.AuthorizedRoles = AuthorizedRoles;
 			editor.ContainerName = ContainerName;
