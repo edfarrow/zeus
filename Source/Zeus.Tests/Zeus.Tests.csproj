@@ -120,6 +120,7 @@
     <Compile Include="ContentItemTests.cs" />
     <Compile Include="Definitions\DefinitionTests.cs" />
     <Compile Include="Definitions\Items\TestTextPage.cs" />
+    <Compile Include="Editors\Attributes\AutoEditorAttributeTests.cs" />
     <Compile Include="Fakes\StaticContextAccessor.cs" />
     <Compile Include="Integrity\ContentTypes\AlternativePage.cs" />
     <Compile Include="Integrity\ContentTypes\AlternativeStartPage.cs" />

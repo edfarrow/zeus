@@ -236,6 +236,7 @@
     <Compile Include="ContentTypes\ContentTypeConfigurationService.cs" />
     <Compile Include="ContentTypes\AdminSiteTreeVisibility.cs" />
     <Compile Include="ContentTypes\AdminSiteTreeVisibilityAttribute.cs" />
+    <Compile Include="Editors\Attributes\AutoEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\DefaultContainerAttribute.cs" />
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="EditableTypes\EditableHierarchyBuilder.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Editors\Attributes\EmbeddedImageEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\FileUploadUtility.cs" />
     <Compile Include="Editors\Attributes\HtmlTextBoxEditorAttribute.cs" />
+    <Compile Include="Editors\Attributes\IEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\TextAreaEditorAttribute.cs" />
     <Compile Include="Editors\Attributes\ConvertUtility.cs" />
     <Compile Include="Editors\Controls\HtmlTextBox.cs" />

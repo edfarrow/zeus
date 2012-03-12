@@ -13,7 +13,7 @@ using Label = System.Web.UI.WebControls.Label;
 
 namespace Zeus.Editors.Attributes
 {
-	public abstract class AbstractEditorAttribute : Attribute, IEditor, ISecurable, IPropertyAwareAttribute
+	public abstract class AbstractEditorAttribute : Attribute, IEditorAttribute, IEditor, ISecurable, IPropertyAwareAttribute
 	{
 		private Label _label;
 		private string _requiredText, _requiredErrorMessage;
@@ -307,6 +307,11 @@ namespace Zeus.Editors.Attributes
 		public override int GetHashCode()
 		{
 			return Name.GetHashCode();
+		}
+
+		public IEditor GetEditor()
+		{
+			return this;
 		}
 
 		#endregion

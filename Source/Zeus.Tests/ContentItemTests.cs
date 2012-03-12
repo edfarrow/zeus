@@ -5,14 +5,14 @@ namespace Zeus.Tests
 	[TestFixture]
 	public class ContentItemTests
 	{
-		private class MyWebsite : ContentItem
+		public class MyWebsite : ContentItem
 		{
 
 		}
 
-		private class MyPage : ContentItem
+		public class MyPage : ContentItem
 		{
-			public virtual string MyProperty { get; set; }
+			public string MyProperty { get; set; }
 		}
 
 		#region Sanity checks on AncestryDocument<T> properties

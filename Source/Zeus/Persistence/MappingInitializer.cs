@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson.Serialization;
 using Ninject;
+using Ormongo.IdentityMap;
 using Zeus.ContentTypes;
 
 namespace Zeus.Persistence
@@ -16,6 +17,9 @@ namespace Zeus.Persistence
 
 		public void Initialize()
 		{
+			ContentItem.Plugins.Add(new IdentityMap<ContentItem>());
+			ContentItem.CacheDepth = true;
+
 			foreach (var contentType in _contentTypeManager.GetContentTypes())
 				BsonClassMap.RegisterClassMap(new UntypedBsonClassMap(contentType.ItemType));
 		}

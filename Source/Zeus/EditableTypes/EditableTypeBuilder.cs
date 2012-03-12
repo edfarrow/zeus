@@ -12,7 +12,7 @@ namespace Zeus.EditableTypes
 
 		private readonly ITypeFinder _typeFinder;
 		private readonly IEditableHierarchyBuilder<IEditor> _hierarchyBuilder;
-		private readonly AttributeExplorer<IEditor> _editorExplorer;
+		private readonly AttributeExplorer<IEditorAttribute> _editorExplorer;
 		private readonly AttributeExplorer<IEditorContainer> _containableExplorer;
 
 		#endregion
@@ -21,7 +21,7 @@ namespace Zeus.EditableTypes
 
 		public EditableTypeBuilder(ITypeFinder typeFinder,
 			IEditableHierarchyBuilder<IEditor> hierarchyBuilder,
-			AttributeExplorer<IEditor> editorExplorer,
+			AttributeExplorer<IEditorAttribute> editorExplorer,
 			AttributeExplorer<IEditorContainer> containableExplorer)
 		{
 			_typeFinder = typeFinder;
@@ -50,10 +50,10 @@ namespace Zeus.EditableTypes
 
 				var editors = _editorExplorer.Find(editableType.ItemType).ToList();
 				editors.Sort();
-				editableType.Editors = editors;
+				editableType.Editors = editors.Select(e => e.GetEditor()).ToList();
 
 				editableType.Containers = _containableExplorer.Find(editableType.ItemType);
-				editableType.RootContainer = _hierarchyBuilder.Build(editableType.Containers, editors);
+				editableType.RootContainer = _hierarchyBuilder.Build(editableType.Containers, editableType.Editors);
 
 				editableTypes.Add(editableType);
 			}
