@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+	<TemplateData>
+		<Name>Zeus Page Template</Name>
+		<Description>Creates a page content type and related MVC items (controller, view model and view)</Description>
+		<Icon>__TemplateIcon.ico</Icon>
+		<TemplateID>d3bfec0e-d672-4cba-952f-f227a13ae675</TemplateID>
+		<ProjectType>Web</ProjectType>
+		<ProjectSubType>CSharp</ProjectSubType>
+		<SortOrder>10</SortOrder>
+		<RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+		<DefaultName>TextPage</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<References>
+			<Reference>
+				<Assembly>System</Assembly>
+			</Reference>
+		</References>
+		<ProjectItem SubType="" TargetFileName="ContentTypes\$fileinputname$.cs" ReplaceParameters="true">ContentTypes\TextPage.cs</ProjectItem>
+		<ProjectItem SubType="" TargetFileName="Controllers\$fileinputname$Controller.cs" ReplaceParameters="true">Controllers\TextPageController.cs</ProjectItem>
+		<ProjectItem SubType="" TargetFileName="ViewModels\$fileinputname$ViewModel.cs" ReplaceParameters="true">ViewModels\TextPageViewModel.cs</ProjectItem>
+		<ProjectItem SubType="" TargetFileName="Views\Website\$fileinputname$\Index.spark" ReplaceParameters="true">Views\TextPage\Index.spark</ProjectItem>
+	</TemplateContent>
+</VSTemplate>
