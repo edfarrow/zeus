@@ -33,7 +33,7 @@ namespace Zeus.Integrity
 		public override void AfterDestroy(ContentItem document)
 		{
 			// TODO: Delete inbound links
-			throw new NotImplementedException();
+			
 			base.AfterDestroy(document);
 		}
 
