@@ -2,9 +2,9 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-		<Title>zeuspropxhtml</Title>
-		<Shortcut>zeuspropxhtml</Shortcut>
-      <Description>Create a new Zeus XHTML String Property</Description>
+		<Title>zeushtml</Title>
+		<Shortcut>zeushtml</Shortcut>
+      <Description>Create a new Zeus HTML String Property</Description>
       <Author>Tim Jones</Author>
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
@@ -14,7 +14,7 @@
       <Declarations>
         <Literal>
           <ID>name</ID>
-          <ToolTip>Content Property Name</ToolTip>
+          <ToolTip>Property Name</ToolTip>
           <Default>Text</Default>
         </Literal>
         <Literal>
@@ -24,17 +24,13 @@
         </Literal>
         <Literal>
           <ID>displayName</ID>
-          <ToolTip>Content Property Display Name</ToolTip>
+          <ToolTip>Display Name</ToolTip>
           <Default>Text</Default>
         </Literal>
 	  </Declarations>
       <Code Language="csharp">
-        <![CDATA[[Zeus.ContentProperties.XhtmlStringContentProperty("$displayName$", $sortOrder$)]
-		public virtual string $name$
-		{
-			get { return GetDetail("$name$", string.Empty); }
-			set { SetDetail("$name$", value); }
-		}
+        <![CDATA[[HtmlTextBoxEditor("$displayName$", $sortOrder$)]
+		public virtual string $name$ { get; set; }
 $end$]]>
       </Code>
     </Snippet>

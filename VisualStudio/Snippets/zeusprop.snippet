@@ -14,7 +14,7 @@
       <Declarations>
         <Literal>
           <ID>name</ID>
-          <ToolTip>Content Property Name</ToolTip>
+          <ToolTip>Property Name</ToolTip>
           <Default>MyProperty</Default>
         </Literal>
 <Literal>
@@ -29,17 +29,13 @@
         </Object>
 		    <Literal>
 			    <ID>displayName</ID>
-			    <ToolTip>Content Property Display Name</ToolTip>
+			    <ToolTip>Display Name</ToolTip>
 			    <Default>My Property</Default>
 		    </Literal>
 	    </Declarations>
       <Code Language="csharp">
-        <![CDATA[[Zeus.ContentProperty("$displayName$", $sortOrder$)]
-		public virtual $type$ $name$
-		{
-			get { return GetDetail("$name$", default($type$)); }
-			set { SetDetail("$name$", value); }
-		}
+        <![CDATA[[AutoEditor("$displayName$", $sortOrder$)]
+		public virtual $type$ $name$ { get; set; }
 $end$]]>
       </Code>
     </Snippet>

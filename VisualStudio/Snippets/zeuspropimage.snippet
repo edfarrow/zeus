@@ -2,8 +2,8 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-		<Title>zeuspropimage</Title>
-		<Shortcut>zeuspropimage</Shortcut>
+		<Title>zeusimage</Title>
+		<Shortcut>zeusimage</Shortcut>
       <Description>Create a new Zeus Image Property</Description>
       <Author>Tim Jones</Author>
       <SnippetTypes>
@@ -14,7 +14,7 @@
       <Declarations>
         <Literal>
           <ID>name</ID>
-          <ToolTip>Content Property Name</ToolTip>
+          <ToolTip>Property Name</ToolTip>
           <Default>Image</Default>
         </Literal>
         <Literal>
@@ -23,25 +23,14 @@
           <Default>100</Default>
         </Literal>
         <Literal>
-          <ID>displayname</ID>
-          <ToolTip>Content Property Display Name</ToolTip>
+          <ID>displayName</ID>
+          <ToolTip>Display Name</ToolTip>
           <Default>Image</Default>
         </Literal>
 	  </Declarations>
       <Code Language="csharp">
-        <![CDATA[[Zeus.Design.Editors.ChildEditor("$displayname$", $sortOrder$)]
-		public virtual Zeus.FileSystem.Images.Image $name$
-		{
-			get { return GetChild("$name$") as Zeus.FileSystem.Images.Image; }
-			set
-			{
-				if (value != null)
-				{
-					value.Name = "$name$";
-					value.AddTo(this);
-				}
-			}
-		}
+        <![CDATA[[EmbeddedImageEditor("$displayName$", $sortOrder$)]
+		public virtual EmbeddedFile $name$ { get; set; }
 $end$]]>
       </Code>
     </Snippet>
