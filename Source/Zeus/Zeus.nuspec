@@ -15,10 +15,12 @@
 		<file src="NuGet\WebsiteAreaRegistration.cs.pp" target="content" />
 		<file src="NuGet\WebsiteModule.cs.pp" target="content" />
 		<file src="bin\Release\Camino.dll" target="lib\net40" />
+		<file src="bin\Release\Castle.Core.dll" target="lib\net40" />
 		<file src="bin\Release\CKEditor.NET.dll" target="lib\net40" />
 		<file src="bin\Release\Coolite.Ext.UX.dll" target="lib\net40" />
 		<file src="bin\Release\Ext.Net.dll" target="lib\net40" />
 		<file src="bin\Release\Ext.Net.Utilities.dll" target="lib\net40" />
+		<file src="bin\Release\FluentMongo.dll" target="lib\net40" />
 		<file src="bin\Release\MongoDB.Bson.dll" target="lib\net40" />
 		<file src="bin\Release\MongoDB.Driver.dll" target="lib\net40" />
 		<file src="bin\Release\Newtonsoft.Json.dll" target="lib\net40" />
