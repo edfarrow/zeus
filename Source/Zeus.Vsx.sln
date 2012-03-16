@@ -58,6 +58,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.AddIns.ECommerce.Paypa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Editors.Resources", "Zeus.Editors.Resources\Zeus.Editors.Resources.csproj", "{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vsx", "Vsx", "{F39F23DB-4796-4CCD-98C1-EBBFA820C168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Vsx.Templates.PageTemplate", "Zeus.Vsx.Templates.PageTemplate\Zeus.Vsx.Templates.PageTemplate.csproj", "{122D6BAA-E714-4F0D-94FD-E09E9170ED81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Vsx.Installer", "Zeus.Vsx.Installer\Zeus.Vsx.Installer.csproj", "{31F6CF97-5827-4BAB-9E76-826121930643}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Zeus.vsmdi
@@ -219,6 +225,24 @@ Global
 		{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D8A8F8A8-40D8-4364-B5CE-95325C889BD6}.Release|x86.ActiveCfg = Release|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Documentation|x86.ActiveCfg = Debug|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81}.Release|x86.ActiveCfg = Release|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Documentation|x86.ActiveCfg = Debug|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F6CF97-5827-4BAB-9E76-826121930643}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,5 +262,7 @@ Global
 		{A7A33508-F0F0-46FC-882D-150BB333BC0C} = {203A0F4D-1D96-4F4C-995E-6F9505DD1D24}
 		{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
 		{34EDBA77-B394-419F-9A68-05EA97DA9F98} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
+		{122D6BAA-E714-4F0D-94FD-E09E9170ED81} = {F39F23DB-4796-4CCD-98C1-EBBFA820C168}
+		{31F6CF97-5827-4BAB-9E76-826121930643} = {F39F23DB-4796-4CCD-98C1-EBBFA820C168}
 	EndGlobalSection
 EndGlobal

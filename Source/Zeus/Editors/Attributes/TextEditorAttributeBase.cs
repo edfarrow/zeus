@@ -1,27 +1,13 @@
 ﻿using System;
 using System.Web.UI;
-using Zeus.ContentTypes;
 using Zeus.EditableTypes;
 
 namespace Zeus.Editors.Attributes
 {
-	/// <summary>
-	/// Attribute used to mark properties as editable. This attribute is predefined to use 
-	/// the <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor.</summary>
-	/// <example>
-	/// [Zeus.Details.EditableTextBox("Published", 80)]
-	/// public override DateTime Published
-	/// {
-	///     get { return base.Published; } 
-	///     set { base.Published = value; }
-	/// }
-	/// </example>
 	[AttributeUsage(AttributeTargets.Property)]
 	public abstract class TextEditorAttributeBase : AbstractEditorAttribute
 	{
-		private string _dataTypeText, _dataTypeErrorMessage;
-
-		public TextEditorAttributeBase()
+		protected TextEditorAttributeBase()
 		{
 			
 		}
@@ -29,7 +15,7 @@ namespace Zeus.Editors.Attributes
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		public TextEditorAttributeBase(string title, int sortOrder)
+		protected TextEditorAttributeBase(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
 		}
@@ -38,7 +24,7 @@ namespace Zeus.Editors.Attributes
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
 		/// <param name="maxLength">The max length of the text box.</param>
-		public TextEditorAttributeBase(string title, int sortOrder, int maxLength)
+		protected TextEditorAttributeBase(string title, int sortOrder, int maxLength)
 			: this(title, sortOrder)
 		{
 			MaxLength = maxLength;

@@ -12,7 +12,6 @@ namespace Zeus.Admin.Plugins.Tree
 	{
 		private readonly HierarchyBuilder _treeBuilder;
 		private Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> _filter;
-		private bool _excludeRoot, _forceSync;
 
 		public SiteTree(HierarchyBuilder treeBuilder)
 		{
@@ -34,21 +33,9 @@ namespace Zeus.Admin.Plugins.Tree
 			return new SiteTree(new BranchHierarchyBuilder(initialItem, lastAncestor, appendAdditionalLevel));
 		}
 
-		public SiteTree ExcludeRoot(bool exclude)
-		{
-			_excludeRoot = exclude;
-			return this;
-		}
-
 		public SiteTree Filter(Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> filter)
 		{
 			_filter = filter;
-			return this;
-		}
-
-		public SiteTree ForceSync()
-		{
-			_forceSync = true;
 			return this;
 		}
 
@@ -68,7 +55,6 @@ namespace Zeus.Admin.Plugins.Tree
 		{
 			IHierarchyNavigator<ContentItem> navigator = new ItemHierarchyNavigator(_treeBuilder, _filter);
 			TreeNodeBase rootNode = BuildNodesRecursive(navigator, rootOnly, withLinks, _filter);
-			//rootNode.ChildrenOnly = _excludeRoot;
 			return rootNode;
 		}
 

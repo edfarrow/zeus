@@ -8,18 +8,12 @@ namespace Zeus.Editors.Attributes
 	/// Attribute used to mark properties as editable. This attribute is predefined to use 
 	/// the <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor.</summary>
 	/// <example>
-	/// [Zeus.Details.EditableTextBox("Published", 80)]
-	/// public override DateTime Published
-	/// {
-	///     get { return base.Published; } 
-	///     set { base.Published = value; }
-	/// }
+	/// [TextAreaEditor("Published", 80)]
+	/// public override DateTime Published { get; set; }
 	/// </example>
 	[AttributeUsage(AttributeTargets.Property)]
 	public class TextAreaEditorAttribute : TextEditorAttributeBase
 	{
-		private string _dataTypeText, _dataTypeErrorMessage;
-
 		public TextAreaEditorAttribute()
 		{
 		}

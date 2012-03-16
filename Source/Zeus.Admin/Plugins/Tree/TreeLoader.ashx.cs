@@ -17,7 +17,6 @@ namespace Zeus.Admin.Plugins.Tree
 			bool fromRoot = false;
 			if (!string.IsNullOrEmpty(fromRootTemp))
 				fromRoot = Convert.ToBoolean(fromRootTemp);
-			bool sync = (context.Request["sync"] == "true");
 			ObjectId? nodeId = !string.IsNullOrEmpty(context.Request["node"]) ? ObjectId.Parse(context.Request["node"]) as ObjectId? : null;
 			ObjectId? overrideNodeId = !string.IsNullOrEmpty(context.Request["overrideNode"]) ? ObjectId.Parse(context.Request["overrideNode"]) as ObjectId? : null;
 
@@ -27,16 +26,11 @@ namespace Zeus.Admin.Plugins.Tree
 				ContentItem selectedItem = ContentItem.Find(nodeId.Value);
 
 				SiteTree tree;
-				if (sync)
-					tree = SiteTree.From(selectedItem);
-				else if (fromRoot)
+				if (fromRoot)
 					tree = SiteTree.Between(selectedItem, Context.RootItem, true)
 						.OpenTo(selectedItem);
 				else
 					tree = SiteTree.From(selectedItem, 2);
-
-				if (sync)
-					tree = tree.ForceSync();
 
 				//if (context.User.Identity.Name != "administrator")
 				//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
