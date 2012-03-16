@@ -10,7 +10,7 @@ using Zeus.Configuration;
 using Zeus.Engine;
 using Zeus.Web.Mvc;
 
-[assembly: PreApplicationStartMethod(typeof(Zeus.Web.ZeusHttpApplication), "RegisterModules")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(Zeus.Web.ZeusHttpApplication), "RegisterModules")]
 
 namespace Zeus.Web
 {
