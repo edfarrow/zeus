@@ -9,10 +9,10 @@
 		<description>$description$</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<tags>.net40 ASP.NET CMS</tags>
+		<dependencies>
+			<dependency id="Zeus" version="$version$" />
+		</dependencies>
 	</metadata>
-	<dependencies>
-		<dependency id="Zeus" version="$version$" />
-	</dependencies>
 	<files>
 		<file src="NuGet\web.config.transform" target="content" />
 		<file src="bin\Release\CodeKicker.BBCode.dll" target="lib\net40" />
