@@ -53,6 +53,9 @@ namespace Zeus.Integrity
 		/// <returns>Null if the item can be moved or an exception if the item can't be moved.</returns>
 		public virtual ZeusException GetMoveException(ContentItem source, ContentItem destination)
 		{
+			if (source is IRootItem)
+				return null;
+
 			if (IsDestinationBelowSource(source, destination))
 				return new DestinationOnOrBelowItselfException(source, destination);
 
