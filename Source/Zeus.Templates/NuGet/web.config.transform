@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<sectionGroup name="zeus" type="Zeus.Configuration.ZeusSectionGroup, Zeus">
+			<section name="templates" type="Zeus.Templates.Configuration.TemplatesSection, Zeus.Templates" requirePermission="false" />
+		</sectionGroup>
+	</configSections>
+	<zeus>
+		<templates>
+			<seo enabled="true" htmlTitleFormat="{Title} || ProjectName" 
+				 metaKeywordsFormat="{Title}, ProjectName" 
+				 metaDescriptionFormat="{Title} page for ProjectName" />
+		</templates>
+	</zeus>
+	<spark>
+		<pages>
+			<namespaces>
+				<add namespace="Zeus.Templates.Mvc.Html" />
+			</namespaces>
+		</pages>
+	</spark>
+</configuration>

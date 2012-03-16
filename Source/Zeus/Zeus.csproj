@@ -448,6 +448,8 @@
     <Compile Include="FileSystem\Images\EmbeddedCroppedImage.cs" />
     <Compile Include="FileSystem\EmbeddedFile.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
+    <None Include="NuGet\WebsiteAreaRegistration.cs.pp" />
+    <None Include="NuGet\WebsiteModule.cs.pp" />
     <Compile Include="Persistence\ContentItemObserver.cs" />
     <Compile Include="Persistence\IContentItemObserver.cs" />
     <Compile Include="Persistence\MappingInitializer.cs" />
@@ -784,6 +786,7 @@
     <EmbeddedResource Include="Admin\Plugins\FileManager\TreeLoader.ashx" />
     <EmbeddedResource Include="Admin\Plugins\Tree\TreeLoader.ashx" />
     <None Include="packages.config" />
+    <None Include="NuGet\web.config.transform" />
     <None Include="Zeus.nuspec" />
   </ItemGroup>
   <ItemGroup>

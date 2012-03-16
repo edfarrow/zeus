@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<title>$id$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<description>$description$</description>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<tags>.net40 ASP.NET CMS</tags>
+	</metadata>
+	<files>
+		<file src="NuGet\web.config.transform" target="content" />
+		<file src="bin\Release\CodeKicker.BBCode.dll" target="lib\net40" />
+	</files>
+	<dependencies>
+		<dependency id="Zeus" version="$version$" />
+	</dependencies>
+</package>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<sectionGroup name="zeus" type="Zeus.Configuration.ZeusSectionGroup, Zeus">
+			<section name="admin" type="Zeus.Configuration.AdminSection, Zeus" requirePermission="false" />
+			<section name="database" type="Zeus.Configuration.DatabaseSection, Zeus" requirePermission="false" />
+			<section name="host" type="Zeus.Configuration.HostSection, Zeus" requirePermission="false" />
+		</sectionGroup>
+		<section name="spark" type="Spark.Configuration.SparkSectionHandler, Spark" />
+	</configSections>
+	<system.web>
+		<httpHandlers>
+			<!-- The following handler only needs to be there because Ext.NET looks for it here -->
+			<add path="*/ext.axd" verb="*" type="Ext.Net.ResourceHandler" validate="false" />
+		</httpHandlers>
+	</system.web>
+	<zeus>
+		<admin name="Project Name" path="admin">
+			<authorizedRoles>
+				<add role="Administrators" />
+				<add role="Editors" />
+			</authorizedRoles>
+			<installer checkInstallationStatus="true" mode="Install" />
+			<recycleBin enabled="false" />
+			<tree tooltipsEnabled="false" />
+		</admin>
+		<database databaseName="ProjectName" serverPort="27017" />
+		<host rootItemID="000000000000000000000000">
+			<sites>
+				<clear />
+				<site id="DefaultSite" startPageID="000000000000000000000000" description="Default Site">
+					<siteHosts>
+						<add name="*" />
+					</siteHosts>
+				</site>
+			</sites>
+			<web extension="" />
+		</host>
+	</zeus>
+	<spark>
+		<compilation debug="true" />
+		<pages pageBaseType="Spark.Web.Mvc.SparkView">
+			<namespaces>
+				<add namespace="System.Web.Mvc" />
+				<add namespace="System.Web.Mvc.Html" />
+				<add namespace="Microsoft.Web.Mvc" />
+				<add namespace="Zeus.Web.Mvc.Html" />
+			</namespaces>
+		</pages>
+	</spark>
+	<system.webServer>
+		<handlers>
+			<add name="PostedFileUploadHandler" preCondition="integratedMode" verb="POST" path="PostedFileUpload.axd" type="Zeus.Web.Handlers.PostedFileUploadHandler, Zeus" />
+			<add name="GoogleSiteMapHandler" preCondition="integratedMode" verb="GET" path="GoogleSiteMap.axd" type="Zeus.Web.Handlers.GoogleSiteMapHandler, Zeus" />
+			<add name="CacheHandler" preCondition="integratedMode" verb="GET" path="Cache.axd" type="Zeus.Web.Handlers.CacheHandler, Zeus" />
+			<add name="ResourceHandler" path="*/ext.axd" verb="*" type="Ext.Net.ResourceHandler, Ext.Net" />
+		</handlers>
+		<modules runAllManagedModulesForAllRequests="true">
+			<add name="DirectRequestModule" type="Ext.Net.DirectRequestModule, Ext.Net" />
+			<add name="AuthenticationModule" type="Zeus.Web.Security.AuthenticationModule, Zeus" />
+			<add name="AuthorizationModule" type="Zeus.Web.Security.AuthorizationModule, Zeus" />
+		</modules>
+	</system.webServer>
+</configuration>

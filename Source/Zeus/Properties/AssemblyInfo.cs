@@ -11,5 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Content Management Framework for ASP.NET MVC.")]
 [assembly: AssemblyCulture("")]
 
+[assembly: AssemblyVersion("1.0.0.0")]
+
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9cc95ec2-06c7-4bb4-aaca-7bc493dc8cab")]

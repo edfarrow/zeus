@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Retail")]
 [assembly: AssemblyCompany("Sound in Theory Ltd")]
 [assembly: AssemblyProduct("Zeus")]
-[assembly: AssemblyCopyright("Copyright ©2009 Sound in Theory Ltd")]
+[assembly: AssemblyCopyright("Copyright ©2012 Sound in Theory Ltd")]
 [assembly: AssemblyTrademark("sitdap.com")]
 [assembly: ComVisible(false)]
 
