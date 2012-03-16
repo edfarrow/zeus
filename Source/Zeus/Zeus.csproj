@@ -96,6 +96,10 @@
     <Reference Include="MongoDB.Bson">
       <HintPath>..\..\Libraries\Ormongo\MongoDB.Bson.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Ext.Net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
@@ -157,12 +161,187 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AddIns\AddInContainer.cs" />
+    <Compile Include="Admin\AdminInitializer.cs" />
+    <Compile Include="Admin\AdminModule.cs" />
+    <Compile Include="Admin\AdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AffectedItems.ascx.cs">
+      <DependentUpon>AffectedItems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AffectedItems.ascx.designer.cs">
+      <DependentUpon>AffectedItems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Assets\Css\Resources.cs" />
+    <Compile Include="Admin\Assets\Images\Resources.cs" />
+    <Compile Include="Admin\Assets\JS\Resources.cs" />
+    <Compile Include="Admin\ClientScriptManagerExtensions.cs" />
+    <Compile Include="Admin\Controls\LoginName.cs" />
+    <Compile Include="Admin\Controls\LoginStatus.cs" />
+    <Compile Include="Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Imagecrop.aspx.cs">
+      <DependentUpon>Imagecrop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Imagecrop.aspx.designer.cs">
+      <DependentUpon>Imagecrop.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\IMainInterface.cs" />
+    <Compile Include="Admin\Install\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Install\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MainInterfacePluginInitializer.cs" />
+    <Compile Include="Admin\MenuLoaderBase.cs" />
     <Compile Include="Admin\NavigationFlag\NavigationCachingService.cs" />
     <Compile Include="Admin\NavigationFlag\NavigationServiceInitializer.cs" />
+    <Compile Include="Admin\Plugins\Children\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\Children\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\Children\GridPluginInitializer.cs" />
+    <Compile Include="Admin\Plugins\Children\ManageChildrenMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\ContextMenu\ContextMenuLoader.ashx.cs">
+      <DependentUpon>ContextMenuLoader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\ContextMenu\ContextMenuMainInterfacePlugin.cs" />
+    <Compile Include="Admin\Plugins\ContextMenu\ContextMenuPluginInitializer.cs" />
+    <Compile Include="Admin\Plugins\ContextMenu\ContextMenuTreePlugin.cs" />
+    <Compile Include="Admin\Plugins\CopyItem\CopyItemMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\CopyItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\CopyItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\DeleteItem\AffectedItems.ashx.cs">
+      <DependentUpon>AffectedItems.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\DeleteItem\DeleteGridToolbarPlugin.cs" />
+    <Compile Include="Admin\Plugins\DeleteItem\DeleteItemMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\DeleteItem\DeleteUserControl.ascx.cs">
+      <DependentUpon>DeleteUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\DeleteItem\DeleteUserControl.ascx.designer.cs">
+      <DependentUpon>DeleteUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\DeleteItem\ReferencingItems.ashx.cs">
+      <DependentUpon>ReferencingItems.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\EditItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\EditItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\EditItem\EditItemMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\EditItem\KeepAlive.aspx.cs">
+      <DependentUpon>KeepAlive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\EditItem\KeepAlive.aspx.designer.cs">
+      <DependentUpon>KeepAlive.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\FileManager\FileManagerContextMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\FileManager\FileManagerMainInterfacePlugin.cs" />
+    <Compile Include="Admin\Plugins\FileManager\FileManagerUserControl.ascx.cs">
+      <DependentUpon>FileManagerUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\FileManager\FileManagerUserControl.ascx.designer.cs">
+      <DependentUpon>FileManagerUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\FileManager\TreeLoader.ashx.cs">
+      <DependentUpon>TreeLoader.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Plugins\IMainInterfacePlugin.cs" />
+    <Compile Include="Admin\Plugins\ImportExport\ContentTypeNotFoundException.cs" />
+    <Compile Include="Admin\Plugins\ImportExport\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\ImportExport\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\ImportExport\ImportExportMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\ImportExport\InvalidXmlException.cs" />
     <Compile Include="Admin\Plugins\MainInterfacePluginBase.cs" />
+    <Compile Include="Admin\Plugins\MoveItem\MoveItemTreePlugin.cs" />
+    <Compile Include="Admin\Plugins\MoveItem\MoveUserControl.ascx.cs">
+      <DependentUpon>MoveUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\MoveItem\MoveUserControl.ascx.designer.cs">
+      <DependentUpon>MoveUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\NewItem\NewItemMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\PageCaching\DeleteCachedPageMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\PageCaching\PageCachingMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\PageCaching\PageCachingUserControl.ascx.cs">
+      <DependentUpon>PageCachingUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\PageCaching\PageCachingUserControl.ascx.designer.cs">
+      <DependentUpon>PageCachingUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\PasteItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\PasteItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\PasteItem\PasteItemMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\Permissions\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\Permissions\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\Permissions\ManagePermissionsMenuPlugin.cs" />
     <Compile Include="Admin\Plugins\PluginBase.cs" />
+    <Compile Include="Admin\Plugins\PluginUserControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\Preview\PreviewMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\RecycleBin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\RecycleBin\DeleteInterceptor.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\IRecycleBin.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\IRecycleBinHandler.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\RecycleBinContainer.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\RecycleBinHandler.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\RecycleBinInitializer.cs" />
+    <Compile Include="Admin\Plugins\RecycleBin\RecycleBinMenuPlugin.cs" />
     <Compile Include="Admin\Plugins\TreePluginBase.cs" />
     <Compile Include="Admin\Plugins\ITreePlugin.cs" />
     <Compile Include="Admin\Plugins\MenuPluginBase.cs" />
@@ -178,6 +357,22 @@
     <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Admin\NodePosition.cs" />
     <Compile Include="Admin\Plugins\IToolbarPlugin.cs" />
+    <Compile Include="Admin\Plugins\Tree\SiteTree.cs" />
+    <Compile Include="Admin\Plugins\Tree\TreeLoader.ashx.cs">
+      <DependentUpon>TreeLoader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Plugins\Tree\TreeMainInterfacePlugin.cs" />
+    <Compile Include="Admin\Plugins\Tree\TreePluginInitializer.cs" />
+    <Compile Include="Admin\PreviewFrame.Master.cs">
+      <DependentUpon>PreviewFrame.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PreviewFrame.Master.designer.cs">
+      <DependentUpon>PreviewFrame.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PreviewFrameAdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
     <Compile Include="Admin\SecurityInitializer.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
@@ -543,7 +738,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\Controls\ReactiveTextBox.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\default.css" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
@@ -562,7 +759,196 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Admin\Plugins\Tree\Resources\TreeCssInitializer.js" />
+    <EmbeddedResource Include="Admin\Plugins\RecycleBin\Default.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\Permissions\Default.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\PasteItem\Default.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\PageCaching\PageCachingUserControl.ascx" />
+    <EmbeddedResource Include="Admin\Plugins\NewItem\Resources\Ext.ux.zeus.NewItemGridMenuPlugin.js" />
+    <EmbeddedResource Include="Admin\Plugins\NewItem\Resources\Ext.ux.zeus.NewItemContextMenuPlugin.js" />
+    <EmbeddedResource Include="Admin\Plugins\MoveItem\MoveUserControl.ascx" />
+    <EmbeddedResource Include="Admin\Plugins\ImportExport\Default.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.js" />
+    <EmbeddedResource Include="Admin\Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />
+    <EmbeddedResource Include="Admin\Plugins\FileManager\FileManagerUserControl.ascx" />
+    <EmbeddedResource Include="Admin\Plugins\EditItem\KeepAlive.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\EditItem\Default.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\DeleteItem\DeleteUserControl.ascx" />
+    <EmbeddedResource Include="Admin\Plugins\CopyItem\Default.aspx" />
+    <EmbeddedResource Include="Admin\Plugins\ContextMenu\Resources\Ext.ux.zeus.ContextMenuPlugin.js" />
+    <EmbeddedResource Include="Admin\Plugins\Children\Default.aspx" />
+    <EmbeddedResource Include="Admin\PreviewFrame.Master" />
+    <EmbeddedResource Include="Admin\Plugins\ContextMenu\ContextMenuLoader.ashx" />
+    <EmbeddedResource Include="Admin\Plugins\DeleteItem\AffectedItems.ashx" />
+    <EmbeddedResource Include="Admin\Plugins\DeleteItem\ReferencingItems.ashx" />
+    <EmbeddedResource Include="Admin\Plugins\FileManager\TreeLoader.ashx" />
+    <EmbeddedResource Include="Admin\Plugins\Tree\TreeLoader.ashx" />
     <None Include="packages.config" />
+    <None Include="Zeus.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\edit.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\globalization.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\jcrop.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\jcrop_demos.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\jcrop_jquery.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\login.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\new.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\permissions.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\preview.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\reset.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\shared.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\thickbox.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\tree.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Css\view.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\blank.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Edit\inputGradient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\LanguageMissing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Login\button.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Login\mainBox.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Login\textBox.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Theme\bannerBg.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Theme\logo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Theme\logOut.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\collapse-all.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\expand-all.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\add.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\arrowDown.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\arrowSortable.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\arrowUp.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\button_arrow_left.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\button_arrow_right.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\cancel.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\confirm.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\edit.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\littleTick.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\trash.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\Images\View\trashOpen.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop\fixed.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop\jquery.color.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop\jquery.Jcrop.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop\jquery.Jcrop.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop\jquery.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop\non-fixed.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jcrop_jquery.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\jquery.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\view.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Assets\JS\zeus.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Install\Default.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\AffectedItems.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Default.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Imagecrop.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Login.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,10 +8,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Zeus")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Content Management Framework for ASP.NET MVC.")]
 [assembly: AssemblyCulture("")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9cc95ec2-06c7-4bb4-aaca-7bc493dc8cab")]
-
-[assembly: InternalsVisibleTo("Zeus.Admin")]

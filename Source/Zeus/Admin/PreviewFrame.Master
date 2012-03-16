@@ -1,0 +1,16 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PreviewFrame.master.cs" Inherits="Zeus.Admin.PreviewFrame" %>
+<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net, Version=1.0.0.35428, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+	<title runat="server"></title>
+	<asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+	<form runat="server" id="frmForm" enctype="multipart/form-data">
+		<asp:ScriptManager runat="server" />
+		<ext:ResourceManager runat="server" Theme="Gray" AjaxViewStateMode="Enabled" />
+		<asp:ContentPlaceHolder ID="Content" runat="server" />
+	</form>
+</body>
+</html>

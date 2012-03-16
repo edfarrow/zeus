@@ -148,10 +148,6 @@
       <Project>{E1EC7BD3-0431-4AD5-A037-F68166BD92B4}</Project>
       <Name>Zeus.AddIns.ECommerce</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Zeus.Admin\Zeus.Admin.csproj">
-      <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
-      <Name>Zeus.Admin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Zeus.BaseLibrary</Name>
