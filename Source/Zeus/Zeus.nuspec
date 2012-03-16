@@ -17,7 +17,7 @@
 		<file src="bin\Release\Ext.Net.dll" target="lib" />
 		<file src="bin\Release\Ext.Net.Utilities.dll" target="lib" />
 		<file src="bin\Release\MongoDB.Bson.dll" target="lib" />
-		<file src="bin\Release\Newtonson.Json.dll" target="lib" />
+		<file src="bin\Release\Newtonsoft.Json.dll" target="lib" />
 		<file src="bin\Release\Ormongo.dll" target="lib" />
 		<file src="bin\Release\Ormongo.Ancestry.dll" target="lib" />
 		<file src="bin\Release\Ormongo.IdentityMap.dll" target="lib" />
