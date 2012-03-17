@@ -71,8 +71,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Camino">
-      <HintPath>..\..\Libraries\Camino.dll</HintPath>
+    <Reference Include="Camino, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Camino.0.1.2\lib\net40\Camino.dll</HintPath>
     </Reference>
     <Reference Include="CKEditor.NET">
       <HintPath>..\..\Libraries\CKEditor.NET.dll</HintPath>
@@ -786,7 +787,9 @@
     <EmbeddedResource Include="Admin\Plugins\FileManager\TreeLoader.ashx" />
     <EmbeddedResource Include="Admin\Plugins\Tree\TreeLoader.ashx" />
     <None Include="packages.config" />
-    <None Include="NuGet\web.config.transform" />
+    <None Include="NuGet\web.config.transform">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Zeus.nuspec" />
   </ItemGroup>
   <ItemGroup>

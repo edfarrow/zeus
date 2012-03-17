@@ -58,9 +58,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Camino, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Camino, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Camino.dll</HintPath>
+      <HintPath>..\packages\Camino.0.1.2\lib\net40\Camino.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net, Version=1.0.0.36291, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
