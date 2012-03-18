@@ -73,9 +73,13 @@
     <Reference Include="CodeKicker.BBCode, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BBCode.0.3.0\lib\CodeKicker.BBCode.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.Net, Version=1.0.0.36291, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+    <Reference Include="Ext.Net, Version=1.3.0.2809, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Ext.Net\Ext.Net.dll</HintPath>
+      <HintPath>..\packages\Ext.NET.1.3.0\lib\Ext.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Net.Utilities, Version=1.3.0.39155, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext.NET.Utilities.1.3.0\lib\Ext.Net.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="FluentMongo, Version=1.3.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Ormongo.0.1.2\lib\net40-Client\FluentMongo.dll</HintPath>
@@ -89,6 +93,10 @@
     </Reference>
     <Reference Include="MongoDB.Driver, Version=1.3.1.4349, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <HintPath>..\packages\mongocsharpdriver.1.3.1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
