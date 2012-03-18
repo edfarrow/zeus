@@ -81,7 +81,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Source\packages\Ormongo.0.1.2\lib\net40-Client\Ormongo.dll</HintPath>
     </Reference>
-    <Reference Include="Ormongo.Ancestry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Ormongo.Ancestry, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Source\packages\Ormongo.Ancestry.0.1.1\lib\net40\Ormongo.Ancestry.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
