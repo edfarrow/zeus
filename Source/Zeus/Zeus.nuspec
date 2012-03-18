@@ -16,8 +16,5 @@
 		<file src="NuGet\WebsiteModule.cs.pp" target="content" />
 		<file src="bin\Release\CKEditor.NET.dll" target="lib\net40" />
 		<file src="bin\Release\Coolite.Ext.UX.dll" target="lib\net40" />
-		<file src="bin\Release\Ext.Net.dll" target="lib\net40" />
-		<file src="bin\Release\Ext.Net.Utilities.dll" target="lib\net40" />
-		<file src="bin\Release\Newtonsoft.Json.dll" target="lib\net40" />
 	</files>
 </package>
