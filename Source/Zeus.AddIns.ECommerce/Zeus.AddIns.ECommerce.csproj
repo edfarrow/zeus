@@ -240,15 +240,10 @@
     <Folder Include="ContentTypes\Widgets\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\Ext.NET.CHANGELOG.txt" />
-    <Content Include="App_Readme\Ext.NET.README.txt" />
-    <Content Include="App_Readme\Ext.NET.Utilities.LICENSE.txt" />
-    <Content Include="App_Readme\Ext.NET.Utilities.README.txt" />
-    <Content Include="Ext.NET.Default.aspx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <None Include="Zeus.AddIns.ECommerce.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

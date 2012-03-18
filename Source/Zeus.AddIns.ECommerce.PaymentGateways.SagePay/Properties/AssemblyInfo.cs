@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Zeus.AddIns.ECommerce.PaymentGateways.SagePay")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SagePay payment gateway for Zeus ECommerce addin")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Sound in Theory Ltd")]
 [assembly: AssemblyProduct("Zeus.AddIns.ECommerce.PaymentGateways.SagePay")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2009")]
+[assembly: AssemblyCopyright("Copyright ©Sound in Theory 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
