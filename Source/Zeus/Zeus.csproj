@@ -118,8 +118,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ormongo.0.1.2\lib\net40-Client\Ormongo.dll</HintPath>
     </Reference>
-    <Reference Include="Ormongo.Ancestry">
-      <HintPath>..\..\Libraries\Ormongo\Ormongo.Ancestry.dll</HintPath>
+    <Reference Include="Ormongo.Ancestry, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ormongo.Ancestry.0.1.1\lib\net40\Ormongo.Ancestry.dll</HintPath>
     </Reference>
     <Reference Include="Ormongo.IdentityMap, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -19,6 +19,5 @@
 		<file src="bin\Release\Ext.Net.dll" target="lib\net40" />
 		<file src="bin\Release\Ext.Net.Utilities.dll" target="lib\net40" />
 		<file src="bin\Release\Newtonsoft.Json.dll" target="lib\net40" />
-		<file src="bin\Release\Ormongo.IdentityMap.dll" target="lib\net40" />
 	</files>
 </package>
