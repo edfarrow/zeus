@@ -25,7 +25,7 @@ namespace Zeus.Web.Mvc
             // Create and initialize Zeus engine.
             ContentEngine engine = Zeus.Context.Initialize(false);
 
-            ViewEngines.Engines.Clear();
+            //ViewEngines.Engines.Clear();
 
             // Create Spark view engine and register it with MVC.
             var sparkServiceContainer = SparkEngineStarter.CreateContainer();

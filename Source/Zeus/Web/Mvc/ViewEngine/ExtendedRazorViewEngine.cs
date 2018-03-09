@@ -11,11 +11,13 @@ namespace Zeus.Web.Mvc.ViewEngine
     {
         public ExtendedRazorViewEngine()
         {
-            this.AreaMasterLocationFormats = this.AreaPartialViewLocationFormats = this.AreaViewLocationFormats = this.AreaViewLocationFormats.Union(
+            this.AreaViewLocationFormats = this.AreaViewLocationFormats.Union(
                 new string[]
                 {
                     "~/Areas/{2}/Views/{1}/{0}.cshtml",
-                    "~/Areas/{2}/Views/Shared/{0}.cshtml"
+                    "~/Areas/{2}/Views/Shared/{1}/{0}.cshtml",
+                    "~/Areas/{2}/Views/{1}/{0}",
+                    "~/Areas/{2}/Views/Shared/{1}/{0}"
                 }).ToArray();
         }
     }
