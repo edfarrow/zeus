@@ -250,33 +250,6 @@ namespace Zeus.Installation
             return configSection.ConnectionStringName;
         }
 
-        /*public IDbConnection GetConnection()
-		{
-			IDriver driver = GetDriver();
-
-			IDbConnection conn = driver.CreateConnection();
-			if (Cfg.Properties.ContainsKey(Environment.ConnectionString))
-				conn.ConnectionString = (string) Cfg.Properties[Environment.ConnectionString];
-			else if (Cfg.Properties.ContainsKey(Environment.ConnectionStringName))
-				conn.ConnectionString = ConfigurationManager.ConnectionStrings[(string) Cfg.Properties[Environment.ConnectionStringName]].ConnectionString;
-			else
-				throw new Exception("Didn't find a confgiured connection string or connection string name in the nhibernate configuration.");
-			return conn;
-		}
-
-		public IDbCommand GenerateCommand(CommandType type, string sqlString)
-		{
-			IDriver driver = GetDriver();
-			return driver.GenerateCommand(type, new NHibernate.SqlCommand.SqlString(sqlString), new SqlType[0]);
-		}
-
-		private IDriver GetDriver()
-		{
-			string driverName = (string) Cfg.Properties[Environment.ConnectionDriver];
-			Type driverType = NHibernate.Util.ReflectHelper.ClassForName(driverName);
-			return (IDriver) Activator.CreateInstance(driverType);
-		}*/
-
         #endregion Helper Methods
 
         #endregion Methods
