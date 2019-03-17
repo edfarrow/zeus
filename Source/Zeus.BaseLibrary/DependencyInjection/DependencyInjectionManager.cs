@@ -15,11 +15,11 @@ namespace Zeus.BaseLibrary.DependencyInjection
 
 		private class InitializableKernel : StandardKernel
 		{
-			private readonly List<IBinding> _bindings;
+			private readonly List<IBinding> _bindings = new List<IBinding>();
 
 			public InitializableKernel()
 			{
-				_bindings = new List<IBinding>();
+				
 			}
 
 			public override void AddBinding(IBinding binding)
@@ -45,23 +45,40 @@ namespace Zeus.BaseLibrary.DependencyInjection
 			try
 			{
 				// Get all DLLS in bin folder.
-				IEnumerable<string> files = Directory.GetFiles(Path.GetDirectoryName(HttpRuntime.BinDirectory), "*.dll");
-
-				// Load modules in Zeus DLLs first.
-				_kernel.Load(FindAssemblies(files.Where(s => Path.GetFileName(s).StartsWith("Zeus."))));
+				IEnumerable<string> files = Directory.GetFiles(GetBinDirectory(), "*.dll");
+                //IEnumerable<string> files = Directory.GetFiles(Path.GetDirectoryName(GetType().Assembly.Location), "*.dll");
+                
+                // Load modules in Zeus DLLs first.
+                _kernel.Load(FindAssemblies(files.Where(s => Path.GetFileName(s).StartsWith("Zeus."))));
 
 				// Then load non-Zeus DLLs - this gives projects a chance to override Zeus modules.
 				// Actually we just load all DLLs, because DLLs that have already been loaded
 				// won't get loaded again.
 				_kernel.Load(FindAssemblies(files.Where(s => !Path.GetFileName(s).StartsWith("Zeus."))));
 			}
-			catch (TypeLoadException)
+			catch (TypeLoadException ex)
 			{
 				
 			}
 		}
 
-		private static IEnumerable<Assembly> FindAssemblies(IEnumerable<string> filenames)
+        /// <summary>
+        /// Gets the direcory containing the application
+        /// </summary>
+        /// <returns></returns>
+        private string GetBinDirectory()
+        {
+            try
+            {
+                return Path.GetDirectoryName(HttpRuntime.BinDirectory);
+            }
+            catch (System.Exception)
+            {
+                return Path.GetDirectoryName(GetType().Assembly.Location);
+            }
+        }
+
+        private static IEnumerable<Assembly> FindAssemblies(IEnumerable<string> filenames)
 		{
 			return FindAssemblyNames(filenames, a => true).Select(an => Assembly.Load(an));
 		}
